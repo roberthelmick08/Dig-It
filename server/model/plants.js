@@ -8,7 +8,7 @@ var plantSchema = new mongoose.Schema({
     depth: { type: Number, required: false },
     germStart: { type: Number, required: false },
     germEnd: { type: Number, required: false },
-    harvestable: { type: Number, required: true },
+    harvestable: { type: Boolean, required: true },
     img: { type: String, required: false },
     lifeType: { type: String, required: true },
     methodNum: { type: Number, required: false },
@@ -19,7 +19,7 @@ var plantSchema = new mongoose.Schema({
     weeksToHarvest: { type: Number, required: false },
     weeksToSowBeforeLastFrost: { type: Number, required: false },
     variety: { type: String, required: false },
-    zones: { type: Array, required: false }
+    zones: { type: Array, required: false },
 });
 
 module.exports = mongoose.model('Plant', plantSchema);

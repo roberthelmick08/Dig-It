@@ -18,15 +18,24 @@ mongoose.connection.on('error', (err) => {
 
 const PORT = 3000;
 
-// app.use(cors());
-// app.use(bodyparser.json);
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
+app.use(bodyparser.json());
+app.use(cors());
 
 app.use('/api', route);
 
+/* *************
+ * GET
+ ***************/
 app.get('/', (req, res) => {
     res.send('app.get(/)')
 });
 
+/* *************
+ * GET all plants
+ ***************/
 app.get('/search', (req, res) => {
     res.send('app.get(/search)')
 });
