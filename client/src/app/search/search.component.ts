@@ -1,3 +1,5 @@
+import { DataService } from './../data.service';
+import { Plant } from './../../models/plant';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+  plantsList: Array<Plant> = [];
 
-  constructor() { }
+  constructor( private dataService: DataService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  getPlants() {
+
   }
 
 }
