@@ -4,7 +4,14 @@
 <h2 class="page-header">Add New Plant!</h2>
 
 <div *ngIf="step === 0" class="add-plant-scroll-contents">
-    Step {{step}}
+    <form>
+        <mat-form-field>
+            <input matInput placeholder="Common Name" name="commonName" ngModel [required]="newPlant.botanicalName.length > 0">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Botanical Name" [required]="newPlant.commonName.length > 0">
+        </mat-form-field>
+    </form>
 </div>
 
 <div *ngIf="step === 1" class="add-plant-scroll-contents">
@@ -19,5 +26,5 @@
     <button mat-button color="primary" (click)="closeDialog()" *ngIf="step === 0">Cancel</button>
     <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
     <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 2">Next ></button>
-    <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 2">Submit</button>
+    <button mat-raised-button color="primary" type="submit" *ngIf="step === 2">Submit</button>
 </div>

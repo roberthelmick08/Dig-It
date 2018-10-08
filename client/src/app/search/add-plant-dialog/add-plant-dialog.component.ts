@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { FormGroup } from '@angular/forms';
 import { Plant } from '../../../models/plant';
 
 @Component({
@@ -10,6 +11,8 @@ import { Plant } from '../../../models/plant';
 export class AddPlantDialogComponent implements OnInit {
   // Variable used to navigate Add Plant screens
   step: number = 0;
+
+  newPlant: Plant;
 
   constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent> ) {}
 
@@ -32,7 +35,10 @@ export class AddPlantDialogComponent implements OnInit {
 
   // Save Plant
   onSubmit(plant: Plant) {
-
+    if (!this.newPlant.botanicalName) {
+      this.newPlant.botanicalName = this.newPlant.commonName;
+    } else if (!this.newPlant.commonName) {
+      this.newPlant.commonName = this.newPlant.botanicalName;
+    }
   }
-
 }
