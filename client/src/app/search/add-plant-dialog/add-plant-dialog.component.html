@@ -1,0 +1,23 @@
+<div fxFlex="100">
+    <mat-icon (click)="closeDialog()">close</mat-icon>
+</div>
+<h2 class="page-header">Add New Plant!</h2>
+
+<div *ngIf="step === 0" class="add-plant-scroll-contents">
+    Step {{step}}
+</div>
+
+<div *ngIf="step === 1" class="add-plant-scroll-contents">
+    Step {{step}}
+</div>
+
+<div *ngIf="step === 2" class="add-plant-scroll-contents">
+    Step {{step}}
+</div>
+
+<div class="footer" fxFlex="100">
+    <button mat-button color="primary" (click)="closeDialog()" *ngIf="step === 0">Cancel</button>
+    <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
+    <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 2">Next ></button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 2">Submit</button>
+</div>
