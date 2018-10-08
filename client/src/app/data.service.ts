@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 import { Plant } from '../models/plant';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class DataService {
 
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
-      .map(res => res.json());
+      .pipe(map(res => res.json()));
   }
 
   addPlant(newPlant: Plant) {
