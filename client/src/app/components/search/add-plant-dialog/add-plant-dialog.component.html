@@ -1,0 +1,74 @@
+<div class="add-plant-dialog" fxLayout="column">
+
+    <div fxFlex="100" fxLayout="row">
+        <h2 class="page-header">Add New Plant!</h2>
+        <mat-icon (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="add-plant-scroll-container">
+        <form>
+            <div *ngIf="step === 0" class="add-plant-scroll-contents" fxLayout="column">
+                <mat-form-field>
+                    <input matInput placeholder="Common Name" name="commonName" ngModel [required]="newPlant?.botanicalName?.length > 0">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Botanical Name" name="botanicalName" ngModel [required]="newPlant?.commonName?.length > 0">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select required>
+                        <mat-option value="cactus">Cactus</mat-option>
+                        <mat-option value="succulent">Succulent</mat-option>
+                        <mat-option value="fruit">Fruit</mat-option>
+                        <mat-option value="grain">Grain</mat-option>
+                        <mat-option value="grass">Grass</mat-option>
+                        <mat-option value="herb">Herb</mat-option>
+                        <mat-option value="orn">Flower</mat-option>
+                        <mat-option value="house">Misc Houseplant</mat-option>
+                        <mat-option value="shrub">Shrub</mat-option>
+                        <mat-option value="vege">Vegetable</mat-option>
+                        <mat-option value="vine">Vine</mat-option>
+                        <mat-label>
+                            <mat-icon>spa</mat-icon> <i>Plant Type</i></mat-label>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select required>
+                        <mat-option value="a">Annual</mat-option>
+                        <mat-option value="p">Perennial</mat-option>
+                        <mat-option value="b">Biennial</mat-option>
+                        <mat-label>
+                            <mat-icon>nature_people</mat-icon> <i>Life Cycle</i></mat-label>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="step === 1" class="add-plant-scroll-contents">
+                <mat-form-field>
+                    <mat-select required>
+                        <mat-option value="fsun">
+                            <mat-icon>brightness_high</mat-icon> Full Sun</mat-option>
+                        <mat-option value="psun">
+                            <mat-icon>brightness_low</mat-icon> Partial Sun</mat-option>
+                        <mat-option value="psha">
+                            <mat-icon>brightness_medium</mat-icon> Partial Shade</mat-option>
+                        <mat-option value="fsha">
+                            <mat-icon>wb_cloudy</mat-icon> Full Shade</mat-option>
+                        <mat-label>
+                            <mat-icon>wb_sunny</mat-icon> <i>Sun Schedule</i></mat-label>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="step === 2" class="add-plant-scroll-contents">
+                Step {{step}}
+            </div>
+        </form>
+    </div>
+
+    <div class="footer" fxFlex="100">
+        <button mat-button color="primary" (click)="closeDialog()" *ngIf="step === 0">Cancel</button>
+        <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
+        <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 2">Next ></button>
+        <button mat-raised-button color="primary" type="submit" *ngIf="step === 2">Submit</button>
+    </div>
+</div>

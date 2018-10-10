@@ -59,22 +59,26 @@ router.post('/new_plant', (req, res, next) => {
         botanicalName: req.body.botanicalName,
         commonName: req.body.commonName,
         stage: req.body.stage,
-        comment: req.body.comment,
-        depth: req.body.depth,
-        germStart: req.body.germStart,
-        germEnd: req.body.germEnd,
         harvestable: req.body.harvestable,
         img: req.body.img,
         lifeType: req.body.lifeType,
         methodNum: req.body.methodNum,
-        sowingMethod: req.body.sowingMethod,
-        sowingSpace: req.body.sowingSpace,
         sunSchedule: req.body.sunSchedule,
         type: req.body.type,
-        weeksToHarvest: req.body.weeksToHarvest,
-        weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
         variety: req.body.variety,
-        zones: req.body.zones
+        zones: req.body.zones,
+        timeRecs: {
+            germStart: req.body.germStart,
+            germEnd: req.body.germEnd,
+            weeksToHarvest: req.body.weeksToHarvest,
+            weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
+        },
+        tips: {
+            comment: req.body.comment,
+            depth: req.body.depth,
+            sowingMethod: req.body.sowingMethod,
+            sowingSpace: req.body.sowingSpace,
+        }
     });
 
     newPlant.save((err, item) => {
@@ -93,22 +97,26 @@ router.put('/plant/:id', (req, res, next) => {
                 botanicalName: req.body.botanicalName,
                 commonName: req.body.commonName,
                 stage: req.body.stage,
-                comment: req.body.comment,
-                depth: req.body.depth,
-                germStart: req.body.germStart,
-                germEnd: req.body.germEnd,
                 harvestable: req.body.harvestable,
                 img: req.body.img,
                 lifeType: req.body.lifeType,
                 methodNum: req.body.methodNum,
-                sowingMethod: req.body.sowingMethod,
-                sowingSpace: req.body.sowingSpace,
                 sunSchedule: req.body.sunSchedule,
                 type: req.body.type,
-                weeksToHarvest: req.body.weeksToHarvest,
-                weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
                 variety: req.body.variety,
-                zones: req.body.zones
+                zones: req.body.zones,
+                timeRecs: {
+                    germStart: req.body.germStart,
+                    germEnd: req.body.germEnd,
+                    weeksToHarvest: req.body.weeksToHarvest,
+                    weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
+                },
+                tips: {
+                    comment: req.body.comment,
+                    depth: req.body.depth,
+                    sowingMethod: req.body.sowingMethod,
+                    sowingSpace: req.body.sowingSpace,
+                }
             }
         },
         function(err, result) {

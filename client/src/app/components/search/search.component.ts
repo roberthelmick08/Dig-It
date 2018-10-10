@@ -1,6 +1,6 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
-import { DataService } from './../data.service';
-import { Plant } from './../../models/plant';
+import { DataService } from '../../services/data.service';
+import { Plant } from './../../../models/plant';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormGroup } from '@angular/forms';
-import { Plant } from '../../../models/plant';
+import { Plant } from '../../../../models/plant';
 
 @Component({
   selector: 'app-add-plant-dialog',
@@ -14,7 +14,9 @@ export class AddPlantDialogComponent implements OnInit {
 
   newPlant: Plant;
 
-  constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent> ) {}
+  constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent> ) {
+    this.newPlant = new Plant();
+  }
 
   ngOnInit() { }
 
