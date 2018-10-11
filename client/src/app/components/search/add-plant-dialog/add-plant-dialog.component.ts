@@ -35,12 +35,18 @@ export class AddPlantDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  getPlants(form)  {
+    console.log(form.value);
+  }
+
   // Save Plant
-  onSubmit(plant: Plant) {
+  onSubmit() {
     if (!this.newPlant.botanicalName) {
       this.newPlant.botanicalName = this.newPlant.commonName;
     } else if (!this.newPlant.commonName) {
       this.newPlant.commonName = this.newPlant.botanicalName;
     }
+
+    console.log(this.newPlant);
   }
 }
