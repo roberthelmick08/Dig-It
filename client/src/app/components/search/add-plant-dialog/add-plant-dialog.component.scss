@@ -1,0 +1,13 @@
+.add-plant-dialog {
+    .add-plant-scroll-container {
+        overflow-y: auto;
+        height: 55vh;
+        mat-slide-toggle.mat-slide-toggle {
+            margin-top: 1rem;
+            padding-left: 15%;
+        }
+        mat-hint.mat-hint {
+            margin-bottom: 0.5rem;
+        }
+    }
+}
