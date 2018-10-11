@@ -18,8 +18,11 @@ mongoose.connection.on('error', (err) => {
 
 const PORT = 3000;
 
-// app.use(cors());
-// app.use(bodyparser.json);
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
+app.use(bodyparser.json());
+app.use(cors());
 
 app.use('/api', route);
 
@@ -27,9 +30,12 @@ app.get('/', (req, res) => {
     res.send('app.get(/)')
 });
 
-app.get('/search', (req, res) => {
-    res.send('app.get(/search)')
-});
+/* *************
+ * GET all plants
+ ***************/
+// app.get('/search', (req, res) => {
+//     res.send('app.get(/search)')
+// });
 
 app.listen(PORT, () => {
     console.log('Server has been started at port: ' + PORT);
