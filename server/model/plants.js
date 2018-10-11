@@ -12,24 +12,14 @@ var plantSchema = new mongoose.Schema({
     type: { type: String, required: true },
     variety: { type: String, required: false },
     zones: { type: Array, required: false },
-    timeRecs: {
-        type: {
-            germStart: { type: Number, required: false },
-            germEnd: { type: Number, required: false },
-            weeksToHarvest: { type: Number, required: false },
-            weeksToSowBeforeLastFrost: { type: Number, required: false },
-        },
-        required: false
-    },
-    tips: {
-        type: {
-            depth: { type: Number, required: false },
-            sowingMethod: { type: String, required: false },
-            sowingSpace: { type: Number, required: false },
-            comment: { type: String, required: false },
-        },
-        required: false
-    }
+    germStart: { type: Number, required: false },
+    germEnd: { type: Number, required: false },
+    weeksToHarvest: { type: Number, required: false },
+    weeksToSowBeforeLastFrost: { type: Number, required: false },
+    depth: { type: Number, required: false },
+    sowingMethod: { type: String, required: false },
+    sowingSpace: { type: Number, required: false },
+    comment: { type: String, required: false },
 });
 
 module.exports = mongoose.model('Plant', plantSchema);

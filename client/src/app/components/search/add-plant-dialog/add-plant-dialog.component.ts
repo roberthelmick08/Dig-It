@@ -6,7 +6,7 @@ import { Plant } from '../../../../models/plant';
 @Component({
   selector: 'app-add-plant-dialog',
   templateUrl: './add-plant-dialog.component.html',
-  styleUrls: ['./add-plant-dialog.component.css']
+  styleUrls: ['./add-plant-dialog.component.scss']
 })
 export class AddPlantDialogComponent implements OnInit {
   // Variable used to navigate Add Plant screens
@@ -16,37 +16,57 @@ export class AddPlantDialogComponent implements OnInit {
 
   constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent> ) {
     this.newPlant = new Plant();
+
+    // Set default values
+    this.newPlant.harvestable = false;
+    this.newPlant.weeksToSowBeforeLastFrost = 4;
+    this.newPlant.stage = 0;
+    this.newPlant.germEnd = 2;
   }
 
   ngOnInit() { }
 
-  // Navigate to next page
   onNextStep() {
     this.step++;
   }
 
-  // Navigate to next page
   onPreviousStep() {
     this.step--;
   }
 
-  // Cancel
   closeDialog(): void {
     this.dialogRef.close();
   }
 
-  getPlants(form)  {
-    console.log(form.value);
-  }
-
-  // Save Plant
   onSubmit() {
-    if (!this.newPlant.botanicalName) {
-      this.newPlant.botanicalName = this.newPlant.commonName;
-    } else if (!this.newPlant.commonName) {
-      this.newPlant.commonName = this.newPlant.botanicalName;
+    // convert inputted values to negative numbers
+    if (this.newPlant.weeksToSowBeforeLastFrost > 0) {
+      this.newPlant.weeksToSowBeforeLastFrost = 0 - this.newPlant.weeksToSowBeforeLastFrost;
+    } else if (this.newPlant.germEnd > 0) {
+      this.newPlant.germEnd = 0 - this.newPlant.germEnd;
     }
 
+    // Refresh Defaults
+    this.newPlant.germStart = this.newPlant.weeksToSowBeforeLastFrost;
+
+    // Format text input
+    this.newPlant.botanicalName = this.toTitleCase(this.newPlant.botanicalName);
+    this.newPlant.commonName = this.toTitleCase(this.newPlant.commonName);
+    this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
+    this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
+
     console.log(this.newPlant);
+
+    this.closeDialog();
+  }
+
+  toTitleCase(input: string) {
+    input = input.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ');
+    return input;
+  }
+
+  toSentenceCase(input: string) {
+    input = input.trim()[0].toUpperCase() + input.substring(1, input.length - 1);
+    return input;
   }
 }

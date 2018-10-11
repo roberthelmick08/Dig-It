@@ -67,18 +67,14 @@ router.post('/new_plant', (req, res, next) => {
         type: req.body.type,
         variety: req.body.variety,
         zones: req.body.zones,
-        timeRecs: {
-            germStart: req.body.germStart,
-            germEnd: req.body.germEnd,
-            weeksToHarvest: req.body.weeksToHarvest,
-            weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
-        },
-        tips: {
-            comment: req.body.comment,
-            depth: req.body.depth,
-            sowingMethod: req.body.sowingMethod,
-            sowingSpace: req.body.sowingSpace,
-        }
+        germStart: req.body.germStart,
+        germEnd: req.body.germEnd,
+        weeksToHarvest: req.body.weeksToHarvest,
+        weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
+        comment: req.body.comment,
+        depth: req.body.depth,
+        sowingMethod: req.body.sowingMethod,
+        sowingSpace: req.body.sowingSpace,
     });
 
     newPlant.save((err, item) => {
@@ -105,18 +101,14 @@ router.put('/plant/:id', (req, res, next) => {
                 type: req.body.type,
                 variety: req.body.variety,
                 zones: req.body.zones,
-                timeRecs: {
-                    germStart: req.body.germStart,
-                    germEnd: req.body.germEnd,
-                    weeksToHarvest: req.body.weeksToHarvest,
-                    weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
-                },
-                tips: {
-                    comment: req.body.comment,
-                    depth: req.body.depth,
-                    sowingMethod: req.body.sowingMethod,
-                    sowingSpace: req.body.sowingSpace,
-                }
+                germStart: req.body.germStart,
+                germEnd: req.body.germEnd,
+                weeksToHarvest: req.body.weeksToHarvest,
+                weeksToSowBeforeLastFrost: req.body.weeksToSowBeforeLastFrost,
+                comment: req.body.comment,
+                depth: req.body.depth,
+                sowingMethod: req.body.sowingMethod,
+                sowingSpace: req.body.sowingSpace,
             }
         },
         function(err, result) {
