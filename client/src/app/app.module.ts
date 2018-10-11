@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
-  MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
+  MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
+  MatSidenavModule, MatMenuModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -29,7 +30,11 @@ import { AddPlantDialogComponent } from './components/search/add-plant-dialog/ad
     MatSelectModule,
     OverlayModule,
     MatInputModule,
+    MatSlideToggleModule,
     MatDialogModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatSidenavModule,
     FlexLayoutModule,
     BrowserAnimationsModule
   ],

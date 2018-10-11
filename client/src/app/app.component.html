@@ -1,1 +1,55 @@
-<app-search></app-search>
+<div style="height: 100vh;">
+    <mat-toolbar color="primary">
+        <div fxShow="true" fxHide.gt-sm="true" fxLayoutAlign="space-between center" fxFlex="100">
+            <a (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </a>
+
+            <span>Dig-It</span>
+        </div>
+
+        <div fxShow="true" fxHide.lt-md="true" fxLayoutAlign="space-between center" fxFlex="100">
+            <span>Dig-It</span>
+
+            <div>
+                <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
+                <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
+            </div>
+            <button class="profile-menu-button" [matMenuTriggerFor]="menu"> </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="setCurrentPage('edit_profile')">
+              <mat-icon>edit</mat-icon>
+              <span>Edit Profile</span>
+            </button>
+                <button mat-menu-item (click)="setCurrentPage('help')">
+              <mat-icon>help_outline</mat-icon>
+              <span>Help</span>
+            </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container fxFlexFill>
+
+        <mat-sidenav #sidenav fxLayout="column">
+
+            <div fxLayout="column">
+                <button class="profile-menu-button" (click)="setCurrentPage('edit_profile')"> </button>
+
+                <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
+                <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
+
+                <button mat-menu-item (click)="setCurrentPage('help')">
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+            </div>
+
+        </mat-sidenav>
+
+        <mat-sidenav-content fxFlexFill>
+
+            <app-search *ngIf="currentPage === 'search'"></app-search>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
