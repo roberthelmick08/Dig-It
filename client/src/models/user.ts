@@ -1,11 +1,12 @@
 import { Plant } from './plant';
 
 export class User {
-  name: String;
-  email: String;
-  password: String;
-  phone?: String;
-  zone: Number;
-  zip: Number;
+  name: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
+  phone?: string;
+  zone: number;
+  zip: number;
   garden?: Array<Plant>;
 }

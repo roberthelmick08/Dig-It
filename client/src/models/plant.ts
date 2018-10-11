@@ -1,32 +1,29 @@
 export class Plant {
-  // Page 1
+  // Page 0
   botanicalName?: string;
   commonName: string;
   type: string;
   lifeType: string;
   harvestable: boolean;
+  weeksToHarvest?: number;
 
-  // Page 2
+  // Page 1
   sunSchedule?: string;
   stage?: number;
   variety?: string;
+  comment?: string;
 
-  // Page 3
-  timeRecs: {
-    weeksToSowBeforeLastFrost?: number;
-    germStart?: number;
-    germEnd?: number;
-    weeksToHarvest?: number;
-  };
+  // Page 2 - Advanced settings
+  weeksToSowBeforeLastFrost?: number;
+  germEnd?: number;
 
-  tips: {
-    depth?: number;
-    sowingMethod?: string,
-    sowingSpace?: number,
-    comment?: string,
-  };
+  // Read-only tips
+  sowingMethod?: string;
+  sowingSpace?: number;
+  depth?: number;
 
   // Not used
+  germStart?: number;
   img?: string;
   methodNum?: number;
   zones?: Array<number>;
