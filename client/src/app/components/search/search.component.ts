@@ -19,6 +19,8 @@ export class SearchComponent implements AfterViewInit {
 
   searchTerm: string = '';
 
+  searchBy: string = 'commonName';
+
   constructor( private dataService: DataService, public dialog: MatDialog ) { }
 
   ngAfterViewInit() {
@@ -32,11 +34,72 @@ export class SearchComponent implements AfterViewInit {
 
   onSearch() {
     this.visiblePlants = this.plantsList.filter(plant => {
-      return plant.botanicalName.toLowerCase().includes(this.searchTerm.toLowerCase())
-          || plant.commonName.toLowerCase().includes(this.searchTerm.toLowerCase());
+      return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
+          || plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    }).sort( plant => {
+      if (this.searchBy === 'commonName') {
+        if (plant.commonName.substring(0, this.searchTerm.length).toLowerCase() === this.searchTerm.toLowerCase()) {
+          return -1;
+        } else {
+          return this.levDist(plant.commonName, this.searchTerm);
+        }
+      } else if (this.searchBy === 'botanicalName') {
+        if (plant.botanicalName.substring(0, this.searchTerm.length).toLowerCase() === this.searchTerm.toLowerCase()) {
+          return -1;
+        } else {
+          return this.levDist(plant.botanicalName, this.searchTerm);
+        }
+      }
     });
-    console.log(this.visiblePlants);
   }
+
+  // Reorder array based on closest match to search term
+  levDist(s, t) {
+    const d = []; // 2d matrix
+
+    const n = s.length;
+    const m = t.length;
+
+    if (n === 0) { return m; }
+    if (m === 0) { return n; }
+
+    // Create an array of arrays in javascript (a descending loop is quicker)
+    for (let i = n; i >= 0; i--) { d[i] = []; }
+
+    for (let i = n; i >= 0; i--) { d[i][0] = i; }
+    for (let j = m; j >= 0; j--) { d[0][j] = j; }
+
+    for (let i = 1; i <= n; i++) {
+        const s_i = s.charAt(i - 1);
+
+        for (let j = 1; j <= m; j++) {
+
+            // Check the jagged ld total so far
+            if (i === j && d[i][j] > 4) { return n; }
+
+            const t_j = t.charAt(j - 1);
+            const cost = (s_i === t_j) ? 0 : 1; // Step 5
+
+            // Calculate the minimum
+            let mi = d[i - 1][j] + 1;
+            const b = d[i][j - 1] + 1;
+            const c = d[i - 1][j - 1] + cost;
+
+            if (b < mi) { mi = b; }
+            if (c < mi) { mi = c; }
+
+            d[i][j] = mi; // Step 6
+
+            // Damerau transposition
+            if (i > 1 && j > 1 && s_i === t.charAt(j - 2) && s.charAt(i - 2) === t_j) {
+                d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + cost);
+            }
+        }
+    }
+
+    // Step 7
+    return d[n][m];
+}
 
   openAddPlantDialog() {
     const dialogRef = this.dialog.open(AddPlantDialogComponent, {
