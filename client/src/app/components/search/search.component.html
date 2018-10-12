@@ -1,29 +1,28 @@
-<div fxLayout="column">
-    <div fxLayoutAlign="row">
-        <mat-form-field fxFlex="30">
-            <input matInput type="search" placeholder="Search" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" (blur)="onSearch()"/>
-        </mat-form-field>
-        <mat-radio-group class="example-radio-group" [(ngModel)]="searchBy" fxLayout="column">
-            <mat-radio-button class="example-radio-button" *ngFor="let name of ['commonName', 'botanicalName']" [value]="name" (click)="onSearch()">
-                {{name === 'botanicalName' ? 'Botanical Name' : 'Common Name'}}
-            </mat-radio-button>
-        </mat-radio-group>
+<div fxLayoutAlign="row">
+    <mat-form-field fxFlex="30">
+        <input matInput type="search" placeholder="Search" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" (blur)="onSearch()" />
+    </mat-form-field>
+    <mat-radio-group class="example-radio-group" [(ngModel)]="searchBy" fxLayout="column">
+        <mat-radio-button class="example-radio-button" *ngFor="let name of ['commonName', 'botanicalName']" [value]="name" (click)="onSearch()">
+            {{name === 'botanicalName' ? 'Botanical Name' : 'Common Name'}}
+        </mat-radio-button>
+    </mat-radio-group>
+</div>
+
+<div *ngIf="!visiblePlants">Enter a search term to begin</div>
+
+<div fxLayout="column" *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0">
+    <h2>No Plants Found</h2>
+
+    <div fxLayout="row">
+        <h4>Would you like to</h4>
+        <button mat-raised-button color="primary" (click)="openAddPlantDialog()">Add a Plant</button>
     </div>
 
-    <div *ngIf="!visiblePlants">Enter a search term to begin</div>
-
-    <div fxLayout="column" *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0">
-        <h2>No Plants Found</h2>
-
-        <div fxLayout="row">
-            <h4>Would you like to</h4>
-            <button mat-raised-button color="primary" (click)="openAddPlantDialog()">Add a Plant</button>
-        </div>
-    </div>
-
-    <div *ngIf="visiblePlants?.length > 0 && searchTerm.length > 0">
+    <div *ngIf="visiblePlants?.length > 0">
         <ul>
             <li *ngFor="let plant of visiblePlants">{{plant.commonName}} - {{plant.botanicalName}}</li>
         </ul>
     </div>
+
 </div>

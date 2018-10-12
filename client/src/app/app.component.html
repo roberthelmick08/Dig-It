@@ -12,8 +12,8 @@
             <span>Dig-It</span>
 
             <div>
-                <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
                 <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
+                <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
                 <a (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
             </div>
             <button class="profile-menu-button" [matMenuTriggerFor]="menu"> </button>
@@ -48,14 +48,21 @@
 
         </mat-sidenav>
 
-        <mat-sidenav-content fxFlexFill>
+        <mat-sidenav-content fxFlexFill fxLayoutAlign="center">
 
-            <app-search *ngIf="currentPage === 'search'"></app-search>
-            <app-garden *ngIf="currentPage === 'garden'"></app-garden>
-            <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
 
-            <app-help *ngIf="currentPage === 'help'"></app-help>
-            <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
+
+            <mat-card fxLayout="column" fxFlex="60">
+                <app-search *ngIf="currentPage === 'search'"></app-search>
+                <app-garden *ngIf="currentPage === 'garden'"></app-garden>
+                <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
+
+                <app-help *ngIf="currentPage === 'help'"></app-help>
+                <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
+            </mat-card>
+
+
+
 
         </mat-sidenav-content>
     </mat-sidenav-container>

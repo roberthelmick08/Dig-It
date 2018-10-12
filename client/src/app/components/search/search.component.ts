@@ -51,8 +51,13 @@ export class SearchComponent implements AfterViewInit {
         }
       }
     });
+  console.log(this.visiblePlants);
+
   }
 
+  infiniteScroll() {
+
+  }
   // Reorder array based on closest match to search term
   levDist(s, t) {
     const d = []; // 2d matrix
