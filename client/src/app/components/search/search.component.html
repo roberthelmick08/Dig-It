@@ -16,7 +16,7 @@
 
     <div fxLayout="row">
         <h4>Would you like to</h4>
-        <button mat-raised-button color="primary" (click)="openAddPlantDialog()">Add a Plant</button>
+        <button mat-raised-button (click)="openAddPlantDialog()" class="add-plant-button">Add a Plant</button>
     </div>
 
     <div *ngIf="visiblePlants?.length > 0">

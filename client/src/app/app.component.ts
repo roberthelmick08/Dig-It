@@ -6,9 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  currentPage = 'garden';
+
+  isUserMenuOpen: boolean = false;
+
+  currentPage: string = 'garden';
 
   setCurrentPage(page: string) {
     this.currentPage = page;
+  }
+
+  toggleUserMenu(){
+    this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 }

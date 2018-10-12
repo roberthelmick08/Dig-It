@@ -21,6 +21,6 @@ export class DataService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.apiPath + '/new_plant', newPlant, {headers: headers})
-      .map(res => res.json());
+      .pipe(map(res => res.json()));
   }
 }

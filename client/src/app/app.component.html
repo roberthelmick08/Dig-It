@@ -1,5 +1,6 @@
-<div style="height: 100vh;">
-    <mat-toolbar color="primary">
+<div style="height: calc(100vh - 64px);">
+    <mat-toolbar class="navbar">
+        <!-- Hamburger menu for mobile devices -->
         <div fxShow="true" fxHide.gt-sm="true" fxLayoutAlign="space-between center" fxFlex="100">
             <a (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
@@ -8,25 +9,20 @@
             <span>Dig-It</span>
         </div>
 
+        <!-- Full Navbar for larger devices -->
         <div fxShow="true" fxHide.lt-md="true" fxLayoutAlign="space-between center" fxFlex="100">
-            <span>Dig-It</span>
+            <div class="toolbar-logo">Dig-It</div>
 
-            <div>
-                <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
-                <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
-                <a (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <div (click)="setCurrentPage('search')" class="navbar-items">Add To Garden</div>
+
+                <div class="garden-icon-wrapper" (click)="setCurrentPage('garden')">
+                </div>
+
+                <div (click)="setCurrentPage('reminders')" class="navbar-items">Reminders</div>
             </div>
-            <button class="profile-menu-button" [matMenuTriggerFor]="menu"> </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="setCurrentPage('edit_profile')">
-              <mat-icon>edit</mat-icon>
-              <span>Edit Profile</span>
-            </button>
-                <button mat-menu-item (click)="setCurrentPage('help')">
-              <mat-icon>help_outline</mat-icon>
-              <span>Help</span>
-            </button>
-            </mat-menu>
+
+            <div class="profile-menu-button" (click)="setCurrentPage('edit_profile')">User</div>
         </div>
     </mat-toolbar>
 
@@ -48,16 +44,15 @@
 
         </mat-sidenav>
 
-        <mat-sidenav-content fxFlexFill fxLayoutAlign="center">
+        <mat-sidenav-content fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
 
 
 
-            <mat-card fxLayout="column" fxFlex="60">
+            <mat-card fxLayout="column" fxFlex="60" class="page-content">
                 <app-search *ngIf="currentPage === 'search'"></app-search>
                 <app-garden *ngIf="currentPage === 'garden'"></app-garden>
                 <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
 
-                <app-help *ngIf="currentPage === 'help'"></app-help>
                 <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
             </mat-card>
 

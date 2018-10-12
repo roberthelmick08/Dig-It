@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { HelpComponent } from './components/help/help.component';
 import { GardenComponent } from './components/garden/garden.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
@@ -25,7 +24,6 @@ import { PlantDetailsDialogComponent } from './components/plant-details-dialog/p
     SearchComponent,
     AddPlantDialogComponent,
     EditProfileComponent,
-    HelpComponent,
     GardenComponent,
     RemindersComponent,
     PlantDetailsDialogComponent
