@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
-  MatSidenavModule, MatMenuModule } from '@angular/material';
+  MatSidenavModule, MatMenuModule, MatRadioModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -13,12 +13,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { HelpComponent } from './components/help/help.component';
+import { GardenComponent } from './components/garden/garden.component';
+import { RemindersComponent } from './components/reminders/reminders.component';
+import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    AddPlantDialogComponent
+    AddPlantDialogComponent,
+    EditProfileComponent,
+    HelpComponent,
+    GardenComponent,
+    RemindersComponent,
+    PlantDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +36,7 @@ import { AddPlantDialogComponent } from './components/search/add-plant-dialog/ad
     FormsModule,
     MatIconModule,
     MatButtonModule,
+    MatRadioModule,
     MatOptionModule,
     MatSelectModule,
     OverlayModule,

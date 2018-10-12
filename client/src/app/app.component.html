@@ -14,6 +14,7 @@
             <div>
                 <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
                 <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
+                <a (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
             </div>
             <button class="profile-menu-button" [matMenuTriggerFor]="menu"> </button>
             <mat-menu #menu="matMenu">
@@ -38,6 +39,7 @@
 
                 <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
                 <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
+                <a (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
 
                 <button mat-menu-item (click)="setCurrentPage('help')">
                   <mat-icon>help_outline</mat-icon>
@@ -49,6 +51,11 @@
         <mat-sidenav-content fxFlexFill>
 
             <app-search *ngIf="currentPage === 'search'"></app-search>
+            <app-garden *ngIf="currentPage === 'garden'"></app-garden>
+            <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
+
+            <app-help *ngIf="currentPage === 'help'"></app-help>
+            <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
 
         </mat-sidenav-content>
     </mat-sidenav-container>
