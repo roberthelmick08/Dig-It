@@ -1,4 +1,4 @@
-// @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 /**********************
  * THEME VARIABLES
@@ -14,6 +14,10 @@ $color-dark-gray: #423E37;
 /**********************
  * ELEMENTS
  **********************/
+
+.mat-drawer-container {
+    background: transparent;
+}
 
 .page-header {
     font-family: Futura, Trebuchet MS, Arial, sans-serif;

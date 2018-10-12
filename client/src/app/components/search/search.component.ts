@@ -51,7 +51,6 @@ export class SearchComponent implements AfterViewInit {
         }
       }
     });
-  console.log(this.visiblePlants);
 
   }
 

@@ -17,12 +17,16 @@
                 <div (click)="setCurrentPage('search')" class="navbar-items">Add To Garden</div>
 
                 <div class="garden-icon-wrapper" (click)="setCurrentPage('garden')">
+                    <mat-icon>spa</mat-icon>
                 </div>
 
                 <div (click)="setCurrentPage('reminders')" class="navbar-items">Reminders</div>
             </div>
 
-            <div class="profile-menu-button" (click)="setCurrentPage('edit_profile')">User</div>
+
+            <mat-card class="profile-menu-button" (click)="setCurrentPage('edit_profile')">
+                <mat-icon>person</mat-icon>
+            </mat-card>
         </div>
     </mat-toolbar>
 
