@@ -1,0 +1,28 @@
+<div fxLayout="column">
+    <div fxFlex="100" fxLayoutAlign="center">
+        <h2 class="page-header">My Garden</h2>
+    </div>
+    <div fxLayout="row wrap">
+
+        <mat-card class="plant-grid-item" *ngFor="let plant of userPlants" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="space-between start">
+                <div class="plant-icon">
+                    Plant Stage
+                </div>
+                <div class="reminders-icon-container" fxLayout="row">
+                    <div class="reminders-icon" *ngFor="let reminder of plant?.reminders" title="Click to mark DONE">
+                        <mat-icon *ngIf="reminder === 'water'">wb_cloudy</mat-icon>
+                        <mat-icon *ngIf="reminder === 'transplant'">compare_arrows</mat-icon>
+                        <mat-icon *ngIf="reminder === 'move-outside'">arrow_forward</mat-icon>
+                        <mat-icon *ngIf="reminder === 'move-inside'">arrow_back</mat-icon>
+                        <mat-icon *ngIf="reminder === 'harvest'">arrow_back</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="plant-name-details" fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+                <h4>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h4>
+                <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
+            </div>
+        </mat-card>
+    </div>
+</div>
