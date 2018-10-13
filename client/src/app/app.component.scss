@@ -3,6 +3,9 @@
     background: rgba(256, 256, 256, 0.3);
     color: $color-dark-gray;
     font-family: Futura, Trebuchet MS, Arial, sans-serif;
+    .toolbar-logo {
+        position: absolute;
+    }
     .garden-icon-wrapper {
         background: $color-light-green;
         height: 100px;
