@@ -16,7 +16,9 @@ import { AddPlantDialogComponent } from './components/search/add-plant-dialog/ad
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { GardenComponent } from './components/garden/garden.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
+import { LoginComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,10 @@ import { PlantDetailsDialogComponent } from './components/plant-details-dialog/p
     AddPlantDialogComponent,
     EditProfileComponent,
     GardenComponent,
+    LoginComponent,
     RemindersComponent,
-    PlantDetailsDialogComponent
+    PlantDetailsDialogComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

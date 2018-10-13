@@ -25,7 +25,7 @@
 
     <div *ngIf="visiblePlants?.length > 0">
         <ul>
-            <li *ngFor="let plant of visiblePlants">{{plant.commonName}} - {{plant.botanicalName}}</li>
+            <li *ngFor="let plant of visiblePlants" (click)="addToGarden(plant)">{{plant.commonName}} - {{plant.botanicalName}}</li>
         </ul>
 
     </div>

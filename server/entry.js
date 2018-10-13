@@ -30,13 +30,6 @@ app.get('/', (req, res) => {
     res.send('app.get(/)')
 });
 
-/* *************
- * GET all plants
- ***************/
-// app.get('/search', (req, res) => {
-//     res.send('app.get(/search)')
-// });
-
 app.listen(PORT, () => {
     console.log('Server has been started at port: ' + PORT);
 });

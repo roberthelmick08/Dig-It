@@ -24,7 +24,7 @@
             </div>
 
 
-            <mat-card class="profile-menu-button" (click)="setCurrentPage('edit_profile')">
+            <mat-card class="profile-menu-button" (click)="setCurrentPage('login')">
                 <mat-icon>person</mat-icon>
             </mat-card>
         </div>
@@ -53,11 +53,12 @@
 
 
             <mat-card fxLayout="column" fxFlex="60" class="page-content">
-                <app-search *ngIf="currentPage === 'search'"></app-search>
-                <app-garden *ngIf="currentPage === 'garden'"></app-garden>
-                <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
+                <app-search *ngIf="currentPage === 'search'" (currentUser)="currentUser"></app-search>
+                <app-garden *ngIf="currentPage === 'garden'" (currentUser)="currentUser"></app-garden>
+                <app-reminders *ngIf="currentPage === 'reminders'" (currentUser)="currentUser"></app-reminders>
 
-                <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
+                <app-login *ngIf="currentPage === 'login'" (currentUser)="currentUser"></app-login>
+                <app-edit-profile *ngIf="currentPage === 'edit_profile'" (currentUser)="currentUser"></app-edit-profile>
             </mat-card>
 
 

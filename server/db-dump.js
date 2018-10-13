@@ -1,6 +1,21 @@
 db = db.getSiblingDB("meanAuth");
-db.plants.drop();
 
+db.users.drop();
+db.createCollection("users");
+
+db.users.insert({
+    name: "a",
+    email: "a",
+    password: "a",
+    admin: true,
+    phone: "5555555555",
+    zone: 9,
+    zip: 75056,
+    garden: []
+});
+
+
+db.plants.drop();
 db.createCollection("plants");
 
 var allPlants = [
@@ -861,6 +876,4 @@ var allPlants = [
     { commonName: "Heart-leaved alexanders", botanicalName: "Zizia aptera", variety: "yellow", type: "orn", methodNum: 4, sowingMethod: 12, weeksToSowBeforeLastFrost: -12, depth: 2, sowingSpace: 10, lifetype: "p", sunSchedule: "psha", img: null, comment: "ground cover.", germStart: -4, germEnd: -12, zones: null, time_to_harvest: 0, harvestable: false },
     { commonName: "Italian zucchini", botanicalName: "Zucchetta rampicante tromboncino", variety: "yellow", type: "veg", methodNum: 1, sowingMethod: 0, weeksToSowBeforeLastFrost: 1, depth: 5, sowingSpace: 96, lifetype: "a", sunSchedule: "fsun", img: null, comment: "do not grow more than one plant.", germStart: 0, germEnd: -2, zones: null, time_to_harvest: 10, harvestable: true },
 ]
-
-
-db.plants.insert(allPlants)
+db.plants.insert(allPlants);

@@ -1,4 +1,6 @@
 export class Plant {
+  _id: string;
+
   // Page 0
   botanicalName?: string;
   commonName: string;
