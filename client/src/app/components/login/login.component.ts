@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -10,6 +11,12 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent {
+
+  @Output()
+  navigateToRegisterEvent = new EventEmitter();
+  @Output()
+  navigateToGardenEvent = new EventEmitter();
+
   credentials: TokenPayload = {
     email: '',
     password: ''
@@ -19,9 +26,13 @@ export class LoginComponent {
 
   login() {
     this.auth.login(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/profile');
+    this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);
     });
+  }
+
+  navigateToRegister() {
+    this.navigateToRegisterEvent.emit(null);
   }
 }

@@ -59,13 +59,8 @@ export class SearchComponent implements AfterViewInit {
   }
 
   addToGarden(plant: Plant) {
-    this.dataService.addToGarden(id).subscribe( data => {
+    this.dataService.addToGarden(plant).subscribe( data => {
       if (data.n === 1) {
-        for (let plant of this.plantsList) {
-          if (plant._id === id) {
-
-          }
-        }
       }
     });
   }

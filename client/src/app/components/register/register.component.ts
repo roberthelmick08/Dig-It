@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 
@@ -16,11 +16,14 @@ export class RegisterComponent {
     password: ''
   };
 
+  @Output()
+  navigateToGardenEvent = new EventEmitter();
+
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   register() {
     this.auth.register(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/profile');
+      this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);
     });

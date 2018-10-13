@@ -1,3 +1,4 @@
+import { AuthenticationService } from './services/authentication.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +20,13 @@ import { RemindersComponent } from './components/reminders/reminders.component';
 import { LoginComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', component: AppComponent },
+];
 
 @NgModule({
   declarations: [
@@ -34,7 +42,9 @@ import { RegisterComponent } from './components/register/register.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     HttpModule,
+    RouterModule,
     FormsModule,
     MatIconModule,
     MatCheckboxModule,
@@ -51,12 +61,13 @@ import { RegisterComponent } from './components/register/register.component';
     MatToolbarModule,
     MatSidenavModule,
     FlexLayoutModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
   ],
   entryComponents: [
     AddPlantDialogComponent,
   ],
-  providers: [MatDialog],
+  providers: [MatDialog, AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
