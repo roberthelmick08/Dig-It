@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { DataService } from './../../../services/data.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { FormGroup } from '@angular/forms';
 import { Plant } from '../../../../models/plant';
 
 @Component({
@@ -14,7 +14,10 @@ export class AddPlantDialogComponent implements OnInit {
 
   newPlant: Plant;
 
-  constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent> ) {
+  @Output()
+  getPlantsEvent: EventEmitter<any> = new EventEmitter();
+
+  constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>, private dataService: DataService) {
     this.newPlant = new Plant();
 
     // Set default values
@@ -50,23 +53,31 @@ export class AddPlantDialogComponent implements OnInit {
     this.newPlant.germStart = this.newPlant.weeksToSowBeforeLastFrost;
 
     // Format text input
-    this.newPlant.botanicalName = this.toTitleCase(this.newPlant.botanicalName);
-    this.newPlant.commonName = this.toTitleCase(this.newPlant.commonName);
-    this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
-    this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
+    if (this.newPlant.botanicalName) this.newPlant.botanicalName = this.toTitleCase(this.newPlant.botanicalName);
+    if (this.newPlant.commonName) this.newPlant.commonName = this.toTitleCase(this.newPlant.commonName);
+    if (this.newPlant.variety) this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
+    if (this.newPlant.comment) this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
 
-    console.log(this.newPlant);
+    this.dataService.addPlant(this.newPlant)
+    .subscribe(item => {
+      console.log(item);
+      this.dataService.getAllPlants();
+    });
 
     this.closeDialog();
   }
 
   toTitleCase(input: string) {
-    input = input.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ');
-    return input;
+    if (input) {
+      input = input.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ');
+      return input;
+    }
   }
 
   toSentenceCase(input: string) {
-    input = input.trim()[0].toUpperCase() + input.substring(1, input.length - 1);
-    return input;
+    if (input) {
+      input = input.trim()[0].toUpperCase() + input.substring(1, input.length - 1);
+      return input;
+    }
   }
 }

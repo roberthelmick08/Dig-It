@@ -18,13 +18,12 @@
             <button mat-raised-button fxFlex="100" (click)="openAddPlantDialog()" class="add-plant-button">Add a Plant</button>
         </div>
         <h2 class="search-warning">No Plants Found</h2>
+    </div>
 
-
-        <div *ngIf="visiblePlants?.length > 0">
-            <ul>
-                <li *ngFor="let plant of visiblePlants">{{plant.commonName}} - {{plant.botanicalName}}</li>
-            </ul>
-        </div>
+    <div *ngIf="visiblePlants?.length > 0">
+        <ul>
+            <li *ngFor="let plant of visiblePlants">{{plant.commonName}} - {{plant.botanicalName}}</li>
+        </ul>
 
     </div>
 </div>
