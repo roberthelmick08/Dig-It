@@ -26,7 +26,8 @@ export class LoginComponent {
 
   login() {
     this.auth.login(this.credentials).subscribe(() => {
-    this.navigateToGardenEvent.emit(null);
+      console.error('NAV TO GARDEN - LOGIN comp');
+      this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);
     });

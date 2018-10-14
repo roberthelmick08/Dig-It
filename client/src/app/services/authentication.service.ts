@@ -20,6 +20,8 @@ export interface TokenPayload {
 export class AuthenticationService {
   private token: string;
 
+  apiPath: String = 'http://localhost:3000/api';
+
   constructor(private http: HttpClient, private router: Router) {}
 
   private saveToken(token: string): void {
@@ -59,9 +61,9 @@ export class AuthenticationService {
     let base;
 
     if (method === 'post') {
-      base = this.http.post(`/api/${type}`, user);
+      base = this.http.post(this.apiPath + '/' + type, user);
     } else {
-      base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(this.apiPath + '/' + type, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(

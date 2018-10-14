@@ -1,6 +1,6 @@
 import { DataService } from './../../../services/data.service';
 import { Component } from '@angular/core';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MatSnackBar, MatSnackBarModule } from '@angular/material';
 import { Plant } from '../../../../models/plant';
 
 @Component({
@@ -65,9 +65,12 @@ export class AddPlantDialogComponent {
         this.snackBar.open('Plant saved successfully');
       }
       this.dataService.getAllPlants();
+    }, (err) => {
+      console.error(err);
+      this.snackBar.open('Something went wrong :(');
     });
 
-    this.closeDialog();
+    // this.closeDialog();
   }
 
   toTitleCase(input: string) {

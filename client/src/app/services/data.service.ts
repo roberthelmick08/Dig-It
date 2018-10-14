@@ -36,7 +36,7 @@ export class DataService {
   addToGarden(plant: Plant) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.apiPath + '/garden/', '5bc1582c4d699095a5b3446e', {headers: headers})
+    return this.http.post(this.apiPath + '/garden/', plant._id, {headers: headers})
       .pipe(map(res => res.json()));
     // return this.http.post(this.apiPath + '/garden/', id, {headers: headers})
     //   .pipe(map(res => res.json()));

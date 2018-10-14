@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
-  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule } from '@angular/material';
+  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBar,
+  MatSnackBarContainer } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -39,6 +40,7 @@ const routes: Routes = [
     RemindersComponent,
     PlantDetailsDialogComponent,
     RegisterComponent,
+    MatSnackBarContainer,
   ],
   imports: [
     BrowserModule,
@@ -66,8 +68,9 @@ const routes: Routes = [
   ],
   entryComponents: [
     AddPlantDialogComponent,
+    MatSnackBarContainer,
   ],
-  providers: [MatDialog, AuthenticationService, AuthGuardService],
+  providers: [MatDialog, MatSnackBar, AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

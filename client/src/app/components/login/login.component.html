@@ -1,14 +1,10 @@
 <h1 class="form-signin-heading">Sign in</h1>
 <p class="lead">No Dig-It account? Please <a (click)="navigateToRegister()">register</a> instead.</p>
 
-<form (submit)="login()">
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input matInput type="email" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password">
-    </div>
-    <button type="submit" class="btn btn-default">Sign in!</button>
-</form>
+<mat-form-field>
+    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="credentials.email">
+</mat-form-field>
+<mat-form-field>
+    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+</mat-form-field>
+<button type="submit" (click)="login()">Sign in!</button>

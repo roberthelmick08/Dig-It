@@ -1,37 +1,95 @@
 const express = require('express');
 var router = express.Router();
 var jwt = require('express-jwt');
-const fs = require('fs');
+var passport = require('passport');
+var mongoose = require('mongoose');
 var privateKEY = 'MY_SECRET_KEY';
 // var privateKEY = fs.readFileSync('../../private.key', 'utf8');
 
 const PlantSchema = require('../model/plants')
 const UserSchema = require('../model/user')
+var User = mongoose.model('User');
 
 const auth = jwt({
     secret: privateKEY,
     userProperty: 'payload'
 });
 
-const ctrlProfile = require('../controllers/profile');
-const ctrlAuth = require('../controllers/authentication');
+
+var sendJSONresponse = function(res, status, content) {
+    res.status(status);
+    res.json(content);
+};
 
 /**************
  * AUTHENTICATION requests
  ***************/
 
-router.post('/register', ctrlAuth.register);
-router.post('/login', ctrlAuth.login);
+router.post('/register', (req, res, next) => {
+
+    // if(!req.body.name || !req.body.email || !req.body.password) {
+    //   sendJSONresponse(res, 400, {
+    //     "message": "All fields required"
+    //   });
+    //   return;
+    // }
+
+    console.log('in register auth service')
+    var user = new User();
+
+    user.name = req.body.name;
+    user.email = req.body.email;
+
+    user.setPassword(req.body.password);
+
+    user.save(function(err) {
+        var token;
+        token = user.generateJwt();
+        res.status(200);
+        res.json({
+            "token": token
+        });
+    });
+});
+
+router.post('/login', (req, res) => {
+
+    // if(!req.body.email || !req.body.password) {
+    //   sendJSONresponse(res, 400, {
+    //     "message": "All fields required"
+    //   });
+    //   return;
+    // }
+
+    passport.authenticate('local', function(err, user, info) {
+        var token;
+
+        // If Passport throws/catches an error
+        if (err) {
+            res.status(404).json(err);
+            return;
+        }
+
+        // If a user is found
+        if (user) {
+            token = user.generateJwt();
+            res.status(200);
+            res.json({
+                "token": token
+            });
+        } else {
+            // If user is not found
+            res.status(401).json(info);
+        }
+    });
+});
 
 /**************
  * USER requests
  ***************/
 
-// profile
-router.get('/profile', auth, ctrlProfile.profileRead);
-
 // GET user login
-router.get('/login', (req, res, next) => {
+router.get('/login', (req, res) => {
     UserSchema.findOne(function(err, user) {
         if (err) {
             res.json(err);
@@ -39,11 +97,6 @@ router.get('/login', (req, res, next) => {
             res.json(user);
         }
     })
-});
-
-// POST register user
-router.post('/register', (req, res, next) => {
-
 });
 
 // PUT edit user profile

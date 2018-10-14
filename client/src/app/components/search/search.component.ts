@@ -37,8 +37,14 @@ export class SearchComponent implements AfterViewInit {
 
   onSearch() {
     this.visiblePlants = this.plantsList.filter(plant => {
-      return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
-          || plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      if (plant.botanicalName && !plant.commonName) {
+        return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      } else if (plant.commonName && !plant.botanicalName) {
+        return plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      } else {
+        return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
+            || plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      }
     }).sort( plant => {
       if (this.searchBy === 'commonName') {
         if (plant.commonName.substring(0, this.searchTerm.length).toLowerCase() === this.searchTerm.toLowerCase()) {
@@ -54,8 +60,6 @@ export class SearchComponent implements AfterViewInit {
         }
       }
     });
-
-
   }
 
   addToGarden(plant: Plant) {
