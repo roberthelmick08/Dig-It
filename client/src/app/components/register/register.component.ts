@@ -13,7 +13,12 @@ export class RegisterComponent {
   credentials: TokenPayload = {
     email: '',
     name: '',
-    password: ''
+    password: '',
+    admin: false,
+    phone: 7577132191,
+    zone: 9,
+    zip: 75056,
+    garden: []
   };
 
   @Output()

@@ -34,11 +34,15 @@ router.post('/register', (req, res, next) => {
     //   return;
     // }
 
-    console.log('in register auth service')
-    var user = new User();
+    var user = new UserSchema();
 
     user.name = req.body.name;
     user.email = req.body.email;
+    user.admin = req.body.admin;
+    user.phone = req.body.phone;
+    user.zone = req.body.zone;
+    user.zip = req.body.zip;
+    user.garden = req.body.garden;
 
     user.setPassword(req.body.password);
 
@@ -89,65 +93,65 @@ router.post('/login', (req, res) => {
  ***************/
 
 // GET user login
-router.get('/login', (req, res) => {
-    UserSchema.findOne(function(err, user) {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(user);
-        }
-    })
-});
+// router.get('/login', (req, res) => {
+//     UserSchema.findOne(function(err, user) {
+//         if (err) {
+//             res.json(err);
+//         } else {
+//             res.json(user);
+//         }
+//     })
+// });
 
 // PUT edit user profile
-router.put('/profile/:id', (req, res, next) => {
-    PlantSchema.findOneAndUpdate({ _id: req.params.id }, {
-            $set: {
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password,
-                admin: req.body.admin,
-                phone: req.body.phone,
-                zone: req.body.zone,
-                zip: req.body.zip,
-                garden: req.body.garden
-            }
-        },
-        function(err, result) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(result);
-            }
-        })
-});
+// router.put('/profile/:id', (req, res, next) => {
+//     PlantSchema.findOneAndUpdate({ _id: req.params.id }, {
+//             $set: {
+//                 name: req.body.name,
+//                 email: req.body.email,
+//                 password: req.body.password,
+//                 admin: req.body.admin,
+//                 phone: req.body.phone,
+//                 zone: req.body.zone,
+//                 zip: req.body.zip,
+//                 garden: req.body.garden
+//             }
+//         },
+//         function(err, result) {
+//             if (err) {
+//                 res.json(err);
+//             } else {
+//                 res.json(result);
+//             }
+//         })
+// });
 
 // PUT update user garden
-router.put('/garden/:id', (req, res, next) => {
-    PlantSchema.findOneAndUpdate({ _id: req.params.id }, {
-            $set: {
-                garden: req.body.garden
-            }
-        },
-        function(err, result) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(result);
-            }
-        })
-});
+// router.put('/garden/:id', (req, res, next) => {
+//     PlantSchema.findOneAndUpdate({ _id: req.params.id }, {
+//             $set: {
+//                 garden: req.body.garden
+//             }
+//         },
+//         function(err, result) {
+//             if (err) {
+//                 res.json(err);
+//             } else {
+//                 res.json(result);
+//             }
+//         })
+// });
 
 // DELETE user from DB
-router.delete('/plant/:id', (req, res, next) => {
-    UserSchema.remove({ _id: req.params.id }, function(err, result) {
-        if (err) {
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    })
-});
+// router.delete('/plant/:id', (req, res, next) => {
+//     UserSchema.remove({ _id: req.params.id }, function(err, result) {
+//         if (err) {
+//             res.json(err);
+//         } else {
+//             res.json(result);
+//         }
+//     })
+// });
 
 /**************
  * PLANT requests

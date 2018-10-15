@@ -19,7 +19,13 @@ export class LoginComponent {
 
   credentials: TokenPayload = {
     email: '',
-    password: ''
+    name: '',
+    password: '',
+    admin: false,
+    phone: 7577132191,
+    zone: 9,
+    zip: 75056,
+    garden: []
   };
 
   constructor(private auth: AuthenticationService, private router: Router) {}
