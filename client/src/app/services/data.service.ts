@@ -12,6 +12,15 @@ export class DataService {
 
   constructor( private http: Http ) { }
 
+  getUser(id: number) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.apiPath + '/user/', '5bc1582c4d699095a5b3446e', {headers: headers})
+      .pipe(map(res => res.json()));
+    // return this.http.post(this.apiPath + '/garden/', id, {headers: headers})
+    //   .pipe(map(res => res.json()));
+  }
+
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
       .pipe(map(res => res.json()));
@@ -22,5 +31,14 @@ export class DataService {
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.apiPath + '/new_plant', newPlant, {headers: headers})
       .pipe(map(res => res.json()));
+  }
+
+  addToGarden(plant: Plant) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.apiPath + '/garden/', plant._id, {headers: headers})
+      .pipe(map(res => res.json()));
+    // return this.http.post(this.apiPath + '/garden/', id, {headers: headers})
+    //   .pipe(map(res => res.json()));
   }
 }

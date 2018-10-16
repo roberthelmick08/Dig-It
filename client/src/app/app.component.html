@@ -1,4 +1,4 @@
-<div style="height: calc(100vh - 64px);">
+<div style="height: 100vh;">
     <mat-toolbar class="navbar">
         <!-- Hamburger menu for mobile devices -->
         <div fxShow="true" fxHide.gt-sm="true" fxLayoutAlign="space-between center" fxFlex="100">
@@ -24,7 +24,7 @@
             </div>
 
 
-            <mat-card class="profile-menu-button" (click)="setCurrentPage('edit_profile')">
+            <mat-card class="profile-menu-button" (click)="setCurrentPage('login')">
                 <mat-icon>person</mat-icon>
             </mat-card>
         </div>
@@ -57,6 +57,8 @@
                 <app-garden *ngIf="currentPage === 'garden'"></app-garden>
                 <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
 
+                <app-register *ngIf="currentPage === 'register'" (navigateToGardenEvent)="setCurrentPage('garden')"></app-register>
+                <app-login *ngIf="currentPage === 'login'" (navigateToGardenEvent)="setCurrentPage('garden')" (navigateToRegisterEvent)="setCurrentPage('register')"></app-login>
                 <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
             </mat-card>
 

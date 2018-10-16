@@ -1,0 +1,10 @@
+<h1 class="form-signin-heading">Sign in</h1>
+<p class="lead">No Dig-It account? Please <a (click)="navigateToRegister()">register</a> instead.</p>
+
+<mat-form-field>
+    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="credentials.email">
+</mat-form-field>
+<mat-form-field>
+    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+</mat-form-field>
+<button type="submit" (click)="login()">Sign in!</button>
