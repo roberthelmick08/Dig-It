@@ -8,6 +8,7 @@ import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBar,
   MatSnackBarContainer } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,6 +47,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     HttpModule,
+    Ng2TelInputModule,
     RouterModule,
     FormsModule,
     MatIconModule,
@@ -64,6 +66,7 @@ const routes: Routes = [
     MatSidenavModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
+
     RouterModule.forRoot(routes),
   ],
   entryComponents: [

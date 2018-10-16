@@ -22,9 +22,9 @@ export class LoginComponent {
     name: '',
     password: '',
     admin: false,
-    phone: 7577132191,
-    zone: 9,
-    zip: 75056,
+    phone: null,
+    zone: null,
+    zip: null,
     garden: []
   };
 
@@ -32,7 +32,6 @@ export class LoginComponent {
 
   login() {
     this.auth.login(this.credentials).subscribe(() => {
-      console.error('NAV TO GARDEN - LOGIN comp');
       this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);

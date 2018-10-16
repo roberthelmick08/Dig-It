@@ -1,11 +1,20 @@
 <h1>Register</h1>
 <mat-form-field>
-    <input matInput type="text" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name">
+    <input matInput type="text" name="name" placeholder="Your name" [(ngModel)]="credentials.name" required>
 </mat-form-field>
 <mat-form-field>
-    <input matInput type="email" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="credentials.email" required>
 </mat-form-field>
 <mat-form-field>
-    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password" required>
+</mat-form-field>
+<mat-form-field>
+    <input type="text" ng2TelInput [(ngModel)]="credentials.phone" />
+</mat-form-field>
+<mat-form-field>
+    <input matInput type="text" name="name" placeholder="Phone Number" [(ngModel)]="credentials.name" required>
+</mat-form-field>
+<mat-form-field>
+    <input matInput type="text" name="name" placeholder="ZIP code" [(ngModel)]="credentials.name" required>
 </mat-form-field>
 <button mat-raised-button type="submit" (click)="register()">Register!</button>

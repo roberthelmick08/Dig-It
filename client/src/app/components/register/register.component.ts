@@ -15,11 +15,14 @@ export class RegisterComponent {
     name: '',
     password: '',
     admin: false,
-    phone: 7577132191,
-    zone: 9,
-    zip: 75056,
+    phone: null,
+    zone: null,
+    zip: null,
     garden: []
   };
+
+
+  isPhoneWarningVisible: boolean = false;
 
   @Output()
   navigateToGardenEvent = new EventEmitter();
