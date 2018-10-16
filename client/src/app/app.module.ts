@@ -71,6 +71,7 @@ const routes: Routes = [
   ],
   entryComponents: [
     AddPlantDialogComponent,
+    PlantDetailsDialogComponent,
     MatSnackBarContainer,
   ],
   providers: [MatDialog, MatSnackBar, AuthenticationService, AuthGuardService],

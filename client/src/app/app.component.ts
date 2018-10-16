@@ -1,26 +1,22 @@
-import { DataService } from './services/data.service';
-import { Component, OnInit } from '@angular/core';
+import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
+import { Component } from '@angular/core';
 import { User } from 'src/models/user';
+import { MatDialog } from '@angular/material';
+import { Plant } from 'src/models/plant';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   currentUser: User;
 
   isUserMenuOpen: boolean = false;
 
   currentPage: string = 'garden';
 
-  constructor(private dataService: DataService) {
-
-  }
-
-  ngOnInit() {
-    // this.dataService.getUser();
-  }
+  constructor( public dialog: MatDialog) { }
 
   setCurrentPage(page: string) {
     this.currentPage = page;
@@ -28,5 +24,16 @@ export class AppComponent implements OnInit {
 
   toggleUserMenu() {
     this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  openPlantDetailsDialog(plant: Plant){
+    const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
+      height: '80vh',
+      width: '40%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // TODO
+    });
   }
 }

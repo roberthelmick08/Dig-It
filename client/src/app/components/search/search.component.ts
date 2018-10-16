@@ -31,8 +31,7 @@ export class SearchComponent implements AfterViewInit {
   }
 
   getPlants() {
-    this.dataService.getAllPlants()
-        .subscribe(plants => this.plantsList = plants);
+    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants);
   }
 
   onSearch() {

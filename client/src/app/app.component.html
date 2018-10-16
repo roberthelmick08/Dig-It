@@ -54,7 +54,7 @@
 
             <mat-card fxLayout="column" fxFlex="60" class="page-content">
                 <app-search *ngIf="currentPage === 'search'"></app-search>
-                <app-garden *ngIf="currentPage === 'garden'"></app-garden>
+                <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-garden>
                 <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
 
                 <app-register *ngIf="currentPage === 'register'" (navigateToGardenEvent)="setCurrentPage('garden')"></app-register>
