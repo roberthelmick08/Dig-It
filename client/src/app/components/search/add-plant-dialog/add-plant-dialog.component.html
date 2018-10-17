@@ -31,9 +31,9 @@
 
                 <mat-form-field>
                     <mat-select required placeholder="Life Cycle" name="lifeType" [(ngModel)]="newPlant.lifeType">
-                        <mat-option value="a">Annual</mat-option>
-                        <mat-option value="p">Perennial</mat-option>
-                        <mat-option value="b">Biennial</mat-option>
+                        <mat-option value="Annual">Annual</mat-option>
+                        <mat-option value="Perennial">Perennial</mat-option>
+                        <mat-option value="Biennial">Biennial</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-hint>Does it produce something to harvest?</mat-hint>
@@ -49,18 +49,18 @@
                 <mat-form-field>
                     <mat-select required placeholder="Sun Schedule" name="sunSchedule" [(ngModel)]="newPlant.sunSchedule">
                         <mat-select-trigger>
-                            <span *ngIf="newPlant.sunSchedule === 'fsun'"><mat-icon>brightness_high</mat-icon> Full Sun</span>
-                            <span *ngIf="newPlant.sunSchedule === 'psun'"><mat-icon>brightness_low</mat-icon> Partial Sun</span>
-                            <span *ngIf="newPlant.sunSchedule === 'psha'"><mat-icon>brightness_medium</mat-icon> Partial Shade</span>
-                            <span *ngIf="newPlant.sunSchedule === 'fsha'"><mat-icon>wb_cloudy</mat-icon> Full Shade</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Full Sun'"><mat-icon>brightness_high</mat-icon> Full Sun</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Partial Sun'"><mat-icon>brightness_low</mat-icon> Partial Sun</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Partial Shade'"><mat-icon>brightness_medium</mat-icon> Partial Shade</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Full Shade'"><mat-icon>wb_cloudy</mat-icon> Full Shade</span>
                         </mat-select-trigger>
-                        <mat-option value="fsun">
+                        <mat-option value="Full Sun">
                             <mat-icon>brightness_high</mat-icon> Full Sun</mat-option>
-                        <mat-option value="psun">
+                        <mat-option value="Partial Sun">
                             <mat-icon>brightness_low</mat-icon> Partial Sun</mat-option>
-                        <mat-option value="psha">
+                        <mat-option value="Partial Shade">
                             <mat-icon>brightness_medium</mat-icon> Partial Shade</mat-option>
-                        <mat-option value="fsha">
+                        <mat-option value="Full Shade">
                             <mat-icon>wb_cloudy</mat-icon> Full Shade</mat-option>
                     </mat-select>
                 </mat-form-field>
