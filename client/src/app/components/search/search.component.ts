@@ -1,6 +1,6 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
 import { DataService } from '../../services/data.service';
-import { Component, AfterViewInit, Input } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { User } from 'src/models/user';
@@ -14,6 +14,10 @@ import { User } from 'src/models/user';
 export class SearchComponent implements AfterViewInit {
   @Input()
   currentUser: User;
+
+  @Output()
+  openPlantDetailsDialogEvent = new EventEmitter();
+
   // Variable to store ALL plants from database
   plantsList: Array<Plant> = [];
 
@@ -125,5 +129,9 @@ export class SearchComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       // TODO
     });
+  }
+
+  openPlantDetailsDialog(plant) {
+    this.openPlantDetailsDialogEvent.emit(plant);
   }
 }

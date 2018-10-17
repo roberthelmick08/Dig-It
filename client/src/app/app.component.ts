@@ -26,10 +26,11 @@ export class AppComponent {
     this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 
-  openPlantDetailsDialog(plant: Plant){
+  openPlantDetailsDialog(plant: Plant) {
     const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
       height: '80vh',
-      width: '40%'
+      width: '40%',
+      data: plant
     });
 
     dialogRef.afterClosed().subscribe(result => {

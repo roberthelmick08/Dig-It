@@ -17,7 +17,31 @@ export class GardenComponent {
       botanicalName: 'Peruvian Torch',
       commonName: 'San Pedro',
       reminders: ['water', 'repot'],
+      stage: 2
+    },
+    {
+      botanicalName: 'Peruvian Torch',
+      commonName: 'San Pedro',
+      reminders: ['water', 'repot'],
       stage: 1
+    },
+    {
+      botanicalName: 'Peruvian Torch',
+      commonName: 'San Pedro',
+      reminders: ['water', 'repot'],
+      stage: 4
+    },
+    {
+      botanicalName: 'Peruvian Torch',
+      commonName: 'San Pedro',
+      reminders: ['water', 'repot'],
+      stage: 3
+    },
+    {
+      botanicalName: 'Peruvian Torch',
+      commonName: 'San Pedro',
+      reminders: ['water', 'repot'],
+      stage: 5
     },
     {
       botanicalName: 'Peruvian Torch',
@@ -35,191 +59,17 @@ export class GardenComponent {
       botanicalName: 'Peruvian Torch',
       commonName: 'San Pedro',
       reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: '',
-      commonName: 'San Pedro',
-      reminders: ['water', 'move-outdoors'],
       stage: 1
     },
 ];
 
   constructor(private dataService: DataService) { }
-  
-  markReminderDone(plant, reminder){
-    plant.reminders.splice(plant.reminders.findIndex(r => { return reminder === r }), 1);
+
+  markReminderDone(plant, reminder) {
+    plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
   }
 
-  openPlantDetailsDialog(plant: Plant){
+  openPlantDetailsDialog(plant: Plant) {
     this.openPlantDetailsDialogEvent.emit(plant);
   }
 }

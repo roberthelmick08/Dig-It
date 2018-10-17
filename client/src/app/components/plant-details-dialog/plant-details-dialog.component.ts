@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Plant } from 'src/models/plant';
 
 @Component({
   selector: 'app-plant-details-dialog',
@@ -8,7 +9,17 @@ import { MatDialogRef } from '@angular/material';
 })
 export class PlantDetailsDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<PlantDetailsDialogComponent>) { }
+  // Variable used to navigate to next plant details page
+  step: number = 0;
 
+  constructor(@Inject(MAT_DIALOG_DATA) public plant: Plant, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>) { }
+
+  onNextStep() {
+    this.step++;
+  }
+
+  onPreviousStep() {
+    this.step--;
+  }
 
 }

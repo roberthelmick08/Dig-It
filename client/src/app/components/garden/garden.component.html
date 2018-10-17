@@ -3,7 +3,7 @@
         <h2 class="page-header">My Garden</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-        <mat-card class="plant-grid-item" *ngFor="let plant of userPlants" fxLayout="column" (click)="$event.stopPropagation(); openPlantDetailsDialog(plant)">
+        <mat-card class="plant-grid-item" *ngFor="let plant of userPlants" fxLayout="column" (click)="openPlantDetailsDialog(plant)">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
                     <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" />
