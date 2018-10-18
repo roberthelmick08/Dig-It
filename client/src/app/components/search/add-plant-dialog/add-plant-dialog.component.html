@@ -15,25 +15,25 @@
                 </mat-form-field>
                 <mat-form-field>
                     <mat-select required placeholder="Plant Type" name="type" [(ngModel)]="newPlant.type">
-                        <mat-option value="cactus">Cactus</mat-option>
-                        <mat-option value="orn">Flower</mat-option>
-                        <mat-option value="fruit">Fruit</mat-option>
-                        <mat-option value="grain">Grain</mat-option>
-                        <mat-option value="grass">Grass</mat-option>
-                        <mat-option value="herb">Herb</mat-option>
-                        <mat-option value="house">Misc Houseplant</mat-option>
-                        <mat-option value="shrub">Shrub</mat-option>
-                        <mat-option value="succulent">Succulent</mat-option>
-                        <mat-option value="vege">Vegetable</mat-option>
-                        <mat-option value="vine">Vine</mat-option>
+                        <mat-option value="Cactus">Cactus</mat-option>
+                        <mat-option value="Flower">Flower</mat-option>
+                        <mat-option value="Fruit">Fruit</mat-option>
+                        <mat-option value="Grain">Grain</mat-option>
+                        <mat-option value="Grass">Grass</mat-option>
+                        <mat-option value="Herb">Herb</mat-option>
+                        <mat-option value="Houseplant">Misc Houseplant</mat-option>
+                        <mat-option value="Shrub">Shrub</mat-option>
+                        <mat-option value="Succulent">Succulent</mat-option>
+                        <mat-option value="Vegetable">Vegetable</mat-option>
+                        <mat-option value="Vine">Vine</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field>
                     <mat-select required placeholder="Life Cycle" name="lifeType" [(ngModel)]="newPlant.lifeType">
-                        <mat-option value="a">Annual</mat-option>
-                        <mat-option value="p">Perennial</mat-option>
-                        <mat-option value="b">Biennial</mat-option>
+                        <mat-option value="Annual">Annual</mat-option>
+                        <mat-option value="Perennial">Perennial</mat-option>
+                        <mat-option value="Biennial">Biennial</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-hint>Does it produce something to harvest?</mat-hint>
@@ -49,18 +49,18 @@
                 <mat-form-field>
                     <mat-select required placeholder="Sun Schedule" name="sunSchedule" [(ngModel)]="newPlant.sunSchedule">
                         <mat-select-trigger>
-                            <span *ngIf="newPlant.sunSchedule === 'fsun'"><mat-icon>brightness_high</mat-icon> Full Sun</span>
-                            <span *ngIf="newPlant.sunSchedule === 'psun'"><mat-icon>brightness_low</mat-icon> Partial Sun</span>
-                            <span *ngIf="newPlant.sunSchedule === 'psha'"><mat-icon>brightness_medium</mat-icon> Partial Shade</span>
-                            <span *ngIf="newPlant.sunSchedule === 'fsha'"><mat-icon>wb_cloudy</mat-icon> Full Shade</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Full Sun'"><mat-icon>brightness_high</mat-icon> Full Sun</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Partial Sun'"><mat-icon>brightness_low</mat-icon> Partial Sun</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Partial Shade'"><mat-icon>brightness_medium</mat-icon> Partial Shade</span>
+                            <span *ngIf="newPlant.sunSchedule === 'Full Shade'"><mat-icon>wb_cloudy</mat-icon> Full Shade</span>
                         </mat-select-trigger>
-                        <mat-option value="fsun">
+                        <mat-option value="Full Sun">
                             <mat-icon>brightness_high</mat-icon> Full Sun</mat-option>
-                        <mat-option value="psun">
+                        <mat-option value="Partial Sun">
                             <mat-icon>brightness_low</mat-icon> Partial Sun</mat-option>
-                        <mat-option value="psha">
+                        <mat-option value="Partial Shade">
                             <mat-icon>brightness_medium</mat-icon> Partial Shade</mat-option>
-                        <mat-option value="fsha">
+                        <mat-option value="Full Shade">
                             <mat-icon>wb_cloudy</mat-icon> Full Shade</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -97,6 +97,8 @@
     </div>
 
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
+        <mat-checkbox [(ngModel)]="isSaveToGarden">Save to Garden</mat-checkbox>
+
         <button mat-button color="primary" (click)="closeDialog()" *ngIf="step === 0">Cancel</button>
         <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
         <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 1 && step !== 2" [disabled]="(!newPlant.commonName && !newPlant.botanicalName) || !newPlant.type || !newPlant.lifeType || (newPlant.harvestable === true && !newPlant.weeksToHarvest)">Next ></button>

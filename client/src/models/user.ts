@@ -1,6 +1,7 @@
 import { Plant } from './plant';
 
 export class User {
+  _id: string;
   name: string;
   email: string;
   password: string;
@@ -9,4 +10,6 @@ export class User {
   zone: number;
   zip: number;
   garden?: Array<Plant>;
+  exp: number;
+  iat: number;
 }

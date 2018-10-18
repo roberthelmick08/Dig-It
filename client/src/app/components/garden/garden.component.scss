@@ -2,14 +2,21 @@
 .plant-grid-item {
     height: 150px;
     width: 200px;
+    padding: 0;
+    margin: 16px 16px;
+    border-bottom: 4px solid transparent;
+    &:hover {
+        border-bottom: 4px solid $color-light-green;
+    }
     .plant-icon {
-        height: 35px;
-        width: 35px;
+        height: 60px;
+        width: 60px;
+        opacity: 0.8;
     }
     .reminders-icon-container {
         .reminders-icon {
-            height: 16px;
-            width: 16px;
+            height: 24px;
+            width: 24px;
             cursor: pointer;
             margin-left: 8px;
         }

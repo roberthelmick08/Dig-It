@@ -1,8 +1,9 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
 import { DataService } from '../../services/data.service';
-import { Plant } from './../../../models/plant';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Plant } from './../../../models/plant';
+import { User } from 'src/models/user';
 
 @Component({
   selector: 'app-search',
@@ -11,6 +12,12 @@ import { MatDialog } from '@angular/material';
   providers: [ DataService ]
 })
 export class SearchComponent implements AfterViewInit {
+  @Input()
+  currentUser: User;
+
+  @Output()
+  openPlantDetailsDialogEvent = new EventEmitter();
+
   // Variable to store ALL plants from database
   plantsList: Array<Plant> = [];
 
@@ -28,14 +35,19 @@ export class SearchComponent implements AfterViewInit {
   }
 
   getPlants() {
-    this.dataService.getAllPlants()
-        .subscribe(plants => this.plantsList = plants);
+    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants);
   }
 
   onSearch() {
     this.visiblePlants = this.plantsList.filter(plant => {
-      return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
-          || plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      if (plant.botanicalName && !plant.commonName) {
+        return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      } else if (plant.commonName && !plant.botanicalName) {
+        return plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      } else {
+        return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
+            || plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      }
     }).sort( plant => {
       if (this.searchBy === 'commonName') {
         if (plant.commonName.substring(0, this.searchTerm.length).toLowerCase() === this.searchTerm.toLowerCase()) {
@@ -51,12 +63,15 @@ export class SearchComponent implements AfterViewInit {
         }
       }
     });
-
   }
 
-  infiniteScroll() {
-
+  addToGarden(plant: Plant) {
+    this.dataService.addToGarden(plant).subscribe( data => {
+      if (data.n === 1) {
+      }
+    });
   }
+
   // Reorder array based on closest match to search term
   levDist(s, t) {
     const d = []; // 2d matrix
@@ -114,5 +129,9 @@ export class SearchComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       // TODO
     });
+  }
+
+  openPlantDetailsDialog(plant) {
+    this.openPlantDetailsDialogEvent.emit(plant);
   }
 }

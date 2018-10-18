@@ -26,16 +26,7 @@ app.use(cors());
 
 app.use('/api', route);
 
-app.get('/', (req, res) => {
-    res.send('app.get(/)')
-});
-
-/* *************
- * GET all plants
- ***************/
-// app.get('/search', (req, res) => {
-//     res.send('app.get(/search)')
-// });
+app.get('/', (req, res) => {});
 
 app.listen(PORT, () => {
     console.log('Server has been started at port: ' + PORT);

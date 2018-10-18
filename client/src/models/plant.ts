@@ -1,28 +1,26 @@
 export class Plant {
-  // Page 0
+  _id: string;
   botanicalName?: string;
   commonName: string;
-  type: string;
-  lifeType: string;
+  type: string = "Cactus" || "Flower" || "Fruit" || "Grain" || "Grass" || "Herb" || "Houseplant" || "Shrub" || "Succulent" || "Vegetable" || "Vine";
+  lifeType: string = "Annual" || "Perennial" || "Biennial";
+  // Whether plant produces something that can be harvested
   harvestable: boolean;
+  // Weeks until
   weeksToHarvest?: number;
-
-  // Page 1
   sunSchedule?: string;
   stage?: number;
   variety?: string;
   comment?: string;
-
-  // Page 2 - Advanced settings
   weeksToSowBeforeLastFrost?: number;
+  // Duration of germination period in weeks
   germEnd?: number;
-
-  // Read-only tips
+  // Sowing Tips
   sowingMethod?: string;
   sowingSpace?: number;
   depth?: number;
 
-  // Not used
+  // Not Used
   germStart?: number;
   img?: string;
   methodNum?: number;

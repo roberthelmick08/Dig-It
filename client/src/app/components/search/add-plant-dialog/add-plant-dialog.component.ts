@@ -8,7 +8,7 @@ import { Plant } from '../../../../models/plant';
   templateUrl: './add-plant-dialog.component.html',
   styleUrls: ['./add-plant-dialog.component.scss']
 })
-export class AddPlantDialogComponent implements OnInit {
+export class AddPlantDialogComponent {
   // Variable used to navigate Add Plant screens
   step: number = 0;
 
@@ -26,8 +26,6 @@ export class AddPlantDialogComponent implements OnInit {
     this.newPlant.stage = 0;
     this.newPlant.germEnd = 2;
   }
-
-  ngOnInit() { }
 
   onNextStep() {
     this.step++;
@@ -64,7 +62,7 @@ export class AddPlantDialogComponent implements OnInit {
       this.dataService.getAllPlants();
     });
 
-    this.closeDialog();
+    // this.closeDialog();
   }
 
   toTitleCase(input: string) {
