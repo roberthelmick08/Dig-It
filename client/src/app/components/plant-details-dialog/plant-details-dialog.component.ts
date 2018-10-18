@@ -22,17 +22,17 @@ export class PlantDetailsDialogComponent {
     this.step--;
   }
 
-  formatTextToSentenceCase(text: string){
+  toSentenceCase(text: string) {
     let sentenceArray = text.trim().split('. ');
-    sentenceArray.forEach( sentence => {
-      let charArray = sentence.split('');
+    sentenceArray = sentenceArray.map( sentence => {
+      const charArray = sentence.split('');
       charArray[0] = charArray[0].toUpperCase();
-      if(charArray[charArray.length - 1] !== ".") {
-        charArray.push(".");
+      if (charArray[charArray.length - 1] !== '.') {
+        charArray.push('.');
       }
-      return charArray.join("");
+      return charArray.join('');
     });
-    return sentenceArray.join(" ");
+    return sentenceArray.join(' ');
   }
 
 }

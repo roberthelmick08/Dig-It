@@ -8,7 +8,7 @@
     <!--  -->
     <div *ngIf="step === 0" fxLayout="column" class="slider-container">
         <div [innerHTML]="plant.type"></div>
-        <div [innerHTML]="formatTextToSentenceCase(plant.comment)"></div>
+        <div [innerHTML]="toSentenceCase(plant.comment)"></div>
 
     </div>
 
