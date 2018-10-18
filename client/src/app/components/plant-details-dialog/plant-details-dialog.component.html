@@ -1,28 +1,40 @@
 <div class="add-plant-dialog" fxLayout="column">
+    <div>
+        <img src="../../../assets/icons/reminders/repot.svg" fxFlex="25" />
 
-    <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
-        <h2 class="page-header">{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h2>
-        <h4>{{plant.commonName ? plant.botanicalName : '' }}</h4>
-    </div>
-
-    <!--  -->
-    <div *ngIf="step === 0" fxLayout="column" class="slider-container">
-        <div [innerHTML]="plant.type"></div>
-        <div [innerHTML]="toSentenceCase(plant.comment)"></div>
-
-    </div>
-
-    <!-- Sowing Details -->
-    <div *ngIf="step === 1" fxLayout="column" class="slider-container">
-        <div *ngIf="plant.depth || plant.sowingSpace">Seeds should be sown
-            <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
-            <span *ngIf="plant.depth && plant.sowingSpace">and </span>
-            <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
+        <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
+            <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
+            <h2>{{plant.commonName ? plant.botanicalName : '' }}</h2>
+            <h4>{{toSentenceCase(plant.variety)}}</h4>
         </div>
     </div>
 
+    <div class="plant-details-container" fxLayout="column">
+        <!-- General Details -->
+        <div *ngIf="step === 0" fxLayout="column" class="slider-container">
+            <div *ngIf="plant.type">Type: {{plant.type}}</div>
+            <div>{{plant.sunSchedule}}</div>
+            <div [innerHTML]="plant.lifeType"></div>
+            <div *ngIf="plant.comment">Comments: {{toSentenceCase(plant.comment)}}</div>
+            <div *ngIf="plant.harvestable">Approx. harvest date</div>
+            <div *ngIf="plant.zones">Grows well in zones {{plant.zones}}</div>
+        </div>
+
+        <!-- Sowing Details -->
+        <div *ngIf="step === 1" fxLayout="column" class="slider-container">
+            <div *ngIf="plant.depth || plant.sowingSpace">Seeds should be sown
+                <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
+                <span *ngIf="plant.depth && plant.sowingSpace">and </span>
+                <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
+            </div>
+        </div>
+    </div>
+
+
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
-        <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
+        <button mat-button color="secondary" (click)="dialogRef.close()" *ngIf="step === 0">Close</button>
         <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step === 0">Next ></button>
+        <button mat-raised-button color="secondary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
+        <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step !== 0">Close</button>
     </mat-dialog-actions>
 </div>

@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Plant } from 'src/models/plant';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-plant-details-dialog',
@@ -23,16 +24,18 @@ export class PlantDetailsDialogComponent {
   }
 
   toSentenceCase(text: string) {
-    let sentenceArray = text.trim().split('. ');
-    sentenceArray = sentenceArray.map( sentence => {
-      const charArray = sentence.split('');
-      charArray[0] = charArray[0].toUpperCase();
-      if (charArray[charArray.length - 1] !== '.') {
-        charArray.push('.');
-      }
-      return charArray.join('');
-    });
-    return sentenceArray.join(' ');
+    if (text) {
+      let sentenceArray = text.trim().split('. ');
+      sentenceArray = sentenceArray.map( sentence => {
+        const charArray = sentence.split('');
+        charArray[0] = charArray[0].toUpperCase();
+        if (charArray[charArray.length - 1] !== '.') {
+          charArray.push('.');
+        }
+        return charArray.join('');
+      });
+      return sentenceArray.join(' ');
+    }
   }
 
 }
