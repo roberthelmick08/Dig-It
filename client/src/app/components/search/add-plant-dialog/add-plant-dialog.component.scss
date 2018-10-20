@@ -1,4 +1,8 @@
+@import "../../../../styles.scss";
 .add-plant-dialog {
+    .page-header {
+        font-size: 2rem;
+    }
     .add-plant-scroll-container {
         overflow-y: auto;
         height: 55vh;

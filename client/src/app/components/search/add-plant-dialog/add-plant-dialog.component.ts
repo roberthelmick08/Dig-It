@@ -37,10 +37,6 @@ export class AddPlantDialogComponent {
     this.step--;
   }
 
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
-
   onSubmit() {
     // convert inputted values to negative numbers
     if (this.newPlant.weeksToSowBeforeLastFrost > 0) {
@@ -63,7 +59,6 @@ export class AddPlantDialogComponent {
       this.dataService.getAllPlants();
     });
 
-    // this.closeDialog();
   }
 
   toTitleCase(input: string) {
