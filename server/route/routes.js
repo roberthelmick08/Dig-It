@@ -66,6 +66,7 @@ router.post('/login', (req, res) => {
     // }
 
     passport.authenticate('local', function(err, user, info) {
+        console.log("IN PASSPORT AUTHENTICATE");
         var token;
 
         // If Passport throws/catches an error

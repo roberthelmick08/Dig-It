@@ -1,6 +1,6 @@
 import { DataService } from './../../../services/data.service';
-import { Component } from '@angular/core';
-import { MatDialogRef, MatSnackBar, MatSnackBarModule } from '@angular/material';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 import { Plant } from '../../../../models/plant';
 
 @Component({
@@ -14,10 +14,10 @@ export class AddPlantDialogComponent {
 
   newPlant: Plant;
 
-  isSaveToGarden: boolean = true;
+  @Output()
+  getPlantsEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>,
-    private dataService: DataService, public snackBar: MatSnackBar) {
+  constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>, private dataService: DataService) {
     this.newPlant = new Plant();
 
     // Set default values
@@ -51,23 +51,15 @@ export class AddPlantDialogComponent {
     this.newPlant.germStart = this.newPlant.weeksToSowBeforeLastFrost;
 
     // Format text input
-    this.newPlant.botanicalName = this.toTitleCase(this.newPlant.botanicalName);
-    this.newPlant.commonName = this.toTitleCase(this.newPlant.commonName);
-    this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
-    this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
+    if (this.newPlant.botanicalName) this.newPlant.botanicalName = this.toTitleCase(this.newPlant.botanicalName);
+    if (this.newPlant.commonName) this.newPlant.commonName = this.toTitleCase(this.newPlant.commonName);
+    if (this.newPlant.variety) this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
+    if (this.newPlant.comment) this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
 
     this.dataService.addPlant(this.newPlant)
     .subscribe(item => {
-      if (this.isSaveToGarden) {
-        // TODO: save to garden logic
-        this.snackBar.open('Plant added to garden');
-      } else {
-        this.snackBar.open('Plant saved successfully');
-      }
+      console.log(item);
       this.dataService.getAllPlants();
-    }, (err) => {
-      console.error(err);
-      this.snackBar.open('Something went wrong :(');
     });
 
     // this.closeDialog();
