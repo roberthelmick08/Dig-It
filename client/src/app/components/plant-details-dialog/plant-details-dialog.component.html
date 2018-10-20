@@ -12,15 +12,15 @@
     <div class="plant-details-container" fxLayout="column">
         <!-- General Details -->
         <div *ngIf="step === 0" fxLayout="column" class="slider-container">
-            <h4 *ngIf="plant.type" class="highlight text-right">{{plant.type}}
+            <h2 *ngIf="plant.type" class="highlight text-right">{{plant.type}}
                 <mat-icon>info</mat-icon>
-            </h4>
-            <h4 *ngIf="plant.lifeType" class="highlight text-right">{{plant.lifeType}}
+            </h2>
+            <h2 *ngIf="plant.lifeType" class="highlight text-right">{{plant.lifeType}}
                 <mat-icon>info</mat-icon>
-            </h4>
-            <h4 *ngIf="plant.sunSchedule" class="highlight text-right">{{plant.sunSchedule}}
+            </h2>
+            <h2 *ngIf="plant.sunSchedule" class="highlight text-right">{{plant.sunSchedule}}
                 <mat-icon>info</mat-icon>
-            </h4>
+            </h2>
             <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date: <span class="highlight">{{dataService.getHarvestDate(plant.weeksToHarvest)}}</span>
                 <mat-icon>info</mat-icon>
             </div>
@@ -33,14 +33,15 @@
 
         <!-- Sowing Details -->
         <div *ngIf="step === 1" fxLayout="column" class="slider-container">
+            <div *ngIf="plant.methodNum">
+                {{dataService.getSowingMethodString(plant.methodNum)}}
+            </div>
             <div *ngIf="plant.depth || plant.sowingSpace">Seeds should be sown
                 <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
                 <span *ngIf="plant.depth && plant.sowingSpace">and </span>
                 <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
             </div>
-            <div *ngIf="plant.methodNum">
-                {{dataService.getSowingMethodString(plant.methodNum)}}
-            </div>
+
         </div>
     </div>
 
