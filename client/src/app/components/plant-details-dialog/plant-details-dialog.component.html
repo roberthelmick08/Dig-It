@@ -1,5 +1,5 @@
-<div class="add-plant-dialog" fxLayout="column">
-    <div>
+<div class="plant-details-dialog" fxLayout="column">
+    <div class="add-plant-header">
         <img src="../../../assets/icons/reminders/repot.svg" fxFlex="25" />
 
         <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
@@ -12,12 +12,23 @@
     <div class="plant-details-container" fxLayout="column">
         <!-- General Details -->
         <div *ngIf="step === 0" fxLayout="column" class="slider-container">
-            <div *ngIf="plant.type">Type: {{plant.type}}</div>
-            <div>{{plant.sunSchedule}}</div>
-            <div [innerHTML]="plant.lifeType"></div>
-            <div *ngIf="plant.comment">Comments: {{toSentenceCase(plant.comment)}}</div>
-            <div *ngIf="plant.harvestable">Approx. harvest date</div>
-            <div *ngIf="plant.zones">Grows well in zones {{plant.zones}}</div>
+            <h4 *ngIf="plant.type" class="highlight text-right">{{plant.type}}
+                <mat-icon>info</mat-icon>
+            </h4>
+            <h4 *ngIf="plant.lifeType" class="highlight text-right">{{plant.lifeType}}
+                <mat-icon>info</mat-icon>
+            </h4>
+            <h4 *ngIf="plant.sunSchedule" class="highlight text-right">{{plant.sunSchedule}}
+                <mat-icon>info</mat-icon>
+            </h4>
+            <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date: <span class="highlight">{{dataService.getHarvestDate(plant.weeksToHarvest)}}</span>
+                <mat-icon>info</mat-icon>
+            </div>
+            <div *ngIf="plant.zones">Grows well in zones <span class="highlight">{{plant.zones}}</span></div>
+            <div *ngIf="plant.comment">
+                <div fxFlex="30" class="highlight">Comments: </div>
+                {{toSentenceCase(plant.comment)}}
+            </div>
         </div>
 
         <!-- Sowing Details -->
@@ -27,13 +38,16 @@
                 <span *ngIf="plant.depth && plant.sowingSpace">and </span>
                 <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
             </div>
+            <div *ngIf="plant.methodNum">
+                {{dataService.getSowingMethodString(plant.methodNum)}}
+            </div>
         </div>
     </div>
 
 
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
         <button mat-button color="secondary" (click)="dialogRef.close()" *ngIf="step === 0">Close</button>
-        <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step === 0">Next ></button>
+        <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step === 0 && (plant.methodNum || plant.depth || plant.sowingSpace)">Next ></button>
         <button mat-raised-button color="secondary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
         <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step !== 0">Close</button>
     </mat-dialog-actions>

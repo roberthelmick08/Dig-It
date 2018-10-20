@@ -1,7 +1,7 @@
+import { DataService } from './../../services/data.service';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Plant } from 'src/models/plant';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-plant-details-dialog',
@@ -13,7 +13,8 @@ export class PlantDetailsDialogComponent {
   // Variable used to navigate to next plant details page
   step: number = 0;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public plant: Plant, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public plant: Plant, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
+  public dataService: DataService) { }
 
   onNextStep() {
     this.step++;

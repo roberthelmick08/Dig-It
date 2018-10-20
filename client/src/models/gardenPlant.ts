@@ -1,9 +1,8 @@
-export class Plant {
-  _id: string;
+export class GardenPlant {
   botanicalName?: string;
   commonName: string;
-  type: string = 'Cactus' || 'Flower' || 'Fruit' || 'Grain' || 'Grass' || 'Herb' || 'Houseplant'
-  || 'Shrub' || 'Succulent' || 'Vegetable' || 'Vine';
+  type: string = 'Cactus' || 'Flower' || 'Fruit' || 'Grain' || 'Grass' ||
+  'Herb' || 'Houseplant' || 'Shrub' || 'Succulent' || 'Vegetable' || 'Vine';
   lifeType: string = 'Annual' || 'Perennial' || 'Biennial';
   // Whether plant produces something that can be harvested
   harvestable: boolean;

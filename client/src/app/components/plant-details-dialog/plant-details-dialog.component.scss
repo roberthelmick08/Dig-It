@@ -1,27 +1,37 @@
 @import "../../../styles.scss";
-.add-plant-dialog {
-    img {
-        margin-right: 1rem;
+.plant-details-dialog {
+    .add-plant-header {
+        img {
+            margin-right: 1rem;
+        }
+        h1,
+        h2,
+        h4 {
+            font-family: Futura, Trebuchet MS, Arial, sans-serif;
+        }
+        h1 {
+            color: $color-dark-gray;
+            letter-spacing: 0.125rem;
+        }
+        h2 {
+            color: $color-dark-green;
+        }
+        h4 {
+            color: $color-blue;
+            opacity: 0.6;
+        }
     }
-    h1,
-    h2,
-    h4 {
-        font-family: Futura, Trebuchet MS, Arial, sans-serif;
-    }
-    h1 {
-        color: $color-dark-gray;
-        letter-spacing: 0.125rem;
-    }
-    h2 {
-        color: $color-dark-green;
-    }
-    h4 {
-        color: $color-blue;
-    }
-    .slider-container {
-        height: 37vh;
-        .highlight {
-            color: $color-red;
+    .plant-details-container {
+        padding-top: 1rem;
+        font-size: 1.25rem;
+        .slider-container {
+            height: 37vh;
+            .highlight {
+                color: $color-red;
+            }
+            div {
+                margin-bottom: 1rem;
+            }
         }
     }
 }
