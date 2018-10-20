@@ -16,9 +16,6 @@
         </mat-radio-group>
     </div>
 
-    <div fxLayout="row">
-        <button mat-raised-button fxFlex="100" (click)="openAddPlantDialog()" class="add-plant-button">Create a Plant</button>
-    </div>
 
     <div *ngIf="!visiblePlants " class="search-warning ">Enter a search term to begin</div>
 
@@ -35,10 +32,16 @@
                 </div>
             </div>
             <div class="plant-name-details" fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
-                <h4>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h4>
+                <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                 <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
             </div>
         </div>
 
+    </div>
+
+    <div fxLayout="row">
+        <button mat-fab color="warn" (click)="openAddPlantDialog()" class="add-plant-button">
+          <mat-icon>add</mat-icon>
+        </button>
     </div>
 </div>

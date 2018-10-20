@@ -8,12 +8,35 @@
         border-right: 4px solid $color-light-green;
         background: rgba(217, 217, 217, 0.2);
     }
+    h3 {
+        color: $color-dark-green;
+        letter-spacing: 0.125rem; //2px
+    }
+    h5 {
+        color: $color-dark-green;
+        letter-spacing: 0.0625rem; //1px
+    }
 }
 
 .add-plant-button {
-    background: $color-red;
     color: #ffffff;
-    letter-spacing: 4px;
+    position: fixed;
+    bottom: 1rem;
+    right: 16%;
+    height: 7rem;
+    width: 7rem;
+    &:hover {
+        mat-icon.mat-icon {
+            opacity: 1;
+        }
+    }
+    mat-icon.mat-icon {
+        font-size: 7rem;
+        margin-top: -1rem;
+        opacity: 0.8;
+        width: 7rem;
+        height: 7rem;
+    }
 }
 
 .search-warning {
@@ -21,7 +44,6 @@
     color: $color-dark-gray;
     opacity: 0.3;
     margin: 3rem 0;
-    text-align: right;
     letter-spacing: 6px;
 }
 

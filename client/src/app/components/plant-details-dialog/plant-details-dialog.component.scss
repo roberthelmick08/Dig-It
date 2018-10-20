@@ -1,13 +1,4 @@
 @import "../../../styles.scss";
-.close-dialog-icon {
-    color: $color-dark-gray;
-    float: right;
-    cursor: pointer;
-    &:hover {
-        color: $color-red;
-    }
-}
-
 .plant-details-dialog {
     .add-plant-header {
         img {
@@ -37,8 +28,7 @@
                 tr {
                     margin-bottom: 1rem;
                     td {
-                        border-left: 1px solid #D9D9D9;
-                        border-bottom: 1px solid #D9D9D9;
+                        border-left: 2px solid #D9D9D9;
                         padding-left: 1rem;
                     }
                 }
@@ -65,7 +55,7 @@
             cursor: pointer;
             opacity: 0.4;
             position: relative;
-            top: 1rem;
+            top: 0.75rem;
             left: 0.5rem;
             &:hover {
                 color: $color-red;

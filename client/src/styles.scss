@@ -1,4 +1,4 @@
-@import "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "./theme";
 
 /**********************
  * THEME VARIABLES
@@ -17,6 +17,15 @@ $color-dark-gray: #423E37;
 
 .mat-drawer-container {
     background: transparent;
+}
+
+.close-dialog-icon {
+    color: $color-dark-gray;
+    float: right;
+    cursor: pointer;
+    &:hover {
+        color: $color-red;
+    }
 }
 
 .page-header {
