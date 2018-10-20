@@ -1,6 +1,6 @@
 <div fxLayout="column">
     <div fxFlex="100" fxLayoutAlign="center">
-        <h2 class="page-header">My Garden</h2>
+        <h2 class="page-header" title="Click to rename" contenteditable>My Garden</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
         <mat-card class="plant-grid-item" *ngFor="let plant of userPlants" fxLayout="column" (click)="openPlantDetailsDialog(plant)">
