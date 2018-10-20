@@ -1,4 +1,13 @@
 @import "../../../styles.scss";
+.close-dialog-icon {
+    color: $color-dark-gray;
+    float: right;
+    cursor: pointer;
+    &:hover {
+        color: $color-red;
+    }
+}
+
 .plant-details-dialog {
     .add-plant-header {
         img {
@@ -22,17 +31,26 @@
         padding-top: 1rem;
         font-size: 1.25rem;
         .slider-container {
-            height: 37vh;
+            height: 39vh;
+            table {
+                border-collapse: collapse;
+                tr {
+                    margin-bottom: 1rem;
+                    td {
+                        border-left: 1px solid #D9D9D9;
+                        border-bottom: 1px solid #D9D9D9;
+                        padding-left: 1rem;
+                    }
+                }
+            }
             .highlight {
                 color: $color-red;
             }
-            h2 {
-                text-align: right;
-                margin-bottom: 1rem;
+            h3 {
+                text-align: center;
                 opacity: 0.6;
             }
             div {
-                margin-bottom: 1rem;
                 text-align: justify;
             }
         }
@@ -45,8 +63,13 @@
             font-size: 1rem;
             color: $color-dark-gray;
             cursor: pointer;
+            opacity: 0.4;
+            position: relative;
+            top: 1rem;
+            left: 0.5rem;
             &:hover {
                 color: $color-red;
+                opacity: 1;
             }
         }
     }
