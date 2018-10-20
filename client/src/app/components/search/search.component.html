@@ -1,7 +1,9 @@
 <div fxLayout="column">
     <div fxFlex="100" fxLayoutAlign="center">
-        <h2 class="page-header">Add to Garden</h2>
+        <h2 class="page-header">Search</h2>
     </div>
+
+
 
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
         <mat-form-field fxFlex="50">
@@ -14,18 +16,19 @@
         </mat-radio-group>
     </div>
 
+    <div fxLayout="row">
+        <button mat-raised-button fxFlex="100" (click)="openAddPlantDialog()" class="add-plant-button">Create a Plant</button>
+    </div>
+
     <div *ngIf="!visiblePlants " class="search-warning ">Enter a search term to begin</div>
 
     <div fxLayout="column " *ngIf="searchTerm.length> 0 && visiblePlants?.length === 0">
-        <div fxLayout="row">
-            <button mat-raised-button fxFlex="100" (click)="openAddPlantDialog()" class="add-plant-button">Create a Plant</button>
-        </div>
         <h2 class="search-warning">No Plants Found</h2>
     </div>
 
     <div *ngIf="visiblePlants?.length > 0" fxLayout="column">
 
-        <mat-card class="plant-grid-item" *ngFor="let plant of visiblePlants" (click)="openPlantDetailsDialog(plant)">
+        <div class="plant-grid-item" *ngFor="let plant of visiblePlants" (click)="openPlantDetailsDialog(plant)">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
                     <img src="../../../assets/icons/reminders/repot.svg" />
@@ -35,10 +38,7 @@
                 <h4>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h4>
                 <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
             </div>
-        </mat-card>
-
-        <div fxLayout="row">
-            <button mat-raised-button fxFlex="100" (click)="openAddPlantDialog()" class="add-plant-button">Create a Plant</button>
         </div>
+
     </div>
 </div>

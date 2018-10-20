@@ -14,6 +14,8 @@ export class AddPlantDialogComponent {
 
   newPlant: Plant;
 
+  isSaveToGarden: boolean = true;
+
   @Output()
   getPlantsEvent: EventEmitter<any> = new EventEmitter();
 
@@ -58,7 +60,6 @@ export class AddPlantDialogComponent {
 
     this.dataService.addPlant(this.newPlant)
     .subscribe(item => {
-      console.log(item);
       this.dataService.getAllPlants();
     });
 

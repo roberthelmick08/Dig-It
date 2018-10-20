@@ -1,8 +1,18 @@
 @import "../../../styles.scss";
+.plant-grid-item {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    padding: 1rem;
+    &:hover {
+        border-left: 4px solid $color-light-green;
+        border-right: 4px solid $color-light-green;
+        background: rgba(217, 217, 217, 0.2);
+    }
+}
+
 .add-plant-button {
     background: $color-red;
-    color: white;
-    font-family: Futura, Trebuchet MS, Arial, sans-serif;
+    color: #ffffff;
     letter-spacing: 4px;
 }
 
@@ -12,7 +22,6 @@
     opacity: 0.3;
     margin: 3rem 0;
     text-align: right;
-    font-family: Futura, Trebuchet MS, Arial, sans-serif;
     letter-spacing: 6px;
 }
 

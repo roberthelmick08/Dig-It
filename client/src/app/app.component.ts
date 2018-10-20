@@ -30,7 +30,8 @@ export class AppComponent {
     const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
       height: '80vh',
       width: '40%',
-      data: plant
+      panelClass: 'dialog-container',
+      data: plant,
     });
 
     dialogRef.afterClosed().subscribe(result => {

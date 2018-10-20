@@ -123,7 +123,8 @@ export class SearchComponent implements AfterViewInit {
   openAddPlantDialog() {
     const dialogRef = this.dialog.open(AddPlantDialogComponent, {
       height: '80vh',
-      width: '40%'
+      width: '40%',
+      panelClass: 'dialog-container'
     });
 
     dialogRef.afterClosed().subscribe(result => {

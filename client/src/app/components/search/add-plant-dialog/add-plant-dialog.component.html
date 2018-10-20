@@ -64,7 +64,7 @@
                             <mat-icon>wb_cloudy</mat-icon> Full Shade</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field *ngIf="isSaveToGarden">
                     <mat-select required placeholder="Plant Stage" name="stage" [(ngModel)]="newPlant.stage">
                         <mat-option value="0">Seed</mat-option>
                         <mat-option value="1">Sproutling</mat-option>

@@ -9,6 +9,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class GardenComponent {
 
+  gardenName: string = 'My Garden';
+
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
@@ -71,5 +73,9 @@ export class GardenComponent {
 
   openPlantDetailsDialog(plant: Plant) {
     this.openPlantDetailsDialogEvent.emit(plant);
+  }
+
+  saveGardenName(event) {
+    this.gardenName = event.path[0].innerText;
   }
 }
