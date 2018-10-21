@@ -21,9 +21,6 @@ export class RegisterComponent {
     garden: []
   };
 
-
-  isPhoneWarningVisible: boolean = false;
-
   @Output()
   navigateToGardenEvent = new EventEmitter();
 
