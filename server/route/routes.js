@@ -25,16 +25,7 @@ var sendJSONresponse = function(res, status, content) {
  ***************/
 
 router.post('/register', (req, res, next) => {
-
-    // if(!req.body.name || !req.body.email || !req.body.password) {
-    //   sendJSONresponse(res, 400, {
-    //     "message": "All fields required"
-    //   });
-    //   return;
-    // }
-
     var user = new UserSchema();
-    console.log('req.body: ', req.body);
 
     user.name = req.body.name;
     user.email = req.body.email;
@@ -47,7 +38,6 @@ router.post('/register', (req, res, next) => {
 
     user.setPassword(req.body.password);
 
-    console.log('USER AFTER SET PASSWORD', user);
     user.save(function(err) {
 
         var token;
@@ -60,14 +50,6 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-
-    // if(!req.body.email || !req.body.password) {
-    //   sendJSONresponse(res, 400, {
-    //     "message": "All fields required"
-    //   });
-    //   return;
-    // }
-
     passport.authenticate('local', function(err, user, info) {
         var token;
 
@@ -89,6 +71,21 @@ router.post('/login', (req, res, next) => {
             res.status(401).json(info);
         }
     })(req, res, next);
+});
+
+router.get('/garden', auth, (req, res) => {
+    console.log('in garden route', req.payload);
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message": "UnauthorizedError: private profile"
+        });
+    } else {
+        console.log(req.payload);
+        user.findById(req.payload._id)
+            .exec(function(err, user) {
+                res.status(200).json(user);
+            });
+    }
 });
 
 /**************

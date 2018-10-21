@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
-import { AppComponent } from '../app.component';
 
 interface TokenResponse {
   token: string;
@@ -20,6 +19,14 @@ export interface TokenPayload {
   zone?: number;
   zip?: number;
   garden?: Array<Plant>;
+}
+
+export interface UserDetails {
+  _id: string;
+  email: string;
+  name: string;
+  exp: number;
+  iat: number;
 }
 
 @Injectable()
@@ -42,7 +49,7 @@ export class AuthenticationService {
     return this.token;
   }
 
-  public getUserDetails(): User {
+  public getUserDetails(): UserDetails {
     const token = this.getToken();
     let payload;
     if (token) {
@@ -63,7 +70,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get', type: 'login'|'register'|'garden', user?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -85,8 +92,6 @@ export class AuthenticationService {
   }
 
   public register(user: TokenPayload): Observable<any> {
-    console.log(user);
-
     return this.request('post', 'register', user);
   }
 
@@ -95,7 +100,7 @@ export class AuthenticationService {
   }
 
   public garden(): Observable<any> {
-    return this.request('get', 'profile');
+    return this.request('get', 'garden');
   }
 
   public logout(): void {

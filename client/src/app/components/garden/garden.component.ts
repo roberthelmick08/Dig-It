@@ -23,6 +23,7 @@ export class GardenComponent implements OnInit {
   ngOnInit() {
     this.authService.garden().subscribe(user => {
       this.user = user;
+      console.log(user);
     }, (err) => {
       console.error(err);
     });
