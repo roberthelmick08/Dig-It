@@ -1,4 +1,17 @@
+import { Reminder } from './reminder';
+
 export class GardenPlant {
+
+/*
+* Additional Fields - Garden Plant
+*/
+reminders: Array<Reminder>;
+harvestDate?: Date;
+nextWaterDate?: Date;
+
+/*
+* Plant Attributes
+*/
   botanicalName?: string;
   commonName: string;
   type: string = 'Cactus' || 'Flower' || 'Fruit' || 'Grain' || 'Grass' ||
@@ -20,7 +33,11 @@ export class GardenPlant {
   sowingSpace?: number;
   depth?: number;
 
-  // Not Used
+
+
+/*
+* Not Used
+*/
   germStart?: number;
   img?: string;
   methodNum?: number;

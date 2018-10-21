@@ -39,7 +39,7 @@
 
     </div>
 
-    <div fxLayout="row">
+    <div fxLayout="row" *ngIf="authService.isLoggedIn()">
         <button mat-fab color="warn" (click)="openAddPlantDialog()" class="add-plant-button">
           <mat-icon>add</mat-icon>
         </button>

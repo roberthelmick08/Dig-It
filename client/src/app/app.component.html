@@ -12,24 +12,20 @@
 
         <!-- Full Navbar for larger devices -->
         <div fxShow="true" fxHide.lt-md="true" fxLayoutAlign="space-between center" fxFlex="100">
-            <div class="toolbar-logo">Dig-It
-                <div (click)="authService.logout()">Logout</div>
-            </div>
+            <div class="toolbar-logo" (click)="setCurrentPage('home')">Dig-It</div>
 
             <div fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
-                <div (click)="setCurrentPage('search')" class="navbar-items">Add To Garden</div>
+                <div (click)="setCurrentPage('search')" class="navbar-items">Search Plants</div>
 
-                <div class="garden-icon-wrapper" (click)="setCurrentPage('garden')">
+                <div class="garden-icon-wrapper" [class.garden-icon-wrapper-hover]="authService.isLoggedIn()" (click)="authService.isLoggedIn() ? setCurrentPage('garden') : '' ">
                     <mat-icon>spa</mat-icon>
                 </div>
 
-                <div (click)="setCurrentPage('reminders')" class="navbar-items">Reminders</div>
+                <div *ngIf="authService.isLoggedIn()" (click)="setCurrentPage('reminders')" class="navbar-items">Reminders</div>
             </div>
 
-
-            <mat-card class="profile-menu-button" (click)="setCurrentPage('login')">
-                <mat-icon>person</mat-icon>
-            </mat-card>
+            <div *ngIf="authService.isLoggedIn()" (click)="authService.logout()">Logout</div>
+            <mat-icon *ngIf="authService.isLoggedIn()" class="profile-menu-button">person</mat-icon>
         </div>
     </mat-toolbar>
 
@@ -41,8 +37,8 @@
                 <button class="profile-menu-button" (click)="setCurrentPage('edit_profile')"> </button>
 
                 <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
-                <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
-                <a (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
+                <a (click)="setCurrentPage('search')" mat-button>Search Plants</a>
+                <a *ngIf="authService.isLoggedIn()" (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
 
                 <button mat-menu-item (click)="setCurrentPage('help')">
                   <mat-icon>help_outline</mat-icon>
@@ -52,22 +48,24 @@
         </mat-sidenav>
 
         <mat-sidenav-content fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
-
-
-
             <mat-card fxLayout="column" fxFlex="60" class="page-content">
-                <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-search>
-                <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-garden>
-                <app-reminders *ngIf="currentPage === 'reminders'"></app-reminders>
 
+
+
+
+
+                <app-home *ngIf="currentPage === 'home'" (navigateToRegisterEvent)="setCurrentPage('register')" (navigateToLoginEvent)="setCurrentPage('login')"></app-home>
                 <app-register *ngIf="currentPage === 'register'" (navigateToGardenEvent)="setCurrentPage('garden')"></app-register>
                 <app-login *ngIf="currentPage === 'login'" (navigateToGardenEvent)="setCurrentPage('garden')" (navigateToRegisterEvent)="setCurrentPage('register')"></app-login>
+
+                <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-search>
+                <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-garden>
                 <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
+
+
+
+
             </mat-card>
-
-
-
-
         </mat-sidenav-content>
     </mat-sidenav-container>
 </div>

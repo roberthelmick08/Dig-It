@@ -1,4 +1,4 @@
-import { Plant } from './plant';
+import { GardenPlant } from './gardenPlant';
 
 export class User {
   _id: string;
@@ -9,7 +9,7 @@ export class User {
   phone?: string;
   zone: number;
   zip: number;
-  garden?: Array<Plant>;
+  garden?: Array<GardenPlant>;
   exp: number;
   iat: number;
 }

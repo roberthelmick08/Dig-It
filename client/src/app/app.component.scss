@@ -7,15 +7,8 @@
     .toolbar-logo {
         position: absolute;
     }
-    .garden-icon-wrapper {
-        background: $color-light-green;
-        height: 100px;
-        width: 100px;
-        border-radius: 50%;
-        border: 2px solid #ffffff;
-        cursor: pointer;
-        margin: 40px 50px 0 50px;
-        z-index: 999;
+    .garden-icon-wrapper-hover {
+        cursor: pointer !important;
         &:hover {
             -webkit-box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
             box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
@@ -24,6 +17,16 @@
             transform: scale(1.1);
             transition: all 0.3s ease;
         }
+    }
+    .garden-icon-wrapper {
+        background: $color-light-green;
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        margin: 40px 50px 0 50px;
+        z-index: 999;
+        cursor: default;
         mat-icon.mat-icon {
             font-size: 100px;
             color: $color-dark-gray;
@@ -41,38 +44,25 @@
     }
 }
 
+.profile-menu-button {
+    color: $color-dark-gray;
+    opacity: 0.3;
+    -webkit-box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
+    box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+    &:hover {
+        transition: all 0.3s ease;
+        opacity: 0.7;
+    }
+}
+
 .page-content-wrapper {
     .page-content {
         padding-top: 4rem;
         background: #ffffff;
         overflow-y: auto;
-    }
-}
-
-.profile-menu-button {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    background-color: $color-light-gray;
-    border: 2px solid $color-red;
-    margin-top: -75px;
-    margin-right: -75px;
-    &:hover {
-        -webkit-box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
-        box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-        transform: scale(1.1);
-        transition: all 0.3s ease;
-        mat-icon.mat-icon {
-            transition: all 0.3s ease;
-            opacity: 0.7;
-        }
-    }
-    mat-icon.mat-icon {
-        margin-top: 40px;
-        font-size: 40px;
-        color: $color-dark-gray;
-        opacity: 0.3;
     }
 }

@@ -21,7 +21,9 @@ export class Plant {
   sowingSpace?: number;
   depth?: number;
 
-  // Not Used
+ /*
+* Not Used
+*/
   germStart?: number;
   img?: string;
   methodNum?: number;

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 interface TokenResponse {
   token: string;
@@ -93,9 +94,9 @@ export class AuthenticationService {
     return this.request('post', 'login', user);
   }
 
-  // public profile(): Observable<any> {
-  //   return this.request('get', 'profile');
-  // }
+  public garden(): Observable<any> {
+    return this.request('get', 'profile');
+  }
 
   public logout(): void {
     this.token = '';
