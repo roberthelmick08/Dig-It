@@ -24,5 +24,4 @@ export class HomeComponent implements OnInit {
   navigateToLogin(event: Event) {
     this.navigateToLoginEvent.emit(null);
   }
-
 }
