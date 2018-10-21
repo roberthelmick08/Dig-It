@@ -99,7 +99,7 @@
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
         <mat-checkbox [(ngModel)]="isSaveToGarden">Save to Garden</mat-checkbox>
 
-        <button mat-button color="primary" (click)="closeDialog()" *ngIf="step === 0">Cancel</button>
+        <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step === 0">Cancel</button>
         <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
         <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 1 && step !== 2" [disabled]="(!newPlant.commonName && !newPlant.botanicalName) || !newPlant.type || !newPlant.lifeType || (newPlant.harvestable === true && !newPlant.weeksToHarvest)">Next ></button>
         <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 1 || step === 2" [disabled]="!newPlant.sunSchedule || !newPlant.stage">Submit</button>

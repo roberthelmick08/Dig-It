@@ -15,7 +15,7 @@ var userSchema = new mongoose.Schema({
     phone: { type: String, required: false },
     zone: { type: Number, required: true },
     zip: { type: Number, required: true },
-    garden: { type: Array, required: true },
+    garden: { type: Array, required: false },
 });
 
 userSchema.methods.setPassword = function(password) {
