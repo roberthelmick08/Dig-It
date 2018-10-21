@@ -13,12 +13,12 @@ interface TokenResponse {
 export interface TokenPayload {
   email: string;
   password: string;
-  name: string;
-  admin: boolean;
+  name?: string;
+  admin?: boolean;
   phone?: number;
-  zone: number;
-  zip: number;
-  garden: Array<Plant>;
+  zone?: number;
+  zip?: number;
+  garden?: Array<Plant>;
 }
 
 @Injectable()
@@ -32,7 +32,6 @@ export class AuthenticationService {
   private saveToken(token: string): void {
     localStorage.setItem('mean-token', token);
     this.token = token;
-    console.log(token);
   }
 
   private getToken(): string {
@@ -92,9 +91,9 @@ export class AuthenticationService {
     return this.request('post', 'login', user);
   }
 
-  public profile(): Observable<any> {
-    return this.request('get', 'profile');
-  }
+  // public profile(): Observable<any> {
+  //   return this.request('get', 'profile');
+  // }
 
   public logout(): void {
     this.token = '';

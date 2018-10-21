@@ -15,7 +15,6 @@ const auth = jwt({
     userProperty: 'payload'
 });
 
-
 var sendJSONresponse = function(res, status, content) {
     res.status(status);
     res.json(content);
@@ -33,6 +32,8 @@ router.post('/register', (req, res, next) => {
     //   });
     //   return;
     // }
+
+    console.log('IN ROUTES.JS', req);
 
     var user = new UserSchema();
 
@@ -56,7 +57,7 @@ router.post('/register', (req, res, next) => {
     });
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
 
     // if(!req.body.email || !req.body.password) {
     //   sendJSONresponse(res, 400, {
@@ -65,8 +66,9 @@ router.post('/login', (req, res) => {
     //   return;
     // }
 
+    console.log("IN PASSPORT AUTHENTICATE 1");
     passport.authenticate('local', function(err, user, info) {
-        console.log("IN PASSPORT AUTHENTICATE");
+        console.log("IN PASSPORT AUTHENTICATE 2");
         var token;
 
         // If Passport throws/catches an error
@@ -86,73 +88,8 @@ router.post('/login', (req, res) => {
             // If user is not found
             res.status(401).json(info);
         }
-    });
+    })(req, res, next);
 });
-
-/**************
- * USER requests
- ***************/
-
-// GET user login
-// router.get('/login', (req, res) => {
-//     UserSchema.findOne(function(err, user) {
-//         if (err) {
-//             res.json(err);
-//         } else {
-//             res.json(user);
-//         }
-//     })
-// });
-
-// PUT edit user profile
-// router.put('/profile/:id', (req, res, next) => {
-//     PlantSchema.findOneAndUpdate({ _id: req.params.id }, {
-//             $set: {
-//                 name: req.body.name,
-//                 email: req.body.email,
-//                 password: req.body.password,
-//                 admin: req.body.admin,
-//                 phone: req.body.phone,
-//                 zone: req.body.zone,
-//                 zip: req.body.zip,
-//                 garden: req.body.garden
-//             }
-//         },
-//         function(err, result) {
-//             if (err) {
-//                 res.json(err);
-//             } else {
-//                 res.json(result);
-//             }
-//         })
-// });
-
-// PUT update user garden
-// router.put('/garden/:id', (req, res, next) => {
-//     PlantSchema.findOneAndUpdate({ _id: req.params.id }, {
-//             $set: {
-//                 garden: req.body.garden
-//             }
-//         },
-//         function(err, result) {
-//             if (err) {
-//                 res.json(err);
-//             } else {
-//                 res.json(result);
-//             }
-//         })
-// });
-
-// DELETE user from DB
-// router.delete('/plant/:id', (req, res, next) => {
-//     UserSchema.remove({ _id: req.params.id }, function(err, result) {
-//         if (err) {
-//             res.json(err);
-//         } else {
-//             res.json(result);
-//         }
-//     })
-// });
 
 /**************
  * PLANT requests
