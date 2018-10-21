@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { User } from 'src/models/user';
 import { MatDialog } from '@angular/material';
 import { Plant } from 'src/models/plant';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
 
   currentPage: string = 'garden';
 
-  constructor( public dialog: MatDialog) { }
+  constructor( public dialog: MatDialog, public authService: AuthenticationService) { }
 
   setCurrentPage(page: string) {
     this.currentPage = page;

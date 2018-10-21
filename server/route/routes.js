@@ -33,9 +33,8 @@ router.post('/register', (req, res, next) => {
     //   return;
     // }
 
-    console.log('IN ROUTES.JS', req);
-
     var user = new UserSchema();
+    console.log('req.body: ', req.body);
 
     user.name = req.body.name;
     user.email = req.body.email;
@@ -45,9 +44,12 @@ router.post('/register', (req, res, next) => {
     user.zip = req.body.zip;
     user.garden = req.body.garden;
 
+
     user.setPassword(req.body.password);
 
+    console.log('USER AFTER SET PASSWORD', user);
     user.save(function(err) {
+
         var token;
         token = user.generateJwt();
         res.status(200);
@@ -66,9 +68,7 @@ router.post('/login', (req, res, next) => {
     //   return;
     // }
 
-    console.log("IN PASSPORT AUTHENTICATE 1");
     passport.authenticate('local', function(err, user, info) {
-        console.log("IN PASSPORT AUTHENTICATE 2");
         var token;
 
         // If Passport throws/catches an error

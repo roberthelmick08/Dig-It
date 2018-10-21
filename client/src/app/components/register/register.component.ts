@@ -16,7 +16,7 @@ export class RegisterComponent {
     password: '',
     admin: false,
     phone: null,
-    zone: null,
+    zone: 8,
     zip: null,
     garden: []
   };

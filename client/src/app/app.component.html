@@ -7,11 +7,14 @@
             </a>
 
             <span>Dig-It</span>
+
         </div>
 
         <!-- Full Navbar for larger devices -->
         <div fxShow="true" fxHide.lt-md="true" fxLayoutAlign="space-between center" fxFlex="100">
-            <div class="toolbar-logo">Dig-It</div>
+            <div class="toolbar-logo">Dig-It
+                <div (click)="authService.logout()">Logout</div>
+            </div>
 
             <div fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
                 <div (click)="setCurrentPage('search')" class="navbar-items">Add To Garden</div>
