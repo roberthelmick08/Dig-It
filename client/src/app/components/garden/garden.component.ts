@@ -1,71 +1,32 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { Plant } from './../../../models/plant';
 import { DataService } from './../../services/data.service';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { User } from 'src/models/user';
 
 @Component({
   selector: 'app-garden',
   templateUrl: './garden.component.html',
   styleUrls: ['./garden.component.scss']
 })
-export class GardenComponent {
+export class GardenComponent implements OnInit {
+
+  user: User;
 
   gardenName: string = 'My Garden';
 
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
-  userPlants = [
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 2
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 4
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 3
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 5
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-    {
-      botanicalName: 'Peruvian Torch',
-      commonName: 'San Pedro',
-      reminders: ['water', 'repot'],
-      stage: 1
-    },
-];
+  constructor(private dataService: DataService, public authService: AuthenticationService) { }
 
-  constructor(private dataService: DataService) { }
+  ngOnInit() {
+    this.authService.garden().subscribe(user => {
+      this.user = user;
+    }, (err) => {
+      console.error(err);
+    });
+  }
 
   markReminderDone(plant, reminder) {
     plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);

@@ -15,7 +15,7 @@ export class AppComponent {
 
   isUserMenuOpen: boolean = false;
 
-  currentPage: string = 'garden';
+  currentPage: string = 'home';
 
   constructor( public dialog: MatDialog, public authService: AuthenticationService) { }
 

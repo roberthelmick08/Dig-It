@@ -4,6 +4,7 @@ import { Component, AfterViewInit, Input, Output, EventEmitter } from '@angular/
 import { MatDialog } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { User } from 'src/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-search',
@@ -28,7 +29,7 @@ export class SearchComponent implements AfterViewInit {
 
   searchBy: string = 'commonName';
 
-  constructor( private dataService: DataService, public dialog: MatDialog ) { }
+  constructor( private dataService: DataService, public authService: AuthenticationService, public dialog: MatDialog ) { }
 
   ngAfterViewInit() {
     this.getPlants();

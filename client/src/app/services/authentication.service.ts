@@ -93,9 +93,9 @@ export class AuthenticationService {
     return this.request('post', 'login', user);
   }
 
-  // public profile(): Observable<any> {
-  //   return this.request('get', 'profile');
-  // }
+  public garden(): Observable<any> {
+    return this.request('get', 'profile');
+  }
 
   public logout(): void {
     this.token = '';
