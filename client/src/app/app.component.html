@@ -23,7 +23,7 @@
                     <mat-icon>spa</mat-icon>
                 </div>
 
-                <div (click)="setCurrentPage('reminders')" class="navbar-items">Reminders</div>
+                <div *ngIf="authService.isLoggedIn()" (click)="setCurrentPage('reminders')" class="navbar-items">Reminders</div>
             </div>
 
 
@@ -42,7 +42,7 @@
 
                 <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
                 <a (click)="setCurrentPage('search')" mat-button>Add To Garden</a>
-                <a (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
+                <a *ngIf="authService.isLoggedIn()" (click)="setCurrentPage('reminders')" mat-button>Reminders</a>
 
                 <button mat-menu-item (click)="setCurrentPage('help')">
                   <mat-icon>help_outline</mat-icon>
