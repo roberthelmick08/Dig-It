@@ -1,11 +1,13 @@
-import { GardenPlant } from './../../../models/gardenPlant';
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
-import { DataService } from '../../services/data.service';
 import { Component, AfterViewInit, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Plant } from './../../../models/plant';
-import { User } from 'src/models/user';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { GardenPlant } from './../../../models/gardenPlant';
+import { User } from './../../../models/user';
+import { DataService } from '../../services/data.service';
+import { AuthenticationService } from './../../services/authentication.service';
+import { ReminderService } from './../../services/reminder.service';
+
 
 @Component({
   selector: 'app-search',
@@ -30,7 +32,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   searchBy: string = 'commonName';
 
-  constructor( private dataService: DataService, public authService: AuthenticationService, public dialog: MatDialog ) { }
+  constructor( private dataService: DataService, public authService: AuthenticationService,
+    private reminderService: ReminderService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.authService.garden().subscribe(user => {
@@ -128,16 +131,16 @@ addToGarden(plant: Plant) {
   this.setGardenPlant(plant);
 
   this.dataService.addToGarden(plant).subscribe( data => {
-    if (data.n === 1) {
-
-    }
   });
 }
-  setGardenPlant(plant: Plant): GardenPlant {
-    let gardenPlant = new GardenPlant();
-
-
-
+  setGardenPlant(plant: Plant, stage?: number): GardenPlant {
+    const gardenPlant = new GardenPlant();
+    gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
+    if (stage) {
+      gardenPlant.stage = stage;
+    } else {
+      gardenPlant.stage = 0;
+    }
     return gardenPlant;
   }
 
