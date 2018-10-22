@@ -49,7 +49,7 @@ export class AuthenticationService {
     return this.token;
   }
 
-  public getUserDetails(): User {
+  public getUserDetails(): UserDetails {
     const token = this.getToken();
     let payload;
     if (token) {

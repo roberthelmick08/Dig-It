@@ -10,6 +10,6 @@ export class User {
   zone: number;
   zip: number;
   garden?: Array<GardenPlant>;
-  exp: number;
-  iat: number;
+  exp?: number;
+  iat?: number;
 }

@@ -37,8 +37,6 @@ router.post('/register', (req, res, next) => {
 
     user.setPassword(req.body.password);
 
-    console.log(user);
-
     user.save(function(err) {
 
         var token;
@@ -80,8 +78,10 @@ router.get('/garden', auth, (req, res) => {
             "message": "UnauthorizedError: private profile"
         });
     } else {
-        user.findById(req.payload._id)
+        console.log('before FINDBYID: ', req.payload);
+        User.findById(req.payload._id)
             .exec(function(err, user) {
+                console.log(user);
                 res.status(200).json(user);
             });
     }

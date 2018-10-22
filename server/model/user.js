@@ -12,10 +12,10 @@ var userSchema = new mongoose.Schema({
     hash: { type: String, required: true },
     salt: { type: String, required: true },
     admin: { type: Boolean, required: true },
-    phone: { type: String, required: false },
+    phone: { type: String },
     zone: { type: Number, required: true },
     zip: { type: Number, required: true },
-    garden: { type: Array, required: false },
+    garden: { type: Array },
 });
 
 userSchema.methods.setPassword = function(password) {
