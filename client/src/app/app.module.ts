@@ -26,6 +26,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { ReminderService } from './services/reminder.service';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
@@ -76,7 +77,7 @@ const routes: Routes = [
     PlantDetailsDialogComponent,
     MatSnackBarContainer,
   ],
-  providers: [MatDialog, MatSnackBar, AuthenticationService, AuthGuardService],
+  providers: [MatDialog, MatSnackBar, AuthenticationService, AuthGuardService, ReminderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

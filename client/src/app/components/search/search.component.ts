@@ -1,6 +1,7 @@
+import { GardenPlant } from './../../../models/gardenPlant';
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
 import { DataService } from '../../services/data.service';
-import { Component, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { User } from 'src/models/user';
@@ -12,12 +13,12 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./search.component.scss'],
   providers: [ DataService ]
 })
-export class SearchComponent implements AfterViewInit {
-  @Input()
-  currentUser: User;
+export class SearchComponent implements AfterViewInit, OnInit {
 
-  @Output()
-  openPlantDetailsDialogEvent = new EventEmitter();
+    @Output()
+    openPlantDetailsDialogEvent = new EventEmitter();
+
+  user: User;
 
   // Variable to store ALL plants from database
   plantsList: Array<Plant> = [];
@@ -30,6 +31,15 @@ export class SearchComponent implements AfterViewInit {
   searchBy: string = 'commonName';
 
   constructor( private dataService: DataService, public authService: AuthenticationService, public dialog: MatDialog ) { }
+
+  ngOnInit(): void {
+    this.authService.garden().subscribe(user => {
+      this.user = user;
+      console.log(this.user);
+    }, (err) => {
+      console.error(err);
+    });
+  }
 
   ngAfterViewInit() {
     this.getPlants();
@@ -62,13 +72,6 @@ export class SearchComponent implements AfterViewInit {
         } else {
           return this.levDist(plant.botanicalName, this.searchTerm);
         }
-      }
-    });
-  }
-
-  addToGarden(plant: Plant) {
-    this.dataService.addToGarden(plant).subscribe( data => {
-      if (data.n === 1) {
       }
     });
   }
@@ -120,6 +123,23 @@ export class SearchComponent implements AfterViewInit {
     // Step 7
     return d[n][m];
 }
+
+addToGarden(plant: Plant) {
+  this.setGardenPlant(plant);
+
+  this.dataService.addToGarden(plant).subscribe( data => {
+    if (data.n === 1) {
+
+    }
+  });
+}
+  setGardenPlant(plant: Plant): GardenPlant {
+    let gardenPlant = new GardenPlant();
+
+
+
+    return gardenPlant;
+  }
 
   openAddPlantDialog() {
     const dialogRef = this.dialog.open(AddPlantDialogComponent, {

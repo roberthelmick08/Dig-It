@@ -35,6 +35,7 @@
                 <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                 <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
             </div>
+            <button mat-fab (click)="addToGarden(plant)"><mat-icon>add</mat-icon></button>
         </div>
 
     </div>
