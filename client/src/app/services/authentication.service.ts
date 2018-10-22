@@ -49,7 +49,7 @@ export class AuthenticationService {
     return this.token;
   }
 
-  public getUserDetails(): UserDetails {
+  public getUserDetails(): User {
     const token = this.getToken();
     let payload;
     if (token) {
@@ -87,7 +87,6 @@ export class AuthenticationService {
         return data;
       })
     );
-
     return request;
   }
 

@@ -35,8 +35,9 @@ router.post('/register', (req, res, next) => {
     user.zip = req.body.zip;
     user.garden = req.body.garden;
 
-
     user.setPassword(req.body.password);
+
+    console.log(user);
 
     user.save(function(err) {
 
@@ -74,13 +75,11 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/garden', auth, (req, res) => {
-    console.log('in garden route', req.payload);
     if (!req.payload._id) {
         res.status(401).json({
             "message": "UnauthorizedError: private profile"
         });
     } else {
-        console.log(req.payload);
         user.findById(req.payload._id)
             .exec(function(err, user) {
                 res.status(200).json(user);
