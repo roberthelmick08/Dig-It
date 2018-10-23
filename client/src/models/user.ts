@@ -6,10 +6,10 @@ export class User {
   email: string;
   password: string;
   isAdmin: boolean;
-  phone?: string;
+  phone?: number;
   zone: number;
   zip: number;
   garden?: Array<GardenPlant>;
-  exp: number;
-  iat: number;
+  exp?: number;
+  iat?: number;
 }

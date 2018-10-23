@@ -25,16 +25,7 @@ var sendJSONresponse = function(res, status, content) {
  ***************/
 
 router.post('/register', (req, res, next) => {
-
-    // if(!req.body.name || !req.body.email || !req.body.password) {
-    //   sendJSONresponse(res, 400, {
-    //     "message": "All fields required"
-    //   });
-    //   return;
-    // }
-
     var user = new UserSchema();
-    console.log('req.body: ', req.body);
 
     user.name = req.body.name;
     user.email = req.body.email;
@@ -44,10 +35,8 @@ router.post('/register', (req, res, next) => {
     user.zip = req.body.zip;
     user.garden = req.body.garden;
 
-
     user.setPassword(req.body.password);
 
-    console.log('USER AFTER SET PASSWORD', user);
     user.save(function(err) {
 
         var token;
@@ -60,14 +49,6 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-
-    // if(!req.body.email || !req.body.password) {
-    //   sendJSONresponse(res, 400, {
-    //     "message": "All fields required"
-    //   });
-    //   return;
-    // }
-
     passport.authenticate('local', function(err, user, info) {
         var token;
 
@@ -89,6 +70,49 @@ router.post('/login', (req, res, next) => {
             res.status(401).json(info);
         }
     })(req, res, next);
+});
+
+router.get('/garden', auth, (req, res) => {
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message": "UnauthorizedError: private profile"
+        });
+    } else {
+        User.findById(req.payload._id)
+            .exec(function(err, user) {
+                res.status(200).json(user);
+            });
+    }
+});
+
+router.put('/garden', auth, (req, res) => {
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message": "UnauthorizedError: private profile"
+        });
+    } else {
+        User.findOneAndUpdate({ _id: req.body._id }, {
+                $set: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    admin: req.body.admin,
+                    phone: req.body.phone,
+                    zone: req.body.zone,
+                    zip: req.body.zip,
+                    garden: req.body.garden,
+                }
+            },
+            // flag to return newly updated mongo document
+            { new: true },
+            function(err, result) {
+                if (err) {
+                    res.json(err);
+                } else {
+                    res.json(result);
+                    console.log(result);
+                }
+            });
+    }
 });
 
 /**************
@@ -141,7 +165,7 @@ router.post('/new_plant', (req, res, next) => {
 
 // PUT edit plant
 router.put('/plant/:id', (req, res, next) => {
-    PlantSchema.findOneAndUpdate({ _id: req.params.id }, {
+    PlantSchema.findOneAndUpdate({ _id: req.body._id }, {
             $set: {
                 botanicalName: req.body.botanicalName,
                 commonName: req.body.commonName,
@@ -176,7 +200,7 @@ router.put('/plant/:id', (req, res, next) => {
 
 // DELETE plant from DB
 router.delete('/plant/:id', (req, res, next) => {
-    PlantSchema.remove({ _id: req.params.id }, function(err, result) {
+    PlantSchema.remove({ _id: req.body._id }, function(err, result) {
         if (err) {
             res.json(err);
         } else {
