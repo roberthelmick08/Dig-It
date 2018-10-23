@@ -138,15 +138,17 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   setGardenPlant(plant: Plant, stage?: number): GardenPlant {
     const gardenPlant = new GardenPlant();
-    gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
+
     if (stage) {
       gardenPlant.stage = stage;
     } else {
       gardenPlant.stage = 0;
     }
 
+    gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
     gardenPlant._id = plant._id;
     gardenPlant.commonName = plant.commonName;
+    gardenPlant.botanicalName = plant.botanicalName;
     gardenPlant.type = plant.type;
     gardenPlant.lifeType = plant.lifeType;
     gardenPlant.harvestable = plant.harvestable;
@@ -163,6 +165,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     gardenPlant.methodNum = plant.methodNum;
     gardenPlant.img = plant.img;
     gardenPlant.zones = plant.zones;
+
     return gardenPlant;
   }
 

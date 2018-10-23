@@ -15,9 +15,11 @@ export class AppComponent {
 
   isUserMenuOpen: boolean = false;
 
-  currentPage: string = 'home';
+  currentPage: string;
 
-  constructor( public dialog: MatDialog, public authService: AuthenticationService) { }
+  constructor( public dialog: MatDialog, public authService: AuthenticationService) {
+    this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
+  }
 
   setCurrentPage(page: string) {
     this.currentPage = page;

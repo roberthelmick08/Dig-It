@@ -3,8 +3,6 @@
         <h2 class="page-header">Search</h2>
     </div>
 
-
-
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
         <mat-form-field fxFlex="50">
             <input matInput type="search" placeholder="Search" [(ngModel)]="searchTerm" (keyup.enter)="onSearch() " (keyup.tab)="onSearch() " (blur)="onSearch() " />
@@ -15,7 +13,6 @@
             </mat-radio-button>
         </mat-radio-group>
     </div>
-
 
     <div *ngIf="!visiblePlants " class="search-warning ">Enter a search term to begin</div>
 
@@ -37,7 +34,6 @@
             </div>
             <button mat-fab (click)="addToGarden(plant);"><mat-icon>add</mat-icon></button>
         </div>
-
     </div>
 
     <div fxLayout="row" *ngIf="authService.isLoggedIn()">

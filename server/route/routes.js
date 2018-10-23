@@ -108,8 +108,8 @@ router.put('/garden', auth, (req, res) => {
                 if (err) {
                     res.json(err);
                 } else {
-                    res.json(result);
                     console.log(result);
+                    res.json(result);
                 }
             });
     }

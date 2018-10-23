@@ -1,11 +1,6 @@
 import { Reminder } from './reminder';
 
 export class GardenPlant {
-/*
-* Additional Fields - Garden Plant
-*/
-reminders: Array<Reminder>;
-stage: number;
 
 /*
 * Plant Attributes
@@ -16,7 +11,6 @@ stage: number;
   type: string = 'Cactus' || 'Flower' || 'Fruit' || 'Grain' || 'Grass' ||
   'Herb' || 'Houseplant' || 'Shrub' || 'Succulent' || 'Vegetable' || 'Vine';
   lifeType: string = 'Annual' || 'Perennial' || 'Biennial';
-  // Weeks until
   sunSchedule?: string;
   variety?: string;
   comment?: string;
@@ -26,14 +20,18 @@ stage: number;
   sowingSpace?: number;
   depth?: number;
   methodNum?: number;
-
-  img?: string;
   zones?: Array<number>;
 
-
   /*
-  * Not Used
+  * Additional Fields - Garden Plant
   */
+ reminders: Array<Reminder>;
+ stage: number;
+
+ /*
+ * Not Used
+ */
+ img?: string;
  weeksToHarvest?: number;
  weeksToSowBeforeLastFrost?: number;
  harvestable: boolean;
