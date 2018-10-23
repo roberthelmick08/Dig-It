@@ -22,7 +22,7 @@
 
     <div *ngIf="visiblePlants?.length > 0" fxLayout="column">
 
-        <div class="plant-grid-item" *ngFor="let plant of visiblePlants" (click)="openPlantDetailsDialog(plant)">
+        <div class="plant-grid-item" *ngFor="let plant of visiblePlants" (click)="openPlantDetailsDialog(plant); $event.stopPropagation();">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
                     <img src="../../../assets/icons/reminders/repot.svg" />
@@ -32,7 +32,25 @@
                 <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                 <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
             </div>
-            <button mat-fab (click)="addToGarden(plant);"><mat-icon>add</mat-icon></button>
+            <div *ngIf="isAddToGardenMenuVisible === true">
+                <mat-form-field>
+                    <mat-select placeholder="Plant Stage" name="stage" [(ngModel)]="plant.stage" required>
+                        <mat-option value="0">Seed</mat-option>
+                        <mat-option value="1">Sproutling</mat-option>
+                        <mat-option value="2">Young Plant</mat-option>
+                        <mat-option value="3">Mature Plant</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select *ngIf="plant.stage > 0" placeholder="Potted / In Ground" name="isPotted" [(ngModel)]="plant.isPotted" required>
+                        <mat-option value="true">Potted</mat-option>
+                        <mat-option value="false">In Ground</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <button mat-fab (click)="isAddToGardenMenuVisible = !isAddToGardenMenuVisible;"><mat-icon>{{isAddToGardenMenuVisible ? 'cancel' : 'add'}}</mat-icon></button>
         </div>
     </div>
 

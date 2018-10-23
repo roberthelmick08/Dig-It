@@ -27,6 +27,7 @@ export class GardenPlant {
   */
  reminders: Array<Reminder>;
  stage: number;
+ isPotted?: boolean;
 
  /*
  * Not Used

@@ -17,8 +17,8 @@ import { ReminderService } from './../../services/reminder.service';
 })
 export class SearchComponent implements AfterViewInit, OnInit {
 
-    @Output()
-    openPlantDetailsDialogEvent = new EventEmitter();
+  @Output()
+  openPlantDetailsDialogEvent = new EventEmitter();
 
   user: User;
 
@@ -31,6 +31,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
   searchTerm: string = '';
 
   searchBy: string = 'commonName';
+
+  isAddToGardenMenuVisible: boolean = false;
 
   constructor( private dataService: DataService, public authService: AuthenticationService,
     private reminderService: ReminderService, public dialog: MatDialog ) { }
@@ -49,6 +51,61 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   getPlants() {
     this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants);
+  }
+  
+  addToGarden(plant: Plant) {
+    const gardenPlant = this.setGardenPlant(plant);
+
+    this.user.garden.push(gardenPlant);
+
+    this.authService.addToGarden(this.user).subscribe( data => {
+      console.log(data);
+    });
+  }
+
+  setGardenPlant(plant: Plant): GardenPlant {
+    const gardenPlant = new GardenPlant();
+
+    gardenPlant.stage = plant.stage ? plant.stage : 0;
+    gardenPlant.isPotted = isPotted;
+    gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
+    gardenPlant._id = plant._id;
+    gardenPlant.commonName = plant.commonName;
+    gardenPlant.botanicalName = plant.botanicalName;
+    gardenPlant.type = plant.type;
+    gardenPlant.lifeType = plant.lifeType;
+    gardenPlant.harvestable = plant.harvestable;
+    gardenPlant.weeksToHarvest = plant.weeksToHarvest;
+    gardenPlant.sunSchedule = plant.sunSchedule;
+    gardenPlant.variety = plant.variety;
+    gardenPlant.comment = plant.comment;
+    gardenPlant.weeksToSowBeforeLastFrost = plant.weeksToSowBeforeLastFrost;
+    gardenPlant.germEnd = plant.germEnd;
+    gardenPlant.sowingMethod = plant.sowingMethod;
+    gardenPlant.sowingSpace = plant.sowingSpace;
+    gardenPlant.depth = plant.depth;
+    gardenPlant.germStart = plant.germStart;
+    gardenPlant.methodNum = plant.methodNum;
+    gardenPlant.img = plant.img;
+    gardenPlant.zones = plant.zones;
+
+    return gardenPlant;
+  }
+
+  openAddPlantDialog() {
+    const dialogRef = this.dialog.open(AddPlantDialogComponent, {
+      height: '80vh',
+      width: '40%',
+      panelClass: 'dialog-container'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // TODO
+    });
+  }
+
+  openPlantDetailsDialog(plant) {
+    this.openPlantDetailsDialogEvent.emit(plant);
   }
 
   onSearch() {
@@ -125,63 +182,4 @@ export class SearchComponent implements AfterViewInit, OnInit {
     // Step 7
     return d[n][m];
 }
-
-  addToGarden(plant: Plant) {
-    const gardenPlant = this.setGardenPlant(plant);
-
-    this.user.garden.push(gardenPlant);
-
-    this.authService.addToGarden(this.user).subscribe( data => {
-      console.log(data);
-    });
-  }
-
-  setGardenPlant(plant: Plant, stage?: number): GardenPlant {
-    const gardenPlant = new GardenPlant();
-
-    if (stage) {
-      gardenPlant.stage = stage;
-    } else {
-      gardenPlant.stage = 0;
-    }
-
-    gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
-    gardenPlant._id = plant._id;
-    gardenPlant.commonName = plant.commonName;
-    gardenPlant.botanicalName = plant.botanicalName;
-    gardenPlant.type = plant.type;
-    gardenPlant.lifeType = plant.lifeType;
-    gardenPlant.harvestable = plant.harvestable;
-    gardenPlant.weeksToHarvest = plant.weeksToHarvest;
-    gardenPlant.sunSchedule = plant.sunSchedule;
-    gardenPlant.variety = plant.variety;
-    gardenPlant.comment = plant.comment;
-    gardenPlant.weeksToSowBeforeLastFrost = plant.weeksToSowBeforeLastFrost;
-    gardenPlant.germEnd = plant.germEnd;
-    gardenPlant.sowingMethod = plant.sowingMethod;
-    gardenPlant.sowingSpace = plant.sowingSpace;
-    gardenPlant.depth = plant.depth;
-    gardenPlant.germStart = plant.germStart;
-    gardenPlant.methodNum = plant.methodNum;
-    gardenPlant.img = plant.img;
-    gardenPlant.zones = plant.zones;
-
-    return gardenPlant;
-  }
-
-  openAddPlantDialog() {
-    const dialogRef = this.dialog.open(AddPlantDialogComponent, {
-      height: '80vh',
-      width: '40%',
-      panelClass: 'dialog-container'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // TODO
-    });
-  }
-
-  openPlantDetailsDialog(plant) {
-    this.openPlantDetailsDialogEvent.emit(plant);
-  }
 }
