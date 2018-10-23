@@ -38,7 +38,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.authService.garden().subscribe(user => {
       this.user = user;
-      console.log(this.user);
     }, (err) => {
       console.error(err);
     });
@@ -127,12 +126,16 @@ export class SearchComponent implements AfterViewInit, OnInit {
     return d[n][m];
 }
 
-addToGarden(plant: Plant) {
-  this.setGardenPlant(plant);
+  addToGarden(plant: Plant) {
+    const gardenPlant = this.setGardenPlant(plant);
 
-  this.dataService.addToGarden(plant).subscribe( data => {
-  });
-}
+    this.user.garden.push(gardenPlant);
+
+    this.authService.addToGarden(this.user).subscribe( data => {
+      console.log(data);
+    });
+  }
+
   setGardenPlant(plant: Plant, stage?: number): GardenPlant {
     const gardenPlant = new GardenPlant();
     gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
@@ -141,6 +144,25 @@ addToGarden(plant: Plant) {
     } else {
       gardenPlant.stage = 0;
     }
+
+    gardenPlant._id = plant._id;
+    gardenPlant.commonName = plant.commonName;
+    gardenPlant.type = plant.type;
+    gardenPlant.lifeType = plant.lifeType;
+    gardenPlant.harvestable = plant.harvestable;
+    gardenPlant.weeksToHarvest = plant.weeksToHarvest;
+    gardenPlant.sunSchedule = plant.sunSchedule;
+    gardenPlant.variety = plant.variety;
+    gardenPlant.comment = plant.comment;
+    gardenPlant.weeksToSowBeforeLastFrost = plant.weeksToSowBeforeLastFrost;
+    gardenPlant.germEnd = plant.germEnd;
+    gardenPlant.sowingMethod = plant.sowingMethod;
+    gardenPlant.sowingSpace = plant.sowingSpace;
+    gardenPlant.depth = plant.depth;
+    gardenPlant.germStart = plant.germStart;
+    gardenPlant.methodNum = plant.methodNum;
+    gardenPlant.img = plant.img;
+    gardenPlant.zones = plant.zones;
     return gardenPlant;
   }
 

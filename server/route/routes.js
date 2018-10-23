@@ -78,11 +78,37 @@ router.get('/garden', auth, (req, res) => {
             "message": "UnauthorizedError: private profile"
         });
     } else {
-        console.log('before FINDBYID: ', req.payload);
         User.findById(req.payload._id)
             .exec(function(err, user) {
-                console.log(user);
                 res.status(200).json(user);
+            });
+    }
+});
+
+router.put('/garden', auth, (req, res) => {
+    if (!req.payload._id) {
+        res.status(401).json({
+            "message": "UnauthorizedError: private profile"
+        });
+    } else {
+        User.findOneAndUpdate({ _id: req.params.id }, {
+                $set: {
+                    _id: req.params._id,
+                    name: req.params.name,
+                    email: req.params.email,
+                    admin: req.params.admin,
+                    phone: req.params.phone,
+                    zone: req.params.zone,
+                    zip: req.params.zip,
+                    garden: req.params.garden,
+                }
+            },
+            function(err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(result);
+                }
             });
     }
 });

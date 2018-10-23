@@ -25,7 +25,6 @@ export class ReminderService {
     // TODO: Add conditions based off plant.stage, plant.type,
     tempReminder.date = this.addDays(new Date(), 7);
 
-    console.log(tempReminder);
     return tempReminder;
   }
 

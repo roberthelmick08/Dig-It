@@ -1,3 +1,4 @@
+import { GardenPlant } from './../../models/gardenPlant';
 import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
@@ -11,14 +12,7 @@ export class DataService {
 
   apiPath: String = 'http://localhost:3000/api';
 
-  constructor( private http: Http ) { }
-
-  getUser(id: number) {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.apiPath + '/user/', '5bc1582c4d699095a5b3446e', {headers: headers})
-      .pipe(map(res => res.json()));
-  }
+  constructor( private http: Http) { }
 
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
@@ -30,18 +24,6 @@ export class DataService {
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.apiPath + '/new_plant', newPlant, {headers: headers})
       .pipe(map(res => res.json()));
-  }
-
-  addToGarden(plant: Plant) {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.apiPath + '/garden/', plant._id, {headers: headers})
-      .pipe(map(res => res.json()));
-  }
-
-  getHarvestDate(weeksToHarvest: number): Date {
-
-    return null;
   }
 
   getSowingMethodString(methodNum: number): string {

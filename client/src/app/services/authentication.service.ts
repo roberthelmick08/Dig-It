@@ -1,5 +1,6 @@
-import { User } from './../../models/user';
-import { Plant } from './../../models/plant';
+import { GardenPlant } from './../../models/gardenPlant';
+// import { User } from './../../models/user';
+// import { Plant } from './../../models/plant';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +19,7 @@ export interface TokenPayload {
   phone?: number;
   zone?: number;
   zip?: number;
-  garden?: Array<Plant>;
+  garden?: Array<GardenPlant>;
 }
 
 export interface UserDetails {
@@ -70,18 +71,20 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'garden', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get' | 'put', type: 'login'|'register'|'garden', user?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
       base = this.http.post(this.apiPath + '/' + type, user);
-    } else {
+    } else if (method === 'get') {
       base = this.http.get(this.apiPath + '/' + type, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+    } else if ( method === 'put') {
+      base = this.http.put(this.apiPath + '/' + type, user, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(
       map((data: TokenResponse) => {
-        if (data.token) {
+        if (data && data.token) {
           this.saveToken(data.token);
         }
         return data;
@@ -100,6 +103,10 @@ export class AuthenticationService {
 
   public garden(): Observable<any> {
     return this.request('get', 'garden');
+  }
+
+  public addToGarden(user: TokenPayload): Observable<any> {
+    return this.request('put', 'garden', user);
   }
 
   public logout(): void {

@@ -1,7 +1,6 @@
 import { Reminder } from './reminder';
 
 export class GardenPlant {
-
 /*
 * Additional Fields - Garden Plant
 */
@@ -11,6 +10,7 @@ stage: number;
 /*
 * Plant Attributes
 */
+  _id: string;
   botanicalName?: string;
   commonName: string;
   type: string = 'Cactus' || 'Flower' || 'Fruit' || 'Grain' || 'Grass' ||
@@ -37,9 +37,6 @@ stage: number;
  weeksToHarvest?: number;
  weeksToSowBeforeLastFrost?: number;
  harvestable: boolean;
-
-
-
  germStart?: number;
  sowingMethod?: string;
 }
