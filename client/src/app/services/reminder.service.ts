@@ -58,9 +58,14 @@ export class ReminderService {
       }
     }
 
-    // TODO: Add conditions based off season (more often during summer)
+    let today = new Date();
 
-    tempReminder.date = this.addDays(new Date(), dayIncrementer);
+    // Reduce dayIncrementer during mid-May to mid-September
+    if(today.getMonth() > 4 && today.getDate() > 15 && today.getMonth() < 8 && today.getDate() < 15) {
+      dayIncrementer = dayIncrementer - 2;
+    }
+
+    tempReminder.date = this.addDays(today, dayIncrementer);
     return tempReminder;
   }
 
