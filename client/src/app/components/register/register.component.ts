@@ -16,9 +16,10 @@ export class RegisterComponent {
     password: '',
     admin: false,
     phone: null,
-    zone: 8,
+    zone: null,
     zip: null,
     garden: []
+
   };
 
   @Output()

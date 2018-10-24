@@ -13,15 +13,13 @@ export class GardenComponent implements OnInit {
 
   user: User;
 
-  gardenName: string = 'My Garden';
-
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
   constructor(private dataService: DataService, public authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.authService.garden().subscribe(user => {
+    this.authService.getUser().subscribe(user => {
       this.user = user;
     }, (err) => {
       console.error(err);
@@ -30,13 +28,12 @@ export class GardenComponent implements OnInit {
 
   markReminderDone(plant, reminder) {
     plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
+    this.authService.updateUser(this.user).subscribe( data => {
+      console.log(data);
+    });
   }
 
   openPlantDetailsDialog(plant: Plant) {
     this.openPlantDetailsDialogEvent.emit(plant);
-  }
-
-  saveGardenName(event) {
-    this.gardenName = event.path[0].innerText;
   }
 }

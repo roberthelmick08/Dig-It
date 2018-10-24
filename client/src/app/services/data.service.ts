@@ -26,6 +26,12 @@ export class DataService {
       .pipe(map(res => res.json()));
   }
 
+  // TODO
+  getHarvestDate(weeksToHarvest: number): Date {
+    const harvestDate = new Date();
+    return harvestDate;
+  }
+
   getSowingMethodString(methodNum: number): string {
     let methodString: string;
 

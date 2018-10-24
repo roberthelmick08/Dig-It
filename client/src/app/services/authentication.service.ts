@@ -1,6 +1,4 @@
 import { GardenPlant } from './../../models/gardenPlant';
-// import { User } from './../../models/user';
-// import { Plant } from './../../models/plant';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -71,7 +69,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get' | 'put', type: 'login'|'register'|'garden', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get' | 'put', type: 'login'|'register'|'user', user?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -101,12 +99,12 @@ export class AuthenticationService {
     return this.request('post', 'login', user);
   }
 
-  public garden(): Observable<any> {
-    return this.request('get', 'garden');
+  public getUser(): Observable<any> {
+    return this.request('get', 'user');
   }
 
-  public addToGarden(user: TokenPayload): Observable<any> {
-    return this.request('put', 'garden', user);
+  public updateUser(user: TokenPayload): Observable<any> {
+    return this.request('put', 'user', user);
   }
 
   public logout(): void {

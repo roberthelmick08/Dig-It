@@ -38,7 +38,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     private reminderService: ReminderService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
-    this.authService.garden().subscribe(user => {
+    this.authService.getUser().subscribe(user => {
       this.user = user;
     }, (err) => {
       console.error(err);
@@ -52,13 +52,13 @@ export class SearchComponent implements AfterViewInit, OnInit {
   getPlants() {
     this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants);
   }
-  
+
   addToGarden(plant: Plant) {
     const gardenPlant = this.setGardenPlant(plant);
 
     this.user.garden.push(gardenPlant);
 
-    this.authService.addToGarden(this.user).subscribe( data => {
+    this.authService.updateUser(this.user).subscribe( data => {
       console.log(data);
     });
   }
@@ -67,7 +67,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     const gardenPlant = new GardenPlant();
 
     gardenPlant.stage = plant.stage ? plant.stage : 0;
-    gardenPlant.isPotted = isPotted;
+    gardenPlant.isPotted = plant.isPotted;
     gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
     gardenPlant._id = plant._id;
     gardenPlant.commonName = plant.commonName;
