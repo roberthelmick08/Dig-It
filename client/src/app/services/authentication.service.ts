@@ -34,6 +34,9 @@ export class AuthenticationService {
 
   apiPath: String = 'http://localhost:3000/api';
 
+    // CORS config
+    corsUrl = 'https://cors-anywhere.herokuapp.com/';
+
   constructor(private http: HttpClient, private router: Router) {}
 
   private saveToken(token: string): void {
@@ -111,5 +114,30 @@ export class AuthenticationService {
     this.token = '';
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
+  }
+
+  public setUser(credentials) {
+    // Latitude and Longitude to use for Frostline API
+    let lat: number;
+    let lon: number;
+
+    this.doCORSRequest({
+      method: 'GET',
+      url: 'https://phzmapi.org/' + credentials.zip + '.json',
+    }, function printResult(result) {
+        console.log(result);
+        credentials.zone = result.zone;
+        lat = result.lat;
+        lon = result.lon;
+    });
+  }
+
+  public doCORSRequest(options, printResult) {
+    const x = new XMLHttpRequest();
+    x.open(options.method, this.corsUrl + options.url);
+    x.onload = x.onerror = () => {
+      printResult(x.responseText);
+    };
+    x.send(options.data);
   }
 }

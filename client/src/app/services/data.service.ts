@@ -26,14 +26,14 @@ export class DataService {
       .pipe(map(res => res.json()));
     }
 
-    getZoneFromZip(zip: number) {
-      const headers = new Headers();
+    // getZoneFromZip(zip: number) {
+    //   const headers = new Headers();
 
-      headers.append('Content-Type', 'application/json');
+    //   headers.append('Content-Type', 'application/json');
 
-      return this.http.get('https://phzmapi.org/' + zip + '.json', {headers: headers})
-        .pipe(map(res => res.json()));
-  }
+    //   return this.http.get('https://phzmapi.org/' + zip + '.json', {headers: headers})
+    //     .pipe(map(res => res.json()));
+    // }
 
   // TODO
   getHarvestDate(weeksToHarvest: number): Date {

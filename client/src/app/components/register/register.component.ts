@@ -11,6 +11,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 
 export class RegisterComponent {
+
   credentials: TokenPayload = {
     email: '',
     name: '',
@@ -22,25 +23,10 @@ export class RegisterComponent {
     garden: []
   };
 
-  @Output()
-  navigateToGardenEvent = new EventEmitter();
+  constructor(private auth: AuthenticationService, private dataService: DataService, private router: Router) { }
 
-  constructor(private auth: AuthenticationService, private dataService: DataService, private router: Router) {}
+register() {
+  this.auth.setUser(this.credentials);
+}
 
-  register() {
-
-    // TODO: API calls to determine zone, first frost date and last frost date from zip
-    // this.dataService.getZoneFromZip(this.credentials.zip).subscribe(zone => {
-    //   this.credentials.zone = zone;
-    //   console.log(this.credentials.zone);
-    // }, (err) => {
-    //   console.error(err);
-    // });
-
-    this.auth.register(this.credentials).subscribe(() => {
-      this.navigateToGardenEvent.emit(null);
-    }, (err) => {
-      console.error(err);
-    });
-  }
 }
