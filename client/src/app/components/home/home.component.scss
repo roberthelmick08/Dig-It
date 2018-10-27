@@ -1,7 +1,6 @@
 @import "../../../styles.scss";
 .sprout-stages-img {
-    width: calc(100% + 4rem);
-    margin-left: -2rem;
+    width: 100%;
     z-index: -1;
 }
 
@@ -9,16 +8,42 @@
     z-index: 1;
 }
 
+.getting-started-container {
+    background-color: $color-light-green;
+    padding: 2rem;
+    .paragraph-container {
+        color: $color-dark-gray;
+        text-align: justify;
+        padding-right: 2rem;
+        font-size: 0.875rem;
+        h3 {
+            letter-spacing: 0.25rem;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+    }
+    .steps {
+        .step-item {
+            text-align: center;
+            padding: 0 1rem 0 0;
+            mat-icon.mat-icon {
+                height: 4rem;
+                width: 4rem;
+                font-size: 4rem;
+            }
+        }
+    }
+}
+
 .quick-overview-container {
+    padding: 1rem;
+    background-image: url("../../../assets/img/shovel-garden.jpeg");
+    background-size: contain;
     .quick-overview-header {
         h1 {
             text-align: center;
             font-size: 7rem;
             letter-spacing: 1rem;
-            span {
-                color: $color-light-gray;
-                font-size: 5rem;
-            }
         }
         h2 {
             color: $color-light-gray;
@@ -29,11 +54,15 @@
     }
     .quick-overview-contents {
         .quick-overview-item {
+            height: 90px;
+            margin-top: 4rem;
             img {
                 width: 75px;
             }
             p {
                 text-align: justify;
+                font-size: 0.875rem;
+                margin-left: 1rem;
             }
         }
     }
