@@ -36,3 +36,5 @@ node_modules
 www
 
 .gitignore
+
+tslint.json
