@@ -53,7 +53,7 @@
 
 
 
-                <app-home *ngIf="currentPage === 'home'" (navigateToRegisterEvent)="setCurrentPage('register')" (navigateToLoginEvent)="setCurrentPage('login')"></app-home>
+                <app-home *ngIf="currentPage === 'home'"></app-home>
                 <app-register *ngIf="currentPage === 'register'" (navigateToGardenEvent)="setCurrentPage('garden')"></app-register>
                 <app-login *ngIf="currentPage === 'login'" (navigateToGardenEvent)="setCurrentPage('garden')" (navigateToRegisterEvent)="setCurrentPage('register')"></app-login>
 

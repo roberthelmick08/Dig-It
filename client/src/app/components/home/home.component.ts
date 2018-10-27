@@ -17,11 +17,4 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  navigateToRegister(event: Event) {
-    this.navigateToRegisterEvent.emit(null);
-  }
-
-  navigateToLogin(event: Event) {
-    this.navigateToLoginEvent.emit(null);
-  }
 }
