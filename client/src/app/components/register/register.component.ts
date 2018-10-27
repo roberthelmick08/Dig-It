@@ -23,10 +23,17 @@ export class RegisterComponent {
     garden: []
   };
 
+  @Output()
+  navigateToGardenEvent = new EventEmitter();
+
   constructor(private auth: AuthenticationService, private dataService: DataService, private router: Router) { }
 
-register() {
-  this.auth.setUser(this.credentials);
+  register() {
+    this.auth.setUser(this.credentials).subscribe(() => {
+      this.navigateToGardenEvent.emit(null);
+    }, (err) => {
+      console.error(err);
+  });
 }
 
 }

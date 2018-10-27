@@ -34,8 +34,8 @@ export class AuthenticationService {
 
   apiPath: String = 'http://localhost:3000/api';
 
-    // CORS config
-    corsUrl = 'https://cors-anywhere.herokuapp.com/';
+  // CORS config
+  corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -94,10 +94,6 @@ export class AuthenticationService {
     return request;
   }
 
-  public register(user: TokenPayload): Observable<any> {
-    return this.request('post', 'register', user);
-  }
-
   public login(user: TokenPayload): Observable<any> {
     return this.request('post', 'login', user);
   }
@@ -116,20 +112,27 @@ export class AuthenticationService {
     this.router.navigateByUrl('/');
   }
 
-  public setUser(credentials) {
+  public setUser(credentials): Observable<any> {
     // Latitude and Longitude to use for Frostline API
-    let lat: number;
-    let lon: number;
+    let coordinates: {lat: number, lon: number};
 
-    this.doCORSRequest({
-      method: 'GET',
-      url: 'https://phzmapi.org/' + credentials.zip + '.json',
-    }, function printResult(result) {
-        console.log(result);
-        credentials.zone = result.zone;
-        lat = result.lat;
-        lon = result.lon;
-    });
+    let res;
+
+    // this.doCORSRequest({
+    //   method: 'GET',
+    //   url: 'https://phzmapi.org/' + credentials.zip + '.json',
+    // }, function printResult(result) {
+    //   res = JSON.parse(result);
+    // });
+
+    // this.doCORSRequest({
+    //   method: 'GET',
+    //   url: 'http://api.farmsense.net/v1/frostdates/stations/?lat=' + coordinates.lat + '&lon=' + coordinates.lon
+    // }, function getResult(result) {
+    //   console.log(result);
+    // });
+
+    return this.request('post', 'register', credentials);
   }
 
   public doCORSRequest(options, printResult) {
