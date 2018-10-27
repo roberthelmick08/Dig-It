@@ -1,32 +1,40 @@
 @import "../../../styles.scss";
-h1 {
-    text-align: center;
-    font-size: 7rem;
-    letter-spacing: 1rem;
-    span {
-        color: $color-dark-green;
-        font-size: 5rem;
-    }
-}
-
-h2 {
-    color: $color-light-gray;
-    font-size: 5rem;
-    text-align: center;
-    letter-spacing: 1rem;
-}
-
 .sprout-stages-img {
-    width: 100%;
+    width: calc(100% + 4rem);
+    margin-left: -2rem;
+    z-index: -1;
+}
+
+.home-page-header {
+    z-index: 1;
 }
 
 .quick-overview-container {
-    .quick-overview-item {
-        img {
-            width: 75px;
+    .quick-overview-header {
+        h1 {
+            text-align: center;
+            font-size: 7rem;
+            letter-spacing: 1rem;
+            span {
+                color: $color-light-gray;
+                font-size: 5rem;
+            }
         }
-        p {
-            text-align: justify;
+        h2 {
+            color: $color-light-gray;
+            font-size: 5rem;
+            text-align: center;
+            letter-spacing: 1rem;
+        }
+    }
+    .quick-overview-contents {
+        .quick-overview-item {
+            img {
+                width: 75px;
+            }
+            p {
+                text-align: justify;
+            }
         }
     }
 }
