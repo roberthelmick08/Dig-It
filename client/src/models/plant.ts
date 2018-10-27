@@ -20,6 +20,7 @@ export class Plant {
   sowingMethod?: string;
   sowingSpace?: number;
   depth?: number;
+  isPotted?: boolean;
 
  /*
 * Not Used

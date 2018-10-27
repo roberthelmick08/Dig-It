@@ -4,8 +4,10 @@
 ### LICENSE
 
 ### TODO:
-- Notifications
-    - Watering
-    - Move all plants indoors
-    - Move mature plants outdoors (on last frost date)
-    - Move 
+- APIs
+    - [USDA Hardiness Zone from ZIP](https://github.com/waldoj/frostline)
+    - [Frost Date](http://www.farmsense.net/api/frost-date-api/)
+    - Weather
+- Features
+    - [Env Variables](https://github.com/motdotla/dotenv)
+    - 

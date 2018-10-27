@@ -72,7 +72,7 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/garden', auth, (req, res) => {
+router.get('/user', auth, (req, res) => {
     if (!req.payload._id) {
         res.status(401).json({
             "message": "UnauthorizedError: private profile"
@@ -85,7 +85,7 @@ router.get('/garden', auth, (req, res) => {
     }
 });
 
-router.put('/garden', auth, (req, res) => {
+router.put('/user', auth, (req, res) => {
     if (!req.payload._id) {
         res.status(401).json({
             "message": "UnauthorizedError: private profile"

@@ -2,6 +2,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 
 export class RegisterComponent {
+
   credentials: TokenPayload = {
     email: '',
     name: '',
@@ -24,13 +26,14 @@ export class RegisterComponent {
   @Output()
   navigateToGardenEvent = new EventEmitter();
 
-  constructor(private auth: AuthenticationService, private router: Router) {}
+  constructor(private auth: AuthenticationService, private dataService: DataService, private router: Router) { }
 
   register() {
-    this.auth.register(this.credentials).subscribe(() => {
+    this.auth.setUser(this.credentials).subscribe(() => {
       this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);
-    });
-  }
+  });
+}
+
 }

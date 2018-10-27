@@ -1,6 +1,6 @@
 import { GardenPlant } from './../../models/gardenPlant';
 import { User } from './../../models/user';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Plant } from '../../models/plant';
@@ -24,6 +24,21 @@ export class DataService {
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.apiPath + '/new_plant', newPlant, {headers: headers})
       .pipe(map(res => res.json()));
+    }
+
+    // getZoneFromZip(zip: number) {
+    //   const headers = new Headers();
+
+    //   headers.append('Content-Type', 'application/json');
+
+    //   return this.http.get('https://phzmapi.org/' + zip + '.json', {headers: headers})
+    //     .pipe(map(res => res.json()));
+    // }
+
+  // TODO
+  getHarvestDate(weeksToHarvest: number): Date {
+    const harvestDate = new Date();
+    return harvestDate;
   }
 
   getSowingMethodString(methodNum: number): string {

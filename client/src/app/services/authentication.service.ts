@@ -1,6 +1,4 @@
 import { GardenPlant } from './../../models/gardenPlant';
-// import { User } from './../../models/user';
-// import { Plant } from './../../models/plant';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -35,6 +33,9 @@ export class AuthenticationService {
   private token: string;
 
   apiPath: String = 'http://localhost:3000/api';
+
+  // CORS config
+  corsUrl = 'https://cors-anywhere.herokuapp.com/';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -71,7 +72,7 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get' | 'put', type: 'login'|'register'|'garden', user?: TokenPayload): Observable<any> {
+  private request(method: 'post'|'get' | 'put', type: 'login'|'register'|'user', user?: TokenPayload): Observable<any> {
     let base;
 
     if (method === 'post') {
@@ -93,25 +94,53 @@ export class AuthenticationService {
     return request;
   }
 
-  public register(user: TokenPayload): Observable<any> {
-    return this.request('post', 'register', user);
-  }
-
   public login(user: TokenPayload): Observable<any> {
     return this.request('post', 'login', user);
   }
 
-  public garden(): Observable<any> {
-    return this.request('get', 'garden');
+  public getUser(): Observable<any> {
+    return this.request('get', 'user');
   }
 
-  public addToGarden(user: TokenPayload): Observable<any> {
-    return this.request('put', 'garden', user);
+  public updateUser(user: TokenPayload): Observable<any> {
+    return this.request('put', 'user', user);
   }
 
   public logout(): void {
     this.token = '';
     window.localStorage.removeItem('mean-token');
     this.router.navigateByUrl('/');
+  }
+
+  public setUser(credentials): Observable<any> {
+    // Latitude and Longitude to use for Frostline API
+    let coordinates: {lat: number, lon: number};
+
+    let res;
+
+    // this.doCORSRequest({
+    //   method: 'GET',
+    //   url: 'https://phzmapi.org/' + credentials.zip + '.json',
+    // }, function printResult(result) {
+    //   res = JSON.parse(result);
+    // });
+
+    // this.doCORSRequest({
+    //   method: 'GET',
+    //   url: 'http://api.farmsense.net/v1/frostdates/stations/?lat=' + coordinates.lat + '&lon=' + coordinates.lon
+    // }, function getResult(result) {
+    //   console.log(result);
+    // });
+
+    return this.request('post', 'register', credentials);
+  }
+
+  public doCORSRequest(options, printResult) {
+    const x = new XMLHttpRequest();
+    x.open(options.method, this.corsUrl + options.url);
+    x.onload = x.onerror = () => {
+      printResult(x.responseText);
+    };
+    x.send(options.data);
   }
 }
