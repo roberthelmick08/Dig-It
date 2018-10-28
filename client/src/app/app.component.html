@@ -47,14 +47,14 @@
         </mat-sidenav>
 
         <mat-sidenav-content fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
-            <mat-card fxLayout="column" fxFlex="{{currentPage === 'home' ? 100 : 60}}" class="page-content" [class.page-content-no-padding]="currentPage === 'home'">
+            <mat-card fxLayout="column" fxFlex="80" class="page-content" [class.page-content-no-padding]="currentPage === 'home'">
+                <!-- <mat-card fxLayout="column" fxFlex="{{currentPage === 'home' ? 100 : 60}}" class="page-content" [class.page-content-no-padding]="currentPage === 'home'"> -->
 
 
 
 
 
                 <app-home *ngIf="currentPage === 'home'"></app-home>
-                <app-register *ngIf="currentPage === 'register'" (navigateToGardenEvent)="setCurrentPage('garden')"></app-register>
                 <app-login *ngIf="currentPage === 'login'" (navigateToGardenEvent)="setCurrentPage('garden')" (navigateToRegisterEvent)="setCurrentPage('register')"></app-login>
 
                 <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-search>

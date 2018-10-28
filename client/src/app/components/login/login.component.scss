@@ -1,0 +1,18 @@
+@import "../../../styles.scss";
+.page-tab-container {
+    .page-tab {
+        cursor: pointer;
+    }
+    .page-tab-active {
+        color: $color-red;
+        cursor: default;
+    }
+    .page-tab-login {
+        border-right: 3px solid $color-light-green;
+    }
+}
+
+.header {
+    font-size: 1.5rem;
+    color: $color-dark-gray;
+}

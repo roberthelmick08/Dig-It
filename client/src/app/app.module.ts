@@ -21,7 +21,6 @@ import { GardenComponent } from './components/garden/garden.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
 import { LoginComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
-import { RegisterComponent } from './components/register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -42,7 +41,6 @@ const routes: Routes = [
     LoginComponent,
     RemindersComponent,
     PlantDetailsDialogComponent,
-    RegisterComponent,
     MatSnackBarContainer,
     HomeComponent,
   ],

@@ -17,22 +17,39 @@ export class LoginComponent {
   @Output()
   navigateToGardenEvent = new EventEmitter();
 
-  credentials: TokenPayload = {
+  loginCredentials: TokenPayload = {
     email: '',
     password: '',
   };
 
+  registerCredentials: TokenPayload = {
+    email: '',
+    name: '',
+    password: '',
+    admin: false,
+    phone: null,
+    zone: 8,
+    zip: null,
+    garden: []
+  };
+
+  activePageTab: 'login' | 'register' = 'login';
+
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   login() {
-    this.auth.login(this.credentials).subscribe(() => {
+    this.auth.login(this.loginCredentials).subscribe(() => {
       this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);
     });
   }
 
-  navigateToRegister() {
-    this.navigateToRegisterEvent.emit(null);
+  register() {
+    this.auth.setUser(this.registerCredentials).subscribe(() => {
+      this.navigateToGardenEvent.emit(null);
+    }, (err) => {
+      console.error(err);
+    });
   }
 }
