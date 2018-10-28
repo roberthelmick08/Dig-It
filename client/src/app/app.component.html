@@ -47,7 +47,7 @@
         </mat-sidenav>
 
         <mat-sidenav-content fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
-            <mat-card fxLayout="column" fxFlex="60" class="page-content" [class.page-content-no-padding]="currentPage === 'home'">
+            <mat-card fxLayout="column" fxFlex="{{currentPage === 'home' ? 100 : 60}}" class="page-content" [class.page-content-no-padding]="currentPage === 'home'">
 
 
 

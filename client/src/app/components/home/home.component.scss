@@ -11,8 +11,8 @@
 .getting-started-container {
     background-color: $color-light-green;
     padding: 2rem;
+    color: $color-dark-gray;
     .paragraph-container {
-        color: $color-dark-gray;
         text-align: justify;
         padding-right: 2rem;
         font-size: 0.875rem;
@@ -37,8 +37,9 @@
 
 .quick-overview-container {
     padding: 1rem;
-    background-image: url("../../../assets/img/shovel-garden.jpeg");
+    background-image: url("../../../assets/img/dirt-garden.jpeg");
     background-size: contain;
+    color: white;
     .quick-overview-header {
         h1 {
             text-align: center;
@@ -54,14 +55,14 @@
     }
     .quick-overview-contents {
         .quick-overview-item {
-            height: 90px;
-            margin-top: 4rem;
+            padding: 1rem 1rem 1rem 0;
+            background: rgba(255, 255, 255, 0.2);
             img {
                 width: 75px;
+                height: 75px;
             }
             p {
                 text-align: justify;
-                font-size: 0.875rem;
                 margin-left: 1rem;
             }
         }
