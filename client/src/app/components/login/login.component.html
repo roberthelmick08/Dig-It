@@ -8,32 +8,31 @@
 
     <div *ngIf="activePageTab === 'login'" fxLayout="column">
         <mat-form-field>
-            <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="credentials.email">
+            <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email">
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+            <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password">
         </mat-form-field>
     </div>
 
     <div *ngIf="activePageTab === 'register'" fxLayout="column">
         <mat-form-field>
-            <input matInput type="text" name="name" placeholder="Your name" [(ngModel)]="credentials.name" required>
+            <input matInput type="text" name="name" placeholder="Your name" [(ngModel)]="registerCredentials.name" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="credentials.email" required>
+            <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="credentials.password" required>
+            <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" name="phone" placeholder="Phone Number" [(ngModel)]="credentials.phone" required>
+            <input matInput type="text" name="phone" placeholder="Phone Number" [(ngModel)]="registerCredentials.phone" required>
         </mat-form-field>
         <mat-form-field>
-            <input matInput type="text" name="zip" placeholder="ZIP code" [(ngModel)]="credentials.zip" required>
+            <input matInput type="text" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
         </mat-form-field>
-        <button mat-raised-button type="submit" (click)="register()">Register!</button>
     </div>
 
-
-    <button mat-flat-button type="submit" (click)="login()">Sign in!</button>
+    <button mat-flat-button type="submit" (click)="register()" *ngIf="activePageTab === 'register'">Register</button>
+    <button mat-flat-button type="submit" (click)="login()" *ngIf="activePageTab === 'login'">Log In</button>
 </div>
