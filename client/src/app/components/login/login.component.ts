@@ -45,8 +45,24 @@ export class LoginComponent {
     });
   }
 
-  register() {
-    this.auth.setUser(this.registerCredentials).subscribe(() => {
+  register() {    
+    // Latitude and Longitude to use for Frostline API
+    let coordinates: {lat: number, lon: number};
+
+    let res;
+
+    // this.auth.doCORSRequest({
+    //   method: 'GET',
+    //   url: 'https://phzmapi.org/' + this.registerCredentials + '.json',
+    // }, function printResult(result) {
+    //   res = JSON.parse(result);
+    // });
+
+    this.auth.doCORSRequest({
+      method: 'GET',
+      url: 'https://phzmapi.org/' + this.registerCredentials + '.json',
+    }).subscribe( result => {
+      res = JSON.parse(result);
       this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);

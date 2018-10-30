@@ -78,9 +78,9 @@ export class AuthenticationService {
     if (method === 'post') {
       base = this.http.post(this.apiPath + '/' + type, user);
     } else if (method === 'get') {
-      base = this.http.get(this.apiPath + '/' + type, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(this.apiPath + '/' + type, { headers: { Authorization: `Bearer ` + this.getToken() }});
     } else if ( method === 'put') {
-      base = this.http.put(this.apiPath + '/' + type, user, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.put(this.apiPath + '/' + type, user, { headers: { Authorization: `Bearer ` + this.getToken() }});
     }
 
     const request = base.pipe(
@@ -112,18 +112,18 @@ export class AuthenticationService {
     this.router.navigateByUrl('/');
   }
 
-  public setUser(credentials): Observable<any> {
-    // Latitude and Longitude to use for Frostline API
-    let coordinates: {lat: number, lon: number};
+  // public setUser(credentials): Observable<any> {
+  //   // Latitude and Longitude to use for Frostline API
+  //   let coordinates: {lat: number, lon: number};
 
-    let res;
+  //   let res;
 
-    // this.doCORSRequest({
-    //   method: 'GET',
-    //   url: 'https://phzmapi.org/' + credentials.zip + '.json',
-    // }, function printResult(result) {
-    //   res = JSON.parse(result);
-    // });
+  //   this.doCORSRequest({
+  //     method: 'GET',
+  //     url: 'https://phzmapi.org/' + credentials.zip + '.json',
+  //   }, function printResult(result) {
+  //     res = JSON.parse(result);
+  //   });
 
     // this.doCORSRequest({
     //   method: 'GET',
@@ -132,10 +132,10 @@ export class AuthenticationService {
     //   console.log(result);
     // });
 
-    return this.request('post', 'register', credentials);
-  }
+    // return this.request('post', 'register', credentials);
+  // }
 
-  public doCORSRequest(options, printResult) {
+  public doCORSRequest(options): Observable<any> {
     const x = new XMLHttpRequest();
     x.open(options.method, this.corsUrl + options.url);
     x.onload = x.onerror = () => {
