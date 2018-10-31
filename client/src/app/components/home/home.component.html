@@ -28,21 +28,12 @@
         <h1>Dig-It</h1>
     </div>
     <div class="quick-overview-contents" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
-        <div class="quick-overview-item" fxLayout="row" fxFlex="40">
-            <img src="../../../assets/icons/gardening-tools.svg" />
-            <p>Dig-It was created for gardeners who struggle to keep their plants strong and healthy. Dig-It saves lives.</p>
-        </div>
-        <div class="quick-overview-item" fxLayout="row" fxFlex="40">
-            <img src="../../../assets/icons/reminders/repot.svg" />
-            <p>Plug in your ZIP code at registration, and Dig-It will give you growing tips specific to your location.</p>
-        </div>
-        <div class="quick-overview-item" fxLayout="row" fxFlex="40">
-            <img src="../../../assets/icons/watering-can.svg" />
-            <p>Never forget to water, re-pot, or harvest your plants again!</p>
-        </div>
-        <div class="quick-overview-item" fxLayout="row" fxFlex="40">
-            <img src="../../../assets/icons/ecology.svg" />
-            <p>Dig-It's extensive crowdsourced database gives details of any plant in the world!<br><br></p>
-        </div>
+        <ng-container *ngFor="let index = index; let slide of slides">
+            <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" 
+            [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep" fxLayout="row" fxFlex="40">
+                <img [src]="slide.imgSrc" />
+                <p [innerHTML]="slide.innerHTML"></p>
+            </div>
+        </ng-container>
     </div>
 </div>

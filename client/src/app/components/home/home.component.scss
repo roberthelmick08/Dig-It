@@ -7,7 +7,9 @@
 .home-page-header {
     z-index: 1;
 }
-
+/deep/ .highlight{
+    color: $color-blue;
+}
 .getting-started-container {
     background-color: $color-light-green;
     padding: 2rem;
@@ -40,10 +42,11 @@
 }
 
 .quick-overview-container {
-    padding: 1rem;
+    padding: 2rem 1rem 1rem 1rem;
     background-image: url("../../../assets/img/dirt.png");
     background-size: contain;
     color: white;
+    height: calc(100vh - 64px - 1rem);
     .quick-overview-header {
         h1 {
             text-align: center;
@@ -58,20 +61,83 @@
         }
     }
     .quick-overview-contents {
+        transition: all 0.5s ease;
+        overflow: hidden;
+        width: 100%;
+        margin-top: 6rem;
         .quick-overview-item {
             padding: 0rem 2rem 1rem 0;
-            margin-bottom: 2rem;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 100px;
-            height: 75px;
+            height: 150px;
+            border-bottom: 2px solid $color-light-green;
             img {
-                width: 75px;
-                min-width: 75px;
-                height: 75px;
+                width: 150px;
+                min-width: 150px;
+                height: 150px;
             }
             p {
                 text-align: justify;
                 margin-left: 1rem;
+                font-size: 1.25rem;
+            }
+        }
+        .slide-out-left {
+            position: absolute;
+            -webkit-animation: slide-out-left 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+            animation: slide-out-left 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        }
+        @-webkit-keyframes slide-out-left {
+            0% {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: translateX(-1000px);
+                transform: translateX(-1000px);
+                opacity: 0;
+            }
+        }
+        @keyframes slide-out-left {
+            0% {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: translateX(-1000px);
+                transform: translateX(-1000px);
+                opacity: 0;
+                display: none;
+            }
+        }
+        .slide-in-right {
+            -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+        @-webkit-keyframes slide-in-right {
+            0% {
+                -webkit-transform: translateX(1000px);
+                transform: translateX(1000px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slide-in-right {
+            0% {
+                -webkit-transform: translateX(1000px);
+                transform: translateX(1000px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+                opacity: 1;
             }
         }
     }

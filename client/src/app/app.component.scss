@@ -45,7 +45,7 @@
             width: 0;
             font-variant-caps: all-petite-caps;
             position: absolute;
-            left: 30%;
+            left: calc(30% - 100px);
             top: 1rem;
             &:hover {
                 -webkit-transform: scale(1.1);
