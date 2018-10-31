@@ -94,8 +94,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   openAddPlantDialog() {
     const dialogRef = this.dialog.open(AddPlantDialogComponent, {
-      height: '80vh',
-      width: '40%',
+      height: '500px',
+      width: '700px',
       panelClass: 'dialog-container'
     });
 

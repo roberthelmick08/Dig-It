@@ -23,8 +23,8 @@
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="setCurrentPage('edit_profile')">My Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-stroked-button color="primary" (click)="setCurrentPage('register')">Register</button>
-                <button mat-raised-button color="accent" class="profile-menu-button" (click)="setCurrentPage('login')">Login</button>
+                <button mat-stroked-button color="primary" (click)="openLoginDialog()">Register</button>
+                <button mat-raised-button color="accent" class="profile-menu-button" (click)="openLoginDialog()">Login</button>
             </div>
         </div>
     </mat-toolbar>

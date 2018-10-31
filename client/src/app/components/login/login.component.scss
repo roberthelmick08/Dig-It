@@ -2,10 +2,14 @@
 .page-tab-container {
     .page-tab {
         cursor: pointer;
+        padding: 1rem 3rem 1rem 3rem;
+        margin-bottom: 2rem;
+        &:hover {
+            background: $color-light-gray;
+        }
     }
     .page-tab-active {
         color: $color-red;
-        cursor: default;
     }
     .page-tab-login {
         border-right: 3px solid $color-light-green;
@@ -15,4 +19,13 @@
 .header {
     font-size: 1.5rem;
     color: $color-dark-gray;
+    margin-bottom: 1rem;
+}
+
+.login-image-container {
+    margin-right: 2rem;
+}
+
+button {
+    margin-top: 3rem;
 }

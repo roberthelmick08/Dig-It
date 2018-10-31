@@ -2,7 +2,7 @@ import { Component, Output } from '@angular/core';
 import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
-
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { EventEmitter } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent {
+export class LoginDialogComponent {
 
   @Output()
   navigateToRegisterEvent = new EventEmitter();
@@ -35,15 +35,16 @@ export class LoginComponent {
 
   activePageTab: 'login' | 'register' = 'login';
 
-  constructor(private auth: AuthenticationService, private router: Router) {}
+  constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private auth: AuthenticationService, private router: Router) {}
 
   login() {
     this.auth.login(this.loginCredentials).subscribe(() => {
+      this.dialogRef.close
       this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);
     });
-  }
+}
 
   register() {    
     // Latitude and Longitude to use for Frostline API
@@ -58,14 +59,15 @@ export class LoginComponent {
     //   res = JSON.parse(result);
     // });
 
-    this.auth.doCORSRequest({
-      method: 'GET',
-      url: 'https://phzmapi.org/' + this.registerCredentials + '.json',
-    }).subscribe( result => {
-      res = JSON.parse(result);
-      this.navigateToGardenEvent.emit(null);
-    }, (err) => {
-      console.error(err);
-    });
+    // this.auth.doCORSRequest({
+    //   method: 'GET',
+    //   url: 'https://phzmapi.org/' + this.registerCredentials + '.json',
+    // }).subscribe( result => {
+    //   res = JSON.parse(result);
+    //   this.navigateToGardenEvent.emit(null);
+    // }, (err) => {
+    //   console.error(err);
+    // });
+    this.dialogRef.close()
   }
 }

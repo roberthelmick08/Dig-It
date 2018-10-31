@@ -3,36 +3,41 @@
         <div class="page-tab page-tab-login" [class.page-tab-active]="activePageTab === 'login'" (click)="activePageTab === 'login' ? '' : activePageTab = 'login'">Login</div>
         <div class="page-tab" [class.page-tab-active]="activePageTab === 'register'" (click)="activePageTab === 'register' ? '' : activePageTab = 'register'">Register</div>
     </div>
+    <div>
+        <div class="login-image-container" fxFlex="30">
+            <img src="../../../assets/icons/reminders/plant.svg" />
+        </div>
+        <div fxFlex>
+            <h1 class="header">{{activePageTab === 'login' ? 'Login' : 'Register'}}</h1>
 
-    <h1 class="header">{{activePageTab === 'login' ? 'Login' : 'Register'}}</h1>
+            <div *ngIf="activePageTab === 'login'" fxLayout="column">
+                <mat-form-field>
+                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password">
+                </mat-form-field>
+            </div>
 
-    <div *ngIf="activePageTab === 'login'" fxLayout="column">
-        <mat-form-field>
-            <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password">
-        </mat-form-field>
+            <div *ngIf="activePageTab === 'register'" fxLayout="column">
+                <mat-form-field>
+                    <input matInput type="text" name="name" placeholder="Your name" [(ngModel)]="registerCredentials.name" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="text" name="phone" placeholder="Phone Number" [(ngModel)]="registerCredentials.phone" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="text" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
+                </mat-form-field>
+            </div>
+        </div>
     </div>
-
-    <div *ngIf="activePageTab === 'register'" fxLayout="column">
-        <mat-form-field>
-            <input matInput type="text" name="name" placeholder="Your name" [(ngModel)]="registerCredentials.name" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput type="text" name="phone" placeholder="Phone Number" [(ngModel)]="registerCredentials.phone" required>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput type="text" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
-        </mat-form-field>
-    </div>
-
-    <button mat-flat-button type="submit" (click)="register()" *ngIf="activePageTab === 'register'">Register</button>
-    <button mat-flat-button type="submit" (click)="login()" *ngIf="activePageTab === 'login'">Log In</button>
+    <button mat-flat-button (click)="register()" *ngIf="activePageTab === 'register'">Register</button>
+    <button mat-flat-button (click)="login()" *ngIf="activePageTab === 'login'">Log In</button>
 </div>

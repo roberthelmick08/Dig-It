@@ -135,11 +135,12 @@ export class AuthenticationService {
     // return this.request('post', 'register', credentials);
   // }
 
-  public doCORSRequest(options): Observable<any> {
+  public doCORSRequest(options) {
+  // public doCORSRequest(options): Observable<any> {
     const x = new XMLHttpRequest();
     x.open(options.method, this.corsUrl + options.url);
     x.onload = x.onerror = () => {
-      printResult(x.responseText);
+      // printResult(x.responseText);
     };
     x.send(options.data);
   }

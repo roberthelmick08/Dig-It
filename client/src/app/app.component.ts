@@ -1,3 +1,4 @@
+import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { Component } from '@angular/core';
 import { User } from 'src/models/user';
@@ -31,14 +32,22 @@ export class AppComponent {
 
   openPlantDetailsDialog(plant: Plant) {
     const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
-      height: '80vh',
-      width: '40%',
+      height: '500px',
+      width: '700px',
       panelClass: 'dialog-container',
       data: plant,
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // TODO
+    });
+  }
+
+  openLoginDialog(){
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      height: '500px',
+      width: '700px',
+      panelClass: 'dialog-container'
     });
   }
 }

@@ -19,7 +19,7 @@ import { AddPlantDialogComponent } from './components/search/add-plant-dialog/ad
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { GardenComponent } from './components/garden/garden.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -38,7 +38,7 @@ const routes: Routes = [
     AddPlantDialogComponent,
     EditProfileComponent,
     GardenComponent,
-    LoginComponent,
+    LoginDialogComponent,
     RemindersComponent,
     PlantDetailsDialogComponent,
     MatSnackBarContainer,
@@ -73,6 +73,7 @@ const routes: Routes = [
   entryComponents: [
     AddPlantDialogComponent,
     PlantDetailsDialogComponent,
+    LoginDialogComponent,
     MatSnackBarContainer,
   ],
   providers: [MatDialog, MatSnackBar, AuthenticationService, AuthGuardService, ReminderService],
