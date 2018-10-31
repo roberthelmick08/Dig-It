@@ -19,7 +19,11 @@
                 <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
             </div>
             <div class="settings-icon-container">
-                <mat-icon class="settings-icon">settings</mat-icon>
+                <mat-icon class="settings-icon" [matMenuTriggerFor]="settingsMenu">settings</mat-icon>
+                <mat-menu #settingsMenu="matMenu">
+                    <button mat-menu-item><mat-icon>edit</mat-icon></button>
+                    <button mat-menu-item><mat-icon>remove</mat-icon></button>
+                </mat-menu>
             </div>
         </mat-card>
     </div>
