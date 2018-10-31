@@ -58,6 +58,7 @@ const routes: Routes = [
     MatRadioModule,
     MatOptionModule,
     MatSelectModule,
+    MatMenuModule,
     OverlayModule,
     MatInputModule,
     MatSlideToggleModule,

@@ -22,6 +22,7 @@
         }
     }
     .plant-name-details {
+        cursor: pointer;
         h4 {
             letter-spacing: 4px;
             color: $color-dark-gray;
@@ -37,17 +38,60 @@
         text-align: right;
         width: 100%;
         .settings-icon {
-            -webkit-transition: -webkit-transform .5s ease-in-out;
-            transition: transform .5s ease-in-out;
             color: $color-light-gray;
             cursor: pointer;
             position: absolute;
             margin-top: -24px;
             margin-left: -24px;
             font-size: 1.3rem;
+            height: 1.3rem;
+            width: 1.3rem;
             &:hover {
+                -webkit-transition: -webkit-transform .5s ease-in-out;
+                transition: transform .5s ease-in-out;
                 -webkit-transform: rotate(90deg);
                 transform: rotate(90deg);
+            }
+        }
+    }
+}
+
+/deep/ .mat-menu-panel {
+    background: transparent;
+    max-width: 50px;
+    min-width: 0;
+    box-shadow: none;
+    padding-left: 16px;
+    margin-left: -14px;
+    margin-bottom: 16px;
+    .mat-menu-item {
+        background: $color-dark-gray;
+        border-radius: 50%;
+        padding: 0;
+        height: 24px;
+        width: 24px;
+        margin-bottom: 0.5rem;
+        &:hover {
+            background-color: $color-dark-gray !important;
+            -webkit-box-shadow: -2px 4px 10px 0px rgba(0, 0, 0, 0.3);
+            box-shadow: -2px 4px 10px 0px rgba(0, 0, 0, 0.3);
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+        mat-icon.mat-icon {
+            color: white !important;
+            font-size: 16px;
+            position: absolute;
+            margin-top: -8px;
+            margin-left: 4px;
+            &:hover {
+                color: $color-red !important;
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+                transition: all 0.3s ease;
             }
         }
     }
