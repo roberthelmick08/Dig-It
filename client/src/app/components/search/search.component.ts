@@ -1,5 +1,5 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
-import { Component, AfterViewInit, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { GardenPlant } from './../../../models/gardenPlant';
@@ -34,6 +34,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   isAddToGardenMenuVisible: boolean = false;
 
+  activeGardenMenuIndex: number;
+
   constructor( private dataService: DataService, public authService: AuthenticationService,
     private reminderService: ReminderService, public dialog: MatDialog ) { }
 
@@ -41,16 +43,15 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.authService.getUser().subscribe(user => {
       this.user = user;
     }, (err) => {
+      this.dataService.openSnackBar('fail');
       console.error(err);
     });
   }
 
   ngAfterViewInit() {
-    this.getPlants();
-  }
-
-  getPlants() {
-    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants);
+    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
+      this.dataService.openSnackBar('fail');
+    });
   }
 
   addToGarden(plant: Plant) {
@@ -58,8 +59,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
     this.user.garden.push(gardenPlant);
 
-    this.authService.updateUser(this.user).subscribe( data => {
-      console.log(data);
+    this.authService.updateUser(this.user).subscribe( result => { }, err => {
+      this.isAddToGardenMenuVisible = false;
+      this.dataService.openSnackBar('fail');
+    }, () =>{
+      this.isAddToGardenMenuVisible = false;
+      this.dataService.openSnackBar('success', 'Plant saved to your Garden!');
     });
   }
 
@@ -94,17 +99,23 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   openAddPlantDialog() {
     const dialogRef = this.dialog.open(AddPlantDialogComponent, {
-      height: '80vh',
-      width: '40%',
+      height: '500px',
+      width: '700px',
       panelClass: 'dialog-container'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // TODO
+      this.addToGarden(result);
     });
+
   }
 
-  openPlantDetailsDialog(plant) {
+  toggleAddToGardenMenu(index: number) {
+    this.isAddToGardenMenuVisible = true;
+    this.activeGardenMenuIndex = index;
+  }
+
+  openPlantDetailsDialog(plant: Plant) {
     this.openPlantDetailsDialogEvent.emit(plant);
   }
 

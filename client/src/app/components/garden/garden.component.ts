@@ -1,3 +1,4 @@
+import { GardenPlant } from './../../../models/gardenPlant';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Plant } from './../../../models/plant';
 import { DataService } from './../../services/data.service';
@@ -29,11 +30,16 @@ export class GardenComponent implements OnInit {
   markReminderDone(plant, reminder) {
     plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
     this.authService.updateUser(this.user).subscribe( data => {
-      console.log(data);
     });
   }
 
   openPlantDetailsDialog(plant: Plant) {
     this.openPlantDetailsDialogEvent.emit(plant);
+  }
+
+  removePlantFromGarden(plant: GardenPlant) {
+    this.user.garden.splice(this.user.garden.findIndex(p => plant === p), 1);
+    this.authService.updateUser(this.user).subscribe( data => {
+    });
   }
 }

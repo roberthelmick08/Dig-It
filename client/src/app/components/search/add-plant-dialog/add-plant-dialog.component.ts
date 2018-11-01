@@ -16,9 +16,6 @@ export class AddPlantDialogComponent {
 
   isSaveToGarden: boolean = true;
 
-  @Output()
-  getPlantsEvent: EventEmitter<any> = new EventEmitter();
-
   constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>, private dataService: DataService) {
     this.newPlant = new Plant();
 
@@ -55,10 +52,17 @@ export class AddPlantDialogComponent {
     if (this.newPlant.comment) this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
 
     this.dataService.addPlant(this.newPlant)
-    .subscribe(item => {
+    .subscribe(result => { }, (err) => {
+      this.dataService.openSnackBar('fail');
+    }, () => {
       this.dataService.getAllPlants();
+      if(this.isSaveToGarden){
+        this.dialogRef.close(this.newPlant);
+      } else{
+        this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
+        this.dialogRef.close();
+      }
     });
-
   }
 
   toTitleCase(input: string) {

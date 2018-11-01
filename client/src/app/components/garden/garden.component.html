@@ -3,20 +3,27 @@
         <h2 class="page-header">Garden</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-        <mat-card class="plant-grid-item" *ngFor="let plant of user?.garden" fxLayout="column" (click)="openPlantDetailsDialog(plant)">
+        <mat-card class="plant-grid-item" *ngFor="let plant of user?.garden" fxLayout="column">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
-                    <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" />
+                    <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" [title]="dataService.getStageString(plant.stage)" />
                 </div>
                 <div class="reminders-icon-container" fxLayout="row">
-                    <div *ngFor="let reminder of plant?.reminders" title="Click to mark Done" (click)="$event.stopPropagation(); markReminderDone(plant, reminder)">
+                    <div *ngFor="let reminder of plant?.reminders" title="Click to mark Done" (click)="markReminderDone(plant, reminder)">
                         <img src="{{ '../../../assets/icons/reminders/' + reminder.name + '.svg' }}" class="reminders-icon" />
                     </div>
                 </div>
             </div>
-            <div class="plant-name-details" fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+            <div class="plant-name-details" fxLayout="column" fxFlex="100" fxLayoutAlign="center center" (click)="openPlantDetailsDialog(plant)">
                 <h4>{{plant.commonName ? (plant.commonName | titlecase): (plant.botanicalName | titlecase)}}</h4>
                 <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
+            </div>
+            <div class="settings-icon-container">
+                <mat-icon class="settings-icon" [matMenuTriggerFor]="settingsMenu" (click)="$event.stopPropagation()">settings</mat-icon>
+                <mat-menu #settingsMenu="matMenu">
+                    <button mat-menu-item><mat-icon>edit</mat-icon></button>
+                    <button mat-menu-item (click)="removePlantFromGarden(plant)"><mat-icon>delete</mat-icon></button>
+                </mat-menu>
             </div>
         </mat-card>
     </div>

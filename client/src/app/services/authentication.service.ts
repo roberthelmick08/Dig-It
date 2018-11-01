@@ -34,9 +34,6 @@ export class AuthenticationService {
 
   apiPath: String = 'http://localhost:3000/api';
 
-  // CORS config
-  corsUrl = 'https://cors-anywhere.herokuapp.com/';
-
   constructor(private http: HttpClient, private router: Router) {}
 
   private saveToken(token: string): void {
@@ -78,9 +75,9 @@ export class AuthenticationService {
     if (method === 'post') {
       base = this.http.post(this.apiPath + '/' + type, user);
     } else if (method === 'get') {
-      base = this.http.get(this.apiPath + '/' + type, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(this.apiPath + '/' + type, { headers: { Authorization: `Bearer ` + this.getToken() }});
     } else if ( method === 'put') {
-      base = this.http.put(this.apiPath + '/' + type, user, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.put(this.apiPath + '/' + type, user, { headers: { Authorization: `Bearer ` + this.getToken() }});
     }
 
     const request = base.pipe(
@@ -113,34 +110,20 @@ export class AuthenticationService {
   }
 
   public setUser(credentials): Observable<any> {
-    // Latitude and Longitude to use for Frostline API
-    let coordinates: {lat: number, lon: number};
-
-    let res;
-
-    // this.doCORSRequest({
-    //   method: 'GET',
-    //   url: 'https://phzmapi.org/' + credentials.zip + '.json',
-    // }, function printResult(result) {
-    //   res = JSON.parse(result);
-    // });
-
-    // this.doCORSRequest({
-    //   method: 'GET',
-    //   url: 'http://api.farmsense.net/v1/frostdates/stations/?lat=' + coordinates.lat + '&lon=' + coordinates.lon
-    // }, function getResult(result) {
-    //   console.log(result);
-    // });
-
     return this.request('post', 'register', credentials);
   }
 
-  public doCORSRequest(options, printResult) {
-    const x = new XMLHttpRequest();
-    x.open(options.method, this.corsUrl + options.url);
-    x.onload = x.onerror = () => {
-      printResult(x.responseText);
-    };
-    x.send(options.data);
+  // public doCORSRequest(options) {
+  public doCORSRequest(options): Observable<any> {
+    return Observable.create(function (observer) {
+      const xhr = new XMLHttpRequest();
+      xhr.open(options.method, 'https://cors-anywhere.herokuapp.com/' + options.url);
+      xhr.onload = xhr.onerror = () => {
+        observer.next(xhr.responseText);
+        observer.complete();
+        // printResult(x.responseText);
+      };
+      xhr.send(options.data);
+    });
   }
 }

@@ -10,6 +10,10 @@ $color-red: #CD5360;
 $color-blue: #008F95;
 $color-light-gray: #D9D9D9;
 $color-dark-gray: #423E37;
+$break-sm: 600px;
+$break-md: 960px;
+$break-lg: 1280px;
+$break-xl: 1920px;
 
 /**********************
  * ELEMENTS
@@ -52,6 +56,46 @@ h5,
 h6 {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+
+/* Snackbar styling */
+
+.snackbar-success,
+.snackbar-fail {
+    background: #423E37 !important;
+    span {
+        font-size: 1.25rem;
+    }
+}
+
+.snackbar-success {
+    color: $color-light-green !important;
+    border-bottom: 4px solid $color-light-green;
+}
+
+.snackbar-fail {
+    color: $color-red !important;
+    border-bottom: 4px solid $color-red;
+}
+
+
+/* Grid scroll bar overridden changes */
+
+::-webkit-scrollbar {
+    width: 0.75rem; //12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $color-dark-gray;
+    opacity: 0.8;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
 }
 
 body {

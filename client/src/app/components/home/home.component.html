@@ -1,6 +1,39 @@
-<p>
-    home works!
-</p>
+<h1 class="home-page-header">Dig-It</h1>
+<img src="../../../assets/img/sproutStages.png" class="sprout-stages-img" />
 
-<div (click)="navigateToLogin($event)">Login</div>
-<div (click)="navigateToRegister($event)">Register</div>
+<div class="getting-started-container" fxLayout.lt-sm="column">
+    <div class="paragraph-container" fxLayout="column" fxFlex.gt-sm="40" fxLayoutAlign="center">
+        <h3>GETTING STARTED</h3>
+        <p>Lots of thought goes into planning your garden. Dig-It makes it easy. Follow these steps and Dig-It will give you easy-to-use, personalized gardening tips and reminders.</p>
+    </div>
+    <div class="steps" fxFlex fxLayoutAlign="space-around">
+        <div fxFlex="33" class="step-item">
+            <mat-icon>person_add</mat-icon>
+            <p>Create an Account</p>
+        </div>
+        <div fxFlex="33" class="step-item">
+            <mat-icon>local_florist</mat-icon>
+            <p>Add Plants to your Garden</p>
+        </div>
+        <div fxFlex="33" class="step-item">
+            <mat-icon>notifications_none</mat-icon>
+            <p>Get custom gardening notifications!</p>
+        </div>
+    </div>
+
+</div>
+<div class="quick-overview-container">
+    <div class="quick-overview-header">
+        <h2>CAN YOU</h2>
+        <h1>Dig-It</h1>
+    </div>
+    <div class="quick-overview-contents" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+        <ng-container *ngFor="let index = index; let slide of slides">
+            <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" 
+            [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep" fxLayout="row" fxFlex="40">
+                <img [src]="slide.imgSrc" />
+                <p [innerHTML]="slide.innerHTML"></p>
+            </div>
+        </ng-container>
+    </div>
+</div>

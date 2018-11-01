@@ -5,8 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
-  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBar,
-  MatSnackBarContainer } from '@angular/material';
+  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 
@@ -19,9 +18,8 @@ import { AddPlantDialogComponent } from './components/search/add-plant-dialog/ad
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { GardenComponent } from './components/garden/garden.component';
 import { RemindersComponent } from './components/reminders/reminders.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
-import { RegisterComponent } from './components/register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -39,11 +37,9 @@ const routes: Routes = [
     AddPlantDialogComponent,
     EditProfileComponent,
     GardenComponent,
-    LoginComponent,
+    LoginDialogComponent,
     RemindersComponent,
     PlantDetailsDialogComponent,
-    RegisterComponent,
-    MatSnackBarContainer,
     HomeComponent,
   ],
   imports: [
@@ -60,24 +56,25 @@ const routes: Routes = [
     MatRadioModule,
     MatOptionModule,
     MatSelectModule,
+    MatMenuModule,
     OverlayModule,
     MatInputModule,
     MatSlideToggleModule,
     MatDialogModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatToolbarModule,
     MatSidenavModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-
     RouterModule.forRoot(routes),
   ],
   entryComponents: [
     AddPlantDialogComponent,
     PlantDetailsDialogComponent,
-    MatSnackBarContainer,
+    LoginDialogComponent,
   ],
-  providers: [MatDialog, MatSnackBar, AuthenticationService, AuthGuardService, ReminderService],
+  providers: [MatDialog, AuthenticationService, AuthGuardService, ReminderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
