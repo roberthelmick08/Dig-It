@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
-  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBar, MatSnackBarContainer} from '@angular/material';
+  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 
@@ -41,7 +41,6 @@ const routes: Routes = [
     RemindersComponent,
     PlantDetailsDialogComponent,
     HomeComponent,
-    MatSnackBarContainer,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +62,7 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatDialogModule,
     MatMenuModule,
+    MatSnackBarModule,
     MatToolbarModule,
     MatSidenavModule,
     FlexLayoutModule,
@@ -73,9 +73,8 @@ const routes: Routes = [
     AddPlantDialogComponent,
     PlantDetailsDialogComponent,
     LoginDialogComponent,
-    MatSnackBarContainer,
   ],
-  providers: [MatDialog, MatSnackBar, AuthenticationService, AuthGuardService, ReminderService],
+  providers: [MatDialog, AuthenticationService, AuthGuardService, ReminderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

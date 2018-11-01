@@ -1,6 +1,6 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
-import { Component, AfterViewInit, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { Component, AfterViewInit, Output, EventEmitter, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { GardenPlant } from './../../../models/gardenPlant';
 import { User } from './../../../models/user';
@@ -37,23 +37,21 @@ export class SearchComponent implements AfterViewInit, OnInit {
   activeGardenMenuIndex: number;
 
   constructor( private dataService: DataService, public authService: AuthenticationService,
-    private reminderService: ReminderService, public dialog: MatDialog,
-    public snackBar: MatSnackBar ) { }
+    private reminderService: ReminderService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
       this.user = user;
     }, (err) => {
+      this.dataService.openSnackBar('fail');
       console.error(err);
     });
   }
 
   ngAfterViewInit() {
-    this.getPlants();
-  }
-
-  getPlants() {
-    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants);
+    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
+      this.dataService.openSnackBar('fail');
+    });
   }
 
   addToGarden(plant: Plant) {
@@ -61,11 +59,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
     this.user.garden.push(gardenPlant);
 
-    this.authService.updateUser(this.user).subscribe( data => {
+    this.authService.updateUser(this.user).subscribe( result => { }, err => {
       this.isAddToGardenMenuVisible = false;
-      this.snackBar.open('Plant saved to your Garden!', null, {
-        duration: 1500
-      });
+      this.dataService.openSnackBar('fail');
+    }, () =>{
+      this.isAddToGardenMenuVisible = false;
+      this.dataService.openSnackBar('success', 'Plant saved to your Garden!');
     });
   }
 
@@ -104,6 +103,11 @@ export class SearchComponent implements AfterViewInit, OnInit {
       width: '700px',
       panelClass: 'dialog-container'
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.addToGarden(result);
+    });
+
   }
 
   toggleAddToGardenMenu(index: number) {

@@ -58,17 +58,42 @@ h6 {
     margin-bottom: 0;
 }
 
-   /* Grid scroll bar overridden changes */
+
+/* Snackbar styling */
+
+.snackbar-success,
+.snackbar-fail {
+    background: #423E37 !important;
+    span {
+        font-size: 1.25rem;
+    }
+}
+
+.snackbar-success {
+    color: $color-light-green !important;
+    border-bottom: 4px solid $color-light-green;
+}
+
+.snackbar-fail {
+    color: $color-red !important;
+    border-bottom: 4px solid $color-red;
+}
+
+
+/* Grid scroll bar overridden changes */
+
 ::-webkit-scrollbar {
-   width: 0.75rem; //12px;
+    width: 0.75rem; //12px;
 }
+
 ::-webkit-scrollbar-thumb {
-   background-color: $color-dark-gray;
-   opacity: 0.8;
-   &:hover{
-       opacity: 1;
-   }
+    background-color: $color-dark-gray;
+    opacity: 0.8;
+    &:hover {
+        opacity: 1;
+    }
 }
+
 ::-webkit-scrollbar-track {
     background: #fff;
 }

@@ -1,9 +1,10 @@
 import { GardenPlant } from './../../models/gardenPlant';
 import { User } from './../../models/user';
-import { Injectable, NgZone } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Plant } from '../../models/plant';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class DataService {
 
   apiPath: String = 'http://localhost:3000/api';
 
-  constructor( private http: Http) { }
+  constructor( private http: Http, public snackBar: MatSnackBar) { }
 
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
@@ -39,6 +40,22 @@ export class DataService {
   getHarvestDate(weeksToHarvest: number): Date {
     const harvestDate = new Date();
     return harvestDate;
+  }
+
+  openSnackBar(status: 'fail' | 'success', message?: string,) {
+    if(status === 'fail'){
+      this.snackBar.open('Something went wrong! Please try again.', null, {
+        duration: 3000,
+        panelClass: 'snackbar-fail',
+        verticalPosition: 'top'
+      });
+    } else {
+      this.snackBar.open(message, null, {
+        duration: 1500,
+        panelClass: 'snackbar-success',
+        verticalPosition: 'top'
+      });
+    }
   }
 
   getSowingMethodString(methodNum: number): string {
