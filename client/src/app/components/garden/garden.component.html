@@ -22,7 +22,7 @@
                 <mat-icon class="settings-icon" [matMenuTriggerFor]="settingsMenu" (click)="$event.stopPropagation()">settings</mat-icon>
                 <mat-menu #settingsMenu="matMenu">
                     <button mat-menu-item><mat-icon>edit</mat-icon></button>
-                    <button mat-menu-item><mat-icon>delete</mat-icon></button>
+                    <button mat-menu-item (click)="removePlantFromGarden(plant)"><mat-icon>delete</mat-icon></button>
                 </mat-menu>
             </div>
         </mat-card>
