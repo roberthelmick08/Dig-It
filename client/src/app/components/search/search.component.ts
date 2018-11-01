@@ -34,6 +34,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   isAddToGardenMenuVisible: boolean = false;
 
+  activeGardenMenuIndex: number;
+
   constructor( private dataService: DataService, public authService: AuthenticationService,
     private reminderService: ReminderService, public dialog: MatDialog ) { }
 
@@ -104,7 +106,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
   }
 
-  openPlantDetailsDialog(plant) {
+  toggleAddToGardenMenu(index: number) {
+    this.isAddToGardenMenuVisible = true;
+    this.activeGardenMenuIndex = index;
+  }
+
+  openPlantDetailsDialog(plant: Plant) {
     this.openPlantDetailsDialogEvent.emit(plant);
   }
 

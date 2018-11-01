@@ -22,7 +22,7 @@
 
     <div *ngIf="visiblePlants?.length > 0" fxLayout="column">
 
-        <div class="plant-grid-item" *ngFor="let plant of visiblePlants">
+        <div class="plant-grid-item" *ngFor="let index = index; let plant of visiblePlants">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
                     <img src="../../../assets/icons/reminders/repot.svg" />
@@ -32,7 +32,7 @@
                 <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                 <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
             </div>
-            <div *ngIf="isAddToGardenMenuVisible === true">
+            <div *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index">
                 <mat-form-field>
                     <mat-select placeholder="Plant Stage" name="stage" [(ngModel)]="plant.stage" required>
                         <mat-option value="0">Seed</mat-option>
@@ -50,9 +50,9 @@
                 </mat-form-field>
             </div>
             <div>
-                <button mat-fab color="warn" *ngIf="!isAddToGardenMenuVisible" (click)="isAddToGardenMenuVisible = true;"><mat-icon>add</mat-icon></button>
-                <button mat-stroked-button color="basic" *ngIf="isAddToGardenMenuVisible" (click)="isAddToGardenMenuVisible = false;">Cancel</button>
-                <button mat-flat-button color="primary" *ngIf="isAddToGardenMenuVisible" (click)="addToGarden(plant)">Submit</button>
+                <button mat-fab color="warn" *ngIf="!isAddToGardenMenuVisible || activeGardenMenuIndex !== index" (click)="toggleAddToGardenMenu(index);"><mat-icon>add</mat-icon></button>
+                <button mat-stroked-button color="basic" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="isAddToGardenMenuVisible = false;">Cancel</button>
+                <button mat-flat-button color="primary" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="addToGarden(plant)">Submit</button>
             </div>
         </div>
     </div>
