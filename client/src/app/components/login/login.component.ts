@@ -39,14 +39,14 @@ export class LoginDialogComponent {
 
   login() {
     this.auth.login(this.loginCredentials).subscribe(() => {
-      this.dialogRef.close
+      this.dialogRef.close();
       this.navigateToGardenEvent.emit(null);
     }, (err) => {
       console.error(err);
     });
 }
 
-  register() {    
+  register() {
     // Latitude and Longitude to use for Frostline API
     let coordinates: {lat: number, lon: number};
 
@@ -68,6 +68,6 @@ export class LoginDialogComponent {
     // }, (err) => {
     //   console.error(err);
     // });
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 }

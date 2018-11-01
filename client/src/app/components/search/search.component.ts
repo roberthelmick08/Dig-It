@@ -1,6 +1,6 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
 import { Component, AfterViewInit, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { GardenPlant } from './../../../models/gardenPlant';
 import { User } from './../../../models/user';
@@ -37,7 +37,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
   activeGardenMenuIndex: number;
 
   constructor( private dataService: DataService, public authService: AuthenticationService,
-    private reminderService: ReminderService, public dialog: MatDialog ) { }
+    private reminderService: ReminderService, public dialog: MatDialog,
+    public snackBar: MatSnackBar ) { }
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
@@ -61,7 +62,10 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.user.garden.push(gardenPlant);
 
     this.authService.updateUser(this.user).subscribe( data => {
-      console.log(data);
+      this.isAddToGardenMenuVisible = false;
+      this.snackBar.open('Plant saved to your Garden!', null, {
+        duration: 1500
+      });
     });
   }
 
@@ -99,10 +103,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
       height: '500px',
       width: '700px',
       panelClass: 'dialog-container'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // TODO
     });
   }
 
