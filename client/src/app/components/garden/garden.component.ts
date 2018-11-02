@@ -17,7 +17,7 @@ export class GardenComponent implements OnInit {
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
-  constructor(private dataService: DataService, public authService: AuthenticationService) { }
+  constructor(public dataService: DataService, public authService: AuthenticationService) { }
 
   ngOnInit() {
     this.authService.getUser().subscribe(user => {

@@ -12,10 +12,11 @@ interface TokenResponse {
 export interface TokenPayload {
   email: string;
   password: string;
-  name?: string;
   admin?: boolean;
   phone?: number;
   zone?: number;
+  firstFrostDate?: Date;
+  lastFrostDate?: Date;
   zip?: number;
   garden?: Array<GardenPlant>;
 }
@@ -23,7 +24,6 @@ export interface TokenPayload {
 export interface UserDetails {
   _id: string;
   email: string;
-  name: string;
   exp: number;
   iat: number;
 }
@@ -121,7 +121,6 @@ export class AuthenticationService {
       xhr.onload = xhr.onerror = () => {
         observer.next(xhr.responseText);
         observer.complete();
-        // printResult(x.responseText);
       };
       xhr.send(options.data);
     });

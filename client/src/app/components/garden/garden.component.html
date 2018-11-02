@@ -3,6 +3,7 @@
         <h2 class="page-header">Garden</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <div *ngIf="!user?.garden">No plants in your Garden. To get started, add a plant to your Garden.</div>
         <mat-card class="plant-grid-item" *ngFor="let plant of user?.garden" fxLayout="column">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">

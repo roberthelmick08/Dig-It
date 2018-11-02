@@ -42,8 +42,8 @@ export class DataService {
     return harvestDate;
   }
 
-  openSnackBar(status: 'fail' | 'success', message?: string,) {
-    if(status === 'fail'){
+  openSnackBar(status: 'fail' | 'success', message?: string) {
+    if (status === 'fail') {
       this.snackBar.open('Something went wrong! Please try again.', null, {
         duration: 3000,
         panelClass: 'snackbar-fail',

@@ -62,7 +62,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.authService.updateUser(this.user).subscribe( result => { }, err => {
       this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('fail');
-    }, () =>{
+    }, () => {
       this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('success', 'Plant saved to your Garden!');
     });

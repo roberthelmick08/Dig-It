@@ -27,13 +27,16 @@ var sendJSONresponse = function(res, status, content) {
 router.post('/register', (req, res, next) => {
     var user = new UserSchema();
 
-    user.name = req.body.name;
+    user.lastFrostDate = req.body.lastFrostDate;
+    user.firstFrostDate = req.body.firstFrostDate;
     user.email = req.body.email;
     user.admin = req.body.admin;
     user.phone = req.body.phone;
     user.zone = req.body.zone;
     user.zip = req.body.zip;
     user.garden = req.body.garden;
+
+    console.log('REQUEST IN ROUTES', user, req.body);
 
     user.setPassword(req.body.password);
 
@@ -93,7 +96,9 @@ router.put('/user', auth, (req, res) => {
     } else {
         User.findOneAndUpdate({ _id: req.body._id }, {
                 $set: {
-                    name: req.body.name,
+                    // name: req.body.name,
+                    lastFrostDate: req.body.lastFrostDate,
+                    firstFrostDate: req.body.firstFrostDate,
                     email: req.body.email,
                     admin: req.body.admin,
                     phone: req.body.phone,
