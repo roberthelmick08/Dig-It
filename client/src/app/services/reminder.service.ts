@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Reminder } from 'src/models/reminder';
 import { Plant } from 'src/models/plant';
+import { User } from 'src/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,18 @@ export class ReminderService {
 
     tempReminder.date = this.addDays(today, dayIncrementer);
     return tempReminder;
+  }
+
+  getHarvestDateString(user: User, plant: Plant): string {
+    let harvestDate = this.addDays(this.getSowDate(user, plant), plant.weeksToHarvest * 7);
+
+    return harvestDate.toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
+  }
+
+  getSowDate(user: User, plant: Plant): Date {
+    // Subtracts weeksToSowBeforeLastFrost from lastFrostDate
+    const sowDate = this.addDays(new Date(user.lastFrostDate), plant.weeksToSowBeforeLastFrost * 7);
+    return sowDate;
   }
 
   // Function to add days to specified date. Returns Date

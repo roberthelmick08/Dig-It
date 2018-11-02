@@ -116,7 +116,11 @@ export class SearchComponent implements AfterViewInit, OnInit {
   }
 
   openPlantDetailsDialog(plant: Plant) {
-    this.openPlantDetailsDialogEvent.emit(plant);
+    const data = {
+      plant: plant,
+      user: this.user
+    }
+    this.openPlantDetailsDialogEvent.emit(data);
   }
 
   onSearch() {

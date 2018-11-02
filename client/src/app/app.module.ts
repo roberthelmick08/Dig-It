@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
-  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule } from '@angular/material';
+  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 
@@ -56,6 +56,7 @@ const routes: Routes = [
     MatRadioModule,
     MatOptionModule,
     MatSelectModule,
+    MatTooltipModule,
     MatMenuModule,
     OverlayModule,
     MatInputModule,

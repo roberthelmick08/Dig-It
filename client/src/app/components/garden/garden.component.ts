@@ -34,7 +34,11 @@ export class GardenComponent implements OnInit {
   }
 
   openPlantDetailsDialog(plant: Plant) {
-    this.openPlantDetailsDialogEvent.emit(plant);
+    const data = {
+      plant: plant,
+      user: this.user
+    }
+    this.openPlantDetailsDialogEvent.emit(data);
   }
 
   removePlantFromGarden(plant: GardenPlant) {
