@@ -35,13 +35,9 @@ router.post('/register', (req, res, next) => {
     user.zone = req.body.zone;
     user.zip = req.body.zip;
     user.garden = req.body.garden;
-
-    console.log('REQUEST IN ROUTES', user, req.body);
-
     user.setPassword(req.body.password);
 
     user.save(function(err) {
-
         var token;
         token = user.generateJwt();
         res.status(200);
@@ -61,7 +57,6 @@ router.post('/login', (req, res, next) => {
             return;
         }
 
-        // If a user is found
         if (user) {
             token = user.generateJwt();
             res.status(200);
@@ -69,7 +64,6 @@ router.post('/login', (req, res, next) => {
                 "token": token
             });
         } else {
-            // If user is not found
             res.status(401).json(info);
         }
     })(req, res, next);
@@ -96,7 +90,6 @@ router.put('/user', auth, (req, res) => {
     } else {
         User.findOneAndUpdate({ _id: req.body._id }, {
                 $set: {
-                    // name: req.body.name,
                     lastFrostDate: req.body.lastFrostDate,
                     firstFrostDate: req.body.firstFrostDate,
                     email: req.body.email,
