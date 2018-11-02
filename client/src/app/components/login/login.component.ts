@@ -77,7 +77,6 @@ export class LoginDialogComponent {
       console.error(err);
     }, () => {
       this.getClosestWeatherStation(coordinates);
-      this.register();
     });
 
   }
@@ -117,6 +116,11 @@ export class LoginDialogComponent {
     }, (err) => {
       this.dataService.openSnackBar('fail');
       console.error(err);
+    }, () => {
+      if (season === 2) {
+        this.register();
+      }
+      console.log(this.registerCredentials);
     });
   }
 }

@@ -23,9 +23,10 @@ var sendJSONresponse = function(res, status, content) {
 /**************
  * AUTHENTICATION requests
  ***************/
-
 router.post('/register', (req, res, next) => {
     var user = new UserSchema();
+
+    console.log(req.body);
 
     user.lastFrostDate = req.body.lastFrostDate;
     user.firstFrostDate = req.body.firstFrostDate;
@@ -70,6 +71,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/user', auth, (req, res) => {
+    console.log('in user routes', req.payload._id);
     if (!req.payload._id) {
         res.status(401).json({
             "message": "UnauthorizedError: private profile"

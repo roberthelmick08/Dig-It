@@ -22,6 +22,7 @@ export class GardenComponent implements OnInit {
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
       this.user = user;
+      console.error(user);
     }, (err) => {
       console.error(err);
     });
