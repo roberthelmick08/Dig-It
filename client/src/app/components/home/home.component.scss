@@ -7,9 +7,11 @@
 .home-page-header {
     z-index: 1;
 }
-/deep/ .highlight{
+
+/deep/ .highlight {
     color: $color-blue;
 }
+
 .getting-started-container {
     background-color: $color-light-green;
     padding: 2rem;
@@ -70,6 +72,7 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 100px;
             height: 150px;
+            width: 500px;
             border-bottom: 2px solid $color-light-green;
             img {
                 width: 150px;

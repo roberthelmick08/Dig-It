@@ -42,6 +42,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
       this.user = user;
+      console.log(user);
     }, (err) => {
       this.dataService.openSnackBar('fail');
       console.error(err);
@@ -62,7 +63,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.authService.updateUser(this.user).subscribe( result => { }, err => {
       this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('fail');
-    }, () =>{
+    }, () => {
       this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('success', 'Plant saved to your Garden!');
     });

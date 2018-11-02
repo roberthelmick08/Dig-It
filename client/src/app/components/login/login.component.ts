@@ -25,19 +25,17 @@ export class LoginDialogComponent {
 
   registerCredentials: TokenPayload = {
     email: '',
-    name: '',
     password: '',
     admin: false,
     phone: null,
     zone: null,
     zip: null,
+    firstFrostDate: null,
+    lastFrostDate: null,
     garden: []
   };
 
   activePageTab: 'login' | 'register' = 'login';
-
-  firstFrostDate: any;
-  lastFrostDate: any;
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private auth: AuthenticationService,
     private dataService: DataService, private router: Router) {}
@@ -56,7 +54,7 @@ export class LoginDialogComponent {
     this.auth.setUser(this.registerCredentials).subscribe((result) => { }, (err) => {
       this.dataService.openSnackBar('fail');
       console.error(err);
-    }, () =>{
+    }, () => {
       this.dialogRef.close();
       this.navigateToGardenEvent.emit(null);
       this.dataService.openSnackBar('success', 'Welcome to Dig-It!');
@@ -79,12 +77,11 @@ export class LoginDialogComponent {
       console.error(err);
     }, () => {
       this.getClosestWeatherStation(coordinates);
-      this.register();
     });
 
   }
 
-  getClosestWeatherStation(coordinates){
+  getClosestWeatherStation(coordinates) {
     // ID of closest weather station used by FarmSense API to find frost dates
     let stationId;
 
@@ -111,14 +108,18 @@ export class LoginDialogComponent {
       result = JSON.parse(result);
       // Convert to Date Object
       let dateString = (new Date()).getFullYear() + '-' + result[0].prob_90.toString().substr(0, 2) + '-' + result[0].prob_90.toString().substr(2, 2);
-      if(season === 1){
-        this.lastFrostDate = new Date(dateString);
-      } else{
-        this.firstFrostDate = new Date(dateString);
+      if (season === 1) {
+        this.registerCredentials.lastFrostDate = new Date(dateString);
+      } else {
+        this.registerCredentials.firstFrostDate = new Date(dateString);
       }
     }, (err) => {
       this.dataService.openSnackBar('fail');
       console.error(err);
+    }, () => {
+      if (season === 2) {
+        this.register();
+      }
     });
   }
 }

@@ -29,8 +29,8 @@
     </div>
     <div class="quick-overview-contents" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
         <ng-container *ngFor="let index = index; let slide of slides">
-            <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" 
-            [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep" fxLayout="row" fxFlex="40">
+            <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep"
+                fxLayout="row">
                 <img [src]="slide.imgSrc" />
                 <p [innerHTML]="slide.innerHTML"></p>
             </div>

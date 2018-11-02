@@ -23,22 +23,20 @@ var sendJSONresponse = function(res, status, content) {
 /**************
  * AUTHENTICATION requests
  ***************/
-
 router.post('/register', (req, res, next) => {
     var user = new UserSchema();
 
-    user.name = req.body.name;
+    user.lastFrostDate = req.body.lastFrostDate;
+    user.firstFrostDate = req.body.firstFrostDate;
     user.email = req.body.email;
     user.admin = req.body.admin;
     user.phone = req.body.phone;
     user.zone = req.body.zone;
     user.zip = req.body.zip;
     user.garden = req.body.garden;
-
     user.setPassword(req.body.password);
 
     user.save(function(err) {
-
         var token;
         token = user.generateJwt();
         res.status(200);
@@ -58,7 +56,6 @@ router.post('/login', (req, res, next) => {
             return;
         }
 
-        // If a user is found
         if (user) {
             token = user.generateJwt();
             res.status(200);
@@ -66,7 +63,6 @@ router.post('/login', (req, res, next) => {
                 "token": token
             });
         } else {
-            // If user is not found
             res.status(401).json(info);
         }
     })(req, res, next);
@@ -93,7 +89,8 @@ router.put('/user', auth, (req, res) => {
     } else {
         User.findOneAndUpdate({ _id: req.body._id }, {
                 $set: {
-                    name: req.body.name,
+                    lastFrostDate: req.body.lastFrostDate,
+                    firstFrostDate: req.body.firstFrostDate,
                     email: req.body.email,
                     admin: req.body.admin,
                     phone: req.body.phone,
