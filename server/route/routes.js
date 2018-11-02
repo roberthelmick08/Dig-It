@@ -26,8 +26,6 @@ var sendJSONresponse = function(res, status, content) {
 router.post('/register', (req, res, next) => {
     var user = new UserSchema();
 
-    console.log(req.body);
-
     user.lastFrostDate = req.body.lastFrostDate;
     user.firstFrostDate = req.body.firstFrostDate;
     user.email = req.body.email;

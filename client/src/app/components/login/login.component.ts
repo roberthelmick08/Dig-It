@@ -120,7 +120,6 @@ export class LoginDialogComponent {
       if (season === 2) {
         this.register();
       }
-      console.log(this.registerCredentials);
     });
   }
 }
