@@ -3,15 +3,17 @@
     .add-plant-header {
         img {
             margin: -24px 24px 24px -24px;
-            border-bottom: 4px solid $color-light-green;
-            border-left: 4px solid $color-light-green;
-            border-right: 4px solid $color-light-green;
             width: 200px;
             height: 200px;
             min-width: 200px;
             min-height: 200px;
             max-width: 200px;
             max-height: 200px;
+        }
+        .image-border {
+            border-bottom: 4px solid $color-light-green;
+            border-left: 4px solid $color-light-green;
+            border-right: 4px solid $color-light-green;
         }
         h1 {
             color: $color-dark-gray;

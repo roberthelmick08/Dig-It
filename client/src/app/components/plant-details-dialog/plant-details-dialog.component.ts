@@ -16,19 +16,30 @@ export class PlantDetailsDialogComponent {
   plant: Plant;
   // Variable used to navigate to next plant details page
   step: number = 0;
+  isImageLoaded: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
   public dataService: DataService, private auth: AuthenticationService, public reminderService: ReminderService) {
     this.plant = data.plant;
     this.user = data.user;
-    let tempBotanicalName = this.plant.botanicalName.split(' ').join('%20');
+    let queryString;
+    if (!this.plant.botanicalName) {
+      queryString = this.plant.commonName.toLocaleLowerCase().split(' ').join('_');
+    } else {
+      queryString = this.plant.botanicalName.toLocaleLowerCase().split(' ').join('_');
+    }
 
     this.auth.doCORSRequest({
       method: 'GET',
-      url: 'https://commons.wikimedia.org/w/api.php?action=query&generator=images&prop=imageinfo&gimlimit=1&redirects=1&titles=' + tempBotanicalName + '&iiprop=url&format=json',
+      url: 'https://commons.wikimedia.org/w/api.php?action=query&generator=images&prop=imageinfo&gimlimit=500&redirects=1&titles=' + queryString + '&iiprop=url&format=json'
     }).subscribe( result => {
       result = JSON.parse(result);
-      this.plant.img = result.query.pages[Object.keys(result.query.pages)[0]].imageinfo[0].url;
+      try {
+        this.plant.img = result.query.pages[Object.keys(result.query.pages)[0]].imageinfo[0].url;
+        this.isImageLoaded = true;
+      } catch (err) {
+        this.isImageLoaded = false;
+      }
     }, (err) => {
       this.dataService.openSnackBar('fail');
       console.error(err);

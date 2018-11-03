@@ -1,7 +1,8 @@
 <mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
 <div class="plant-details-dialog" fxLayout="column">
     <div class="add-plant-header">
-        <img src="{{plant.img ? plant.img : '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg'}}" />
+        <img *ngIf="isImageLoaded" class="image-border" src="{{plant.img}}" />
+        <img *ngIf="!isImageLoaded" src="{{plant.stage ? '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' : '../../../assets/icons/reminders/repot.svg'}}" />
 
         <div fxFlex="100" fxLayoutAlign="center" fxLayout="column" class="plant-name-details">
             <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
