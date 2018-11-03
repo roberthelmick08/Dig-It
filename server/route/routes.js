@@ -105,7 +105,6 @@ router.put('/user', auth, (req, res) => {
                 if (err) {
                     res.json(err);
                 } else {
-                    console.log(result);
                     res.json(result);
                 }
             });
