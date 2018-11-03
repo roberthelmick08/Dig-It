@@ -1,19 +1,17 @@
 @import "../../../styles.scss";
 .plant-details-dialog {
     .add-plant-header {
-        img {
-            margin: -24px 24px 24px -24px;
+        .image-not-found {
+            margin: 0 24px 24px 0;
+            width: 200px;
+        }
+        .image-found {
             width: 200px;
             height: 200px;
-            min-width: 200px;
-            min-height: 200px;
-            max-width: 200px;
-            max-height: 200px;
-        }
-        .image-border {
             border-bottom: 4px solid $color-light-green;
             border-left: 4px solid $color-light-green;
             border-right: 4px solid $color-light-green;
+            margin: -24px 24px 24px -24px;
         }
         h1 {
             color: $color-dark-gray;
@@ -26,9 +24,6 @@
             color: $color-blue;
             opacity: 0.6;
             margin-top: 0.5rem;
-        }
-        .plant-name-details {
-            margin-top: -64px;
         }
     }
     .plant-details-container {
