@@ -17,7 +17,6 @@ import { SearchComponent } from './components/search/search.component';
 import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { GardenComponent } from './components/garden/garden.component';
-import { RemindersComponent } from './components/reminders/reminders.component';
 import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -38,7 +37,6 @@ const routes: Routes = [
     EditProfileComponent,
     GardenComponent,
     LoginDialogComponent,
-    RemindersComponent,
     PlantDetailsDialogComponent,
     HomeComponent,
   ],
