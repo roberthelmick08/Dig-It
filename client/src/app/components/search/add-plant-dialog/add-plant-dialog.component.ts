@@ -56,9 +56,9 @@ export class AddPlantDialogComponent {
       this.dataService.openSnackBar('fail');
     }, () => {
       this.dataService.getAllPlants();
-      if(this.isSaveToGarden){
+      if (this.isSaveToGarden) {
         this.dialogRef.close(this.newPlant);
-      } else{
+      } else {
         this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
         this.dialogRef.close();
       }
@@ -74,7 +74,7 @@ export class AddPlantDialogComponent {
 
   toSentenceCase(input: string) {
     if (input) {
-      input = input.trim()[0].toUpperCase() + input.substring(1, input.length - 1);
+      input = input.trim()[0].toUpperCase() + input.substring(1, input.length);
       return input;
     }
   }

@@ -1,9 +1,9 @@
 <mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
 <div class="plant-details-dialog" fxLayout="column">
     <div class="add-plant-header">
-        <img src="../../../assets/icons/reminders/repot.svg" fxFlex="25" />
+        <img src="{{plant.img ? plant.img : '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg'}}" />
 
-        <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
+        <div fxFlex="100" fxLayoutAlign="center" fxLayout="column" class="plant-name-details">
             <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
             <h2>{{plant.commonName ? plant.botanicalName : '' }}</h2>
             <h4>{{toSentenceCase(plant.variety)}}</h4>

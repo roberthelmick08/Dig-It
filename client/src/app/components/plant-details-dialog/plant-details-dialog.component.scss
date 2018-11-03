@@ -2,7 +2,16 @@
 .plant-details-dialog {
     .add-plant-header {
         img {
-            margin-right: 1rem;
+            margin: -24px 24px 24px -24px;
+            border-bottom: 4px solid $color-light-green;
+            border-left: 4px solid $color-light-green;
+            border-right: 4px solid $color-light-green;
+            width: 200px;
+            height: 200px;
+            min-width: 200px;
+            min-height: 200px;
+            max-width: 200px;
+            max-height: 200px;
         }
         h1 {
             color: $color-dark-gray;
@@ -16,13 +25,16 @@
             opacity: 0.6;
             margin-top: 0.5rem;
         }
+        .plant-name-details {
+            margin-top: -64px;
+        }
     }
     .plant-details-container {
         border-top: 1px solid $color-light-gray;
         padding-top: 1rem;
         font-size: 1.25rem;
         .slider-container {
-            height: 39vh;
+            height: 186px;
             table {
                 border-collapse: collapse;
                 tr {

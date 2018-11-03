@@ -1,3 +1,4 @@
+import { AuthenticationService } from './authentication.service';
 import { GardenPlant } from './../../models/gardenPlant';
 import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
@@ -13,7 +14,7 @@ export class DataService {
 
   apiPath: String = 'http://localhost:3000/api';
 
-  constructor( private http: Http, public snackBar: MatSnackBar) { }
+  constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService) { }
 
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
