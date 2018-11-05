@@ -13,7 +13,7 @@ export class ReminderService {
   // Function to set default reminders when plant is added to user's garden
   setInitialReminders(plant: Plant): Array<Reminder> {
     const remindersArray = [];
-    if (plant.stage !== 0) {
+    if (Number(plant.stage) !== 0) {
       remindersArray.push(this.setWaterReminder(plant));
     }
 
@@ -88,4 +88,5 @@ export class ReminderService {
     result.setDate(result.getDate() + days);
     return result;
   }
+  
 }

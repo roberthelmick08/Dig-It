@@ -26,12 +26,14 @@
         h4 {
             letter-spacing: 4px;
             color: $color-dark-gray;
-            text-decoration: underline overline;
-            text-decoration-color: $color-red;
+            // text-decoration: underline overline;
+            // text-decoration-color: $color-red;
         }
         h5 {
             letter-spacing: 2px;
-            color: $color-light-gray;
+            font-style: italic;
+            color: $color-blue;
+            opacity: 0.5;
         }
     }
     .settings-icon-container {

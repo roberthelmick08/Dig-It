@@ -119,7 +119,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     const data = {
       plant: plant,
       user: this.user
-    }
+    };
     this.openPlantDetailsDialogEvent.emit(data);
   }
 
@@ -147,7 +147,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
           return this.levDist(plant.botanicalName, this.searchTerm);
         }
       }
-    });
+    }).slice(0, 5);
+
   }
 
   // Reorder array based on closest match to search term

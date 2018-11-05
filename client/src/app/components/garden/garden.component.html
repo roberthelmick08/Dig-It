@@ -2,15 +2,15 @@
     <div fxFlex="100" fxLayoutAlign="center">
         <h2 class="page-header">Garden</h2>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center" cdkDrop (cdkDropDropped)="onDrop($event)">
         <div *ngIf="!user?.garden">No plants in your Garden. To get started, add a plant to your Garden.</div>
-        <mat-card class="plant-grid-item" *ngFor="let plant of user?.garden" fxLayout="column">
+        <mat-card class="plant-grid-item" *ngFor="let plant of user?.garden" fxLayout="column" cdkDrag>
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
                     <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" [title]="dataService.getStageString(plant.stage)" />
                 </div>
                 <div class="reminders-icon-container" fxLayout="row">
-                    <div *ngFor="let reminder of plant?.reminders" title="Click to mark Done" (click)="markReminderDone(plant, reminder)">
+                    <div *ngFor="let reminder of plant?.reminders" matTooltip="Click to mark complete" matTooltipClass="dig-it-tooltip" (click)="markReminderDone(plant, reminder)">
                         <img src="{{ '../../../assets/icons/reminders/' + reminder.name + '.svg' }}" class="reminders-icon" />
                     </div>
                 </div>

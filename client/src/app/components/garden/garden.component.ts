@@ -2,8 +2,9 @@ import { GardenPlant } from './../../../models/gardenPlant';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Plant } from './../../../models/plant';
 import { DataService } from './../../services/data.service';
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { User } from 'src/models/user';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-garden',
@@ -46,4 +47,13 @@ export class GardenComponent implements OnInit {
     this.authService.updateUser(this.user).subscribe( data => {
     });
   }
+
+  // To handle drag and drop event
+  onDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+       this.user.garden,
+       event.previousIndex,
+       event.currentIndex
+      );
+    }
 }

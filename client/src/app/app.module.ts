@@ -7,7 +7,7 @@ import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
   MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {Ng2TelInputModule} from 'ng2-tel-input';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,7 +44,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    Ng2TelInputModule,
+    DragDropModule,
     RouterModule,
     FormsModule,
     MatIconModule,

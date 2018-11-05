@@ -21,19 +21,19 @@
                     </td>
                     <td *ngIf="plant.lifeType" fxLayout="row" fxFlex>
                         <h3 class="highlight">{{plant.lifeType}}</h3>
-                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('lifeType', plant.lifeType)">help_outline</mat-icon>
+                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('lifeType', plant.lifeType)" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
                     </td>
                 </tr>
 
                 <tr *ngIf="plant.sunSchedule">
                     <td fxLayout="row" fxFlex="100">
                         <h3 class="highlight">{{plant.sunSchedule}}</h3>
-                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('sunSchedule', plant.sunSchedule)">help_outline</mat-icon>
+                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('sunSchedule', plant.sunSchedule)" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
                     </td>
                 </tr>
             </table>
             <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date: <span class="highlight">{{reminderService.getHarvestDateString(user, plant)}}</span>
-                <mat-icon class="info-icon" [matTooltip]="getTooltipText('harvestDate')">help_outline</mat-icon>
+                <mat-icon class="info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
             </div>
             <div *ngIf="plant.zones">
                 <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div>

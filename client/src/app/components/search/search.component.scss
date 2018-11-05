@@ -9,12 +9,16 @@
         background: rgba(217, 217, 217, 0.2);
     }
     h3 {
-        color: $color-dark-green;
+        color: $color-dark-gray;
         letter-spacing: 0.125rem; //2px
     }
     h5 {
-        color: $color-dark-green;
+        color: $color-blue;
         letter-spacing: 0.0625rem; //1px
+        font-style: italic;
+    }
+    .plant-name-details {
+        cursor: pointer;
     }
 }
 
