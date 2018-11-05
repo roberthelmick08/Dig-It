@@ -13,21 +13,24 @@ export class ReminderService {
   // Function to set default reminders when plant is added to user's garden
   setInitialReminders(plant: Plant, user: User): Array<Reminder> {
     const remindersArray = [];
-    if (plant.stage !== 0) {
-      remindersArray.push(this.setWaterReminder(plant));
-    } else if (plant.stage === 0) {
+    if (plant.stage === 0) {
       remindersArray.push(this.setSowingReminder(plant, user));
+    } else {
+      remindersArray.push(this.setWaterReminder(plant));
     }
 
     if (plant.harvestable && plant.weeksToHarvest) {
       remindersArray.push(this.setHarvestReminder(plant, user));
     }
 
-    // Move Outside
-    // Move inside
-    // Repot
+    if(plant.isPotted){
+      this.setFrostDateReminder('move-inside', user);
+      this.setFrostDateReminder('move-outside', user);
+      this.setRepotReminder(user, plant);
+    }
 
-    // TODO: set Reminders functions for all other reminders
+
+  // TODO: set Reminders functions for all other reminders
     return remindersArray;
   }
 
@@ -107,6 +110,24 @@ export class ReminderService {
 
   getHarvestDateString(user: User, plant: Plant): string {
     return this.getHarvestDate(user, plant).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
+  }
+
+  setRepotReminder(user: User, plant: Plant): Reminder {
+    const tempReminder = new Reminder();
+    tempReminder.name = 'repot';
+    if(plant.stage === 1) {
+      tempReminder.date = this.addDays(this.getSowDate(user, plant), );
+    } else {
+        tempReminder.date = this.addDays(new Date(), plant.type === 'Cactus' || plant.type === 'Succulent' ? 90 : 60);
+    }
+    return tempReminder;
+  }
+
+  setFrostDateReminder(name: 'move-inside' | 'move-outside', user: User): Reminder {
+    const tempReminder = new Reminder();
+    tempReminder.name = name;
+    tempReminder.date = new Date(name === 'move-inside' ? user.firstFrostDate : user.lastFrostDate)
+    return tempReminder;
   }
 
   // Function to add days to specified date. Returns Date

@@ -14,7 +14,7 @@ export class GardenPlant {
   sunSchedule?: string;
   variety?: string;
   comment?: string;
-  // Duration of germination period in weeks
+  // Duration of germination period in weeks, used for repot reminder
   germEnd?: number;
   // Sowing Tips
   sowingSpace?: number;
