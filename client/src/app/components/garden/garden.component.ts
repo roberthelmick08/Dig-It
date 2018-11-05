@@ -31,10 +31,9 @@ export class GardenComponent implements OnInit {
   }
 
   markReminderDone(plant: GardenPlant, reminder: Reminder) {
-    if (reminder.name === 'water' || reminder.name === 'sow') {
-      // this.reminderService.setWaterReminder
-    } else {
-      plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
+    plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
+    if (reminder.name === 'water' || reminder.name === 'spray') {
+      plant.reminders.push(this.reminderService.setWaterReminder(plant));
     }
     this.authService.updateUser(this.user).subscribe( data => { });
   }
