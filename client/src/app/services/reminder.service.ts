@@ -28,9 +28,7 @@ export class ReminderService {
       this.setFrostDateReminder('move-outside', user);
       this.setRepotReminder(user, plant);
     }
-
-
-  // TODO: set Reminders functions for all other reminders
+    
     return remindersArray;
   }
 
@@ -118,7 +116,7 @@ export class ReminderService {
     if(plant.stage === 1) {
       tempReminder.date = this.addDays(this.getSowDate(user, plant),  plant.type === 'Cactus' || plant.type === 'Succulent' ? 30 : 14);
     } else {
-        tempReminder.date = this.addDays(new Date(), plant.type === 'Cactus' || plant.type === 'Succulent' ? 90 : 60);
+      tempReminder.date = this.addDays(new Date(), plant.type === 'Cactus' || plant.type === 'Succulent' ? 90 : 60);
     }
     return tempReminder;
   }
