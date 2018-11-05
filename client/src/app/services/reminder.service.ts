@@ -116,7 +116,7 @@ export class ReminderService {
     const tempReminder = new Reminder();
     tempReminder.name = 'repot';
     if(plant.stage === 1) {
-      tempReminder.date = this.addDays(this.getSowDate(user, plant), );
+      tempReminder.date = this.addDays(this.getSowDate(user, plant),  plant.type === 'Cactus' || plant.type === 'Succulent' ? 30 : 14);
     } else {
         tempReminder.date = this.addDays(new Date(), plant.type === 'Cactus' || plant.type === 'Succulent' ? 90 : 60);
     }
