@@ -5,8 +5,7 @@
 
 ### TODO:
 - APIs
-    - [USDA Hardiness Zone from ZIP](https://github.com/waldoj/frostline)
-    - [Frost Date](http://www.farmsense.net/api/frost-date-api/)
+    - OneSignal web push notifications
     - Weather
 - Features
     - [Env Variables](https://github.com/motdotla/dotenv)

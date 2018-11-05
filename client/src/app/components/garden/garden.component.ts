@@ -1,9 +1,12 @@
+import { ReminderService } from './../../services/reminder.service';
 import { GardenPlant } from './../../../models/gardenPlant';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Plant } from './../../../models/plant';
 import { DataService } from './../../services/data.service';
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { User } from 'src/models/user';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Reminder } from 'src/models/reminder';
 
 @Component({
   selector: 'app-garden',
@@ -17,7 +20,7 @@ export class GardenComponent implements OnInit {
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
-  constructor(public dataService: DataService, public authService: AuthenticationService) { }
+  constructor(public dataService: DataService, public authService: AuthenticationService, private reminderService: ReminderService) { }
 
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
@@ -27,14 +30,20 @@ export class GardenComponent implements OnInit {
     });
   }
 
-  markReminderDone(plant, reminder) {
+  markReminderDone(plant: GardenPlant, reminder: Reminder) {
     plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
-    this.authService.updateUser(this.user).subscribe( data => {
-    });
+    if (reminder.name === 'water' || reminder.name === 'spray') {
+      plant.reminders.push(this.reminderService.setWaterReminder(plant));
+    }
+    this.authService.updateUser(this.user).subscribe( data => { });
   }
 
   openPlantDetailsDialog(plant: Plant) {
-    this.openPlantDetailsDialogEvent.emit(plant);
+    const data = {
+      plant: plant,
+      user: this.user
+    };
+    this.openPlantDetailsDialogEvent.emit(data);
   }
 
   removePlantFromGarden(plant: GardenPlant) {
@@ -42,4 +51,13 @@ export class GardenComponent implements OnInit {
     this.authService.updateUser(this.user).subscribe( data => {
     });
   }
+
+  // To handle drag and drop event
+  onDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+       this.user.garden,
+       event.previousIndex,
+       event.currentIndex
+      );
+    }
 }

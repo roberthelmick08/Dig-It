@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
-  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule } from '@angular/material';
+  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {Ng2TelInputModule} from 'ng2-tel-input';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +17,6 @@ import { SearchComponent } from './components/search/search.component';
 import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { GardenComponent } from './components/garden/garden.component';
-import { RemindersComponent } from './components/reminders/reminders.component';
 import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -38,7 +37,6 @@ const routes: Routes = [
     EditProfileComponent,
     GardenComponent,
     LoginDialogComponent,
-    RemindersComponent,
     PlantDetailsDialogComponent,
     HomeComponent,
   ],
@@ -46,7 +44,7 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    Ng2TelInputModule,
+    DragDropModule,
     RouterModule,
     FormsModule,
     MatIconModule,
@@ -56,6 +54,7 @@ const routes: Routes = [
     MatRadioModule,
     MatOptionModule,
     MatSelectModule,
+    MatTooltipModule,
     MatMenuModule,
     OverlayModule,
     MatInputModule,

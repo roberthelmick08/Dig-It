@@ -71,9 +71,13 @@ export class SearchComponent implements AfterViewInit, OnInit {
   setGardenPlant(plant: Plant): GardenPlant {
     const gardenPlant = new GardenPlant();
 
+    if (plant.stage) {
+      plant.stage = +plant.stage;
+    }
+
     gardenPlant.stage = plant.stage ? plant.stage : 0;
     gardenPlant.isPotted = plant.isPotted;
-    gardenPlant.reminders = this.reminderService.setInitialReminders(plant);
+    gardenPlant.reminders = this.reminderService.setInitialReminders(plant, this.user);
     gardenPlant._id = plant._id;
     gardenPlant.commonName = plant.commonName;
     gardenPlant.botanicalName = plant.botanicalName;
@@ -116,7 +120,11 @@ export class SearchComponent implements AfterViewInit, OnInit {
   }
 
   openPlantDetailsDialog(plant: Plant) {
-    this.openPlantDetailsDialogEvent.emit(plant);
+    const data = {
+      plant: plant,
+      user: this.user
+    };
+    this.openPlantDetailsDialogEvent.emit(data);
   }
 
   onSearch() {
@@ -143,7 +151,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
           return this.levDist(plant.botanicalName, this.searchTerm);
         }
       }
-    });
+    }).slice(0, 5);
+
   }
 
   // Reorder array based on closest match to search term

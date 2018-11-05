@@ -1,11 +1,10 @@
 @import "../../../../styles.scss";
 .add-plant-dialog {
-    .page-header {
+    .h2 {
         font-size: 2rem;
     }
     .add-plant-scroll-container {
-        overflow-y: auto;
-        height: 55vh;
+        height: 326px;
         mat-slide-toggle.mat-slide-toggle {
             margin-top: 1rem;
             padding-left: 15%;

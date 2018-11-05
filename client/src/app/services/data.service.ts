@@ -1,3 +1,4 @@
+import { AuthenticationService } from './authentication.service';
 import { GardenPlant } from './../../models/gardenPlant';
 import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
@@ -13,7 +14,7 @@ export class DataService {
 
   apiPath: String = 'http://localhost:3000/api';
 
-  constructor( private http: Http, public snackBar: MatSnackBar) { }
+  constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService) { }
 
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
@@ -26,21 +27,6 @@ export class DataService {
     return this.http.post(this.apiPath + '/new_plant', newPlant, {headers: headers})
       .pipe(map(res => res.json()));
     }
-
-    // getZoneFromZip(zip: number) {
-    //   const headers = new Headers();
-
-    //   headers.append('Content-Type', 'application/json');
-
-    //   return this.http.get('https://phzmapi.org/' + zip + '.json', {headers: headers})
-    //     .pipe(map(res => res.json()));
-    // }
-
-  // TODO
-  getHarvestDate(weeksToHarvest: number): Date {
-    const harvestDate = new Date();
-    return harvestDate;
-  }
 
   openSnackBar(status: 'fail' | 'success', message?: string) {
     if (status === 'fail') {

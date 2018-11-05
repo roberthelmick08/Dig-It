@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Reminder } from 'src/models/reminder';
 import { Plant } from 'src/models/plant';
+import { User } from 'src/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,21 @@ export class ReminderService {
   constructor() { }
 
   // Function to set default reminders when plant is added to user's garden
-  setInitialReminders(plant: Plant): Array<Reminder> {
+  setInitialReminders(plant: Plant, user: User): Array<Reminder> {
     const remindersArray = [];
     if (plant.stage !== 0) {
       remindersArray.push(this.setWaterReminder(plant));
+    } else if (plant.stage === 0) {
+      remindersArray.push(this.setSowingReminder(plant, user));
     }
+
+    if (plant.harvestable && plant.weeksToHarvest) {
+      remindersArray.push(this.setHarvestReminder(plant, user));
+    }
+
+    // Move Outside
+    // Move inside
+    // Repot
 
     // TODO: set Reminders functions for all other reminders
     return remindersArray;
@@ -61,12 +72,41 @@ export class ReminderService {
     let today = new Date();
 
     // Reduce dayIncrementer during mid-May to mid-September
-    if(today.getMonth() > 4 && today.getDate() > 15 && today.getMonth() < 8 && today.getDate() < 15) {
+    if (today.getMonth() > 4 && today.getDate() > 15 && today.getMonth() < 8 && today.getDate() < 15) {
       dayIncrementer = dayIncrementer - 2;
     }
 
     tempReminder.date = this.addDays(today, dayIncrementer);
     return tempReminder;
+  }
+
+  getSowDate(user: User, plant: Plant): Date {
+    // Subtracts weeksToSowBeforeLastFrost from lastFrostDate
+    const sowDate = this.addDays(new Date(user.lastFrostDate), plant.weeksToSowBeforeLastFrost * 7);
+    return sowDate;
+  }
+
+  setSowingReminder(plant: Plant, user: User): Reminder {
+    const tempReminder = new Reminder();
+    tempReminder.name = 'sow';
+    tempReminder.date = this.getSowDate(user, plant);
+    return tempReminder;
+  }
+
+  setHarvestReminder(plant: Plant, user: User): Reminder {
+    const tempReminder = new Reminder();
+    tempReminder.name = 'harvest';
+    tempReminder.date = this.getHarvestDate(user, plant);
+    return tempReminder;
+  }
+
+  getHarvestDate(user: User, plant: Plant): Date {
+    let harvestDate = this.addDays(this.getSowDate(user, plant), plant.weeksToHarvest * 7);
+    return harvestDate;
+  }
+
+  getHarvestDateString(user: User, plant: Plant): string {
+    return this.getHarvestDate(user, plant).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
   }
 
   // Function to add days to specified date. Returns Date
@@ -75,4 +115,5 @@ export class ReminderService {
     result.setDate(result.getDate() + days);
     return result;
   }
+
 }

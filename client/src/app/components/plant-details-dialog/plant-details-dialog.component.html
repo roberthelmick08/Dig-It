@@ -1,7 +1,8 @@
 <mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
 <div class="plant-details-dialog" fxLayout="column">
     <div class="add-plant-header">
-        <img src="../../../assets/icons/reminders/repot.svg" fxFlex="25" />
+        <img *ngIf="isImageLoaded" class="image-found" src="{{plant.img}}" />
+        <img *ngIf="!isImageLoaded" class="image-not-found" src="{{plant.stage ? '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' : '../../../assets/icons/reminders/repot.svg'}}" />
 
         <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
             <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
@@ -17,23 +18,22 @@
                 <tr *ngIf="plant.lifeType || plant.type">
                     <td *ngIf="plant.type" fxLayout="row" fxFlex>
                         <h3 class="highlight">{{plant.type}}</h3>
-                        <mat-icon class="info-icon">help_outline</mat-icon>
                     </td>
                     <td *ngIf="plant.lifeType" fxLayout="row" fxFlex>
                         <h3 class="highlight">{{plant.lifeType}}</h3>
-                        <mat-icon class="info-icon">help_outline</mat-icon>
+                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('lifeType', plant.lifeType)" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
                     </td>
                 </tr>
 
                 <tr *ngIf="plant.sunSchedule">
                     <td fxLayout="row" fxFlex="100">
                         <h3 class="highlight">{{plant.sunSchedule}}</h3>
-                        <mat-icon class="info-icon">help_outline</mat-icon>
+                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('sunSchedule', plant.sunSchedule)" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
                     </td>
                 </tr>
             </table>
-            <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date: <span class="highlight">{{dataService.getHarvestDate(plant.weeksToHarvest)}}</span>
-                <mat-icon class="info-icon">help_outline</mat-icon>
+            <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date: <span class="highlight">{{reminderService.getHarvestDateString(user, plant)}}</span>
+                <mat-icon class="info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
             </div>
             <div *ngIf="plant.zones">
                 <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div>

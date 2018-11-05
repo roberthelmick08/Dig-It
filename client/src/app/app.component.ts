@@ -12,8 +12,6 @@ import { AuthenticationService } from './services/authentication.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  currentUser: User;
-
   isUserMenuOpen: boolean = false;
 
   currentPage: string;
@@ -30,12 +28,12 @@ export class AppComponent {
     this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 
-  openPlantDetailsDialog(plant: Plant) {
+  openPlantDetailsDialog(data) {
     const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
       height: '500px',
       width: '700px',
       panelClass: 'dialog-container',
-      data: plant,
+      data: data
     });
 
     dialogRef.afterClosed().subscribe(result => {
