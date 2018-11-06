@@ -35,6 +35,10 @@ export class GardenComponent implements OnInit {
     plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
     if (reminder.name === 'water' || reminder.name === 'spray') {
       plant.reminders.push(this.reminderService.setWaterReminder(plant));
+    } else if ((reminder.name === 'move-inside' || reminder.name === 'move-outside') && (plant.lifeType === 'Perennial' || plant.lifeType === 'Biennial')) {
+      plant.reminders.push(this.reminderService.setFrostDateReminder(reminder.name, this.user))
+    } else if (reminder.name === 'repot' && plant.stage < 2){
+      plant.reminders.push(this.reminderService.setRepotReminder(this.user, plant));
     }
     this.authService.updateUser(this.user).subscribe( data => { });
   }
