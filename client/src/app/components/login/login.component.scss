@@ -4,6 +4,7 @@
         cursor: pointer;
         padding: 1rem 3rem 1rem 3rem;
         margin-bottom: 2rem;
+        letter-spacing: 2px;
         &:hover {
             background: $color-light-gray;
         }
@@ -20,6 +21,7 @@
     font-size: 1.5rem;
     color: $color-dark-gray;
     margin-bottom: 1rem;
+    letter-spacing: 4px;
 }
 
 .login-image-container {

@@ -9,7 +9,9 @@
 }
 
 /deep/ .highlight {
-    color: $color-blue;
+    color: $color-light-green;
+    letter-spacing: 4px;
+    font-weight: bold;
 }
 
 .getting-started-container {
@@ -18,16 +20,16 @@
     color: $color-dark-gray;
     margin-top: -4px;
     @media screen and (max-width: $break-sm) {
-        height: 300px;
+        height: 400px;
     }
     .paragraph-container {
         text-align: justify;
         padding-right: 2rem;
-        font-size: 0.875rem;
+        font-size: 1rem;
         h3 {
-            letter-spacing: 0.25rem;
+            letter-spacing: 4px;
             text-align: center;
-            font-size: 1.25rem;
+            font-size: 1.75rem;
         }
     }
     .steps {
@@ -44,12 +46,13 @@
 }
 
 .quick-overview-container {
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
     background-image: url("../../../assets/img/dirt.png");
     background-size: contain;
     color: white;
     height: calc(100vh - 64px - 1rem);
     .quick-overview-header {
+        margin-top: 4rem;
         h1 {
             text-align: center;
             font-size: 7rem;
@@ -141,6 +144,53 @@
                 -webkit-transform: translateX(0);
                 transform: translateX(0);
                 opacity: 1;
+            }
+        }
+    }
+}
+
+.home-footer {
+    color: white;
+    h2 {
+        letter-spacing: 4px;
+        text-transform: uppercase;
+    }
+    h3 {
+        letter-spacing: 4px;
+        opacity: 0.7;
+    }
+    p {
+        margin: 0;
+        opacity: 0.8
+    }
+    a {
+        text-decoration: none;
+        color: white;
+        &:hover {
+            text-decoration: underline;
+            opacity: 1;
+        }
+    }
+    img {
+        height: 48px;
+        width: 48px;
+        opacity: 0.6;
+        cursor: pointer;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+    }
+    .footer-top,
+    .footer-bottom {
+        height: 150px;
+        div {
+            height: 100%;
+            .portfolio-site-link {
+                opacity: 0.5;
             }
         }
     }

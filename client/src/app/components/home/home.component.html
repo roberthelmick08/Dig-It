@@ -32,8 +32,31 @@
             <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep"
                 fxLayout="row">
                 <img [src]="slide.imgSrc" />
-                <p [innerHTML]="slide.innerHTML"></p>
+                <div fxLayoutAlign="start center">
+                    <p [innerHTML]="slide.innerHTML"></p>
+                </div>
             </div>
         </ng-container>
+    </div>
+</div>
+<div class="home-footer" fxLayout="column">
+    <div fxLayout="row" fxFlex="100" class="footer-top">
+        <div fxFlex="33" style="background-color: #01494e" fxLayoutAlign="center center">
+            <mat-icon>spa</mat-icon>
+        </div>
+        <div fxFlex style="background-color: #006067" fxLayoutAlign="center center" fxLayout="column">
+            <h2>Robert Helmick</h2>
+            <p>Denver, Colorado</p>
+            <a href="http://www.rh-codes.com" class="portfolio-site-link">www.rh-codes.com</a>
+        </div>
+        <div fxFlex="33" style="background-color: #008F95" fxLayoutAlign="center center" fxLayout="column">
+            <h2>Contact Me</h2>
+            <h3>757.713.2191</h3>
+        </div>
+    </div>
+    <div style="background-color: #012e31" fxFlex="100" fxLayoutAlign="space-around center" class="footer-bottom">
+        <a href="https://github.com/roberthelmick08"><img src="../../../assets/icons/github.svg" matTooltip="Github" matTooltipClass="dig-it-tooltip" /></a>
+        <a href="http://www.rh-codes.com"><img src="../../../assets/icons/website.svg" matTooltip="Portfolio Site" matTooltipClass="dig-it-tooltip" /></a>
+        <a href="mailto:robert.helmick.08@gmail.com"><img src="../../../assets/icons/email.svg" matTooltip="Email me" matTooltipClass="dig-it-tooltip" /></a>
     </div>
 </div>
