@@ -42,16 +42,25 @@
             cursor: pointer;
             font-size: 1.25rem;
             letter-spacing: 3px;
-            width: 0;
             font-variant-caps: all-petite-caps;
             position: absolute;
-            left: calc(30% - 100px);
+            left: calc(40% - 48px);
             top: 1rem;
+            z-index: 2;
             &:hover {
                 -webkit-transform: scale(1.1);
                 -ms-transform: scale(1.1);
                 transform: scale(1.1);
                 transition: all 0.3s ease;
+            }
+            img {
+                height: 60px;
+                width: 60px;
+                opacity: 0.8;
+                &:hover {
+                    opacity: 1;
+                    transition: all 0.3s ease;
+                }
             }
         }
         .user-button-wrapper {
