@@ -24,7 +24,6 @@
             <div class="settings-icon-container">
                 <mat-icon class="settings-icon" [matMenuTriggerFor]="settingsMenu" (click)="$event.stopPropagation()" *ngIf="isGridItemOnHover && hoverIndex === index">settings</mat-icon>
                 <mat-menu #settingsMenu="matMenu">
-                    <button mat-menu-item><mat-icon>edit</mat-icon></button>
                     <button mat-menu-item (click)="removePlantFromGarden(plant)"><mat-icon>delete</mat-icon></button>
                 </mat-menu>
             </div>

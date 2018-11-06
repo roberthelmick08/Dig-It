@@ -58,7 +58,11 @@ export class GardenComponent implements OnInit {
 
   removePlantFromGarden(plant: GardenPlant) {
     this.user.garden.splice(this.user.garden.findIndex(p => plant === p), 1);
-    this.authService.updateUser(this.user).subscribe( data => {
+    this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
+      this.dataService.openSnackBar('fail');
+    }, () => {
+      let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
+      this.dataService.openSnackBar('success', plantName + 'has been removed from your garden.');
     });
   }
 
