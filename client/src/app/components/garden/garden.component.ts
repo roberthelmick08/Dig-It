@@ -36,8 +36,8 @@ export class GardenComponent implements OnInit {
     if (reminder.name === 'water' || reminder.name === 'spray') {
       plant.reminders.push(this.reminderService.setWaterReminder(plant));
     } else if ((reminder.name === 'move-inside' || reminder.name === 'move-outside') && (plant.lifeType === 'Perennial' || plant.lifeType === 'Biennial')) {
-      plant.reminders.push(this.reminderService.setFrostDateReminder(reminder.name, this.user))
-    } else if (reminder.name === 'repot' && plant.stage < 2){
+      plant.reminders.push(this.reminderService.setFrostDateReminder(reminder.name, this.user));
+    } else if (reminder.name === 'repot' && plant.stage < 2) {
       plant.reminders.push(this.reminderService.setRepotReminder(this.user, plant));
     }
     this.authService.updateUser(this.user).subscribe( data => { });
@@ -67,26 +67,27 @@ export class GardenComponent implements OnInit {
   }
 
   getReminderTooltipText(plant: Plant, reminder: Reminder): string {
-    let text = 'Something went wrong!';
+    let tempText = 'Something went wrong!';
+    let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
 
-    if(reminder.name === 'repot'){
-      if(plant.stage === 1){
-        text = "Repot your {{plant.commonName ? plant.commonName : plant.botanicalName}}. It's strong enough to be put in a small-medium pot. You can start watering it like normal instead of using a spraybottle."
-      } else{
-        text = "Repot your {{plant.commonName ? plant.commonName : plant.botanicalName}}. Put it in a medium or large pot. It's roots probably need more space to spread out."
+    if (reminder.name === 'repot') {
+      if (plant.stage === 1) {
+        tempText = 'Repot your ' + plantName + '. It\'s strong enough to be put in a small-medium pot. You can start watering it like normal instead of using a spraybottle.';
+      } else {
+        tempText = 'Repot your ' + plantName + '. Put it in a medium or large pot. It\'s roots probably need more space to spread out.';
       }
-    } else if(reminder.name === 'sow') {
-      text = "Time to sow your {{plant.commonName ? plant.commonName : plant.botanicalName}} seeds. {{getSowingMethodString(plant.methodNum)}} Seeds should be sown {{plant.depth}} inches deep and {{plant.sowingSpace}} inches apart."
-    } else if (reminder.name === 'water' || reminder.name === 'spray'){
-      text = "If the soil is dry, gently water your {{plant.commonName ? plant.commonName : plant.botanicalName}}.";
+    } else if (reminder.name === 'sow') {
+      tempText = 'Time to sow your ' + plantName + ' seeds. ' + this.dataService.getSowingMethodString(plant.methodNum) + ' Seeds should be sown ' + plant.depth + ' inches deep and ' + plant.sowingSpace + ' inches apart.';
+    } else if (reminder.name === 'water' || reminder.name === 'spray') {
+      tempText = 'If the soil is dry, gently water your ' + plantName + '.';
     } else if (reminder.name === 'move-inside') {
-      text = "It's about to start hitting freezing temps at night in your area. It's time to bring your {{plant.commonName ? plant.commonName : plant.botanicalName}} inside for the winter."
+      tempText = 'It\'s about to start hitting freezing temps at night in your area. It\'s time to bring your ' + plantName + ' inside for the winter.';
     } else if (reminder.name === 'move-outside') {
-      text = "It's finally starting to get warm enough in your area to move your {{plant.commonName ? plant.commonName : plant.botanicalName}} outside."
+      tempText = 'It\'s finally starting to get warm enough in your area to move your ' + plantName + ' outside.';
     } else if (reminder.name === 'harvest') {
-      text = "It's just about time to harvest your {{plant.commonName ? plant.commonName : plant.botanicalName}}. Look up what signs to look for to ensure your {{plant.commonName ? plant.commonName : plant.botanicalName}} is ripe for harvesting.";
+      tempText = 'It\'s just about time to harvest your ' + plantName + '. Look up what signs to look for to ensure your ' + plantName + ' is ripe for harvesting.';
     }
 
-    return text;
+    return tempText;
   }
 }

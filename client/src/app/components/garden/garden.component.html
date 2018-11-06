@@ -10,7 +10,7 @@
                     <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" [title]="dataService.getStageString(plant.stage)" />
                 </div>
                 <div class="reminders-icon-container" fxLayout="row">
-                    <div *ngFor="let reminder of plant?.reminders" matTooltip="getReminderTooltipText(reminder, user)" matTooltipClass="dig-it-tooltip" (click)="markReminderDone(plant, reminder)">
+                    <div *ngFor="let reminder of plant?.reminders" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
                         <img src="{{ '../../../assets/icons/reminders/' + reminder.name + '.svg' }}" class="reminders-icon" />
                     </div>
                 </div>

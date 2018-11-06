@@ -10,6 +10,23 @@ export class ReminderService {
 
   constructor() { }
 
+  setMockReminders(plant: Plant, user: User): Array<Reminder> {
+    let remindersArray = [];
+    let date = new Date();
+
+    remindersArray.push({name: 'water', date});
+    remindersArray.push({name: 'spray', date});
+    remindersArray.push({name: 'move-inside', date});
+    remindersArray.push({name: 'move-outside', date});
+    remindersArray.push({name: 'sow', date});
+    remindersArray.push({name: 'harvest', date});
+    remindersArray.push({name: 'repot', date});
+
+    console.log(remindersArray);
+
+    return remindersArray;
+  }
+
   // Function to set default reminders when plant is added to user's garden
   setInitialReminders(plant: Plant, user: User): Array<Reminder> {
     const remindersArray = [];
@@ -23,12 +40,12 @@ export class ReminderService {
       remindersArray.push(this.setHarvestReminder(plant, user));
     }
 
-    if(plant.isPotted){
+    if (plant.isPotted) {
       this.setFrostDateReminder('move-inside', user);
       this.setFrostDateReminder('move-outside', user);
       this.setRepotReminder(user, plant);
     }
-    
+
     return remindersArray;
   }
 
@@ -113,7 +130,7 @@ export class ReminderService {
   setRepotReminder(user: User, plant: Plant): Reminder {
     const tempReminder = new Reminder();
     tempReminder.name = 'repot';
-    if(plant.stage === 1) {
+    if (plant.stage === 1) {
       tempReminder.date = this.addDays(this.getSowDate(user, plant),  plant.type === 'Cactus' || plant.type === 'Succulent' ? 30 : 14);
     } else {
       tempReminder.date = this.addDays(new Date(), plant.type === 'Cactus' || plant.type === 'Succulent' ? 90 : 60);
@@ -124,7 +141,7 @@ export class ReminderService {
   setFrostDateReminder(name: 'move-inside' | 'move-outside', user: User): Reminder {
     const tempReminder = new Reminder();
     tempReminder.name = name;
-    tempReminder.date = new Date(name === 'move-inside' ? user.firstFrostDate : user.lastFrostDate)
+    tempReminder.date = new Date(name === 'move-inside' ? user.firstFrostDate : user.lastFrostDate);
     return tempReminder;
   }
 

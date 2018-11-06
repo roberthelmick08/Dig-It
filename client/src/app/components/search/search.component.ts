@@ -77,7 +77,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
     gardenPlant.stage = plant.stage ? plant.stage : 0;
     gardenPlant.isPotted = plant.isPotted;
-    gardenPlant.reminders = this.reminderService.setInitialReminders(plant, this.user);
+    // SET MOCK REMINDERS
+    gardenPlant.reminders = this.reminderService.setMockReminders(plant, this.user);
+    // gardenPlant.reminders = this.reminderService.setInitialReminders(plant, this.user);
     gardenPlant._id = plant._id;
     gardenPlant.commonName = plant.commonName;
     gardenPlant.botanicalName = plant.botanicalName;
