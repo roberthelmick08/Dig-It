@@ -38,8 +38,6 @@ $break-xl: 1920px;
     margin-bottom: 1.5rem;
     margin-top: 1rem;
     color: $color-dark-gray;
-    text-decoration: underline overline;
-    text-decoration-color: $color-red;
     font-style: italic;
     opacity: 0.7;
 }
@@ -52,6 +50,7 @@ $break-xl: 1920px;
     border-top: 4px solid $color-light-green;
     margin-top: -24px;
     text-align: justify;
+    font-size: 0.75rem !important;
 }
 
 h1,

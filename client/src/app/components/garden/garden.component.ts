@@ -18,6 +18,10 @@ export class GardenComponent implements OnInit {
 
   user: User;
 
+  isGridItemOnHover: boolean = false;
+
+  hoverIndex: number;
+
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
@@ -36,7 +40,8 @@ export class GardenComponent implements OnInit {
     if (reminder.name === 'water' || reminder.name === 'spray') {
       plant.reminders.push(this.reminderService.setWaterReminder(plant));
     } else if ((reminder.name === 'move-inside' || reminder.name === 'move-outside') && (plant.lifeType === 'Perennial' || plant.lifeType === 'Biennial')) {
-      plant.reminders.push(this.reminderService.setFrostDateReminder(reminder.name, this.user));
+      reminder.date = this.reminderService.addDays(reminder.name === 'move-inside' ? this.user.firstFrostDate : this.user.lastFrostDate, 364);
+      plant.reminders.push(reminder);
     } else if (reminder.name === 'repot' && plant.stage < 2) {
       plant.reminders.push(this.reminderService.setRepotReminder(this.user, plant));
     }
@@ -66,6 +71,15 @@ export class GardenComponent implements OnInit {
     );
   }
 
+  isReminderVisible(reminder: Reminder): boolean {
+    return new Date(reminder.date) <= new Date();
+  }
+
+  setGridItemHover(isHover, index: number) {
+    this.isGridItemOnHover = isHover;
+    this.hoverIndex = index;
+  }
+
   getReminderTooltipText(plant: Plant, reminder: Reminder): string {
     let tempText = 'Something went wrong!';
     let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
@@ -87,7 +101,6 @@ export class GardenComponent implements OnInit {
     } else if (reminder.name === 'harvest') {
       tempText = 'It\'s just about time to harvest your ' + plantName + '. Look up what signs to look for to ensure your ' + plantName + ' is ripe for harvesting.';
     }
-
     return tempText;
   }
 }

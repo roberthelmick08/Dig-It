@@ -22,8 +22,6 @@ export class ReminderService {
     remindersArray.push({name: 'harvest', date});
     remindersArray.push({name: 'repot', date});
 
-    console.log(remindersArray);
-
     return remindersArray;
   }
 
@@ -33,7 +31,10 @@ export class ReminderService {
     if (plant.stage === 0) {
       remindersArray.push(this.setSowingReminder(plant, user));
     } else {
-      remindersArray.push(this.setWaterReminder(plant));
+      let tempReminder = new Reminder();
+        tempReminder.name = plant.stage === 1 ? 'spray' : 'water';
+        tempReminder.date = new Date();
+      remindersArray.push(tempReminder);
     }
 
     if (plant.harvestable && plant.weeksToHarvest) {
