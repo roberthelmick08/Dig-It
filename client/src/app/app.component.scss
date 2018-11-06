@@ -53,6 +53,12 @@
                 transform: scale(1.1);
                 transition: all 0.3s ease;
             }
+            @media screen and (max-width: $break-md) {
+                left: calc(30% - 48px);
+            }
+            @media screen and (max-width: $break-sm) {
+                left: calc(20% - 48px);
+            }
             img {
                 height: 60px;
                 width: 60px;
@@ -72,8 +78,18 @@
                 letter-spacing: 2px;
                 line-height: 2rem;
             }
-            .mat-stroked-button {
-                background: rgba(255, 255, 255, 0.5);
+            @media screen and (max-width: $break-sm) {
+                right: -6px;
+                top: -6px;
+                button {
+                    width: 100px;
+                    overflow: hidden;
+                    white-space: normal;
+                    height: 50px;
+                    line-height: 1rem;
+                    margin-top: 0;
+                    margin-right: 0;
+                }
             }
         }
     }

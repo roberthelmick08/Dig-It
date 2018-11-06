@@ -1,7 +1,7 @@
 <div class="body-wrapper">
     <mat-toolbar class="navbar">
         <div fxFlex="100" style="height: 100%;">
-            <div class="toolbar-logo" (click)="setCurrentPage('home')">Dig-It</div>
+            <div class="toolbar-logo" (click)="setCurrentPage('home')" fxHide.lt-sm="true">Dig-It</div>
             <div class="navbar-items" (click)="setCurrentPage('search')"><img src="../assets/icons/search.png" matTooltip="Search Plants" matTooltipClass="dig-it-tooltip" /></div>
             <div class="garden-icon-wrapper" [class.garden-icon-wrapper-hover]="authService.isLoggedIn()" (click)="authService.isLoggedIn() && setCurrentPage('garden')" matTooltip="{{authService.isLoggedIn() ? 'My Garden' : 'Please log in or register to dig your garden'}}"
                 matTooltipClass="dig-it-tooltip">
