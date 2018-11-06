@@ -35,13 +35,14 @@ export class AppComponent {
       panelClass: 'dialog-container',
       data: data
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // TODO
-    });
   }
 
-  openLoginDialog(){
+  onLogout() {
+    this.authService.logout();
+    this.currentPage = 'home';
+  }
+
+  openLoginDialog() {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       height: '500px',
       width: '700px',

@@ -43,7 +43,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.authService.getUser().subscribe(user => {
       this.user = user;
     }, (err) => {
-      this.dataService.openSnackBar('fail');
       console.error(err);
     });
   }

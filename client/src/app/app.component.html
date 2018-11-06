@@ -19,7 +19,7 @@
             </div>
 
             <div *ngIf="authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-stroked-button color="primary" (click)="authService.logout()">Logout</button>
+                <button mat-stroked-button color="primary" (click)="onLogout()">Logout</button>
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="setCurrentPage('edit_profile')">My Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
