@@ -2,7 +2,7 @@
 .plant-grid-item {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 0;
     &:hover {
         border-left: 4px solid $color-light-green;
         border-right: 4px solid $color-light-green;

@@ -96,9 +96,13 @@
     .page-content-wrapper {
         .page-content {
             padding-top: 3rem;
-            background: #ffffff;
+            background: transparent;
             overflow-y: auto;
             max-height: calc(100% - 64px);
+            box-shadow: none;
+            @media screen and (max-width: $break-sm) {
+                padding: 3rem 0 0 0;
+            }
         }
         .page-content-home {
             padding: 4rem 0 0 0;
