@@ -15,7 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 import { GardenComponent } from './components/garden/garden.component';
 import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
@@ -34,7 +34,7 @@ const routes: Routes = [
     AppComponent,
     SearchComponent,
     AddPlantDialogComponent,
-    EditProfileComponent,
+    EditProfileDialogComponent,
     GardenComponent,
     LoginDialogComponent,
     PlantDetailsDialogComponent,
@@ -70,6 +70,7 @@ const routes: Routes = [
   ],
   entryComponents: [
     AddPlantDialogComponent,
+    EditProfileDialogComponent,
     PlantDetailsDialogComponent,
     LoginDialogComponent,
   ],

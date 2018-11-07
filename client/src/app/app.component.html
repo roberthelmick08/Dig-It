@@ -10,7 +10,7 @@
 
             <div *ngIf="authService.isLoggedIn()" class="user-button-wrapper">
                 <button mat-stroked-button color="primary" (click)="onLogout()">Logout</button>
-                <button mat-raised-button color="accent" class="profile-menu-button" (click)="setCurrentPage('edit_profile')">My Account</button>
+                <button mat-raised-button color="accent" class="profile-menu-button" (click)="openEditProfileDialog()">My Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
                 <!-- <button mat-stroked-button color="primary" (click)="openLoginDialog()">Register</button> -->
@@ -30,9 +30,6 @@
 
             <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-search>
             <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-garden>
-            <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
-
-
 
 
         </mat-card>

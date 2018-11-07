@@ -1,10 +1,9 @@
 import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { Component } from '@angular/core';
-import { User } from 'src/models/user';
 import { MatDialog } from '@angular/material';
-import { Plant } from 'src/models/plant';
 import { AuthenticationService } from './services/authentication.service';
+import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +33,14 @@ export class AppComponent {
       width: '700px',
       panelClass: 'dialog-container',
       data: data
+    });
+  }
+
+  openEditProfileDialog(){
+    const dialogRef = this.dialog.open(EditProfileDialogComponent, {
+      height: '500px',
+      width: '700px',
+      panelClass: 'dialog-container'
     });
   }
 
