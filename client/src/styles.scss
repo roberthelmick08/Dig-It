@@ -84,25 +84,31 @@ h6 {
     border-bottom: 4px solid $color-red;
 }
 
-/* Mat Input styling */
-.mat-form-field-infix{
+
+/* Material Desgin styling */
+
+// Input
+.mat-form-field-infix {
     padding-left: 1rem !important;
 }
-.mat-form-field-label-wrapper{
+
+.mat-form-field-label-wrapper {
     border-left: 1px solid rgba(0, 0, 0, 0.42);
     border-image-source: linear-gradient(transparent, rgba(0, 0, 0, 0.42));
     border-image-slice: 20;
-    label{
+    label {
         padding-left: 1rem;
     }
 }
-.mat-focused{
-    .mat-form-field-label-wrapper{
+
+.mat-focused {
+    .mat-form-field-label-wrapper {
         border-left: 2px solid $color-light-green;
         border-image-source: linear-gradient(transparent, $color-light-green);
         border-image-slice: 20;
     }
 }
+
 
 /* Grid scroll bar overridden changes */
 

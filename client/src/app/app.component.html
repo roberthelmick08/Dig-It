@@ -13,15 +13,13 @@
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openEditProfileDialog()">My Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <!-- <button mat-stroked-button color="primary" (click)="openLoginDialog()">Register</button> -->
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openLoginDialog()">Login / Register</button>
             </div>
         </div>
     </mat-toolbar>
 
     <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
-        <mat-card fxLayout="column" fxFlex="100" fxFlex.gt-md="{{currentPage === 'home' ? 100 : 80}}" class="page-content" [class.page-content-home]="currentPage === 'home'">
-
+        <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'">
 
 
 
