@@ -1,7 +1,7 @@
 @import "../../../styles.scss";
 .sprout-stages-img {
     width: 100%;
-    z-index: -1;
+    height: calc(100vh - 4rem - 64px);
 }
 
 .home-page-header-logo {
@@ -169,17 +169,22 @@
             opacity: 1;
         }
     }
-    img {
-        height: 48px;
-        width: 48px;
-        cursor: pointer;
-        &:hover {
-            -webkit-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            transform: scale(1.1);
-            opacity: 1;
-            transition: all 0.3s ease;
+    .link-icon-container {
+        img {
+            height: 48px;
+            width: 48px;
+            cursor: pointer;
+            &:hover {
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+                opacity: 1;
+                transition: all 0.3s ease;
+            }
         }
+    }
+    .footer-logo {
+        width: 150px !important;
     }
     .footer-top {
         height: 150px;

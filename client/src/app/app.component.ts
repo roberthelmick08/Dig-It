@@ -44,6 +44,11 @@ export class AppComponent {
     });
   }
 
+  onScroll(event){
+    console.log('event', event);
+    console.log('document.documentElement.offsetHeight', document.documentElement.offsetHeight);
+  }
+
   onLogout() {
     this.authService.logout();
     this.currentPage = 'home';

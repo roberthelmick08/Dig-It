@@ -21,7 +21,7 @@
     </mat-toolbar>
 
     <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
-        <mat-card fxLayout="column" fxFlex="100" fxFlex.gt-md="{{currentPage === 'home' ? 100 : 80}}" class="page-content" [class.page-content-home]="currentPage === 'home'">
+        <mat-card fxLayout="column" fxFlex="100" fxFlex.gt-md="{{currentPage === 'home' ? 100 : 80}}" class="page-content" (scroll)="onScroll($event)" [class.page-content-home]="currentPage === 'home'">
 
 
 
