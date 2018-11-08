@@ -4,8 +4,13 @@
     z-index: -1;
 }
 
-.home-page-header {
+.home-page-header-logo {
     z-index: 1;
+    width: 50%;
+    margin-bottom: -14%;
+    @media screen and (max-width: $break-sm) {
+        width: 100%;
+    }
 }
 
 /deep/ .highlight {

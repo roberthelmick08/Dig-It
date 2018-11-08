@@ -7,9 +7,11 @@
         color: $color-dark-gray;
         .toolbar-logo {
             position: absolute;
-            font-size: 2rem;
-            letter-spacing: 0.25rem;
             margin-top: 1rem;
+            z-index: 2;
+            img {
+                height: 64px;
+            }
         }
         .garden-icon-wrapper-hover {
             cursor: pointer !important;
@@ -33,9 +35,10 @@
             top: 0;
             left: calc(50% - 50px);
             cursor: default;
-            mat-icon.mat-icon {
-                font-size: 100px;
-                color: $color-dark-gray;
+            img {
+                height: 150px;
+                margin-left: -16px;
+                margin-top: -26px;
             }
         }
         .navbar-items {

@@ -1,11 +1,13 @@
 <div class="body-wrapper">
     <mat-toolbar class="navbar">
         <div fxFlex="100" style="height: 100%;">
-            <div class="toolbar-logo" (click)="setCurrentPage('home')" fxHide.lt-sm="true">Dig-It</div>
+            <div class="toolbar-logo" (click)="setCurrentPage('home')" fxHide.lt-sm="true">
+                <img src="../assets/logo/dig-it-text.svg" />
+            </div>
             <div class="navbar-items" (click)="setCurrentPage('search')"><img src="../assets/icons/search.png" matTooltip="Search Plants" matTooltipClass="dig-it-tooltip" /></div>
             <div class="garden-icon-wrapper" [class.garden-icon-wrapper-hover]="authService.isLoggedIn()" (click)="authService.isLoggedIn() && setCurrentPage('garden')" matTooltip="{{authService.isLoggedIn() ? 'My Garden' : 'Please log in or register to dig your garden'}}"
                 matTooltipClass="dig-it-tooltip">
-                <mat-icon>spa</mat-icon>
+                <img src="../assets/logo/dig-it-emblem-gray-no-border.svg" />
             </div>
 
             <div *ngIf="authService.isLoggedIn()" class="user-button-wrapper">
@@ -13,7 +15,6 @@
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openEditProfileDialog()">My Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <!-- <button mat-stroked-button color="primary" (click)="openLoginDialog()">Register</button> -->
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openLoginDialog()">Login / Register</button>
             </div>
         </div>
