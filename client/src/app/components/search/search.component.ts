@@ -77,8 +77,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     gardenPlant.stage = plant.stage ? plant.stage : 0;
     gardenPlant.isPotted = plant.isPotted;
     // SET MOCK REMINDERS
-    // gardenPlant.reminders = this.reminderService.setMockReminders(plant, this.user);
-    gardenPlant.reminders = this.reminderService.setInitialReminders(plant, this.user);
+    gardenPlant.reminders = this.reminderService.setMockReminders(plant, this.user);
+    // gardenPlant.reminders = this.reminderService.setInitialReminders(plant, this.user);
     gardenPlant._id = plant._id;
     gardenPlant.commonName = plant.commonName;
     gardenPlant.botanicalName = plant.botanicalName;
@@ -152,7 +152,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
           return this.levDist(plant.botanicalName, this.searchTerm);
         }
       }
-    }).slice(0, 5);
+    }).slice(0, 10);
 
   }
 

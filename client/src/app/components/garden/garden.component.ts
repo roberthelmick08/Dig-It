@@ -97,7 +97,7 @@ export class GardenComponent implements OnInit {
     } else if (reminder.name === 'sow') {
       tempText = 'Time to sow your ' + plantName + ' seeds. ' + this.dataService.getSowingMethodString(plant.methodNum) + ' Seeds should be sown ' + plant.depth + ' inches deep and ' + plant.sowingSpace + ' inches apart.';
     } else if (reminder.name === 'water' || reminder.name === 'spray') {
-      tempText = 'If the soil is dry, gently water your ' + plantName + '.';
+      tempText = 'Water your ' + plantName + '.';
     } else if (reminder.name === 'move-inside') {
       tempText = 'It\'s about to start hitting freezing temps at night in your area. It\'s time to bring your ' + plantName + ' inside for the winter.';
     } else if (reminder.name === 'move-outside') {

@@ -2,11 +2,13 @@
 .plant-grid-item {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    padding: 1rem 1rem 1rem 0;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: rgba(255, 255, 255, 0.3);
     &:hover {
         border-left: 4px solid $color-light-green;
         border-right: 4px solid $color-light-green;
-        background: rgba(217, 217, 217, 0.2);
+        background-color: rgba(255, 255, 255, 0.5);
     }
     h3 {
         color: $color-dark-gray;
@@ -20,26 +22,18 @@
     .plant-name-details {
         cursor: pointer;
     }
+    .resize-select-menu {
+        width: 140px;
+        margin-right: 2rem;
+    }
 }
 
 .add-plant-button {
-    color: #ffffff;
-    position: fixed;
-    bottom: 1rem;
-    right: 16%;
-    height: 7rem;
-    width: 7rem;
+    opacity: 0.8;
     &:hover {
         mat-icon.mat-icon {
             opacity: 1;
         }
-    }
-    mat-icon.mat-icon {
-        font-size: 7rem;
-        margin-top: -1rem;
-        opacity: 0.8;
-        width: 7rem;
-        height: 7rem;
     }
 }
 
