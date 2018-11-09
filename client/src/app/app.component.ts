@@ -1,10 +1,9 @@
 import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { Component } from '@angular/core';
-import { User } from 'src/models/user';
 import { MatDialog } from '@angular/material';
-import { Plant } from 'src/models/plant';
 import { AuthenticationService } from './services/authentication.service';
+import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-root',
@@ -35,13 +34,27 @@ export class AppComponent {
       panelClass: 'dialog-container',
       data: data
     });
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      // TODO
+  openEditProfileDialog(){
+    const dialogRef = this.dialog.open(EditProfileDialogComponent, {
+      height: '500px',
+      width: '700px',
+      panelClass: 'dialog-container'
     });
   }
 
-  openLoginDialog(){
+  onScroll(event){
+    console.log('event', event);
+    console.log('document.documentElement.offsetHeight', document.documentElement.offsetHeight);
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.currentPage = 'home';
+  }
+
+  openLoginDialog() {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       height: '500px',
       width: '700px',

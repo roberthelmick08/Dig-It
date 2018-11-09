@@ -1,68 +1,37 @@
 <div class="body-wrapper">
     <mat-toolbar class="navbar">
-        <!-- Hamburger menu for mobile devices -->
-        <div fxHide.gt-xs="true" fxLayoutAlign="space-between center" fxFlex="100">
-            <a (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-            </a>
-            <span>Dig-It</span>
-        </div>
-
-        <!-- Full Navbar for larger devices -->
-        <div fxHide.lt-sm="true" fxFlex="100" style="height: 100%;">
-            <div class="toolbar-logo" (click)="setCurrentPage('home')">Dig-It</div>
-
-            <div class="navbar-items" (click)="setCurrentPage('search')">Search Plants</div>
-
-            <div class="garden-icon-wrapper" [class.garden-icon-wrapper-hover]="authService.isLoggedIn()" (click)="authService.isLoggedIn() ? setCurrentPage('garden') : '' ">
-                <mat-icon>spa</mat-icon>
+        <div fxFlex="100" style="height: 100%;">
+            <div class="toolbar-logo" (click)="setCurrentPage('home')" fxHide.lt-sm="true">
+                <img src="../assets/logo/dig-it-text.svg" />
+            </div>
+            <div class="navbar-items" (click)="setCurrentPage('search')"><img src="../assets/icons/search.png" matTooltip="Search Plants" matTooltipClass="dig-it-tooltip" /></div>
+            <div class="garden-icon-wrapper" [class.garden-icon-wrapper-hover]="authService.isLoggedIn()" (click)="authService.isLoggedIn() && setCurrentPage('garden')" matTooltip="{{authService.isLoggedIn() ? 'My Garden' : 'Please log in or register to dig your garden'}}"
+                matTooltipClass="dig-it-tooltip">
+                <img src="../assets/logo/dig-it-emblem-gray-no-border.svg" />
             </div>
 
             <div *ngIf="authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-stroked-button color="primary" (click)="authService.logout()">Logout</button>
-                <button mat-raised-button color="accent" class="profile-menu-button" (click)="setCurrentPage('edit_profile')">My Account</button>
+                <button mat-stroked-button color="primary" (click)="onLogout()">Logout</button>
+                <button mat-raised-button color="accent" class="profile-menu-button" (click)="openEditProfileDialog()">Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-stroked-button color="primary" (click)="openLoginDialog()">Register</button>
-                <button mat-raised-button color="accent" class="profile-menu-button" (click)="openLoginDialog()">Login</button>
+                <button mat-raised-button color="accent" class="profile-menu-button" (click)="openLoginDialog()">Login / Register</button>
             </div>
         </div>
     </mat-toolbar>
 
-    <!-- Sidenav for small devices -->
-    <mat-sidenav-container fxFlexFill>
-        <mat-sidenav #sidenav fxLayout="column">
-            <div fxLayout="column">
-
-                <button class="profile-menu-button" (click)="setCurrentPage('edit_profile')"> </button>
-
-                <a (click)="setCurrentPage('garden')" mat-button>My Garden</a>
-                <a (click)="setCurrentPage('search')" mat-button>Search Plants</a>
-
-                <button mat-menu-item (click)="setCurrentPage('help')">
-                  <mat-icon>help_outline</mat-icon>
-                </button>
-
-            </div>
-        </mat-sidenav>
-
-        <mat-sidenav-content fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
-            <mat-card fxLayout="column" fxFlex="100" fxFlex.gt-md="{{currentPage === 'home' ? 100 : 80}}" class="page-content" [class.page-content-home]="currentPage === 'home'">
+    <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
+        <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'">
 
 
 
+            <app-home *ngIf="currentPage === 'home'"></app-home>
+            <app-login *ngIf="currentPage === 'login'" (navigateToGardenEvent)="setCurrentPage('garden')" (navigateToRegisterEvent)="setCurrentPage('register')"></app-login>
 
-                <app-home *ngIf="currentPage === 'home'"></app-home>
-                <app-login *ngIf="currentPage === 'login'" (navigateToGardenEvent)="setCurrentPage('garden')" (navigateToRegisterEvent)="setCurrentPage('register')"></app-login>
-
-                <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-search>
-                <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-garden>
-                <app-edit-profile *ngIf="currentPage === 'edit_profile'"></app-edit-profile>
+            <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-search>
+            <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-garden>
 
 
-
-
-            </mat-card>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+        </mat-card>
+    </div>
 </div>

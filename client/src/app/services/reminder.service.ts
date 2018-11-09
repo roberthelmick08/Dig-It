@@ -10,24 +10,43 @@ export class ReminderService {
 
   constructor() { }
 
+  setMockReminders(plant: Plant, user: User): Array<Reminder> {
+    let remindersArray = [];
+    let date = new Date();
+
+    remindersArray.push({name: 'water', date});
+    remindersArray.push({name: 'spray', date});
+    remindersArray.push({name: 'move-inside', date});
+    remindersArray.push({name: 'move-outside', date});
+    remindersArray.push({name: 'sow', date});
+    remindersArray.push({name: 'harvest', date});
+    remindersArray.push({name: 'repot', date});
+
+    return remindersArray;
+  }
+
   // Function to set default reminders when plant is added to user's garden
   setInitialReminders(plant: Plant, user: User): Array<Reminder> {
     const remindersArray = [];
-    if (plant.stage !== 0) {
-      remindersArray.push(this.setWaterReminder(plant));
-    } else if (plant.stage === 0) {
+    if (plant.stage === 0) {
       remindersArray.push(this.setSowingReminder(plant, user));
+    } else {
+      let tempReminder = new Reminder();
+        tempReminder.name = plant.stage === 1 ? 'spray' : 'water';
+        tempReminder.date = new Date();
+      remindersArray.push(tempReminder);
     }
 
     if (plant.harvestable && plant.weeksToHarvest) {
       remindersArray.push(this.setHarvestReminder(plant, user));
     }
 
-    // Move Outside
-    // Move inside
-    // Repot
+    if (plant.isPotted) {
+      remindersArray.push(this.setFrostDateReminder('move-inside', user));
+      remindersArray.push(this.setFrostDateReminder('move-outside', user));
+      remindersArray.push(this.setRepotReminder(user, plant));
+    }
 
-    // TODO: set Reminders functions for all other reminders
     return remindersArray;
   }
 
@@ -107,6 +126,24 @@ export class ReminderService {
 
   getHarvestDateString(user: User, plant: Plant): string {
     return this.getHarvestDate(user, plant).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
+  }
+
+  setRepotReminder(user: User, plant: Plant): Reminder {
+    const tempReminder = new Reminder();
+    tempReminder.name = 'repot';
+    if (plant.stage === 1) {
+      tempReminder.date = this.addDays(this.getSowDate(user, plant),  plant.type === 'Cactus' || plant.type === 'Succulent' ? 30 : 14);
+    } else {
+      tempReminder.date = this.addDays(new Date(), plant.type === 'Cactus' || plant.type === 'Succulent' ? 90 : 60);
+    }
+    return tempReminder;
+  }
+
+  setFrostDateReminder(name: 'move-inside' | 'move-outside', user: User): Reminder {
+    const tempReminder = new Reminder();
+    tempReminder.name = name;
+    tempReminder.date = new Date(name === 'move-inside' ? user.firstFrostDate : user.lastFrostDate);
+    return tempReminder;
   }
 
   // Function to add days to specified date. Returns Date

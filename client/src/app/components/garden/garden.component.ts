@@ -7,6 +7,7 @@ import { User } from 'src/models/user';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Reminder } from 'src/models/reminder';
+import { text } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-garden',
@@ -16,6 +17,10 @@ import { Reminder } from 'src/models/reminder';
 export class GardenComponent implements OnInit {
 
   user: User;
+
+  isGridItemOnHover: boolean = false;
+
+  hoverIndex: number;
 
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
@@ -27,6 +32,20 @@ export class GardenComponent implements OnInit {
       this.user = user;
     }, (err) => {
       console.error(err);
+      this.dataService.openSnackBar('fail');
+    }, () => {
+      // Reset annual reminders if older than 60 days
+      for (let plant of this.user.garden) {
+        let tempPlant =  plant.reminders.filter(reminder => {
+          return (reminder.name === 'move-in' || reminder.name === 'move-out' || reminder.name === 'repot') && reminder.date < this.reminderService.addDays(new Date(), -60);
+        });
+        tempPlant.map(reminder => {
+          reminder.date = this.reminderService.addDays(reminder.date, 365);
+        });
+
+      }
+      this.authService.updateUser(this.user).subscribe();
+
     });
   }
 
@@ -34,8 +53,17 @@ export class GardenComponent implements OnInit {
     plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
     if (reminder.name === 'water' || reminder.name === 'spray') {
       plant.reminders.push(this.reminderService.setWaterReminder(plant));
+    } else if (((reminder.name === 'move-inside' && plant.isPotted) || reminder.name === 'move-outside') && (plant.lifeType === 'Perennial' || plant.lifeType === 'Biennial')) {
+      reminder.date = this.reminderService.addDays(reminder.name === 'move-inside' ? this.user.firstFrostDate : this.user.lastFrostDate, 364);
+      plant.reminders.push(reminder);
+    } else if (reminder.name === 'repot' && plant.stage < 2) {
+      plant.reminders.push(this.reminderService.setRepotReminder(this.user, plant));
     }
-    this.authService.updateUser(this.user).subscribe( data => { });
+    this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
+      this.dataService.openSnackBar('fail');
+    }, () => {
+      console.log(this.user.garden);
+    });
   }
 
   openPlantDetailsDialog(plant: Plant) {
@@ -48,16 +76,55 @@ export class GardenComponent implements OnInit {
 
   removePlantFromGarden(plant: GardenPlant) {
     this.user.garden.splice(this.user.garden.findIndex(p => plant === p), 1);
-    this.authService.updateUser(this.user).subscribe( data => {
+    this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
+      this.dataService.openSnackBar('fail');
+    }, () => {
+      let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
+      this.dataService.openSnackBar('success', plantName + 'has been removed from your garden.');
     });
   }
 
   // To handle drag and drop event
   onDrop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
-       this.user.garden,
-       event.previousIndex,
-       event.currentIndex
-      );
+      this.user.garden,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+
+  isReminderVisible(reminder: Reminder): boolean {
+    const today = new Date();
+    const reminderDate = new Date(reminder.date);
+    return reminderDate <= today && reminderDate > this.reminderService.addDays(today, -30);
+  }
+
+  setGridItemHover(isHover, index: number) {
+    this.isGridItemOnHover = isHover;
+    this.hoverIndex = index;
+  }
+
+  getReminderTooltipText(plant: Plant, reminder: Reminder): string {
+    let tempText = 'Something went wrong!';
+    let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
+
+    if (reminder.name === 'repot') {
+      if (plant.stage === 1) {
+        tempText = 'Repot your ' + plantName + '. It\'s strong enough to be put in a small-medium pot. You can start watering it like normal instead of using a spraybottle.';
+      } else {
+        tempText = 'Repot your ' + plantName + '. Put it in a medium or large pot. It\'s roots probably need more space to spread out.';
+      }
+    } else if (reminder.name === 'sow') {
+      tempText = 'Time to sow your ' + plantName + ' seeds. ' + this.dataService.getSowingMethodString(plant.methodNum) + ' Seeds should be sown ' + plant.depth + ' inches deep and ' + plant.sowingSpace + ' inches apart.';
+    } else if (reminder.name === 'water' || reminder.name === 'spray') {
+      tempText = 'Water your ' + plantName + '.';
+    } else if (reminder.name === 'move-inside') {
+      tempText = 'It\'s about to start hitting freezing temps at night in your area. It\'s time to bring your ' + plantName + ' inside for the winter.';
+    } else if (reminder.name === 'move-outside') {
+      tempText = 'It\'s finally starting to get warm enough in your area to move your ' + plantName + ' outside.';
+    } else if (reminder.name === 'harvest') {
+      tempText = 'It\'s just about time to harvest your ' + plantName + '. Look up what signs to look for to ensure your ' + plantName + ' is ripe for harvesting.';
     }
+    return tempText;
+  }
 }
