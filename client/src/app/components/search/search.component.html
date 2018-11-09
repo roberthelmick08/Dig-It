@@ -29,7 +29,7 @@
         <div class="plant-grid-item" *ngFor="let index = index; let plant of visiblePlants">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
-                    <img src="../../../assets/icons/reminders/repot.svg" />
+                    <img src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
                 </div>
             </div>
             <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">

@@ -46,6 +46,13 @@ $break-xl: 1920px;
     border-top: 4px solid $color-light-green;
 }
 
+.remove-bottom-padding {
+    .mat-dialog-container {
+        padding-bottom: 0;
+        overflow: hidden;
+    }
+}
+
 .dig-it-tooltip {
     border-top: 4px solid $color-light-green;
     margin-top: -24px;

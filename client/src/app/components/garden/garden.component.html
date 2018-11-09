@@ -7,7 +7,8 @@
         <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" cdkDrag (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
-                    <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" [title]="dataService.getStageString(plant.stage)" />
+                    <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage === 3" [title]="dataService.getStageString(plant.stage)" />
+                    <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage !== 3" [title]="dataService.getStageString(plant.stage)" />
                 </div>
                 <div class="reminders-icon-container" fxLayout="row wrap" fxFlex fxLayoutAlign="end center">
                     <p *ngIf="plant?.reminders.length === 0">No reminders</p>

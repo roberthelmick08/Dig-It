@@ -5,18 +5,19 @@
     </div>
     <div>
         <div class="login-image-container" fxFlex="30">
-            <img src="../../../assets/icons/reminders/plant.svg" />
+            <img src="../../../assets/icons/gardener.svg" />
         </div>
-        <div fxFlex>
+        <div fxFlex class="form-wrapper">
             <h1 class="header">{{activePageTab === 'login' ? 'Login' : 'Register'}}</h1>
 
             <div *ngIf="activePageTab === 'login'" fxLayout="column">
                 <mat-form-field>
-                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email">
+                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password">
+                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" required>
                 </mat-form-field>
+                <button mat-raised-button color="primary" (click)="login()" [disabled]="!loginCredentials.email || !loginCredentials.password">Log In</button>
             </div>
 
             <div *ngIf="activePageTab === 'register'" fxLayout="column">
@@ -26,15 +27,11 @@
                 <mat-form-field>
                     <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" required>
                 </mat-form-field>
-                <!-- <mat-form-field>
-                    <input matInput type="text" name="phone" placeholder="Phone Number" [(ngModel)]="registerCredentials.phone" required>
-                </mat-form-field> -->
                 <mat-form-field>
                     <input matInput type="text" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
                 </mat-form-field>
+                <button mat-raised-button color="primary" (click)="setUserCredentials()" [disabled]="!registerCredentials.email || !registerCredentials.password || !registerCredentials.zip">Register</button>
             </div>
         </div>
     </div>
-    <button mat-flat-button (click)="setUserCredentials()" *ngIf="activePageTab === 'register'">Register</button>
-    <button mat-flat-button (click)="login()" *ngIf="activePageTab === 'login'">Log In</button>
 </div>

@@ -56,9 +56,9 @@ export class AppComponent {
 
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
-      height: '500px',
+      height: '400px',
       width: '700px',
-      panelClass: 'dialog-container'
+      panelClass: ['dialog-container', 'remove-bottom-padding']
     });
   }
 }
