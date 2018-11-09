@@ -96,6 +96,17 @@
                 margin-left: 1rem;
                 font-size: 1.25rem;
             }
+            @media screen and (max-width: $break-sm) {
+                border-radius: 50px;
+                height: 265px;
+                text-align: center;
+                width: 100%;
+                img {
+                    width: 100px;
+                    min-width: 100px;
+                    height: 100px;
+                }
+            }
         }
         .slide-out-left {
             position: absolute;

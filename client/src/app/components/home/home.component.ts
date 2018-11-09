@@ -56,6 +56,6 @@ export class HomeComponent implements OnInit {
             this.isSlideOut = false;
             this.toggleSliderAnimation();
           }, 500);
-    }, 7000);
+    }, 700000);
   }
 }
