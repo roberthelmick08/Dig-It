@@ -32,6 +32,20 @@ export class GardenComponent implements OnInit {
       this.user = user;
     }, (err) => {
       console.error(err);
+      this.dataService.openSnackBar('fail');
+    }, () => {
+      // Reset annual reminders if older than 60 days
+      for (let plant of this.user.garden) {
+        let tempPlant =  plant.reminders.filter(reminder => {
+          return (reminder.name === 'move-in' || reminder.name === 'move-out' || reminder.name === 'repot') && reminder.date < this.reminderService.addDays(new Date(), -60);
+        });
+        tempPlant.map(reminder => {
+          reminder.date = this.reminderService.addDays(reminder.date, 365);
+        });
+
+      }
+      this.authService.updateUser(this.user).subscribe();
+
     });
   }
 
@@ -39,13 +53,17 @@ export class GardenComponent implements OnInit {
     plant.reminders.splice(plant.reminders.findIndex(r => reminder === r), 1);
     if (reminder.name === 'water' || reminder.name === 'spray') {
       plant.reminders.push(this.reminderService.setWaterReminder(plant));
-    } else if ((reminder.name === 'move-inside' || reminder.name === 'move-outside') && (plant.lifeType === 'Perennial' || plant.lifeType === 'Biennial')) {
+    } else if (((reminder.name === 'move-inside' && plant.isPotted) || reminder.name === 'move-outside') && (plant.lifeType === 'Perennial' || plant.lifeType === 'Biennial')) {
       reminder.date = this.reminderService.addDays(reminder.name === 'move-inside' ? this.user.firstFrostDate : this.user.lastFrostDate, 364);
       plant.reminders.push(reminder);
     } else if (reminder.name === 'repot' && plant.stage < 2) {
       plant.reminders.push(this.reminderService.setRepotReminder(this.user, plant));
     }
-    this.authService.updateUser(this.user).subscribe( data => { });
+    this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
+      this.dataService.openSnackBar('fail');
+    }, () => {
+      console.log(this.user.garden);
+    });
   }
 
   openPlantDetailsDialog(plant: Plant) {
@@ -76,7 +94,9 @@ export class GardenComponent implements OnInit {
   }
 
   isReminderVisible(reminder: Reminder): boolean {
-    return new Date(reminder.date) <= new Date();
+    const today = new Date();
+    const reminderDate = new Date(reminder.date);
+    return reminderDate <= today && reminderDate > this.reminderService.addDays(today, -30);
   }
 
   setGridItemHover(isHover, index: number) {

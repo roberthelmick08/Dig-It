@@ -42,9 +42,9 @@ export class ReminderService {
     }
 
     if (plant.isPotted) {
-      this.setFrostDateReminder('move-inside', user);
-      this.setFrostDateReminder('move-outside', user);
-      this.setRepotReminder(user, plant);
+      remindersArray.push(this.setFrostDateReminder('move-inside', user));
+      remindersArray.push(this.setFrostDateReminder('move-outside', user));
+      remindersArray.push(this.setRepotReminder(user, plant));
     }
 
     return remindersArray;
