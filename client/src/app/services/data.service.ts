@@ -14,6 +14,8 @@ export class DataService {
 
   apiPath: String = 'http://localhost:3000/api';
 
+  isImageLoaded: boolean = false;
+
   constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService) { }
 
   getAllPlants() {
@@ -26,6 +28,34 @@ export class DataService {
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.apiPath + '/new_plant', newPlant, {headers: headers})
       .pipe(map(res => res.json()));
+    }
+
+    imageSearchByName(plant: Plant, isRecurse?: boolean) {
+      let queryString;
+
+      if (!plant.botanicalName || isRecurse === true) {
+        queryString = plant.commonName.toLocaleLowerCase().split(' ').join('_');
+      } else {
+        queryString = plant.botanicalName.toLocaleLowerCase().split(' ').join('_');
+      }
+
+      this.auth.doCORSRequest({
+        method: 'GET',
+        url: 'https://commons.wikimedia.org/w/api.php?action=query&generator=images&prop=imageinfo&gimlimit=1&redirects=1&titles=' + queryString + '&iiprop=url&format=json'
+      }).subscribe( result => {
+        result = JSON.parse(result);
+        if (result.query) {
+          plant.img = result.query.pages[Object.keys(result.query.pages)[0]].imageinfo[0].url;
+          this.isImageLoaded = true;
+        }
+      }, (err) => {
+        this.openSnackBar('fail');
+        console.error(err);
+      }, () => {
+        if (!plant.img && !isRecurse) {
+          this.imageSearchByName(plant, true);
+        }
+      });
     }
 
   openSnackBar(status: 'fail' | 'success', message?: string) {

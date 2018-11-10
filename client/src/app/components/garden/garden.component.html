@@ -7,13 +7,14 @@
         <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" cdkDrag (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
             <div fxLayout="row" fxLayoutAlign="space-between start">
                 <div class="plant-icon">
-                    <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage === 3" [title]="dataService.getStageString(plant.stage)" />
-                    <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage !== 3" [title]="dataService.getStageString(plant.stage)" />
+                    <img src="{{plant.img}}" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
+                    <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage === 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+                    <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage !== 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
                 </div>
-                <div class="reminders-icon-container" fxLayout="row wrap" fxFlex fxLayoutAlign="end center">
+                <div class="reminders-container" fxLayout="row wrap" fxFlex fxLayoutAlign="end center">
                     <p *ngIf="plant?.reminders.length === 0">No reminders</p>
                     <ng-container *ngFor="let reminder of plant?.reminders">
-                        <div *ngIf="isReminderVisible(reminder)" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
+                        <div *ngIf="isReminderVisible(reminder)" class="reminder-icon-wrapper" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
                             <img src="{{ '../../../assets/icons/reminders/' + reminder.name + '.svg' }}" class="reminders-icon" />
                         </div>
                     </ng-container>

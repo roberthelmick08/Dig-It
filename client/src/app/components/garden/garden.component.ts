@@ -36,6 +36,7 @@ export class GardenComponent implements OnInit {
     }, () => {
       // Reset annual reminders if older than 60 days
       for (let plant of this.user.garden) {
+        this.dataService.imageSearchByName(plant);
         let tempPlant =  plant.reminders.filter(reminder => {
           return (reminder.name === 'move-in' || reminder.name === 'move-out' || reminder.name === 'repot') && reminder.date < this.reminderService.addDays(new Date(), -60);
         });
