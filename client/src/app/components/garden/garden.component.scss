@@ -64,65 +64,54 @@
                 text-align: center;
             }
         }
-        .settings-icon-container {
-            width: 100%;
-            .settings-icon {
-                color: $color-light-gray;
-                cursor: pointer;
-                position: absolute;
-                margin-top: -40%;
-                font-size: 1.3rem;
-                height: 1.3rem;
-                width: 1.3rem;
-                &:hover {
-                    -webkit-transition: -webkit-transform .5s ease-in-out;
-                    transition: transform .5s ease-in-out;
-                    -webkit-transform: rotate(90deg);
-                    transform: rotate(90deg);
-                }
-            }
-        }
     }
 }
 
-/deep/ .mat-menu-panel {
-    background: transparent;
-    max-width: 50px;
-    min-width: 0;
-    box-shadow: none;
-    padding-left: 14px;
-    margin-left: -42px;
-    margin-top: -34px;
-    .mat-menu-item {
-        background: $color-dark-gray;
-        border-radius: 50%;
-        padding: 0;
-        height: 24px;
-        width: 24px;
-        margin-bottom: 0.5rem;
-        &:hover {
-            background-color: $color-dark-gray !important;
-            -webkit-box-shadow: -2px 4px 10px 0px rgba(0, 0, 0, 0.3);
-            box-shadow: -2px 4px 10px 0px rgba(0, 0, 0, 0.3);
-            -webkit-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            transform: scale(1.1);
-            transition: all 0.3s ease;
+.delete-icon-container {
+    cursor: pointer;
+    &:hover {
+        .lid,
+        .lidcap {
+            transform: rotate(10deg);
+            margin-bottom: 1.5px;
+            background-color: $color-red;
         }
-        mat-icon.mat-icon {
-            color: white !important;
-            font-size: 16px;
-            position: absolute;
-            margin-top: -8px;
-            margin-left: 4px;
-            &:hover {
-                color: $color-red !important;
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
+        .bin {
+            background-color: $color-red;
+            border-top-color: $color-red
         }
+    }
+    .lidcap,
+    .lid,
+    .bin {
+        position: absolute;
+    }
+    .lidcap,
+    .lid {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        background: $color-light-gray;
+        transition: transform .2s linear, margin .2s linear;
+    }
+    .lidcap {
+        bottom: 18.8px;
+        right: 9px;
+        height: 1px;
+        width: 2px;
+    }
+    .lid {
+        bottom: 17px;
+        right: 3px;
+        width: 14px;
+        height: 2px;
+    }
+    .bin {
+        bottom: 4px;
+        right: 4px;
+        width: 10px;
+        border-top: 12px solid $color-light-gray;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
     }
 }
 

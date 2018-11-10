@@ -2,7 +2,8 @@
 <div class="plant-details-dialog" fxLayout="column">
     <div class="add-plant-header">
         <img *ngIf="dataService.isImageLoaded" class="image-found" src="{{plant.img}}" />
-        <img *ngIf="!dataService.isImageLoaded" class="image-not-found" src="{{plant.stage ? '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' : '../../../assets/icons/reminders/repot.svg'}}" />
+        <img *ngIf="!dataService.isImageLoaded && !plant.stage" class="image-not-found" src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
+        <img *ngIf="!dataService.isImageLoaded && plant.stage" class="image-not-found" src="{{'../../../assets/icons/plant-stage/stage' + plant.stage + '.svg'}}" />
 
         <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
             <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
