@@ -5,11 +5,16 @@
     <div fxLayout="row wrap" fxLayoutAlign.gt-sm="space-evenly center" cdkDrop (cdkDropDropped)="onDrop($event)">
         <div *ngIf="!user?.garden">No plants in your Garden. To get started, add a plant to your Garden.</div>
         <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" cdkDrag (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
-            <div fxLayout="row" fxLayoutAlign="space-between start">
-                <div class="plant-icon">
-                    <img src="{{plant.img}}" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
-                    <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage === 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
-                    <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage !== 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+            <div class="plant-icon" (click)="openPlantDetailsDialog(plant)">
+                <img src="{{plant.img}}" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
+                <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage === 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+                <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage !== 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="space-between center" class="plant-details-container">
+                <div class="plant-name-details" fxLayout="column" fxFlex="100" fxLayoutAlign="center center" (click)="openPlantDetailsDialog(plant)">
+                    <h4>{{plant.commonName ? (plant.commonName | titlecase): (plant.botanicalName | titlecase)}}</h4>
+                    <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
                 </div>
                 <div class="reminders-container" fxLayout="row wrap" fxFlex fxLayoutAlign="end center">
                     <p *ngIf="plant?.reminders.length === 0">No reminders</p>
@@ -19,17 +24,14 @@
                         </div>
                     </ng-container>
                 </div>
-            </div>
-            <div class="plant-name-details" fxLayout="column" fxFlex="100" fxLayoutAlign="center center" (click)="openPlantDetailsDialog(plant)">
-                <h4>{{plant.commonName ? (plant.commonName | titlecase): (plant.botanicalName | titlecase)}}</h4>
-                <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
-            </div>
-            <div class="settings-icon-container">
-                <mat-icon class="settings-icon" fxHide.lt-sm="true" [matMenuTriggerFor]="settingsMenu" (click)="$event.stopPropagation()" *ngIf="isGridItemOnHover && hoverIndex === index">settings</mat-icon>
-                <mat-icon class="settings-icon" fxHide.gt-sm="true" [matMenuTriggerFor]="settingsMenu">settings</mat-icon>
-                <mat-menu #settingsMenu="matMenu">
-                    <button mat-menu-item (click)="removePlantFromGarden(plant)"><mat-icon>delete</mat-icon></button>
-                </mat-menu>
+                <div class="settings-icon-container">
+                    <mat-icon class="settings-icon" fxHide.lt-sm="true" [matMenuTriggerFor]="settingsMenu" (click)="$event.stopPropagation()">settings</mat-icon>
+                    <!-- <mat-icon class="settings-icon" fxHide.lt-sm="true" [matMenuTriggerFor]="settingsMenu" (click)="$event.stopPropagation()" *ngIf="isGridItemOnHover && hoverIndex === index">settings</mat-icon> -->
+                    <mat-icon class="settings-icon" fxHide.gt-sm="true" [matMenuTriggerFor]="settingsMenu">settings</mat-icon>
+                    <mat-menu #settingsMenu="matMenu">
+                        <button mat-menu-item (click)="removePlantFromGarden(plant)"><mat-icon>delete</mat-icon></button>
+                    </mat-menu>
+                </div>
             </div>
         </mat-card>
     </div>

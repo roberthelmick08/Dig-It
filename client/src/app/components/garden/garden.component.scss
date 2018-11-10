@@ -1,71 +1,85 @@
 @import "../../../styles.scss";
 .plant-grid-item {
-    height: 150px;
-    width: 200px;
     padding: 0;
     margin: 16px 16px;
     border-bottom: 4px solid transparent;
     background-color: rgba(255, 255, 255, 0.7);
+    height: 250px;
+    width: 200px;
+    overflow: hidden;
     &:hover {
         background-color: rgba(255, 255, 255, 1);
         border-bottom: 4px solid $color-light-green;
+        .plant-icon {
+            opacity: 1;
+        }
     }
     .plant-icon {
-        height: 60px;
-        width: 60px;
         opacity: 0.8;
+        height: 66%;
+        overflow: hidden;
+        cursor: pointer;
         img {
             width: 100%;
+            height: 100%;
         }
     }
-    .reminders-container {
-        background-color: $color-blue;
-        .reminder-icon-wrapper {
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            margin-left: 8px;
-            .reminders-icon {
-                height: 24px;
-                width: 24px;
-                cursor: pointer;
-                margin-left: 6px;
-                margin-top: 6px;
+    .plant-details-container {
+        height: 33%;
+        .reminders-container {
+            height: 40px;
+            width: 100%;
+            margin-top: -163px;
+            position: absolute;
+            padding-right: 8px;
+            background: linear-gradient(white, rgba(255, 255, 255, 0.5), transparent);
+            .reminder-icon-wrapper {
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                margin-left: 8px;
+                background-color: $color-red;
+                border: 1px solid $color-blue;
+                .reminders-icon {
+                    height: 24px;
+                    width: 24px;
+                    cursor: pointer;
+                    margin-left: 6px;
+                    margin-top: 6px;
+                }
             }
         }
-    }
-    .plant-name-details {
-        cursor: pointer;
-        h4 {
-            letter-spacing: 4px;
-            color: $color-dark-gray;
-            text-align: center;
-        }
-        h5 {
-            letter-spacing: 2px;
-            font-style: italic;
-            color: $color-blue;
-            opacity: 0.5;
-            text-align: center;
-        }
-    }
-    .settings-icon-container {
-        text-align: right;
-        width: 100%;
-        .settings-icon {
-            color: $color-light-gray;
+        .plant-name-details {
             cursor: pointer;
-            position: absolute;
-            margin-top: -24px;
-            margin-left: calc(100% - 1.3rem - 4px);
-            font-size: 1.3rem;
-            height: 1.3rem;
-            width: 1.3rem;
-            &:hover {
-                -webkit-transition: -webkit-transform .5s ease-in-out;
-                transition: transform .5s ease-in-out;
-                -webkit-transform: rotate(90deg);
-                transform: rotate(90deg);
+            h4 {
+                letter-spacing: 4px;
+                color: $color-dark-gray;
+                text-align: center;
+            }
+            h5 {
+                letter-spacing: 2px;
+                font-style: italic;
+                color: $color-blue;
+                opacity: 0.5;
+                text-align: center;
+            }
+        }
+        .settings-icon-container {
+            width: 100%;
+            .settings-icon {
+                color: $color-light-gray;
+                cursor: pointer;
+                position: absolute;
+                margin-top: -40%;
+                font-size: 1.3rem;
+                height: 1.3rem;
+                width: 1.3rem;
+                &:hover {
+                    -webkit-transition: -webkit-transform .5s ease-in-out;
+                    transition: transform .5s ease-in-out;
+                    -webkit-transform: rotate(90deg);
+                    transform: rotate(90deg);
+                }
             }
         }
     }
@@ -77,8 +91,8 @@
     min-width: 0;
     box-shadow: none;
     padding-left: 14px;
-    margin-left: 14px;
-    margin-top: -42px;
+    margin-left: -42px;
+    margin-top: -34px;
     .mat-menu-item {
         background: $color-dark-gray;
         border-radius: 50%;

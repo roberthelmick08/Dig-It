@@ -101,16 +101,13 @@
     }
     .page-content-wrapper {
         .page-content {
-            padding-top: 3rem;
             background: transparent;
             overflow-y: auto;
             max-height: calc(100% - 42px);
             box-shadow: none;
+            padding: 3rem 10% 0 10%;
             @media screen and (max-width: $break-sm) {
                 padding: 3rem 0 0 0;
-            }
-            @media screen and (min-width: $break-sm) {
-                padding: 3rem 20% 0 20%;
             }
         }
         .page-content-home {

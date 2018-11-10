@@ -3,7 +3,9 @@
     width: 100%;
     height: calc(100vh - 4rem - 64px);
     background-image: url('../../../assets/img/sproutStages.png');
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
     .home-page-header-logo {
         z-index: 1;
         width: 50%;
@@ -11,9 +13,6 @@
     }
     @media screen and (max-width: $break-sm) {
         background-image: url('../../../assets/img/sproutStages-sm.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: bottom;
         .home-page-header-logo {
             width: 100%;
             margin-top: 50%;

@@ -32,7 +32,7 @@
     <div class="quick-overview-contents" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
         <ng-container *ngFor="let index = index; let slide of slides">
             <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep"
-                fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center center">
+                fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center center">
                 <img [src]="slide.imgSrc" />
                 <div fxLayoutAlign="start center">
                     <p [innerHTML]="slide.innerHTML"></p>

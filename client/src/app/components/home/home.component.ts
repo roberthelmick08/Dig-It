@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   },
   {
     imgSrc: this.iconPath + 'watering-can.svg',
-    innerHTML: 'Never forget to <span class="highlight">water, re-pot,</span> or <span class="highlight">harvest</span> your plants again!'
+    innerHTML: 'Never forget to <span class="highlight">water, re-pot, or harvest</span> your plants again!'
   },
   {
     imgSrc: this.iconPath + 'ecology.svg',
@@ -56,6 +56,6 @@ export class HomeComponent implements OnInit {
             this.isSlideOut = false;
             this.toggleSliderAnimation();
           }, 500);
-    }, 700000);
+    }, 7000);
   }
 }
