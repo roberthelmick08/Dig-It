@@ -15,8 +15,8 @@
     </div>
 
     <button mat-flat-button color="warn" (click)="openAddPlantDialog()" fxFlex="100" *ngIf="authService.isLoggedIn()" class="add-plant-button">
-              Add plant to Dig-It
-            </button>
+      Add plant to Dig-It
+    </button>
 
     <div *ngIf="!visiblePlants || searchTerm.length === 0" class="search-warning ">Enter a search term to begin</div>
 
@@ -32,7 +32,7 @@
                     <img src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
                 </div>
             </div>
-            <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">
+            <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" [matTooltip]="getTooltipImage(plant)" matTooltipClass="dig-it-tooltip" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">
                 <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                 <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
             </div>

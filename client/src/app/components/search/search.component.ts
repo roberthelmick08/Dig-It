@@ -155,6 +155,13 @@ export class SearchComponent implements AfterViewInit, OnInit {
       }
     }).slice(0, 10);
 
+    for (let plant of this.visiblePlants) {
+      this.dataService.imageSearchByName(plant);
+    }
+  }
+
+  getTooltipImage(plant: Plant) {
+    return '<img src=\'{{plant.img}}\'/>';
   }
 
   // Reorder array based on closest match to search term

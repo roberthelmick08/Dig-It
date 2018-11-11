@@ -15,17 +15,19 @@
                 </mat-form-field>
                 <mat-form-field>
                     <mat-select required placeholder="Plant Type" name="type" [(ngModel)]="newPlant.type">
-                        <mat-option value="Cactus">Cactus</mat-option>
-                        <mat-option value="Flower">Flower</mat-option>
-                        <mat-option value="Fruit">Fruit</mat-option>
-                        <mat-option value="Grain">Grain</mat-option>
-                        <mat-option value="Grass">Grass</mat-option>
-                        <mat-option value="Herb">Herb</mat-option>
-                        <mat-option value="Houseplant">Misc Houseplant</mat-option>
-                        <mat-option value="Shrub">Shrub</mat-option>
-                        <mat-option value="Succulent">Succulent</mat-option>
-                        <mat-option value="Vegetable">Vegetable</mat-option>
-                        <mat-option value="Vine">Vine</mat-option>
+                        <mat-option value="Cactus">
+                            <img src="../../../../assets/icons/Cactus.svg" />Cactus</mat-option>
+                        <mat-option value="Flower"><img src="../../../../assets/icons/Flower.svg" />Flower</mat-option>
+                        <mat-option value="Fruit"><img src="../../../../assets/icons/Fruit.svg" />Fruit</mat-option>
+                        <mat-option value="Grain"><img src="../../../../assets/icons/Grain.svg" />Grain</mat-option>
+                        <mat-option value="Grass"><img src="../../../../assets/icons/Grass.svg" />Grass</mat-option>
+                        <mat-option value="Herb"><img src="../../../../assets/icons/Herb.svg" />Herb</mat-option>
+                        <mat-option value="Houseplant"><img src="../../../../assets/icons/Houseplant.svg" />Misc Houseplant</mat-option>
+                        <mat-option value="Shrub"><img src="../../../../assets/icons/Shrub.svg" />Shrub</mat-option>
+                        <mat-option value="Succulent"><img src="../../../../assets/icons/Succulent.svg" />Succulent</mat-option>
+                        <mat-option value="Tree"><img src="../../../../assets/icons/Tree.svg" />Tree</mat-option>
+                        <mat-option value="Vegetable"><img src="../../../../assets/icons/Vegetable.svg" />Vegetable</mat-option>
+                        <mat-option value="Vine"><img src="../../../../assets/icons/Vine.svg" />Vine</mat-option>
                     </mat-select>
                 </mat-form-field>
 
@@ -66,10 +68,10 @@
                 </mat-form-field>
                 <mat-form-field *ngIf="isSaveToGarden">
                     <mat-select required placeholder="Plant Stage" name="stage" [(ngModel)]="newPlant.stage">
-                        <mat-option value="0">Seed</mat-option>
-                        <mat-option value="1">Sproutling</mat-option>
-                        <mat-option value="2">Young Plant</mat-option>
-                        <mat-option value="3">Mature Plant</mat-option>
+                        <mat-option value="0"><img src="../../../../assets/icons/plant-stage/stage0.svg" />Seed</mat-option>
+                        <mat-option value="1"><img src="../../../../assets/icons/plant-stage/stage1.svg" />Sproutling</mat-option>
+                        <mat-option value="2"><img src="../../../../assets/icons/plant-stage/stage2.svg" />Young Plant</mat-option>
+                        <mat-option value="3"><img src="'../../../../assets/icons/' + {{newPlant.type}} + '.svg'" />Mature Plant</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>

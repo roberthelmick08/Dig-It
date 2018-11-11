@@ -116,7 +116,6 @@ export class AuthenticationService {
   // public doCORSRequest(options) {
   public doCORSRequest(options): Observable<any> {
     return Observable.create(function (observer) {
-      console.log(options.url);
       const xhr = new XMLHttpRequest();
       xhr.open(options.method, 'https://cors-anywhere.herokuapp.com/' + options.url);
       xhr.onload = xhr.onerror = () => {
