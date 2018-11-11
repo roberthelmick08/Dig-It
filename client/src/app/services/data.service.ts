@@ -128,13 +128,13 @@ export class DataService {
     let stageString: string;
 
     switch (stage) {
-      case 1: stageString = 'Seed';
+      case 0: stageString = 'Seed';
         break;
-      case 2: stageString = 'Sproutling';
+      case 1: stageString = 'Sproutling';
         break;
-      case 3: stageString = 'Young Plant';
+      case 2: stageString = 'Young Plant';
         break;
-      case 4: stageString = 'Mature Plant';
+      case 3: stageString = 'Mature Plant';
         break;
     }
 
