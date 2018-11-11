@@ -117,14 +117,7 @@
 
 @media screen and (max-width: $break-sm) {
     .plant-grid-item {
-        height: 100px;
-        width: 100%;
         border-bottom: 4px solid $color-light-green;
-        margin: 0;
-        .plant-icon {
-            height: 72px;
-            width: 72px;
-        }
         .reminders-icon-container {
             margin-top: 8px;
             margin-right: 8px;

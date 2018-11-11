@@ -2,13 +2,13 @@
     <div fxFlex="100" fxLayoutAlign="center">
         <h2 class="page-header">Garden</h2>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign.gt-sm="space-evenly center" cdkDrop (cdkDropDropped)="onDrop($event)">
+    <div fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center">
         <div *ngIf="!user?.garden">No plants in your Garden. To get started, add a plant to your Garden.</div>
-        <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" cdkDrag (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
+        <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
             <div class="plant-icon" (click)="openPlantDetailsDialog(plant)">
                 <img src="{{plant.img}}" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
-                <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage === 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
-                <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage !== 3 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+                <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage > 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+                <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage <= 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
             </div>
 
             <div fxLayout="column" fxLayoutAlign="space-between center" class="plant-details-container">
@@ -24,7 +24,7 @@
                         </div>
                     </ng-container>
                 </div>
-                <div class="delete-icon-container" (click)="removePlantFromGarden(plant)" *ngIf="isGridItemOnHover && hoverIndex === index">
+                <div class="delete-icon-container" (click)="removePlantFromGarden(plant)" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
                     <div class="lid"></div>
                     <div class="lidcap"></div>
                     <div class="bin"></div>
