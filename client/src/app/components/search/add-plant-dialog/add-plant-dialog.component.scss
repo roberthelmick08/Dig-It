@@ -3,11 +3,34 @@
     h2 {
         font-size: 2rem;
     }
+    h3 {
+        color: $color-dark-gray;
+        margin-bottom: 32px;
+    }
     .add-plant-scroll-container {
         height: 326px;
         mat-hint.mat-hint,
-        .toggle {
-            margin-top: 18px;
+        .image-container {
+            margin-left: -24px;
+            margin-right: 24px;
+            img {
+                height: 75%;
+                opacity: 0.9;
+                width: 100%;
+            }
+        }
+        .harvest-wrapper {
+            margin-left: -33%;
+            .toggle,
+            mat-hint.mat-hint {
+                margin-top: 18px;
+            }
+        }
+    }
+    a {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

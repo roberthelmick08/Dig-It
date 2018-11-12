@@ -5,29 +5,56 @@
         <h2 class="page-header">{{newPlant.commonName ? newPlant.commonName : 'New Plant'}}</h2>
     </div>
     <div class="add-plant-scroll-container">
-        <form>
+        <div class="image-container" fxFlex="30">
+            <img src="../../../../assets/icons/add-plant-img.svg" />
+        </div>
+        <form fxFlex>
             <div *ngIf="step === 0" class="add-plant-scroll-contents" fxLayout="column">
                 <mat-form-field>
-                    <input matInput placeholder="Common Name" name="commonName" [(ngModel)]="newPlant.commonName" [required]="newPlant?.botanicalName?.length === 0">
+                    <input matInput placeholder="Common Name" name="commonName" maxlength="35" [(ngModel)]="newPlant.commonName" [required]="newPlant?.botanicalName?.length === 0">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput placeholder="Botanical Name" name="botanicalName" [(ngModel)]="newPlant.botanicalName">
+                    <input matInput placeholder="Botanical Name" name="botanicalName" maxlength="25" [(ngModel)]="newPlant.botanicalName">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-select required placeholder="Plant Type" name="type" [(ngModel)]="newPlant.type">
+                        <mat-option value="Houseplant"><img src="../../../../assets/icons/Houseplant.svg" />
+                            <div class="option-text">Houseplant</div>
+                        </mat-option>
                         <mat-option value="Cactus">
-                            <img src="../../../../assets/icons/Cactus.svg" />Cactus</mat-option>
-                        <mat-option value="Flower"><img src="../../../../assets/icons/Flower.svg" />Flower</mat-option>
-                        <mat-option value="Fruit"><img src="../../../../assets/icons/Fruit.svg" />Fruit</mat-option>
-                        <mat-option value="Grain"><img src="../../../../assets/icons/Grain.svg" />Grain</mat-option>
-                        <mat-option value="Grass"><img src="../../../../assets/icons/Grass.svg" />Grass</mat-option>
-                        <mat-option value="Herb"><img src="../../../../assets/icons/Herb.svg" />Herb</mat-option>
-                        <mat-option value="Houseplant"><img src="../../../../assets/icons/Houseplant.svg" />Misc Houseplant</mat-option>
-                        <mat-option value="Shrub"><img src="../../../../assets/icons/Shrub.svg" />Shrub</mat-option>
-                        <mat-option value="Succulent"><img src="../../../../assets/icons/Succulent.svg" />Succulent</mat-option>
-                        <mat-option value="Tree"><img src="../../../../assets/icons/Tree.svg" />Tree</mat-option>
-                        <mat-option value="Vegetable"><img src="../../../../assets/icons/Vegetable.svg" />Vegetable</mat-option>
-                        <mat-option value="Vine"><img src="../../../../assets/icons/Vine.svg" />Vine</mat-option>
+                            <img src="../../../../assets/icons/Cactus.svg" />
+                            <div class="option-text">Cactus</div>
+                        </mat-option>
+                        <mat-option value="Flower"><img src="../../../../assets/icons/Flower.svg" />
+                            <div class="option-text">Flower</div>
+                        </mat-option>
+                        <mat-option value="Fruit"><img src="../../../../assets/icons/Fruit.svg" />
+                            <div class="option-text">Fruit</div>
+                        </mat-option>
+                        <mat-option value="Grain"><img src="../../../../assets/icons/Grain.svg" />
+                            <div class="option-text">Grain</div>
+                        </mat-option>
+                        <mat-option value="Grass"><img src="../../../../assets/icons/Grass.svg" />
+                            <div class="option-text">Grass</div>
+                        </mat-option>
+                        <mat-option value="Herb"><img src="../../../../assets/icons/Herb.svg" />
+                            <div class="option-text">Herb</div>
+                        </mat-option>
+                        <mat-option value="Shrub"><img src="../../../../assets/icons/Shrub.svg" />
+                            <div class="option-text">Shrub</div>
+                        </mat-option>
+                        <mat-option value="Succulent"><img src="../../../../assets/icons/Succulent.svg" />
+                            <div class="option-text">Succulent</div>
+                        </mat-option>
+                        <mat-option value="Tree"><img src="../../../../assets/icons/Tree.svg" />
+                            <div class="option-text">Tree</div>
+                        </mat-option>
+                        <mat-option value="Vegetable"><img src="../../../../assets/icons/Vegetable.svg" />
+                            <div class="option-text">Vegetable</div>
+                        </mat-option>
+                        <mat-option value="Vine"><img src="../../../../assets/icons/Vine.svg" />
+                            <div class="option-text">Vine</div>
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
 
@@ -38,9 +65,9 @@
                         <mat-option value="Biennial">Biennial</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <div fxFlex="100">
+                <div fxFlex="100" class="harvest-wrapper">
                     <mat-hint fxFlex="50">Does it produce something to harvest?</mat-hint>
-                    <mat-slide-toggle fxFlex="20" [(ngModel)]="newPlant.harvestable" name="harvestable" class="toggle">{{ newPlant.harvestable ? 'Yes' : 'No' }}</mat-slide-toggle>
+                    <mat-slide-toggle fxFlex="20" [(ngModel)]="newPlant.harvestable" name="harvestable" class="toggle" matRippleDisabled>{{ newPlant.harvestable ? 'Yes' : 'No' }}</mat-slide-toggle>
                     <mat-form-field fxFlex="30" *ngIf="newPlant.harvestable === true">
                         <input matInput type="number" placeholder="Weeks until harvest" name="weeksToHarvest" [(ngModel)]="newPlant.weeksToHarvest" required>
                     </mat-form-field>
@@ -57,21 +84,33 @@
                             <span *ngIf="newPlant.sunSchedule === 'Full Shade'"><mat-icon>wb_cloudy</mat-icon> Full Shade</span>
                         </mat-select-trigger>
                         <mat-option value="Full Sun">
-                            <mat-icon>brightness_high</mat-icon> Full Sun</mat-option>
+                            <mat-icon>brightness_high</mat-icon>Full Sun
+                        </mat-option>
                         <mat-option value="Partial Sun">
-                            <mat-icon>brightness_low</mat-icon> Partial Sun</mat-option>
+                            <mat-icon>brightness_low</mat-icon>Partial Sun
+                        </mat-option>
                         <mat-option value="Partial Shade">
-                            <mat-icon>brightness_medium</mat-icon> Partial Shade</mat-option>
+                            <mat-icon>brightness_medium</mat-icon>Partial Shade
+                        </mat-option>
                         <mat-option value="Full Shade">
-                            <mat-icon>wb_cloudy</mat-icon> Full Shade</mat-option>
+                            <mat-icon>wb_cloudy</mat-icon>Full Shade
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="isSaveToGarden">
                     <mat-select required placeholder="Plant Stage" name="stage" [(ngModel)]="newPlant.stage">
-                        <mat-option value="0"><img src="../../../../assets/icons/plant-stage/stage0.svg" />Seed</mat-option>
-                        <mat-option value="1"><img src="../../../../assets/icons/plant-stage/stage1.svg" />Sproutling</mat-option>
-                        <mat-option value="2"><img src="../../../../assets/icons/plant-stage/stage2.svg" />Young Plant</mat-option>
-                        <mat-option value="3"><img src="'../../../../assets/icons/' + {{newPlant.type}} + '.svg'" />Mature Plant</mat-option>
+                        <mat-option value="0"><img src="../../../../assets/icons/plant-stage/stage0.svg" />
+                            <div class="option-text">Seed</div>
+                        </mat-option>
+                        <mat-option value="1"><img src="../../../../assets/icons/plant-stage/stage1.svg" />
+                            <div class="option-text">Sproutling</div>
+                        </mat-option>
+                        <mat-option value="2"><img src="../../../../assets/icons/plant-stage/stage2.svg" />
+                            <div class="option-text">Young Plant</div>
+                        </mat-option>
+                        <mat-option value="3"><img src="../../../../assets/icons/{{newPlant.type}}.svg" />
+                            <div class="option-text">Mature Plant</div>
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>

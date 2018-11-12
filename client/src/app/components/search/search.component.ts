@@ -106,13 +106,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
     const dialogRef = this.dialog.open(AddPlantDialogComponent, {
       height: window.innerWidth <= 600 ? '100vh' : '500px',
       width: window.innerWidth <= 600 ? '100vw' : '700px',
-      panelClass: 'dialog-container'
+      panelClass: ['dialog-container', 'remove-bottom-padding']
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.addToGarden(result);
     });
-
   }
 
   toggleAddToGardenMenu(index: number) {

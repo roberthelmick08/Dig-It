@@ -78,7 +78,6 @@ export class LoginDialogComponent {
     }, () => {
       this.getClosestWeatherStation(coordinates);
     });
-
   }
 
   getClosestWeatherStation(coordinates) {

@@ -15,6 +15,7 @@
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openEditProfileDialog()">Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
+                <button mat-raised-button color="accent" class="profile-menu-button" (click)="openAddPlantdialog()">Temp</button>
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openLoginDialog()">Login / Register</button>
             </div>
         </div>
@@ -22,7 +23,6 @@
 
     <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
         <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'">
-
 
 
             <app-home *ngIf="currentPage === 'home'"></app-home>

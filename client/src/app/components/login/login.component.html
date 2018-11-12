@@ -12,7 +12,7 @@
 
             <div *ngIf="activePageTab === 'login'" fxLayout="column">
                 <mat-form-field>
-                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" required>
+                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" required email>
                 </mat-form-field>
                 <mat-form-field>
                     <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" required>
@@ -22,13 +22,13 @@
 
             <div *ngIf="activePageTab === 'register'" fxLayout="column">
                 <mat-form-field>
-                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" required>
+                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" required email>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" required>
+                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="text" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
+                    <input matInput type="number" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="setUserCredentials()" [disabled]="!registerCredentials.email || !registerCredentials.password || !registerCredentials.zip">Register</button>
             </div>

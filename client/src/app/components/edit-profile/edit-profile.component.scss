@@ -1,0 +1,18 @@
+@import "../../../styles.scss";
+
+.page-header{
+    margin-top: 0;
+}
+h1{
+    color: $color-red;
+}
+h2{
+    text-decoration: underline;
+}
+.login-image-container {
+    height: 290px;
+    img {
+        margin-left: -68px;
+        height: 100%;
+    }
+}

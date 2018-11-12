@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 import { User } from 'src/models/user';
+import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -66,7 +67,7 @@ ngOnInit(): void {
   }
 
   openPlantDetailsDialog(data) {
-    const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
+    this.dialog.open(PlantDetailsDialogComponent, {
       height: window.innerWidth <= 600 ? '100vh' : '500px',
       width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: 'dialog-container',
@@ -74,11 +75,19 @@ ngOnInit(): void {
     });
   }
 
-  openEditProfileDialog() {
-    const dialogRef = this.dialog.open(EditProfileDialogComponent, {
+  openAddPlantdialog(){
+    this.dialog.open(AddPlantDialogComponent, {
       height: window.innerWidth <= 600 ? '100vh' : '500px',
       width: window.innerWidth <= 600 ? '100vw' : '700px',
-      panelClass: 'dialog-container'
+      panelClass: ['dialog-container', 'remove-bottom-padding']
+    });
+  }
+
+  openEditProfileDialog() {
+    this.dialog.open(EditProfileDialogComponent, {
+      height: window.innerWidth <= 600 ? '100vh' : '450px',
+      width: window.innerWidth <= 600 ? '100vw' : '700px',
+      panelClass: ['dialog-container', 'remove-bottom-padding']
     });
   }
 
@@ -93,7 +102,7 @@ ngOnInit(): void {
   }
 
   openLoginDialog() {
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
+    this.dialog.open(LoginDialogComponent, {
       height: '400px',
       width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: ['dialog-container', 'remove-bottom-padding']

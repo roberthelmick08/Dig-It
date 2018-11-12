@@ -34,7 +34,6 @@
             border: 2px solid #ffffff;
             z-index: 999;
             position: absolute;
-            top: 5px;
             left: calc(50% - 50px);
             cursor: default;
             img {
@@ -50,7 +49,7 @@
             font-variant-caps: all-petite-caps;
             position: absolute;
             left: calc(35% - 48px);
-            top: 6px;
+            top: 3px;
             z-index: 2;
             &:hover {
                 -webkit-transform: scale(1.1);
@@ -102,6 +101,7 @@
         }
     }
     .page-content-wrapper {
+        padding-bottom: 24px;
         .page-content {
             background: transparent;
             overflow-y: auto;
