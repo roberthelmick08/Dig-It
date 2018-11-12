@@ -8,7 +8,7 @@
             <input matInput type="search" placeholder="Common or Botanical Name" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" />
         </mat-form-field>
         <mat-radio-group class="example-radio-group " [(ngModel)]="searchBy " fxLayout="column ">
-            <mat-radio-button class="example-radio-button " *ngFor="let name of [ 'commonName', 'botanicalName'] " [value]="name " (click)="onSearch() " disableRipple>
+            <mat-radio-button class="example-radio-button " *ngFor="let name of [ 'commonName', 'botanicalName'] " [value]="name " (change)="searchTerm.length > 0 && onSearch() " matRippleDisabled>
                 {{name === 'botanicalName' ? 'Botanical Name' : 'Common Name'}}
             </mat-radio-button>
         </mat-radio-group>
@@ -32,7 +32,7 @@
                     <img src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
                 </div>
             </div>
-            <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" [matTooltip]="getTooltipImage(plant)" matTooltipClass="dig-it-tooltip" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">
+            <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">
                 <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                 <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
             </div>

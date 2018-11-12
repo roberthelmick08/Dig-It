@@ -7,6 +7,7 @@
     height: 250px;
     width: 200px;
     overflow: hidden;
+    transition: .1s ease-in;
     &:hover {
         background-color: rgba(255, 255, 255, 1);
         border-bottom: 4px solid $color-light-green;
@@ -15,13 +16,16 @@
         }
     }
     .plant-icon {
-        opacity: 0.8;
         height: 66%;
         overflow: hidden;
         cursor: pointer;
+        transition: .1s ease-in;
         img {
             width: 100%;
             height: 100%;
+        }
+        @media screen and (min-width: $break-md) {
+            opacity: 0.8;
         }
     }
     .plant-details-container {
@@ -69,6 +73,7 @@
 
 .delete-icon-container {
     cursor: pointer;
+    transition: .1s ease-in;
     &:hover {
         .lid,
         .lidcap {

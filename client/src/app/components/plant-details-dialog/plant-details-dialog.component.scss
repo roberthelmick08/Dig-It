@@ -1,12 +1,11 @@
 @import "../../../styles.scss";
 .plant-details-dialog {
     .add-plant-header {
-        .image-not-found {
-            margin: 0 24px 24px 0;
-            width: 200px;
+        img {
+            max-height: 200px;
+            margin: -16px 24px 24px 0px;
         }
         .image-found {
-            max-height: 200px;
             border-bottom: 4px solid $color-light-green;
             border-left: 4px solid $color-light-green;
             border-right: 4px solid $color-light-green;

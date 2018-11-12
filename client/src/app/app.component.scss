@@ -8,6 +8,7 @@
         .toolbar-logo {
             position: absolute;
             margin-top: 1rem;
+            opacity: 0.8;
             z-index: 2;
             img {
                 height: 64px;
@@ -33,7 +34,7 @@
             border: 2px solid #ffffff;
             z-index: 999;
             position: absolute;
-            top: 0;
+            top: 5px;
             left: calc(50% - 50px);
             cursor: default;
             img {
@@ -49,7 +50,7 @@
             font-variant-caps: all-petite-caps;
             position: absolute;
             left: calc(35% - 48px);
-            top: 2px;
+            top: 6px;
             z-index: 2;
             &:hover {
                 -webkit-transform: scale(1.1);

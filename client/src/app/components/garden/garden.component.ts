@@ -45,13 +45,23 @@ export class GardenComponent implements OnInit {
     } else if (reminder.name === 'sow') {
       // Plant stage 0 -> 1 (seed to sproutling)
       plant.stage++;
+      plant.reminders.push(this.reminderService.setFrostDateReminder('move-inside', this.user));
+      plant.reminders.push(this.reminderService.setFrostDateReminder('move-outside', this.user));
+      plant.reminders.push(this.reminderService.setRepotReminder(this.user, plant));
     } else if (reminder.name === 'repot' && plant.stage < 2) {
       plant.reminders.push(this.reminderService.setRepotReminder(this.user, plant));
       // Plant stage 1 -> 2 (sproutling to young plant)
       plant.stage++;
+      plant.reminders.filter(r => {
+        return r.name === 'spray';
+      }).map(r => {
+        r.name = 'water';
+      });
     } else if (reminder.name === 'repot' && plant.stage === 2) {
       // Plant stage 2 -> 3 (young plant to mature plant)
       plant.stage++;
+    } else if (reminder.name === 'harvest') {
+      plant.reminders = [];
     }
     this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
       this.dataService.openSnackBar('fail');
@@ -74,7 +84,7 @@ export class GardenComponent implements OnInit {
       this.dataService.openSnackBar('fail');
     }, () => {
       let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
-      this.dataService.openSnackBar('success', plantName + 'has been removed from your garden.');
+      this.dataService.openSnackBar('success', plantName + ' has been removed from your garden.');
     });
   }
 

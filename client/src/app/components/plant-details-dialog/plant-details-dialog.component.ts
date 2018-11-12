@@ -69,7 +69,7 @@ export class PlantDetailsDialogComponent {
         innerHtml = 'The lifecycle of a perennial plant is indefinite. They will continue to grow year after year.';
       }
     } else if (type === 'harvestDate') {
-      innerHtml = 'This is an approximate date calculated by Dig-It based on the plant type and the climate in your location. This should only act as a guide, and Dig-It recommends that you research what to look for to tell that the plant is ripe before harvesting';
+      innerHtml = 'This is an approximate date calculated by Dig-It based on the plant type and the climate in your location. This should only act as a guide, and Dig-It recommends that you research what to look for to tell that the plant is ripe before harvesting.';
     }
     return innerHtml;
   }
