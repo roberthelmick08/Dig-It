@@ -28,34 +28,33 @@ export class AppComponent implements OnInit {
 ngOnInit(): void {
   let today = new Date();
 
-  this.authService.getUser().subscribe(user => {
-    this.user = user;
-  }, (err) => {
-    console.error(err);
-    this.dataService.openSnackBar('fail');
-  }, () => {
-  // Reset annual reminders if older than 60 days
-  for (let plant of this.user.garden) {
-    this.dataService.imageSearchByName(plant);
-    let tempPlant =  plant.reminders.filter(reminder => {
-      return (reminder.name === 'move-inside' || reminder.name === 'move-outside' || reminder.name === 'repot') && new Date(reminder.date) < this.reminderService.addDays(today, -60);
-    });
-    tempPlant.map(reminder => {
-      reminder.date = this.reminderService.addDays(reminder.date, 365);
+  if (this.authService.isLoggedIn() === true) {
+    this.authService.getUser().subscribe(user => {
+      this.user = user;
+    }, (err) => {
+      console.error(err);
+      this.dataService.openSnackBar('fail');
+    }, () => {
+    // Reset annual reminders if older than 60 days
+    for (let plant of this.user.garden) {
+      this.dataService.imageSearchByName(plant);
+      let tempPlant =  plant.reminders.filter(reminder => {
+        return (reminder.name === 'move-inside' || reminder.name === 'move-outside' || reminder.name === 'repot') && new Date(reminder.date) < this.reminderService.addDays(today, -60);
+      });
+      tempPlant.map(reminder => {
+        reminder.date = this.reminderService.addDays(reminder.date, 365);
+      });
+    }
+
+    // Refresh frost dates if passed
+    if (new Date(this.user.lastFrostDate) < this.reminderService.addDays(today, -30)) {
+      this.user.lastFrostDate = this.reminderService.addDays(this.user.lastFrostDate, 365);
+    } else if (new Date(this.user.firstFrostDate) < this.reminderService.addDays(today, -30)) {
+      this.user.firstFrostDate = this.reminderService.addDays(this.user.firstFrostDate, 365);
+    }
+    this.authService.updateUser(this.user).subscribe();
     });
   }
-
-  // Refresh frost dates if passed
-  if (new Date(this.user.lastFrostDate) < this.reminderService.addDays(today, -30)) {
-    this.user.lastFrostDate = this.reminderService.addDays(this.user.lastFrostDate, 365);
-  } else if (new Date(this.user.firstFrostDate) < this.reminderService.addDays(today, -30)) {
-    this.user.firstFrostDate = this.reminderService.addDays(this.user.firstFrostDate, 365);
-  }
-  console.log(this.user);
-  this.authService.updateUser(this.user).subscribe();
-  });
-
-
 }
 
   setCurrentPage(page: string) {
@@ -68,8 +67,8 @@ ngOnInit(): void {
 
   openPlantDetailsDialog(data) {
     const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
-      height: '500px',
-      width: '700px',
+      height: window.innerWidth <= 600 ? '100vh' : '500px',
+      width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: 'dialog-container',
       data: data
     });
@@ -77,8 +76,8 @@ ngOnInit(): void {
 
   openEditProfileDialog() {
     const dialogRef = this.dialog.open(EditProfileDialogComponent, {
-      height: '500px',
-      width: '700px',
+      height: window.innerWidth <= 600 ? '100vh' : '500px',
+      width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: 'dialog-container'
     });
   }
@@ -96,7 +95,7 @@ ngOnInit(): void {
   openLoginDialog() {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       height: '400px',
-      width: '700px',
+      width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: ['dialog-container', 'remove-bottom-padding']
     });
   }

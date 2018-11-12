@@ -71,4 +71,14 @@
             }
         }
     }
+    @media screen and (max-width: $break-sm) {
+        h4 {
+            margin-bottom: 1rem;
+        }
+        .mat-dialog-actions {
+            position: absolute;
+            bottom: 2rem;
+            right: 1rem;
+        }
+    }
 }

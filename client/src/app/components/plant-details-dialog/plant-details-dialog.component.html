@@ -1,6 +1,6 @@
 <mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
 <div class="plant-details-dialog" fxLayout="column">
-    <div class="add-plant-header">
+    <div class="add-plant-header" fxLayout.lt-sm="column">
         <img *ngIf="plant.img" src="{{plant.img}}" class="image-found" />
         <img *ngIf="!plant.img" src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
 
@@ -37,7 +37,7 @@
             </div>
             <div *ngIf="plant.zones">
                 <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div>
-            <div *ngIf="plant.comment">
+            <div *ngIf="plant.comment" fxLayout.lt-sm="column">
                 <div fxFlex="30" class="highlight">Comments: </div>
                 <div fxFlex>{{toSentenceCase(plant.comment)}}</div>
             </div>
