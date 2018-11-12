@@ -1,16 +1,13 @@
 @import "../../../../styles.scss";
 .add-plant-dialog {
-    .h2 {
+    h2 {
         font-size: 2rem;
     }
     .add-plant-scroll-container {
         height: 326px;
-        mat-slide-toggle.mat-slide-toggle {
-            margin-top: 1rem;
-            padding-left: 15%;
-        }
-        mat-hint.mat-hint {
-            margin-bottom: 0.5rem;
+        mat-hint.mat-hint,
+        .toggle {
+            margin-top: 18px;
         }
     }
 }

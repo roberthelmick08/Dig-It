@@ -38,10 +38,10 @@
                         <mat-option value="Biennial">Biennial</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-hint>Does it produce something to harvest?</mat-hint>
                 <div fxFlex="100">
-                    <mat-slide-toggle fxFlex="50" [(ngModel)]="newPlant.harvestable" name="harvestable">{{ newPlant.harvestable ? 'Yes' : 'No' }}</mat-slide-toggle>
-                    <mat-form-field fxFlex="50" *ngIf="newPlant.harvestable === true">
+                    <mat-hint fxFlex="50">Does it produce something to harvest?</mat-hint>
+                    <mat-slide-toggle fxFlex="20" [(ngModel)]="newPlant.harvestable" name="harvestable" class="toggle">{{ newPlant.harvestable ? 'Yes' : 'No' }}</mat-slide-toggle>
+                    <mat-form-field fxFlex="30" *ngIf="newPlant.harvestable === true">
                         <input matInput type="number" placeholder="Weeks until harvest" name="weeksToHarvest" [(ngModel)]="newPlant.weeksToHarvest" required>
                     </mat-form-field>
                 </div>
