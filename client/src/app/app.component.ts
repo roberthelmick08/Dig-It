@@ -75,14 +75,6 @@ ngOnInit(): void {
     });
   }
 
-  openAddPlantdialog(){
-    this.dialog.open(AddPlantDialogComponent, {
-      height: window.innerWidth <= 600 ? '100vh' : '500px',
-      width: window.innerWidth <= 600 ? '100vw' : '700px',
-      panelClass: ['dialog-container', 'remove-bottom-padding']
-    });
-  }
-
   openEditProfileDialog() {
     this.dialog.open(EditProfileDialogComponent, {
       height: window.innerWidth <= 600 ? '100vh' : '450px',

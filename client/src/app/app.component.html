@@ -15,7 +15,6 @@
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openEditProfileDialog()">Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-raised-button color="accent" class="profile-menu-button" (click)="openAddPlantdialog()">Temp</button>
                 <button mat-raised-button color="accent" class="profile-menu-button" (click)="openLoginDialog()">Login / Register</button>
             </div>
         </div>
