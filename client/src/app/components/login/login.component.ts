@@ -21,6 +21,9 @@ export class LoginDialogComponent {
   // Temp variable to store string of ZIP code used for parseInt
   tempZip: string;
 
+  // Variable to toggle loading icon
+  isLoading: boolean = false;
+
   loginCredentials: TokenPayload = {
     email: '',
     password: '',
@@ -45,17 +48,18 @@ export class LoginDialogComponent {
 
   login() {
     this.auth.login(this.loginCredentials).subscribe(() => {
-      this.dialogRef.close();
       this.navigateToGardenEvent.emit(null);
     }, (err) => {
-      this.dataService.openSnackBar('fail');
+      this.dataService.openSnackBar('fail', 'Unable to log in. Please try again.');
       console.error(err);
+    }, () => {
+      this.dialogRef.close();
     });
 }
 
   register() {
     this.auth.setUser(this.registerCredentials).subscribe((result) => { }, (err) => {
-      this.dataService.openSnackBar('fail');
+      this.dataService.openSnackBar('fail', 'Unable to register. Please try again.');
       console.error(err);
     }, () => {
       this.dialogRef.close();
@@ -67,6 +71,8 @@ export class LoginDialogComponent {
   setUserCredentials() {
     // Latitude and Longitude to use for Frostline API
     let coordinates: {lat: number, lon: number};
+
+    this.isLoading = true;
 
     this.auth.doCORSRequest({
       method: 'GET',

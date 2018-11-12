@@ -1,3 +1,5 @@
+<mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
+
 <div fxLayout="column">
     <div class="page-tab-container" fxLayout="row" fxFlex="30">
         <div class="page-tab page-tab-login" [class.page-tab-active]="activePageTab === 'login'" (click)="activePageTab === 'login' ? '' : activePageTab = 'login'">Login</div>
@@ -30,7 +32,10 @@
                 <mat-form-field>
                     <input matInput type="text" pattern="\d*" name="zip" placeholder="ZIP code" [(ngModel)]="tempZip" maxLength="5" minLength="5" (keyup)="parseZipString()" required>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="setUserCredentials()" [disabled]="!registerCredentials.email || !registerCredentials.password || tempZip?.length !== 5">Register</button>
+                <button mat-raised-button color="primary" (click)="setUserCredentials()" *ngIf="!isLoading" [disabled]="!registerCredentials.email || !registerCredentials.password || tempZip?.length !== 5">Register</button>
+                <div fxFlex="100" fxLayoutAlign="center center">
+                    <div class="loading-icon" *ngIf="isLoading"></div>
+                </div>
             </div>
         </div>
     </div>
