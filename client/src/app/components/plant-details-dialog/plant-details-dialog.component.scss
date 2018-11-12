@@ -70,6 +70,10 @@
                 opacity: 1;
             }
         }
+        .harvest-info-icon {
+            top: .5rem;
+            left: -1rem;
+        }
     }
     @media screen and (max-width: $break-sm) {
         h4 {

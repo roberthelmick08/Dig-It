@@ -32,8 +32,9 @@
                     </td>
                 </tr>
             </table>
-            <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date: <span class="highlight">{{reminderService.getHarvestDateString(user, plant)}}</span>
-                <mat-icon class="info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
+            <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date:
+                <mat-icon class="info-icon harvest-info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
+                <span class="highlight">{{reminderService.getHarvestDateString(user, plant)}}</span>
             </div>
             <div *ngIf="plant.zones">
                 <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div>
