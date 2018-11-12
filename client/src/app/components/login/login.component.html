@@ -12,7 +12,7 @@
 
             <div *ngIf="activePageTab === 'login'" fxLayout="column">
                 <mat-form-field>
-                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" required email>
+                    <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" required>
                 </mat-form-field>
                 <mat-form-field>
                     <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" required>
@@ -22,15 +22,15 @@
 
             <div *ngIf="activePageTab === 'register'" fxLayout="column">
                 <mat-form-field>
-                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" required email>
+                    <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" required>
+                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="number" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
+                    <input matInput type="text" pattern="\d*" name="zip" placeholder="ZIP code" [(ngModel)]="tempZip" maxLength="5" minLength="5" (keyup)="parseZipString()" required>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="setUserCredentials()" [disabled]="!registerCredentials.email || !registerCredentials.password || !registerCredentials.zip">Register</button>
+                <button mat-raised-button color="primary" (click)="setUserCredentials()" [disabled]="!registerCredentials.email || !registerCredentials.password || tempZip?.length !== 5">Register</button>
             </div>
         </div>
     </div>

@@ -18,6 +18,9 @@ export class LoginDialogComponent {
   @Output()
   navigateToGardenEvent = new EventEmitter();
 
+  // Temp variable to store string of ZIP code used for parseInt
+  tempZip: string;
+
   loginCredentials: TokenPayload = {
     email: '',
     password: '',
@@ -120,5 +123,9 @@ export class LoginDialogComponent {
         this.register();
       }
     });
+  }
+
+  parseZipString(){
+    this.registerCredentials.zip = parseInt(this.tempZip);
   }
 }
