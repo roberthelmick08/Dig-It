@@ -22,7 +22,8 @@
             </mat-form-field>
             <div fxLayout="row">
                 <h3>Your USDA Hardiness Zone:</h3>
-                <mat-icon class="info-icon" matTooltip="Your hardiness zone is calculated by Dig-It based on the climate in your location. The growing season in your area starts on {{getLastFrostDateString()}}, and ends on {{getFirstFrostDateString()}}." matTooltipClass="dig-it-tooltip">help_outline</mat-icon>
+                <mat-icon class="info-icon" matTooltip="Your hardiness zone is calculated by Dig-It based on the climate in your location. The growing season in your area starts on {{getLastFrostDateString()}}, and ends on {{getFirstFrostDateString()}}." matTooltipClass="dig-it-tooltip"
+                    #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
                 <h1>{{user.zone}}</h1>
             </div>
 

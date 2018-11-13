@@ -32,5 +32,10 @@
     img {
         margin-left: -68px;
         height: 100%;
+        @media screen and (max-width: $break-sm) {
+            margin-left: -106px;
+            height: 85%;
+            margin-top: 41px;
+        }
     }
 }

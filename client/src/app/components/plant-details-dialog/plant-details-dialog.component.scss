@@ -1,15 +1,29 @@
 @import "../../../styles.scss";
 .plant-details-dialog {
     .add-plant-header {
+        @media screen and (max-width: $break-sm) {
+            .close-dialog-icon {
+                position: relative;
+                left: calc(100% - 24px);
+            }
+        }
         img {
             max-height: 200px;
             margin: -16px 24px 24px 0px;
+            @media screen and (max-width: $break-sm) {
+                max-height: 250px;
+            }
         }
         .image-found {
             border-bottom: 4px solid $color-light-green;
             border-left: 4px solid $color-light-green;
             border-right: 4px solid $color-light-green;
             margin: -24px 24px 24px -24px;
+            @media screen and (max-width: $break-sm) {
+                margin: -24px -48px 24px -24px;
+                border-left: none;
+                border-right: none;
+            }
         }
         h1 {
             color: $color-dark-gray;
@@ -72,7 +86,7 @@
         }
         .harvest-info-icon {
             top: .5rem;
-            left: -1rem;
+            left: -0.25rem;
         }
     }
     @media screen and (max-width: $break-sm) {
