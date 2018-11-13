@@ -1,4 +1,3 @@
-import { AuthenticationService } from './../../services/authentication.service';
 import { User } from './../../../models/user';
 import { ReminderService } from './../../services/reminder.service';
 import { DataService } from './../../services/data.service';
@@ -18,7 +17,7 @@ export class PlantDetailsDialogComponent {
   step: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
-  public dataService: DataService, private auth: AuthenticationService, public reminderService: ReminderService) {
+  public dataService: DataService, public reminderService: ReminderService) {
     this.plant = data.plant;
     this.user = data.user;
     this.dataService.imageSearchByName(this.plant);

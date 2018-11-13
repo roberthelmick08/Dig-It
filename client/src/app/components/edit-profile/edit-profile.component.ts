@@ -1,29 +1,24 @@
 import { DataService } from './../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { User } from 'src/models/user';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
-export class EditProfileDialogComponent implements OnInit {
+export class EditProfileDialogComponent {
 
   user: User;
 
-  constructor(public dialogRef: MatDialogRef<EditProfileDialogComponent>, public authService: AuthenticationService, 
-    public dataService: DataService) { }
-
-  ngOnInit() {
-    this.authService.getUser().subscribe(user => {
-      this.user = user;
-    }, (err) => {
-      console.error(err);
-      this.dataService.openSnackBar('fail');
-    });
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<EditProfileDialogComponent>,
+  public authService: AuthenticationService, public dataService: DataService) {
+      this.user = data;
+      console.log(this.user);
+      console.log(data);
+     }
 
   editUser() {
     this.authService.setUser(this.user).subscribe((result) => { }, (err) => {
@@ -36,10 +31,10 @@ export class EditProfileDialogComponent implements OnInit {
   }
 
   getFirstFrostDateString(): string {
-    return this.user.firstFrostDate.toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
+    return new Date(this.user.firstFrostDate).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
   }
 
   getLastFrostDateString(): string {
-    return this.user.lastFrostDate.toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
+    return new Date(this.user.lastFrostDate).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
   }
 }

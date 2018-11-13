@@ -1,14 +1,19 @@
 @import "../../../styles.scss";
-
-.page-header{
+.page-header {
     margin-top: 0;
+    font-size: 2rem;
+    text-decoration: none;
 }
-h1{
+
+h1 {
     color: $color-red;
+    margin: -0.5rem 0 0.5rem 1rem;
 }
-h2{
+
+h2 {
     text-decoration: underline;
 }
+
 .login-image-container {
     height: 290px;
     img {

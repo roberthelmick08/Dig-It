@@ -19,7 +19,7 @@
                 <div class="reminders-container" fxLayout="row wrap" fxFlex fxLayoutAlign="end center">
                     <p *ngIf="plant?.reminders.length === 0">No reminders</p>
                     <ng-container *ngFor="let reminder of plant?.reminders">
-                        <div *ngIf="isReminderVisible(reminder)" class="reminder-icon-wrapper" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
+                        <div *ngIf="isReminderVisible(reminder)" class="reminder-icon-wrapper" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
                             <img src="{{ '../../../assets/icons/reminders/' + reminder.name + '.svg' }}" class="reminders-icon" />
                         </div>
                     </ng-container>

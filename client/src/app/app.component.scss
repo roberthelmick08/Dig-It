@@ -92,8 +92,8 @@
                 background-color: rgba(255, 255, 255, 0.5);
             }
             @media screen and (max-width: $break-sm) {
-                right: -6px;
-                top: -6px;
+                right: -8px;
+                top: -4px;
                 button {
                     width: 100px;
                     overflow: hidden;
@@ -111,7 +111,7 @@
         .page-content {
             background: transparent;
             overflow-y: auto;
-            max-height: calc(100% - 42px);
+            max-height: calc(100% - 32px);
             box-shadow: none;
             padding: 3rem 10% 1rem 10%;
             @media screen and (max-width: $break-sm) {
