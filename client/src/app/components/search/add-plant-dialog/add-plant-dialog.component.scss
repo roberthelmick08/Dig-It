@@ -1,16 +1,36 @@
 @import "../../../../styles.scss";
 .add-plant-dialog {
-    .h2 {
+    h2 {
         font-size: 2rem;
+    }
+    h3 {
+        color: $color-dark-gray;
+        margin-bottom: 32px;
     }
     .add-plant-scroll-container {
         height: 326px;
-        mat-slide-toggle.mat-slide-toggle {
-            margin-top: 1rem;
-            padding-left: 15%;
+        mat-hint.mat-hint,
+        .image-container {
+            margin-left: -24px;
+            margin-right: 24px;
+            img {
+                height: 75%;
+                opacity: 0.9;
+                width: 100%;
+            }
         }
-        mat-hint.mat-hint {
-            margin-bottom: 0.5rem;
+        .harvest-wrapper {
+            margin-left: -33%;
+            .toggle,
+            mat-hint.mat-hint {
+                margin-top: 18px;
+            }
+        }
+    }
+    a {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

@@ -1,5 +1,33 @@
+<mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
+
 <div fxLayout="column">
     <div fxFlex="100" fxLayoutAlign="center">
-        <h2 class="page-header">Account Settings</h2>
+        <h2 class="page-header">My Account</h2>
+    </div>
+
+    <div>
+        <div class="login-image-container" fxFlex="30">
+            <img src="../../../assets/icons/gardener.svg" />
+        </div>
+        <div fxFlex class="form-wrapper" fxLayout="column">
+
+            <mat-form-field>
+                <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="user.email" required email>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="user.password" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" name="zip" placeholder="ZIP code" [(ngModel)]="user.zip" required>
+            </mat-form-field>
+            <div fxLayout="row">
+                <h3>Your USDA Hardiness Zone:</h3>
+                <mat-icon class="info-icon" matTooltip="Your hardiness zone is calculated by Dig-It based on the climate in your location. The growing season in your area starts on {{getLastFrostDateString()}}, and ends on {{getFirstFrostDateString()}}." matTooltipClass="dig-it-tooltip"
+                    #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
+                <h1>{{user.zone}}</h1>
+            </div>
+
+            <button mat-raised-button color="primary" (click)="editUser()">Register</button>
+        </div>
     </div>
 </div>

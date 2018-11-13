@@ -1,10 +1,10 @@
-import { AuthenticationService } from './../../services/authentication.service';
 import { User } from './../../../models/user';
 import { ReminderService } from './../../services/reminder.service';
 import { DataService } from './../../services/data.service';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Plant } from 'src/models/plant';
+import { GardenPlant } from 'src/models/gardenPlant';
+import { Reminder } from 'src/models/reminder';
 
 @Component({
   selector: 'app-plant-details-dialog',
@@ -13,52 +13,39 @@ import { Plant } from 'src/models/plant';
 })
 export class PlantDetailsDialogComponent {
   user: User;
-  plant: Plant;
+  plant: GardenPlant;
   // Variable used to navigate to next plant details page
-  step: number = 0;
-  isImageLoaded: boolean = false;
+  step: number = 1;
+  maxSteps: number = 3;
+  today = new Date();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
-  public dataService: DataService, private auth: AuthenticationService, public reminderService: ReminderService) {
+  public dataService: DataService, public reminderService: ReminderService) {
     this.plant = data.plant;
     this.user = data.user;
-    this.imageSearchByName();
-  }
-
-  imageSearchByName(isRecurse?: boolean) {
-    let queryString;
-
-    if (!this.plant.botanicalName || isRecurse === true) {
-      queryString = this.plant.commonName.toLocaleLowerCase().split(' ').join('_');
-    } else {
-      queryString = this.plant.botanicalName.toLocaleLowerCase().split(' ').join('_');
+    this.dataService.imageSearchByName(this.plant);
+    for(let reminder of this.plant.reminders){
+      reminder.date = new Date(reminder.date);
     }
-
-    this.auth.doCORSRequest({
-      method: 'GET',
-      url: 'https://commons.wikimedia.org/w/api.php?action=query&generator=images&prop=imageinfo&gimlimit=1&redirects=1&titles=' + queryString + '&iiprop=url&format=json'
-    }).subscribe( result => {
-      result = JSON.parse(result);
-      if (result.query) {
-        this.plant.img = result.query.pages[Object.keys(result.query.pages)[0]].imageinfo[0].url;
-        this.isImageLoaded = true;
-      }
-    }, (err) => {
-      this.dataService.openSnackBar('fail');
-      console.error(err);
-    }, () => {
-      if (!this.plant.img && !isRecurse) {
-        this.imageSearchByName(true);
-      }
-    });
+    if(!this.plant.comment){
+      this.maxSteps--;
+    }
   }
 
   onNextStep() {
-    this.step++;
+    // Skip 2nd step if no reminders are present
+    if(this.step === 1 && !this.plant.reminders){
+      this.step = this.step + 2;
+    } else {
+      this.step++;
+    }
   }
 
   onPreviousStep() {
     this.step--;
+    if(this.step === 1 && !this.plant.reminders){
+      this.step = this.step - 2;
+    }
   }
 
   toSentenceCase(text: string) {
@@ -74,6 +61,24 @@ export class PlantDetailsDialogComponent {
       });
       return sentenceArray.join(' ');
     }
+  }
+
+  getReminderDateElement(reminder: Reminder, element: string): string{
+    let payLoad;
+
+    switch(element){
+      case('day'): 
+        payLoad = { day: '2-digit'};
+        break;
+      case('month'): 
+        payLoad = { month: 'short'};
+        break;
+      case('year'): 
+        payLoad = { day: 'numeric'};
+        break;
+    }
+    let value = reminder.date.toLocaleDateString('en-US', payLoad );
+    return value;
   }
 
   getTooltipText(type: string, value?: string): string {
@@ -98,7 +103,7 @@ export class PlantDetailsDialogComponent {
         innerHtml = 'The lifecycle of a perennial plant is indefinite. They will continue to grow year after year.';
       }
     } else if (type === 'harvestDate') {
-      innerHtml = 'This is an approximate date calculated by Dig-It based on the plant type and the climate in your location. This should only act as a guide, and Dig-It recommends that you research what to look for to tell that the plant is ripe before harvesting';
+      innerHtml = 'This is an approximate date calculated by Dig-It based on the plant type and the climate in your location. This should only act as a guide, and Dig-It recommends that you research what to look for to tell that the plant is ripe before harvesting.';
     }
     return innerHtml;
   }

@@ -1,5 +1,6 @@
-<img src="../../../assets/logo/dig-it-logo-full.svg" class="home-page-header-logo" />
-<img src="../../../assets/img/sproutStages.png" class="sprout-stages-img" />
+<div class="sprout-stages-img-wrapper">
+    <img src="../../../assets/logo/dig-it-logo-full.svg" class="home-page-header-logo" />
+</div>
 
 <div class="home-footer getting-started-container" fxLayout="column">
     <div style="background-color: #87C145" fxFlex="100" class="getting-started-paragraph-wrapper">
@@ -24,14 +25,14 @@
 </div>
 
 <div class="quick-overview-container">
-    <div class="quick-overview-header">
+    <div class="quick-overview-header" fxLayoutAlign="center center" fxLayout="column">
         <h2>CAN YOU</h2>
-        <h1>Dig-It</h1>
+        <img src="../../../assets/logo/dig-it-text-white.svg" />
     </div>
     <div class="quick-overview-contents" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
         <ng-container *ngFor="let index = index; let slide of slides">
             <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep"
-                fxLayout="row">
+                fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center center">
                 <img [src]="slide.imgSrc" />
                 <div fxLayoutAlign="start center">
                     <p [innerHTML]="slide.innerHTML"></p>
@@ -41,7 +42,7 @@
     </div>
 </div>
 <div class="home-footer" fxLayout="column">
-    <div fxLayout="row" fxFlex="100" class="footer-top">
+    <div fxLayout.lt-sm="column" fxFlex="100" class="footer-top">
         <div fxFlex="33" style="background-color: #008F95" fxLayoutAlign="center center">
             <img src="../../../assets/logo/dig-it-emblem-green.svg" class="footer-logo" />
         </div>

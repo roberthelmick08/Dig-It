@@ -1,116 +1,128 @@
 @import "../../../styles.scss";
 .plant-grid-item {
-    height: 150px;
-    width: 200px;
     padding: 0;
     margin: 16px 16px;
     border-bottom: 4px solid transparent;
     background-color: rgba(255, 255, 255, 0.7);
+    height: 250px;
+    width: 200px;
+    overflow: hidden;
+    transition: .1s ease-in;
     &:hover {
         background-color: rgba(255, 255, 255, 1);
         border-bottom: 4px solid $color-light-green;
+        .plant-icon {
+            opacity: 1;
+        }
     }
     .plant-icon {
-        height: 60px;
-        width: 60px;
-        opacity: 0.8;
-    }
-    .reminders-icon-container {
-        .reminders-icon {
-            height: 36px;
-            width: 36px;
-            cursor: pointer;
-            margin-left: 8px;
-        }
-    }
-    .plant-name-details {
+        height: 66%;
+        overflow: hidden;
         cursor: pointer;
-        h4 {
-            letter-spacing: 4px;
-            color: $color-dark-gray;
-            text-align: center;
+        transition: .1s ease-in;
+        img {
+            width: 100%;
+            height: 100%;
         }
-        h5 {
-            letter-spacing: 2px;
-            font-style: italic;
-            color: $color-blue;
-            opacity: 0.5;
-            text-align: center;
+        @media screen and (min-width: $break-md) {
+            opacity: 0.8;
         }
     }
-    .settings-icon-container {
-        text-align: right;
-        width: 100%;
-        .settings-icon {
-            color: $color-light-gray;
-            cursor: pointer;
+    .plant-details-container {
+        height: 33%;
+        .reminders-container {
+            height: 40px;
+            width: 100%;
+            margin-top: -163px;
             position: absolute;
-            margin-top: -24px;
-            margin-left: calc(100% - 1.3rem - 4px);
-            font-size: 1.3rem;
-            height: 1.3rem;
-            width: 1.3rem;
-            &:hover {
-                -webkit-transition: -webkit-transform .5s ease-in-out;
-                transition: transform .5s ease-in-out;
-                -webkit-transform: rotate(90deg);
-                transform: rotate(90deg);
+            padding-right: 8px;
+            background: linear-gradient(white, rgba(255, 255, 255, 0.5), transparent);
+            .reminder-icon-wrapper {
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                margin-left: 8px;
+                background-color: $color-red;
+                border: 1px solid $color-blue;
+                .reminders-icon {
+                    height: 24px;
+                    width: 24px;
+                    cursor: pointer;
+                    margin-left: 6px;
+                    margin-top: 6px;
+                }
+            }
+        }
+        .plant-name-details {
+            cursor: pointer;
+            h4 {
+                letter-spacing: 4px;
+                color: $color-dark-gray;
+                text-align: center;
+            }
+            h5 {
+                letter-spacing: 2px;
+                font-style: italic;
+                color: $color-blue;
+                opacity: 0.5;
+                text-align: center;
             }
         }
     }
 }
 
-/deep/ .mat-menu-panel {
-    background: transparent;
-    max-width: 50px;
-    min-width: 0;
-    box-shadow: none;
-    padding-left: 14px;
-    margin-left: 14px;
-    margin-top: -42px;
-    .mat-menu-item {
-        background: $color-dark-gray;
-        border-radius: 50%;
-        padding: 0;
-        height: 24px;
-        width: 24px;
-        margin-bottom: 0.5rem;
-        &:hover {
-            background-color: $color-dark-gray !important;
-            -webkit-box-shadow: -2px 4px 10px 0px rgba(0, 0, 0, 0.3);
-            box-shadow: -2px 4px 10px 0px rgba(0, 0, 0, 0.3);
-            -webkit-transform: scale(1.1);
-            -ms-transform: scale(1.1);
-            transform: scale(1.1);
-            transition: all 0.3s ease;
+.delete-icon-container {
+    cursor: pointer;
+    transition: .1s ease-in;
+    &:hover {
+        .lid,
+        .lidcap {
+            transform: rotate(10deg);
+            margin-bottom: 1.5px;
+            background-color: $color-red;
         }
-        mat-icon.mat-icon {
-            color: white !important;
-            font-size: 16px;
-            position: absolute;
-            margin-top: -8px;
-            margin-left: 4px;
-            &:hover {
-                color: $color-red !important;
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
+        .bin {
+            background-color: $color-red;
+            border-top-color: $color-red
         }
+    }
+    .lidcap,
+    .lid,
+    .bin {
+        position: absolute;
+    }
+    .lidcap,
+    .lid {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        background: $color-light-gray;
+        transition: transform .2s linear, margin .2s linear;
+    }
+    .lidcap {
+        bottom: 18.8px;
+        right: 9px;
+        height: 1px;
+        width: 2px;
+    }
+    .lid {
+        bottom: 17px;
+        right: 3px;
+        width: 14px;
+        height: 2px;
+    }
+    .bin {
+        bottom: 4px;
+        right: 4px;
+        width: 10px;
+        border-top: 12px solid $color-light-gray;
+        border-left: 1px solid transparent;
+        border-right: 1px solid transparent;
     }
 }
 
 @media screen and (max-width: $break-sm) {
     .plant-grid-item {
-        height: 100px;
-        width: 100%;
         border-bottom: 4px solid $color-light-green;
-        margin: 0;
-        .plant-icon {
-            height: 72px;
-            width: 72px;
-        }
         .reminders-icon-container {
             margin-top: 8px;
             margin-right: 8px;

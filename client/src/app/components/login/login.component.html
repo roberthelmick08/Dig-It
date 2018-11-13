@@ -1,3 +1,5 @@
+<mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
+
 <div fxLayout="column">
     <div class="page-tab-container" fxLayout="row" fxFlex="30">
         <div class="page-tab page-tab-login" [class.page-tab-active]="activePageTab === 'login'" (click)="activePageTab === 'login' ? '' : activePageTab = 'login'">Login</div>
@@ -5,36 +7,36 @@
     </div>
     <div>
         <div class="login-image-container" fxFlex="30">
-            <img src="../../../assets/icons/reminders/plant.svg" />
+            <img src="../../../assets/icons/gardener.svg" />
         </div>
-        <div fxFlex>
+        <div fxFlex class="form-wrapper">
             <h1 class="header">{{activePageTab === 'login' ? 'Login' : 'Register'}}</h1>
 
             <div *ngIf="activePageTab === 'login'" fxLayout="column">
                 <mat-form-field>
-                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email">
+                    <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" (keyup.enter)="login()" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password">
+                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" (keyup.enter)="login()" required>
                 </mat-form-field>
+                <button mat-raised-button color="primary" (click)="login()" [disabled]="!loginCredentials.email || !loginCredentials.password">Log In</button>
             </div>
 
             <div *ngIf="activePageTab === 'register'" fxLayout="column">
                 <mat-form-field>
-                    <input matInput type="email" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" required>
+                    <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" (keyup.enter)="setUserCredentials()" required>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" required>
+                    <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" (keyup.enter)="setUserCredentials()" required>
                 </mat-form-field>
-                <!-- <mat-form-field>
-                    <input matInput type="text" name="phone" placeholder="Phone Number" [(ngModel)]="registerCredentials.phone" required>
-                </mat-form-field> -->
                 <mat-form-field>
-                    <input matInput type="text" name="zip" placeholder="ZIP code" [(ngModel)]="registerCredentials.zip" required>
+                    <input matInput type="text" pattern="\d*" name="zip" placeholder="ZIP code" [(ngModel)]="tempZip" maxLength="5" minLength="5" (keyup)="parseZipString()" (keyup.enter)="setUserCredentials()" required>
                 </mat-form-field>
+                <button mat-raised-button color="primary" (click)="setUserCredentials()" *ngIf="!isLoading" [disabled]="!registerCredentials.email || !registerCredentials.password || tempZip?.length !== 5">Register</button>
+                <div fxFlex="100" fxLayoutAlign="center center">
+                    <div class="loading-icon" *ngIf="isLoading"></div>
+                </div>
             </div>
         </div>
     </div>
-    <button mat-flat-button (click)="setUserCredentials()" *ngIf="activePageTab === 'register'">Register</button>
-    <button mat-flat-button (click)="login()" *ngIf="activePageTab === 'login'">Log In</button>
 </div>

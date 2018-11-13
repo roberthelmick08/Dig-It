@@ -41,10 +41,12 @@ export class ReminderService {
       remindersArray.push(this.setHarvestReminder(plant, user));
     }
 
-    if (plant.isPotted) {
+    if (plant.isPotted === true) {
       remindersArray.push(this.setFrostDateReminder('move-inside', user));
       remindersArray.push(this.setFrostDateReminder('move-outside', user));
-      remindersArray.push(this.setRepotReminder(user, plant));
+      if (plant.stage < 3) {
+        remindersArray.push(this.setRepotReminder(user, plant));
+      }
     }
 
     return remindersArray;
@@ -120,7 +122,7 @@ export class ReminderService {
   }
 
   getHarvestDate(user: User, plant: Plant): Date {
-    let harvestDate = this.addDays(this.getSowDate(user, plant), plant.weeksToHarvest * 7);
+    let harvestDate = this.addDays(user.lastFrostDate, plant.weeksToHarvest * 7);
     return harvestDate;
   }
 

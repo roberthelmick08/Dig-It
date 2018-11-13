@@ -5,19 +5,27 @@
     padding: 1rem;
     margin-top: 1rem;
     background-color: rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    height: 83px;
     &:hover {
         border-left: 4px solid $color-light-green;
         border-right: 4px solid $color-light-green;
         background-color: rgba(255, 255, 255, 0.5);
     }
+    @media screen and (max-width: $break-md) {
+        border-left: 4px solid $color-light-green;
+        border-right: 4px solid $color-light-green;
+    }
     h3 {
         color: $color-dark-gray;
         letter-spacing: 0.125rem; //2px
+        text-align: right;
     }
     h5 {
         color: $color-blue;
         letter-spacing: 0.0625rem; //1px
         font-style: italic;
+        text-align: right;
     }
     .plant-name-details {
         cursor: pointer;
@@ -31,9 +39,7 @@
 .add-plant-button {
     opacity: 0.8;
     &:hover {
-        mat-icon.mat-icon {
-            opacity: 1;
-        }
+        opacity: 1;
     }
 }
 
@@ -46,6 +52,16 @@
 }
 
 .plant-icon {
-    height: 64px;
-    width: 64px;
+    height: 83px;
+    margin-top: -1rem;
+    img {
+        height: 100%;
+    }
+    .img-found {
+        width: 180px;
+        margin-top: -1rem;
+        margin-left: -1rem;
+        height: 100%;
+        border-right: 4px solid $color-light-green;
+    }
 }

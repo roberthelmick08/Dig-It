@@ -8,9 +8,11 @@
         .toolbar-logo {
             position: absolute;
             margin-top: 1rem;
+            opacity: 0.8;
             z-index: 2;
             img {
                 height: 64px;
+                cursor: pointer;
             }
         }
         .garden-icon-wrapper-hover {
@@ -32,7 +34,6 @@
             border: 2px solid #ffffff;
             z-index: 999;
             position: absolute;
-            top: 0;
             left: calc(50% - 50px);
             cursor: default;
             img {
@@ -47,8 +48,8 @@
             letter-spacing: 3px;
             font-variant-caps: all-petite-caps;
             position: absolute;
-            left: calc(40% - 48px);
-            top: 1rem;
+            left: calc(35% - 48px);
+            top: 3px;
             z-index: 2;
             &:hover {
                 -webkit-transform: scale(1.1);
@@ -81,12 +82,18 @@
                 letter-spacing: 2px;
                 line-height: 2rem;
             }
+            .accent-button {
+                opacity: 0.8;
+                &:hover {
+                    opacity: 1;
+                }
+            }
             .mat-stroked-button {
                 background-color: rgba(255, 255, 255, 0.5);
             }
             @media screen and (max-width: $break-sm) {
-                right: -6px;
-                top: -6px;
+                right: -8px;
+                top: -4px;
                 button {
                     width: 100px;
                     overflow: hidden;
@@ -100,23 +107,22 @@
         }
     }
     .page-content-wrapper {
+        padding-bottom: 22px;
         .page-content {
-            padding-top: 3rem;
             background: transparent;
             overflow-y: auto;
-            max-height: calc(100% - 64px);
+            max-height: calc(100% - 32px);
             box-shadow: none;
+            padding: 3rem 10% 1rem 10%;
             @media screen and (max-width: $break-sm) {
                 padding: 3rem 0 0 0;
-            }
-            @media screen and (min-width: $break-sm) {
-                padding: 3rem 20% 0 20%;
             }
         }
         .page-content-home {
             padding: 4rem 0 0 0;
             background: transparent;
             box-shadow: none;
+            overflow-x: hidden;
         }
     }
 }

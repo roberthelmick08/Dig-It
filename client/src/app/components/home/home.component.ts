@@ -25,12 +25,12 @@ export class HomeComponent implements OnInit {
     innerHTML: 'Dig-It was created for gardeners who struggle to keep their plants strong and healthy. <br><br><span class="highlight">Dig-It. Saves. Lives.</span>'
   },
   {
-    imgSrc: this.iconPath + 'reminders/repot.svg',
+    imgSrc: this.iconPath + 'world.svg',
     innerHTML: 'Plug in your ZIP code at registration, and Dig-It will give you growing tips <span class="highlight">specific to your location.</span>'
   },
   {
     imgSrc: this.iconPath + 'watering-can.svg',
-    innerHTML: 'Never forget to <span class="highlight">water</span>, re-pot, or harvest your plants again!'
+    innerHTML: 'Never forget to <span class="highlight">water, re-pot, or harvest</span> your plants again!'
   },
   {
     imgSrc: this.iconPath + 'ecology.svg',

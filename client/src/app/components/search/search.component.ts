@@ -63,12 +63,11 @@ export class SearchComponent implements AfterViewInit, OnInit {
       this.dataService.openSnackBar('fail');
     }, () => {
       this.isAddToGardenMenuVisible = false;
-      this.dataService.openSnackBar('success', 'Plant saved to your Garden!');
-      console.log(this.user.garden);
+      this.dataService.openSnackBar('success', plant.commonName + ' saved to your Garden!');
     });
   }
 
-  setGardenPlant(plant: Plant): GardenPlant {
+  setGardenPlant(plant): GardenPlant {
     const gardenPlant = new GardenPlant();
 
     if (plant.stage) {
@@ -76,17 +75,14 @@ export class SearchComponent implements AfterViewInit, OnInit {
     }
 
     gardenPlant.stage = plant.stage ? plant.stage : 0;
-    gardenPlant.isPotted = plant.isPotted;
-    // SET MOCK REMINDERS
-    // gardenPlant.reminders = this.reminderService.setMockReminders(plant, this.user);
-    gardenPlant.reminders = this.reminderService.setInitialReminders(plant, this.user);
+    gardenPlant.isPotted = Boolean(plant.isPotted);
     gardenPlant._id = plant._id;
     gardenPlant.commonName = plant.commonName;
     gardenPlant.botanicalName = plant.botanicalName;
     gardenPlant.type = plant.type;
     gardenPlant.lifeType = plant.lifeType;
     gardenPlant.harvestable = plant.harvestable;
-    gardenPlant.weeksToHarvest = plant.weeksToHarvest;
+    gardenPlant.weeksToHarvest = plant.time_to_harvest ? plant.time_to_harvest : 16;
     gardenPlant.sunSchedule = plant.sunSchedule;
     gardenPlant.variety = plant.variety;
     gardenPlant.comment = plant.comment;
@@ -99,21 +95,23 @@ export class SearchComponent implements AfterViewInit, OnInit {
     gardenPlant.methodNum = plant.methodNum;
     gardenPlant.img = plant.img;
     gardenPlant.zones = plant.zones;
+    // SET MOCK REMINDERS
+    // gardenPlant.reminders = this.reminderService.setMockReminders(plant, this.user);
+    gardenPlant.reminders = this.reminderService.setInitialReminders(gardenPlant, this.user);
 
     return gardenPlant;
   }
 
   openAddPlantDialog() {
     const dialogRef = this.dialog.open(AddPlantDialogComponent, {
-      height: '500px',
-      width: '700px',
-      panelClass: 'dialog-container'
+      height: window.innerWidth <= 600 ? '100vh' : '500px',
+      width: window.innerWidth <= 600 ? '100vw' : '700px',
+      panelClass: ['dialog-container', 'remove-bottom-padding']
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.addToGarden(result);
     });
-
   }
 
   toggleAddToGardenMenu(index: number) {
@@ -155,6 +153,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
       }
     }).slice(0, 10);
 
+    for (let plant of this.visiblePlants) {
+      this.dataService.imageSearchByName(plant);
+    }
   }
 
   // Reorder array based on closest match to search term
