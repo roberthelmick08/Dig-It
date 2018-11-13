@@ -12,11 +12,8 @@ import { Reminder } from 'src/models/reminder';
   styleUrls: ['./garden.component.scss']
 })
 export class GardenComponent implements OnInit {
-
   user: User;
-
   isGridItemOnHover: boolean = false;
-
   hoverIndex: number;
 
   @Output()

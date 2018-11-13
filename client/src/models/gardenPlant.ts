@@ -14,13 +14,15 @@ export class GardenPlant {
   sunSchedule?: string;
   variety?: string;
   comment?: string;
-  // Duration of germination period in weeks, used for repot reminder
-  germEnd?: number;
+  img?: string;
+  weeksToHarvest?: number;
+  weeksToSowBeforeLastFrost?: number;
+  harvestable: boolean;
+
   // Sowing Tips
   sowingSpace?: number;
   depth?: number;
   methodNum?: number;
-  zones?: Array<number>;
 
   /*
   * Additional Fields - Garden Plant
@@ -32,10 +34,8 @@ export class GardenPlant {
  /*
  * Not Used
  */
- img?: string;
- weeksToHarvest?: number;
- weeksToSowBeforeLastFrost?: number;
- harvestable: boolean;
  germStart?: number;
+ germEnd?: number;
  sowingMethod?: string;
+ zones?: Array<number>;
 }

@@ -1,66 +1,88 @@
-<div fxLayout="column">
-    <div fxFlex="100" fxLayoutAlign="center">
-        <h2 class="page-header">Search</h2>
-    </div>
+<mat-sidenav-container (backdropClick)="sidenav.close()">
+    <mat-sidenav #sidenav (keydown.escape)="sidenav.close()">
 
-    <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
-        <mat-form-field fxFlex="50">
-            <input matInput type="search" placeholder="Common or Botanical Name" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" />
-        </mat-form-field>
-        <mat-radio-group class="example-radio-group " [(ngModel)]="searchBy " fxLayout="column " matRippleDisabled>
-            <mat-radio-button class="example-radio-button " *ngFor="let name of [ 'commonName', 'botanicalName'] " [value]="name " (change)="searchTerm.length > 0 && onSearch() " matRippleDisabled>
-                {{name === 'botanicalName' ? 'Botanical Name' : 'Common Name'}}
-            </mat-radio-button>
-        </mat-radio-group>
-    </div>
 
-    <button mat-flat-button color="warn" (click)="openAddPlantDialog()" fxFlex="100" *ngIf="authService.isLoggedIn()" class="add-plant-button">
-      Add plant to Dig-It
-    </button>
+        <button mat-flat-button color="accent" (click)="applyFilter()">Apply</button>
+    </mat-sidenav>
 
-    <div *ngIf="!visiblePlants || searchTerm.length === 0" class="search-warning ">Enter a search term</div>
-
-    <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0">
-        <h2 class="search-warning">No Plants Found</h2>
-    </div>
-
-    <div *ngIf="visiblePlants?.length > 0" fxLayout="column">
-
-        <div class="plant-grid-item" *ngFor="let index = index; let plant of visiblePlants">
-            <div fxLayout="row" fxLayoutAlign="space-between start">
-                <div class="plant-icon">
-                    <img src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
-                </div>
+    <mat-sidenav-content>
+        <div fxLayout="column">
+            <div fxFlex="100" fxLayoutAlign="center">
+                <h2 class="page-header">Search</h2>
             </div>
-            <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">
-                <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
-                <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
+
+            <div class="filter-wrapper">
+                <button mat-flat-button color="" (click)="sidenav.open()">
+                    <img src="../../../assets/icons/filter.svg">
+                </button>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let filter of filters">
+                        <mat-icon>close</mat-icon>
+                        {{filter.type}}
+                    </mat-chip>
+                </mat-chip-list>
             </div>
-            <div *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" fxFlex="60" fxLayoutAlign="end center">
-                <mat-form-field *ngIf="plant.stage > 0" class="resize-select-menu">
-                    <mat-select placeholder="Potted / In Ground" name="isPotted" [(ngModel)]="plant.isPotted" required>
-                        <mat-option value="true">Potted</mat-option>
-                        <mat-option value="false">In Ground</mat-option>
-                    </mat-select>
+
+            <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-around center">
+                <mat-form-field fxFlex="50">
+                    <input matInput type="search" placeholder="Common or Botanical Name" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" />
                 </mat-form-field>
+                <mat-radio-group class="example-radio-group " [(ngModel)]="searchBy " fxLayout="column " matRippleDisabled>
+                    <mat-radio-button class="example-radio-button " *ngFor="let name of [ 'commonName', 'botanicalName'] " [value]="name " (change)="searchTerm.length > 0 && onSearch() " matRippleDisabled>
+                        {{name === 'botanicalName' ? 'Botanical Name' : 'Common Name'}}
+                    </mat-radio-button>
+                </mat-radio-group>
             </div>
-            <div fxFlex="40" fxLayout="row" fxLayoutAlign="end center">
-                <div *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" fxFlex="60" fxLayoutAlign="center center" fxLayout="column">
-                    <mat-form-field class="resize-select-menu">
-                        <mat-select placeholder="Plant Stage" name="stage" [(ngModel)]="plant.stage" required>
-                            <mat-option value="0">Seed</mat-option>
-                            <mat-option value="1">Sproutling</mat-option>
-                            <mat-option value="2">Young Plant</mat-option>
-                            <mat-option value="3">Mature Plant</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div fxLayout="column">
-                    <button mat-flat-button color="accent" *ngIf="authService.isLoggedIn() && (!isAddToGardenMenuVisible || activeGardenMenuIndex !== index)" (click)="toggleAddToGardenMenu(index);"><mat-icon>add</mat-icon></button>
-                    <button mat-stroked-button color="accent" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="isAddToGardenMenuVisible = false;">Cancel</button>
-                    <button mat-flat-button color="primary" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="addToGarden(plant)" [disabled]="(plant.stage === 0 && plant.isPotted === undefined) || !plant.stage">Submit</button>
+
+            <button mat-flat-button color="warn" (click)="openAddPlantDialog()" fxFlex="100" *ngIf="authService.isLoggedIn()" class="add-plant-button">
+                Add plant to Dig-It
+            </button>
+
+            <div *ngIf="!visiblePlants || searchTerm.length === 0" class="search-warning ">Enter a search term</div>
+
+            <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0">
+                <h2 class="search-warning">No Plants Found</h2>
+            </div>
+
+            <div *ngIf="visiblePlants?.length > 0" fxLayout="column">
+
+                <div class="plant-grid-item" *ngFor="let index = index; let plant of visiblePlants">
+                    <div fxLayout="row" fxLayoutAlign="space-between start">
+                        <div class="plant-icon">
+                            <img src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
+                        </div>
+                    </div>
+                    <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">
+                        <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
+                        <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
+                    </div>
+                    <div *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" fxFlex="60" fxLayoutAlign="end center">
+                        <mat-form-field *ngIf="plant.stage > 0" class="resize-select-menu">
+                            <mat-select placeholder="Potted / In Ground" name="isPotted" [(ngModel)]="plant.isPotted" required>
+                                <mat-option value="true">Potted</mat-option>
+                                <mat-option value="false">In Ground</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="40" fxLayout="row" fxLayoutAlign="end center">
+                        <div *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" fxFlex="60" fxLayoutAlign="center center" fxLayout="column">
+                            <mat-form-field class="resize-select-menu">
+                                <mat-select placeholder="Plant Stage" name="stage" [(ngModel)]="plant.stage" required>
+                                    <mat-option value="0">Seed</mat-option>
+                                    <mat-option value="1">Sproutling</mat-option>
+                                    <mat-option value="2">Young Plant</mat-option>
+                                    <mat-option value="3">Mature Plant</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="column">
+                            <button mat-flat-button color="accent" *ngIf="authService.isLoggedIn() && (!isAddToGardenMenuVisible || activeGardenMenuIndex !== index)" (click)="toggleAddToGardenMenu(index);"><mat-icon>add</mat-icon></button>
+                            <button mat-stroked-button color="accent" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="isAddToGardenMenuVisible = false;">Cancel</button>
+                            <button mat-flat-button color="primary" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="addToGarden(plant)" [disabled]="(plant.stage === 0 && plant.isPotted === undefined) || !plant.stage">Submit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

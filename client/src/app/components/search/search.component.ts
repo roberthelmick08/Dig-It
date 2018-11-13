@@ -1,12 +1,13 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
-import { Component, AfterViewInit, Output, EventEmitter, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, AfterViewInit, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSidenav } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { GardenPlant } from './../../../models/gardenPlant';
 import { User } from './../../../models/user';
 import { DataService } from '../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { ReminderService } from './../../services/reminder.service';
+import { SearchFilter } from 'src/models/searchFilter';
 
 
 @Component({
@@ -19,6 +20,10 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
+
+  @ViewChild('sidenav') sidenav: MatSidenav;
+
+  filters: Array<SearchFilter>;
 
   user: User;
 
@@ -114,17 +119,21 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
   }
 
-  toggleAddToGardenMenu(index: number) {
-    this.isAddToGardenMenuVisible = true;
-    this.activeGardenMenuIndex = index;
-  }
-
   openPlantDetailsDialog(plant: Plant) {
     const data = {
       plant: plant,
       user: this.user
     };
     this.openPlantDetailsDialogEvent.emit(data);
+  }
+  
+  toggleAddToGardenMenu(index: number) {
+    this.isAddToGardenMenuVisible = true;
+    this.activeGardenMenuIndex = index;
+  }
+
+  applyFilter(){
+
   }
 
   onSearch() {
