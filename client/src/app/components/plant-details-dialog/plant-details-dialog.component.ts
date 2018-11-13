@@ -4,6 +4,7 @@ import { DataService } from './../../services/data.service';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { GardenPlant } from 'src/models/gardenPlant';
+import { Reminder } from 'src/models/reminder';
 
 @Component({
   selector: 'app-plant-details-dialog',
@@ -15,28 +16,36 @@ export class PlantDetailsDialogComponent {
   plant: GardenPlant;
   // Variable used to navigate to next plant details page
   step: number = 1;
-  // Number of slides. Max limit for 'step' variable
-  slidesLength: number = 1;
+  maxSteps: number = 3;
+  today = new Date();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
   public dataService: DataService, public reminderService: ReminderService) {
     this.plant = data.plant;
     this.user = data.user;
     this.dataService.imageSearchByName(this.plant);
+    for(let reminder of this.plant.reminders){
+      reminder.date = new Date(reminder.date);
+    }
+    if(!this.plant.comment){
+      this.maxSteps--;
+    }
   }
 
   onNextStep() {
-    this.step++;
-    // Skip 2nd step if no comment is present
-    if(this.step === 1 && !this.plant.comment){
+    // Skip 2nd step if no reminders are present
+    if(this.step === 1 && !this.plant.reminders){
       this.step = this.step + 2;
-    } if(this.plant.reminders){
-      
+    } else {
+      this.step++;
     }
   }
 
   onPreviousStep() {
     this.step--;
+    if(this.step === 1 && !this.plant.reminders){
+      this.step = this.step - 2;
+    }
   }
 
   toSentenceCase(text: string) {
@@ -52,6 +61,24 @@ export class PlantDetailsDialogComponent {
       });
       return sentenceArray.join(' ');
     }
+  }
+
+  getReminderDateElement(reminder: Reminder, element: string): string{
+    let payLoad;
+
+    switch(element){
+      case('day'): 
+        payLoad = { day: '2-digit'};
+        break;
+      case('month'): 
+        payLoad = { month: 'short'};
+        break;
+      case('year'): 
+        payLoad = { day: 'numeric'};
+        break;
+    }
+    let value = reminder.date.toLocaleDateString('en-US', payLoad );
+    return value;
   }
 
   getTooltipText(type: string, value?: string): string {
