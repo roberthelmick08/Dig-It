@@ -4,7 +4,7 @@ import { ReminderService } from './../../services/reminder.service';
 import { DataService } from './../../services/data.service';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Plant } from 'src/models/plant';
+import { GardenPlant } from 'src/models/gardenPlant';
 
 @Component({
   selector: 'app-plant-details-dialog',
@@ -13,9 +13,11 @@ import { Plant } from 'src/models/plant';
 })
 export class PlantDetailsDialogComponent {
   user: User;
-  plant: Plant;
+  plant: GardenPlant;
   // Variable used to navigate to next plant details page
-  step: number = 0;
+  step: number = 1;
+  // Number of slides. Max limit for 'step' variable
+  slidesLength: number = 1;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
   public dataService: DataService, private auth: AuthenticationService, public reminderService: ReminderService) {
@@ -26,6 +28,12 @@ export class PlantDetailsDialogComponent {
 
   onNextStep() {
     this.step++;
+    // Skip 2nd step if no comment is present
+    if(this.step === 1 && !this.plant.comment){
+      this.step = this.step + 2;
+    } if(this.plant.reminders){
+      
+    }
   }
 
   onPreviousStep() {

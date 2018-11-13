@@ -13,7 +13,7 @@
 
     <div class="plant-details-container" fxLayout="column">
         <!-- General Details -->
-        <div *ngIf="step === 0" fxLayout="column" class="slider-container">
+        <div *ngIf="step === 1" fxLayout="column" class="slider-container">
             <table *ngIf="plant.lifeType || plant.type || plant.sunSchedule">
                 <tr *ngIf="plant.lifeType || plant.type">
                     <td *ngIf="plant.type" fxLayout="row" fxFlex>
@@ -58,7 +58,18 @@
             </div>
         </div>
 
-        <div *ngIf="step === 1" fxLayout="column" class="slider-container">
+        <div *ngIf="step === 2" fxLayout="column" class="slider-container">
+            <h3>Active Reminders</h3>
+            <div *ngFor="let reminder of plant.reminders">
+                <div *ngIf="plant.methodNum">
+                    <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
+                    {{dataService.getSowingMethodString(plant.methodNum)}}
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="step === 3" fxLayout="column" class="slider-container">
+            <h3>Sowing Instructions</h3>
             <div *ngIf="plant.comment">
                 <div *ngIf="plant.methodNum">
                     <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
@@ -75,9 +86,9 @@
     </div>
 
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
-        <button mat-button color="secondary" (click)="dialogRef.close()" *ngIf="step === 0">Close</button>
-        <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step === 0 && (plant.methodNum || plant.depth || plant.sowingSpace)">Next ></button>
-        <button mat-raised-button color="secondary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
-        <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step !== 0">Close</button>
+        <button mat-button color="secondary" (click)="dialogRef.close()" *ngIf="step === 1">Close</button>
+        <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="">Next ></button>
+        <button mat-raised-button color="secondary" (click)="onPreviousStep()" *ngIf="step !== 1">< Back</button>
+        <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step !== 1">Close</button>
     </mat-dialog-actions>
 </div>

@@ -1,12 +1,10 @@
 import { ReminderService } from './../../services/reminder.service';
 import { GardenPlant } from './../../../models/gardenPlant';
 import { AuthenticationService } from './../../services/authentication.service';
-import { Plant } from './../../../models/plant';
 import { DataService } from './../../services/data.service';
 import { User } from 'src/models/user';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Reminder } from 'src/models/reminder';
-import { text } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-garden',
@@ -65,12 +63,10 @@ export class GardenComponent implements OnInit {
     }
     this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
       this.dataService.openSnackBar('fail');
-    }, () => {
-      console.log(this.user.garden);
     });
   }
 
-  openPlantDetailsDialog(plant: Plant) {
+  openPlantDetailsDialog(plant: GardenPlant) {
     const data = {
       plant: plant,
       user: this.user
@@ -99,7 +95,7 @@ export class GardenComponent implements OnInit {
     this.hoverIndex = index;
   }
 
-  getReminderTooltipText(plant: Plant, reminder: Reminder): string {
+  getReminderTooltipText(plant: GardenPlant, reminder: Reminder): string {
     let tempText = 'Something went wrong!';
     let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
 

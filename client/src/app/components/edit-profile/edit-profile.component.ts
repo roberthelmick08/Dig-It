@@ -26,9 +26,8 @@ export class EditProfileDialogComponent implements OnInit {
   }
 
   editUser() {
-    this.authService.setUser(this.user).subscribe((result) => { }, (err) => {
+    this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
       this.dataService.openSnackBar('fail');
-      console.error(err);
     }, () => {
       this.dialogRef.close();
       this.dataService.openSnackBar('success', 'Account updated.');
