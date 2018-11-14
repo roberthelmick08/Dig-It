@@ -41,6 +41,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   activeGardenMenuIndex: number;
 
+  plantTypes = ['All', 'Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Vegetable', 'Vine'];
+
+  sunSchedules = ['All', 'Full Sun', 'Partial Sun', 'Partial Shade', 'Full Shade'];
+
+  lifeCycles = ['All', 'Annual', 'Biennial', 'Perennial'];
+
   constructor( private dataService: DataService, public authService: AuthenticationService,
     private reminderService: ReminderService, public dialog: MatDialog ) { }
 
@@ -126,13 +132,13 @@ export class SearchComponent implements AfterViewInit, OnInit {
     };
     this.openPlantDetailsDialogEvent.emit(data);
   }
-  
+
   toggleAddToGardenMenu(index: number) {
     this.isAddToGardenMenuVisible = true;
     this.activeGardenMenuIndex = index;
   }
 
-  applyFilter(){
+  applyFilter() {
 
   }
 

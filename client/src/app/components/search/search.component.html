@@ -1,11 +1,22 @@
 <mat-sidenav-container (backdropClick)="sidenav.close()">
     <mat-sidenav #sidenav class="sidenav-container" (keydown.escape)="sidenav.close()" fixedInViewport>
 
-
-
+        <!-- Sun Schedule / Plant Type / Harvestable / Life Cycle -->
+        <div class="filter-border">
+            <div class="filter-header">Plant Type</div>
+            <div *ngFor="let plantType of plantTypes">{{plantType}}</div>
+        </div>
+        <div class="filter-border">
+            <div class="filter-header">Sun Schedule</div>
+            <div *ngFor="let sunSchedule of sunSchedules">{{sunSchedule}}</div>
+        </div>
+        <div class="filter-border">
+            <div class="filter-header">Life Cycle</div>
+            <div *ngFor="let lifeCycle of lifeCycles">{{lifeCycle}}</div>
+        </div>
 
         <div class="footer-button-wrapper">
-            <button mat-stroked-button color="accent" (click)="sidenav.close()">Cancel</button>
+            <button mat-stroked-button color="primary" (click)="sidenav.close()">Cancel</button>
             <button mat-flat-button color="primary" (click)="applyFilter()">Apply</button>
         </div>
     </mat-sidenav>

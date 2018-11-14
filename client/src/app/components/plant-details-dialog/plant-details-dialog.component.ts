@@ -29,7 +29,15 @@ export class PlantDetailsDialogComponent {
         reminder.date = new Date(reminder.date);
       }
     }
+
+    this.plant.reminders.sort( (a, b) => {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+
     if (!this.plant.comment) {
+      this.maxSteps--;
+    }
+    if (!this.plant.reminders) {
       this.maxSteps--;
     }
   }
@@ -45,7 +53,7 @@ export class PlantDetailsDialogComponent {
 
   onPreviousStep() {
     this.step--;
-    if (this.step === 1 && !this.plant.reminders) {
+    if (this.step === 3 && !this.plant.reminders) {
       this.step = this.step - 2;
     }
   }
@@ -76,7 +84,7 @@ export class PlantDetailsDialogComponent {
         payLoad = { month: 'short'};
         break;
       case('year'):
-        payLoad = { day: 'numeric'};
+        payLoad = { year: 'numeric'};
         break;
     }
     let value = reminder.date.toLocaleDateString('en-US', payLoad );

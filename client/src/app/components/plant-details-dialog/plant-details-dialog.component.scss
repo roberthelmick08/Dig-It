@@ -41,6 +41,7 @@
         }
     }
     .plant-details-container {
+        height: 266px;
         border-top: 1px solid $color-light-gray;
         padding-top: 1rem;
         font-size: 1.25rem;
@@ -62,6 +63,7 @@
             h3 {
                 text-align: center;
                 opacity: 0.6;
+                letter-spacing: 4px;
             }
             div {
                 text-align: justify;
@@ -92,14 +94,16 @@
     }
     .reminder-list-item {
         .calendar-icon {
-            font-size: 1em;
+            font-size: .7em;
+            margin-top: 16px;
+            margin-right: 16px;
             display: block;
             position: relative;
-            width: 4em;
+            width: 3.5em;
             height: 4em;
             background-color: #fff;
             border-radius: 0.6em;
-            box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 $color-light-gray, 0 4px 0 #fff, 0 5px 0 $color-light-gray, 0 0 0 1px #bdbdbd;
+            box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 0 0 1px #bdbdbd;
             overflow: hidden;
             span {
                 font-size: 1.8em;
@@ -116,7 +120,7 @@
             }
             em {
                 position: absolute;
-                bottom: 0.1em;
+                bottom: -0.1em;
                 color: $color-blue;
                 font-size: 0.8em
             }
@@ -132,6 +136,8 @@
         .reminder-text {
             font-variant: petite-caps;
             color: $color-dark-gray;
+            padding-top: 36px;
+            letter-spacing: 2px;
         }
     }
     @media screen and (max-width: $break-sm) {

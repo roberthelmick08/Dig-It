@@ -14,7 +14,7 @@
 
     <div class="plant-details-container" fxLayout="column">
         <!-- General Details -->
-        <div *ngIf="step === 1" fxLayout="column" class="slider-container">
+        <div *ngIf="step === 1" fxLayout="column">
             <table *ngIf="plant.lifeType || plant.type || plant.sunSchedule">
                 <tr *ngIf="plant.lifeType || plant.type">
                     <td *ngIf="plant.type" fxLayout="row" fxFlex>
@@ -60,19 +60,21 @@
         </div>
 
         <div *ngIf="step === 2" fxLayout="column" class="slider-container">
-            <h3>Active Reminders</h3>
-            <ng-container *ngFor="let reminder of plant?.reminders">
-                <div *ngIf="reminder.date >= today" class="reminder-list-item" fxLayout="row">
-                    <time class="calendar-icon">
-                        <em>{{getReminderDateElement(reminder, 'year')}}</em>
-                        <strong>{{getReminderDateElement(reminder, 'month')}}</strong>
-                        <span>{{getReminderDateElement(reminder, 'day')}}</span>
-                    </time>
-                    <div class="reminder-text">
-                        {{reminder.name | titlecase}}
+            <h3>Upcoming Reminders</h3>
+            <div fxLayout="{{plant.reminders.length < 3 ? 'column wrap' : 'row wrap'}}">
+                <ng-container *ngFor="let reminder of plant?.reminders">
+                    <div *ngIf="reminder.date >= today" class="reminder-list-item" fxLayout="row" fxFlex="50">
+                        <time class="calendar-icon">
+                            <em>{{getReminderDateElement(reminder, 'year')}}</em>
+                            <strong>{{getReminderDateElement(reminder, 'month')}}</strong>
+                            <span>{{getReminderDateElement(reminder, 'day')}}</span>
+                        </time>
+                        <div class="reminder-text" fxLayout="center center">
+                            {{reminder.name | titlecase}}
+                        </div>
                     </div>
-                </div>
-            </ng-container>
+                </ng-container>
+            </div>
         </div>
 
         <div *ngIf="step === 3" fxLayout="column" class="slider-container">
@@ -93,8 +95,8 @@
     </div>
 
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
-        <button mat-button color="secondary" (click)="dialogRef.close()" *ngIf="step === 1">Close</button>
-        <button mat-raised-button color="secondary" (click)="onPreviousStep()" *ngIf="step - 1 > 1">< Back</button>
+        <button mat-button color="accent" (click)="dialogRef.close()" *ngIf="step === 1 && step !== maxSteps">Close</button>
+        <button mat-raised-button color="accent" (click)="onPreviousStep()" *ngIf="step - 1 >= 1">< Back</button>
         <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps">Next ></button>
         <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step === maxSteps || (maxSteps === 2 && !plant.reminders)">Close</button>
     </mat-dialog-actions>
