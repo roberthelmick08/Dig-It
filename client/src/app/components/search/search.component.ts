@@ -23,8 +23,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   @ViewChild('sidenav') sidenav: MatSidenav;
 
-  filters: Array<SearchFilter>;
-
   user: User;
 
   // Variable to store ALL plants from database
@@ -41,27 +39,48 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   activeGardenMenuIndex: number;
 
-  plantTypes = ['All', 'Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Vegetable', 'Vine'];
+  // To store all active filters
+  activeFilters: Array<SearchFilter> = [];
 
-  sunSchedules = ['All', 'Full Sun', 'Partial Sun', 'Partial Shade', 'Full Shade'];
+  plantTypeFilters: Array<SearchFilter>= [];
 
-  lifeCycles = ['All', 'Annual', 'Biennial', 'Perennial'];
+  lifeCycleFilters: Array<SearchFilter>= [];
+  
+  sunScheduleFilters: Array<SearchFilter>= [];
+
+  plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Vegetable', 'Vine'];
+
+  sunSchedules = ['Full Sun', 'Partial Sun', 'Partial Shade', 'Full Shade'];
+
+  lifeCycles = ['Annual', 'Biennial', 'Perennial'];
 
   constructor( private dataService: DataService, public authService: AuthenticationService,
     private reminderService: ReminderService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe(user => {
-      this.user = user;
-    }, (err) => {
-      console.error(err);
-    });
+    for(let plantType of this.plantTypes){
+      this.plantTypeFilters.push({type: 'plantType', value: plantType});
+    }
+    for(let lifeCycle of this.lifeCycles){
+      this.lifeCycleFilters.push({type: 'lifeCycle', value: lifeCycle});
+    }
+    for(let sunSchedule of this.sunSchedules){
+      this.sunScheduleFilters.push({type: 'sunSchedule', value: sunSchedule});
+    }
+
+    if(this.authService.isLoggedIn() === true){
+      this.authService.getUser().subscribe(user => {
+        this.user = user;
+      }, (err) => {
+        console.error(err);
+      });
+    }
   }
 
   ngAfterViewInit() {
-    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
-      this.dataService.openSnackBar('fail');
-    });
+    // this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
+    //   this.dataService.openSnackBar('fail');
+    // });
   }
 
   addToGarden(plant: Plant) {
@@ -138,11 +157,63 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.activeGardenMenuIndex = index;
   }
 
-  applyFilter() {
-
+  applyFilters() {
+    this.activeFilters = [];
+    this.plantTypeFilters.filter(filter => { return filter.isActive === true }).map(filter => { this.activeFilters.push(filter) });
+    this.lifeCycleFilters.filter(filter => { return filter.isActive === true }).map(filter => { this.activeFilters.push(filter) });
+    this.sunScheduleFilters.filter(filter => { return filter.isActive === true }).map(filter => { this.activeFilters.push(filter) });
+    this.sidenav.close();
+    this.onSearch(50);
+    this.visiblePlants = this.visiblePlants.filter(plant => {
+      let retVal = false;
+      for(let activeFilter of this.activeFilters){
+        if(activeFilter.type === 'plantType' && plant.type === activeFilter.value){
+          retVal = true;
+        } else if(activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value){
+          retVal = true;
+        } else if(activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value){
+          retVal = true;
+        } 
+      }
+      return retVal;
+    })
   }
 
-  onSearch() {
+  deselectAllFilters(filterType: 'plantType' | 'lifeCycle' | 'sunSchedule'){
+    if(filterType === 'plantType'){
+      this.plantTypeFilters.map(filter => { filter.isActive = false });
+    } else if (filterType === 'lifeCycle'){
+      this.lifeCycleFilters.map(filter => { filter.isActive = false });
+    } else if (filterType === 'sunSchedule'){
+      this.sunScheduleFilters.map(filter => { filter.isActive = false });
+    }
+  }
+
+  removeFilter(filter: SearchFilter){
+    this.activeFilters.splice(this.activeFilters.findIndex(f => filter === f), 1);
+    if(filter.type === 'plantType'){
+      this.plantTypeFilters.filter(f => { return filter === f }).map(f => { f.isActive = false; });
+    } else if (filter.type === 'lifeCycle'){
+      this.lifeCycleFilters.filter(f => { return filter === f }).map(f => { f.isActive = false; });
+    } else if (filter.type === 'sunSchedule'){
+      this.sunScheduleFilters.filter(f => { return filter === f }).map(f => { f.isActive = false; });
+    }
+  }
+
+  onCancelFilters(){
+    this.plantTypeFilters.filter(filter => {
+      return this.activeFilters.findIndex(f => { return f === filter }) === -1;
+    }).map(f => { f.isActive = false; });
+    this.lifeCycleFilters.filter(filter => {
+      return this.activeFilters.findIndex(f => { return f === filter }) === -1;
+    }).map(f => { f.isActive = false; });
+    this.sunScheduleFilters.filter(filter => {
+      return this.activeFilters.findIndex(f => { return f === filter }) === -1;
+    }).map(f => { f.isActive = false; });
+    this.sidenav.close();
+  }
+
+  onSearch(maxLimit: number) {
     this.visiblePlants = this.plantsList.filter(plant => {
       if (plant.botanicalName && !plant.commonName) {
         return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
@@ -166,7 +237,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
           return this.levDist(plant.botanicalName, this.searchTerm);
         }
       }
-    }).slice(0, 10);
+    }).slice(0, maxLimit);
 
     for (let plant of this.visiblePlants) {
       this.dataService.imageSearchByName(plant);

@@ -3,29 +3,97 @@
     top: 64px !important;
     left: 0;
     right: 60%;
-    background-image: linear-gradient(to bottom left, #008F95 -100%, #494949 45%);
+    background: $color-dark-gray;
+    overflow: hidden;
+    @media screen and (max-width: $break-md) {
+        right: 0;
+        padding-top: 48px;
+    }
     .footer-button-wrapper {
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
+        margin: 16px;
         button {
             margin-left: 16px;
         }
+        .mat-flat-button {
+            width: 100px;
+        }
     }
     .filter-border {
-        border-right: 1px solid;
-        border-left: 1px solid;
-        border-bottom: 1px solid;
-        border-radius: 10px;
-        margin-top: 1rem;
+        border: 1px solid $color-light-gray;
+        border-radius: 8px;
         padding: 1rem;
-        border-image: linear-gradient(to bottom, $color-light-gray -25%, transparent 9%, $color-light-gray 30%);
-        border-image-slice: 20;
-        .filter-header {
-            text-align: center;
-            margin-top: -1.625rem;
-            color: white;
+        margin: 24px;
+        .filter-header-wrapper {
+            .filter-header {
+                margin-top: -28px;
+                margin-bottom: 2px;
+                color: $color-light-gray;
+                border: 1px solid $color-light-gray;
+                border-radius: 18px;
+                padding: 2px 8px;
+                background-color: $color-dark-gray;
+                font-variant: petite-caps;
+            }
         }
+        ul {
+            list-style: none;
+            color: $color-dark-gray;
+            padding: 0;
+            margin-bottom: 0;
+            .filter-item {
+                background-color: $color-light-gray;
+                border-radius: 4px;
+                border: 1px solid transparent;
+                margin-bottom: 16px;
+                padding-right: 4px;
+                cursor: pointer;
+                &:hover {
+                    border: 1px solid $color-light-green;
+                    background-color: white;
+                }
+                img,
+                .mat-icon,
+                .letter-icon {
+                    height: 48px;
+                    width: 48px;
+                    padding: 4px;
+                }
+                .mat-icon,
+                .letter-icon {
+                    font-size: 48px;
+                }
+                .letter-icon {
+                    margin-top: -4px;
+                    margin-bottom: 4px;
+                }
+                .remove-icon {
+                    height: 36px;
+                    padding: 10px 2px;
+                }
+                .filter-text {
+                    font-size: 1rem;
+                    font-variant: petite-caps;
+                    text-align: right;
+                }
+                .checkmark-icon {
+                    color: $color-light-green;
+                    margin-left: -14px;
+                    margin-right: 6px;
+                    font-size: 1.75rem;
+                    font-weight: bold;
+                    margin-top: -12px;
+                    height: 0;
+                    width: 0;
+                }
+            }
+            .filter-item-selected {
+                border: 1px solid $color-light-green;
+                background-color: white;
+            }
+        }
+    }
+    .mat-stroked-button {
+        border-color: $color-light-green;
     }
 }
 
@@ -42,6 +110,7 @@
     .mat-chip-list {
         margin-left: 20%;
         padding-bottom: 16px;
+        height: 40px;
         .mat-chip {
             border-radius: 4px;
             opacity: 0.9;
@@ -116,6 +185,7 @@
         opacity: 0.3;
         margin: 3rem 0;
         letter-spacing: 6px;
+        font-variant: petite-caps;
     }
     .plant-icon {
         height: 83px;

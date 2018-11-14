@@ -1,6 +1,6 @@
 export class SearchFilter {
-    type: string = 'Plant Type' || 'Life Cycle' || 'Sun Schedule' || 'Harvestable';
-    value: Array<string>;
-    isActive: boolean = false;
+    type: string = 'plantType' || 'lifeCycle' || 'sunSchedule';
+    value: string;
+    isActive?: boolean = false;
   }
   

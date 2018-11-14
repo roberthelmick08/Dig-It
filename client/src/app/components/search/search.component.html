@@ -1,23 +1,65 @@
-<mat-sidenav-container (backdropClick)="sidenav.close()">
-    <mat-sidenav #sidenav class="sidenav-container" (keydown.escape)="sidenav.close()" fixedInViewport>
+<mat-sidenav-container (backdropClick)="onCancelFilters()">
+    <mat-sidenav #sidenav class="sidenav-container" (keydown.escape)="onCancelFilters()" fixedInViewport>
 
-        <!-- Sun Schedule / Plant Type / Harvestable / Life Cycle -->
-        <div class="filter-border">
-            <div class="filter-header">Plant Type</div>
-            <div *ngFor="let plantType of plantTypes">{{plantType}}</div>
-        </div>
-        <div class="filter-border">
-            <div class="filter-header">Sun Schedule</div>
-            <div *ngFor="let sunSchedule of sunSchedules">{{sunSchedule}}</div>
-        </div>
-        <div class="filter-border">
-            <div class="filter-header">Life Cycle</div>
-            <div *ngFor="let lifeCycle of lifeCycles">{{lifeCycle}}</div>
+        <div class="filter-border" fxLayout="column">
+            <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
+                <div class="filter-header">Plant Type</div>
+            </div>
+            <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
+                <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('plantType')">
+                    <img src="../../../assets/icons/remove.svg" class="remove-icon" />
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Remove Filters</div>
+                </li>
+                <li class="filter-item" [class.filter-item-selected]="plantType.isActive" *ngFor="let plantType of plantTypeFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="plantType.isActive = !plantType.isActive">
+                    <img src="../../../assets/icons/{{plantType.value}}.svg" />
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">{{plantType.value}}</div>
+                    <mat-icon class="checkmark-icon" *ngIf="plantType.isActive">check</mat-icon>
+                </li>
+            </ul>
         </div>
 
-        <div class="footer-button-wrapper">
-            <button mat-stroked-button color="primary" (click)="sidenav.close()">Cancel</button>
-            <button mat-flat-button color="primary" (click)="applyFilter()">Apply</button>
+        <div class="filter-border" fxLayout="column">
+            <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
+                <div class="filter-header">Sun Schedule</div>
+            </div>
+            <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
+                <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('sunSchedule')">
+                    <img src="../../../assets/icons/remove.svg" class="remove-icon" />
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Remove Filters</div>
+                </li>
+                <li class="filter-item" [class.filter-item-selected]="sunSchedule.isActive" *ngFor="let sunSchedule of sunScheduleFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="sunSchedule.isActive = !sunSchedule.isActive">
+                    <mat-icon *ngIf="sunSchedule.value === 'Full Sun'">brightness_high</mat-icon>
+                    <mat-icon *ngIf="sunSchedule.value === 'Partial Sun'">brightness_low</mat-icon>
+                    <mat-icon *ngIf="sunSchedule.value === 'Partial Shade'">brightness_medium</mat-icon>
+                    <mat-icon *ngIf="sunSchedule.value === 'Full Shade'">wb_cloudy</mat-icon>
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">{{sunSchedule.value}}</div>
+                    <mat-icon class="checkmark-icon" *ngIf="sunSchedule.isActive">check</mat-icon>
+                </li>
+            </ul>
+        </div>
+
+        <div class="filter-border" fxLayout="column">
+            <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
+                <div class="filter-header">Life Cycle</div>
+            </div>
+            <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
+                <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('lifeCycle')">
+                    <img src="../../../assets/icons/remove.svg" class="remove-icon" />
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Remove Filters</div>
+                </li>
+                <li class="filter-item" [class.filter-item-selected]="lifeCycle.isActive" *ngFor="let lifeCycle of lifeCycleFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="lifeCycle.isActive = !lifeCycle.isActive">
+                    <div class="letter-icon" *ngIf="lifeCycle.value === 'Annual'">A</div>
+                    <div class="letter-icon" *ngIf="lifeCycle.value === 'Biennial'">B</div>
+                    <div class="letter-icon" *ngIf="lifeCycle.value === 'Perennial'">P</div>
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">{{lifeCycle.value}}</div>
+                    <mat-icon class="checkmark-icon" *ngIf="lifeCycle.isActive">check</mat-icon>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-button-wrapper" fxLayoutAlign="end">
+            <button mat-stroked-button color="primary" (click)="onCancelFilters()" tabindex="-1">Cancel</button>
+            <button mat-flat-button color="primary" (click)="applyFilters()" tabindex="-1">Apply</button>
         </div>
     </mat-sidenav>
 
@@ -33,21 +75,9 @@
             </div>
 
             <mat-chip-list>
-                <!-- <mat-chip *ngFor="let filter of filters">
-                    <mat-icon>close</mat-icon>
-                    {{filter.type}}
-                </mat-chip> -->
-                <mat-chip color="accent">
-                    <mat-icon>close</mat-icon>
-                    Filter 1
-                </mat-chip>
-                <mat-chip color="accent">
-                    <mat-icon>close</mat-icon>
-                    Filter 2
-                </mat-chip>
-                <mat-chip color="accent" selected>
-                    <mat-icon>close</mat-icon>
-                    Filter 3
+                <mat-chip *ngFor="let filter of activeFilters" color="accent" selected>
+                    <mat-icon (click)="removeFilter(filter)">close</mat-icon>
+                    {{filter.value}}
                 </mat-chip>
             </mat-chip-list>
 
@@ -56,10 +86,10 @@
                     <img src="../../../assets/icons/filter.svg">
                 </div>
                 <mat-form-field fxFlex="55">
-                    <input matInput type="search" placeholder="Common or Botanical Name" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" />
+                    <input matInput type="search" placeholder="Plant Name" [(ngModel)]="searchTerm" (keyup.enter)="onSearch(15)" (keyup.tab)="onSearch(15)" />
                 </mat-form-field>
                 <mat-radio-group class="example-radio-group " [(ngModel)]="searchBy " fxLayout="column " matRippleDisabled>
-                    <mat-radio-button class="example-radio-button " *ngFor="let name of [ 'commonName', 'botanicalName'] " [value]="name " (change)="searchTerm.length > 0 && onSearch() " matRippleDisabled>
+                    <mat-radio-button class="example-radio-button " *ngFor="let name of [ 'commonName', 'botanicalName'] " [value]="name " (change)="searchTerm.length > 0 && onSearch(15) " matRippleDisabled>
                         {{name === 'botanicalName' ? 'Botanical Name' : 'Common Name'}}
                     </mat-radio-button>
                 </mat-radio-group>
