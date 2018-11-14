@@ -1,9 +1,7 @@
 <mat-icon class="close-dialog-icon" (click)="dialogRef.close()">close</mat-icon>
 
 <div fxLayout="column">
-    <div fxFlex="100" fxLayoutAlign="center">
-        <h2 class="page-header">My Account</h2>
-    </div>
+    <h2 class="page-header">My Account</h2>
 
     <div>
         <div class="login-image-container" fxFlex="30">
@@ -27,7 +25,7 @@
                 <h1>{{user.zone}}</h1>
             </div>
 
-            <button mat-raised-button color="primary" (click)="editUser()">Register</button>
+            <button mat-raised-button color="primary" (click)="editUser()">Save Changes</button>
         </div>
     </div>
 </div>

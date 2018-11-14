@@ -73,20 +73,6 @@
                     </div>
                 </div>
             </ng-container>
-
-            <ng-container *ngFor="let reminder of plant?.reminders">
-                <h3>Past Reminders</h3>
-                <div *ngIf="reminder.date < today" class="reminder-list-item" fxLayout="row">
-                    <time class="calendar-icon">
-                        <em>{{getReminderDateElement(reminder, 'year')}}</em>
-                        <strong>{{getReminderDateElement(reminder, 'month')}}</strong>
-                        <span>{{getReminderDateElement(reminder, 'day')}}</span>
-                    </time>
-                    <div class="reminder-text">
-                        {{reminder.name | titlecase}}
-                    </div>
-                </div>
-            </ng-container>
         </div>
 
         <div *ngIf="step === 3" fxLayout="column" class="slider-container">

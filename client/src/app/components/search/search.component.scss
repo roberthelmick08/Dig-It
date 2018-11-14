@@ -1,67 +1,119 @@
 @import "../../../styles.scss";
-.plant-grid-item {
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    padding: 1rem;
-    margin-top: 1rem;
-    background-color: rgba(255, 255, 255, 0.3);
+.sidenav-container {
+    top: 64px !important;
+    left: 0;
+    right: 60%;
+    background-image: linear-gradient(to bottom left, #008F95 -100%, #494949 45%);
+    .footer-button-wrapper {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        button {
+            margin-left: 16px;
+        }
+    }
+}
+
+.mat-drawer-container {
+    background-color: transparent !important;
+    /deep/ .mat-drawer-backdrop {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+}
+
+.sidenav-contents {
     overflow: hidden;
-    height: 83px;
-    &:hover {
-        border-left: 4px solid $color-light-green;
-        border-right: 4px solid $color-light-green;
-        background-color: rgba(255, 255, 255, 0.5);
+    .mat-chip-list {
+        margin-left: 20%;
+        padding-bottom: 16px;
+        .mat-chip {
+            border-radius: 4px;
+            opacity: 0.9;
+            .mat-icon {
+                cursor: pointer;
+                font-size: 1rem;
+                margin-top: 0.625rem;
+                &:hover {
+                    color: $color-red;
+                }
+            }
+        }
     }
-    @media screen and (max-width: $break-md) {
-        border-left: 4px solid $color-light-green;
-        border-right: 4px solid $color-light-green;
-    }
-    h3 {
-        color: $color-dark-gray;
-        letter-spacing: 0.125rem; //2px
-        text-align: right;
-    }
-    h5 {
-        color: $color-blue;
-        letter-spacing: 0.0625rem; //1px
-        font-style: italic;
-        text-align: right;
-    }
-    .plant-name-details {
+    .filter-icon-wrapper {
+        height: 42px;
+        width: 36px;
+        border-radius: 4px;
+        background-color: $color-dark-gray;
         cursor: pointer;
+        margin-top: -18px;
+        img {
+            height: 28px;
+            padding: 4px;
+            margin-top: 2px;
+        }
     }
-    .resize-select-menu {
-        width: 140px;
-        margin-right: 2rem;
+    .plant-grid-item {
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        padding: 1rem;
+        margin-top: 1rem;
+        background-color: rgba(255, 255, 255, 0.3);
+        overflow: hidden;
+        height: 83px;
+        &:hover {
+            border-left: 4px solid $color-light-green;
+            border-right: 4px solid $color-light-green;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        @media screen and (max-width: $break-md) {
+            border-left: 4px solid $color-light-green;
+            border-right: 4px solid $color-light-green;
+        }
+        h3 {
+            color: $color-dark-gray;
+            letter-spacing: 0.125rem; //2px
+            text-align: right;
+        }
+        h5 {
+            color: $color-blue;
+            letter-spacing: 0.0625rem; //1px
+            font-style: italic;
+            text-align: right;
+        }
+        .plant-name-details {
+            cursor: pointer;
+        }
+        .resize-select-menu {
+            width: 140px;
+            margin-right: 2rem;
+        }
     }
-}
-
-.add-plant-button {
-    opacity: 0.8;
-    &:hover {
-        opacity: 1;
+    .add-plant-button {
+        opacity: 0.8;
+        &:hover {
+            opacity: 1;
+        }
     }
-}
-
-.search-warning {
-    font-size: 6rem;
-    color: $color-dark-gray;
-    opacity: 0.3;
-    margin: 3rem 0;
-    letter-spacing: 6px;
-}
-
-.plant-icon {
-    height: 83px;
-    margin-top: -1rem;
-    img {
-        height: 100%;
+    .search-warning {
+        font-size: 6rem;
+        color: $color-dark-gray;
+        opacity: 0.3;
+        margin: 3rem 0;
+        letter-spacing: 6px;
     }
-    .img-found {
-        width: 180px;
+    .plant-icon {
+        height: 83px;
         margin-top: -1rem;
-        margin-left: -1rem;
-        height: 100%;
-        border-right: 4px solid $color-light-green;
+        img {
+            height: 100%;
+        }
+        .img-found {
+            width: 180px;
+            margin-top: -1rem;
+            margin-left: -1rem;
+            height: 100%;
+            border-right: 4px solid $color-light-green;
+        }
     }
 }
