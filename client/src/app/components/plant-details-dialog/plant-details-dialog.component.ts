@@ -28,11 +28,11 @@ export class PlantDetailsDialogComponent {
       for (let reminder of this.plant.reminders) {
         reminder.date = new Date(reminder.date);
       }
+      this.plant.reminders.sort( (a, b) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      });
     }
 
-    this.plant.reminders.sort( (a, b) => {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    });
 
     if (!this.plant.comment) {
       this.maxSteps--;
