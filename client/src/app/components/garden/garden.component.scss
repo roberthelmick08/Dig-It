@@ -71,6 +71,11 @@
     }
 }
 
+.drag-handle {
+    cursor: move;
+    color: $color-light-gray;
+}
+
 .delete-icon-container {
     cursor: pointer;
     transition: .1s ease-in;

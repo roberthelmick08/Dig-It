@@ -7,13 +7,8 @@
         color: $color-dark-gray;
         margin-bottom: 32px;
     }
-    .shift-is-save-to-garden {
-        margin-top: -32px;
-    }
     .add-plant-scroll-container {
-        @media screen and (min-width: $break-sm){
-            height: 326px;
-        }
+        height: 326px;
         mat-hint.mat-hint,
         .image-container {
             margin-left: -24px;
@@ -30,20 +25,12 @@
             mat-hint.mat-hint {
                 margin-top: 18px;
             }
-            @media screen and (max-width: $break-sm){
-                .toggle-margin-bottom{
-                        margin-bottom: 77px;
-                }
-                .harvest-weeks-input{
-                    margin-top: 12px;
-                }
-            }
         }
-        a {
-            cursor: pointer;
-            &:hover {
-                text-decoration: underline;
-            }
+    }
+    a {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

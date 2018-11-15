@@ -8,6 +8,7 @@ import { DataService } from '../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { ReminderService } from './../../services/reminder.service';
 import { SearchFilter } from 'src/models/searchFilter';
+import { AddToGardenDialogComponent } from './add-to-garden-dialog/add-to-garden-dialog.component';
 
 
 @Component({
@@ -34,10 +35,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
   searchTerm: string = '';
 
   searchBy: string = 'commonName';
-
-  isAddToGardenMenuVisible: boolean = false;
-
-  activeGardenMenuIndex: number;
 
   // To store all active filters
   activeFilters: Array<SearchFilter> = [];
@@ -89,10 +86,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.user.garden.push(gardenPlant);
 
     this.authService.updateUser(this.user).subscribe( result => { }, err => {
-      this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('fail');
     }, () => {
-      this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('success', plant.commonName + ' saved to your Garden!');
     });
   }
@@ -152,9 +147,20 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.openPlantDetailsDialogEvent.emit(data);
   }
 
-  toggleAddToGardenMenu(index: number) {
-    this.isAddToGardenMenuVisible = true;
-    this.activeGardenMenuIndex = index;
+  openAddToGardenDialog(plant: Plant){
+    const dialogRef = this.dialog.open(AddToGardenDialogComponent, {
+      panelClass: ['dialog-container']
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      plant.isPotted = result.isPotted;
+      plant.stage = result.stage;
+    }, (err) => {
+      this.dataService.openSnackBar('fail');
+      console.log(err);
+     }, () => {
+      this.addToGarden(plant);
+    });
   }
 
   applyFilters() {

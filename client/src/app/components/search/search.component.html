@@ -108,34 +108,12 @@
                             <img src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
                         </div>
                     </div>
-                    <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)" *ngIf="isAddToGardenMenuVisible === false || activeGardenMenuIndex !== index || plant.stage === 0">
+                    <div class="plant-name-details" fxLayout="column" fxFlex="60" fxLayoutAlign="center end" (click)="openPlantDetailsDialog(plant)">
                         <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                         <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
                     </div>
-                    <div *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" fxFlex="60" fxLayoutAlign="end center">
-                        <mat-form-field *ngIf="plant.stage > 0" class="resize-select-menu">
-                            <mat-select placeholder="Potted / In Ground" name="isPotted" [(ngModel)]="plant.isPotted" required>
-                                <mat-option value="true">Potted</mat-option>
-                                <mat-option value="false">In Ground</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div fxFlex="40" fxLayout="row" fxLayoutAlign="end center">
-                        <div *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" fxFlex="60" fxLayoutAlign="center center" fxLayout="column">
-                            <mat-form-field class="resize-select-menu">
-                                <mat-select placeholder="Plant Stage" name="stage" [(ngModel)]="plant.stage" required>
-                                    <mat-option value="0">Seed</mat-option>
-                                    <mat-option value="1">Sproutling</mat-option>
-                                    <mat-option value="2">Young Plant</mat-option>
-                                    <mat-option value="3">Mature Plant</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div fxLayout="column">
-                            <button mat-flat-button color="accent" *ngIf="authService.isLoggedIn() && (!isAddToGardenMenuVisible || activeGardenMenuIndex !== index)" (click)="toggleAddToGardenMenu(index);"><mat-icon>add</mat-icon></button>
-                            <button mat-stroked-button color="accent" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="isAddToGardenMenuVisible = false;">Cancel</button>
-                            <button mat-flat-button color="primary" *ngIf="isAddToGardenMenuVisible === true && activeGardenMenuIndex === index" (click)="addToGarden(plant)" [disabled]="(plant.stage === 0 && plant.isPotted === undefined) || !plant.stage">Submit</button>
-                        </div>
+                    <div fxLayout="column">
+                        <button mat-flat-button color="accent" *ngIf="authService.isLoggedIn()" (click)="openAddToGardenDialog(plant)"><mat-icon>add</mat-icon></button>
                     </div>
                 </div>
             </div>
