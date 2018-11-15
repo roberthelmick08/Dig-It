@@ -8,12 +8,14 @@ Dig-It is a single-page web application that gives users custom gardening remind
 
 ## Built With
 
-* NodeJS
 * Angular 6
 * SASS
-* [Hopscotch](http://linkedin.github.io/hopscotch) - Site Walkthrough
-* [FarmSense](http://www.farmsense.net/api/frost-date-api/) - Calculate frost dates in user's location
+* NodeJS
+* MongoDB
+* [WikiMedia](https://www.mediawiki.org/) - Image lookup
 * [FrostLine by Waldo Jaquith](https://github.com/waldoj/frostline) - Calculate user's USDA Plant Hardiness Zone
+* [FarmSense](http://www.farmsense.net/api/frost-date-api/) - Calculate frost dates in user's location
+* [Hopscotch](http://linkedin.github.io/hopscotch) - Site Walkthrough
 
 ## License
 
