@@ -42,11 +42,11 @@ export class SearchComponent implements AfterViewInit, OnInit {
   // To store all active filters
   activeFilters: Array<SearchFilter> = [];
 
-  plantTypeFilters: Array<SearchFilter>= [];
+  plantTypeFilters: Array<SearchFilter> = [];
 
-  lifeCycleFilters: Array<SearchFilter>= [];
-  
-  sunScheduleFilters: Array<SearchFilter>= [];
+  lifeCycleFilters: Array<SearchFilter> = [];
+
+  sunScheduleFilters: Array<SearchFilter> = [];
 
   plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Vegetable', 'Vine'];
 
@@ -58,17 +58,17 @@ export class SearchComponent implements AfterViewInit, OnInit {
     private reminderService: ReminderService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
-    for(let plantType of this.plantTypes){
+    for (let plantType of this.plantTypes) {
       this.plantTypeFilters.push({type: 'plantType', value: plantType});
     }
-    for(let lifeCycle of this.lifeCycles){
+    for (let lifeCycle of this.lifeCycles) {
       this.lifeCycleFilters.push({type: 'lifeCycle', value: lifeCycle});
     }
-    for(let sunSchedule of this.sunSchedules){
+    for (let sunSchedule of this.sunSchedules) {
       this.sunScheduleFilters.push({type: 'sunSchedule', value: sunSchedule});
     }
 
-    if(this.authService.isLoggedIn() === true){
+    if (this.authService.isLoggedIn() === true) {
       this.authService.getUser().subscribe(user => {
         this.user = user;
       }, (err) => {
@@ -78,9 +78,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    // this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
-    //   this.dataService.openSnackBar('fail');
-    // });
+    this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
+      this.dataService.openSnackBar('fail');
+    });
   }
 
   addToGarden(plant: Plant) {
@@ -159,61 +159,62 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   applyFilters() {
     this.activeFilters = [];
-    this.plantTypeFilters.filter(filter => { return filter.isActive === true }).map(filter => { this.activeFilters.push(filter) });
-    this.lifeCycleFilters.filter(filter => { return filter.isActive === true }).map(filter => { this.activeFilters.push(filter) });
-    this.sunScheduleFilters.filter(filter => { return filter.isActive === true }).map(filter => { this.activeFilters.push(filter) });
+    this.plantTypeFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
+    this.lifeCycleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
+    this.sunScheduleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
     this.sidenav.close();
-    this.onSearch(50);
+    this.onSearch();
     this.visiblePlants = this.visiblePlants.filter(plant => {
       let retVal = false;
-      for(let activeFilter of this.activeFilters){
-        if(activeFilter.type === 'plantType' && plant.type === activeFilter.value){
+      for (let activeFilter of this.activeFilters) {
+        if (activeFilter.type === 'plantType' && plant.type === activeFilter.value) {
           retVal = true;
-        } else if(activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value){
+        } else if (activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value) {
           retVal = true;
-        } else if(activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value){
+        } else if (activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
           retVal = true;
-        } 
+        }
       }
       return retVal;
-    })
+    });
   }
 
-  deselectAllFilters(filterType: 'plantType' | 'lifeCycle' | 'sunSchedule'){
-    if(filterType === 'plantType'){
-      this.plantTypeFilters.map(filter => { filter.isActive = false });
-    } else if (filterType === 'lifeCycle'){
-      this.lifeCycleFilters.map(filter => { filter.isActive = false });
-    } else if (filterType === 'sunSchedule'){
-      this.sunScheduleFilters.map(filter => { filter.isActive = false });
+  deselectAllFilters(filterType: 'plantType' | 'lifeCycle' | 'sunSchedule') {
+    if (filterType === 'plantType') {
+      this.plantTypeFilters.map(filter => { filter.isActive = false; });
+    } else if (filterType === 'lifeCycle') {
+      this.lifeCycleFilters.map(filter => { filter.isActive = false; });
+    } else if (filterType === 'sunSchedule') {
+      this.sunScheduleFilters.map(filter => { filter.isActive = false; });
     }
   }
 
-  removeFilter(filter: SearchFilter){
+  removeFilter(filter: SearchFilter) {
     this.activeFilters.splice(this.activeFilters.findIndex(f => filter === f), 1);
-    if(filter.type === 'plantType'){
-      this.plantTypeFilters.filter(f => { return filter === f }).map(f => { f.isActive = false; });
-    } else if (filter.type === 'lifeCycle'){
-      this.lifeCycleFilters.filter(f => { return filter === f }).map(f => { f.isActive = false; });
-    } else if (filter.type === 'sunSchedule'){
-      this.sunScheduleFilters.filter(f => { return filter === f }).map(f => { f.isActive = false; });
+    if (filter.type === 'plantType') {
+      this.plantTypeFilters.filter(f => filter === f).map(f => { f.isActive = false; });
+    } else if (filter.type === 'lifeCycle') {
+      this.lifeCycleFilters.filter(f => filter === f).map(f => { f.isActive = false; });
+    } else if (filter.type === 'sunSchedule') {
+      this.sunScheduleFilters.filter(f => filter === f).map(f => { f.isActive = false; });
     }
+    this.applyFilters();
   }
 
-  onCancelFilters(){
+  onCancelFilters() {
     this.plantTypeFilters.filter(filter => {
-      return this.activeFilters.findIndex(f => { return f === filter }) === -1;
+      return this.activeFilters.findIndex(f => f === filter) === -1;
     }).map(f => { f.isActive = false; });
     this.lifeCycleFilters.filter(filter => {
-      return this.activeFilters.findIndex(f => { return f === filter }) === -1;
+      return this.activeFilters.findIndex(f => f === filter) === -1;
     }).map(f => { f.isActive = false; });
     this.sunScheduleFilters.filter(filter => {
-      return this.activeFilters.findIndex(f => { return f === filter }) === -1;
+      return this.activeFilters.findIndex(f => f === filter) === -1;
     }).map(f => { f.isActive = false; });
     this.sidenav.close();
   }
 
-  onSearch(maxLimit: number) {
+  onSearch() {
     this.visiblePlants = this.plantsList.filter(plant => {
       if (plant.botanicalName && !plant.commonName) {
         return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
@@ -237,7 +238,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
           return this.levDist(plant.botanicalName, this.searchTerm);
         }
       }
-    }).slice(0, maxLimit);
+    }).slice(0, 100);
 
     for (let plant of this.visiblePlants) {
       this.dataService.imageSearchByName(plant);
