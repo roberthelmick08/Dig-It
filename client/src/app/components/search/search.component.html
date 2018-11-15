@@ -8,7 +8,7 @@
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
                 <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('plantType')">
                     <img src="../../../assets/icons/remove.svg" class="remove-icon" />
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Remove Filters</div>
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Clear Filters</div>
                 </li>
                 <li class="filter-item" [class.filter-item-selected]="plantType.isActive" *ngFor="let plantType of plantTypeFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="plantType.isActive = !plantType.isActive">
                     <img src="../../../assets/icons/{{plantType.value}}.svg" />
@@ -25,7 +25,7 @@
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
                 <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('sunSchedule')">
                     <img src="../../../assets/icons/remove.svg" class="remove-icon" />
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Remove Filters</div>
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Clear Filters</div>
                 </li>
                 <li class="filter-item" [class.filter-item-selected]="sunSchedule.isActive" *ngFor="let sunSchedule of sunScheduleFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="sunSchedule.isActive = !sunSchedule.isActive">
                     <mat-icon *ngIf="sunSchedule.value === 'Full Sun'">brightness_high</mat-icon>
@@ -45,7 +45,7 @@
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
                 <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('lifeCycle')">
                     <img src="../../../assets/icons/remove.svg" class="remove-icon" />
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Remove Filters</div>
+                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Clear Filters</div>
                 </li>
                 <li class="filter-item" [class.filter-item-selected]="lifeCycle.isActive" *ngFor="let lifeCycle of lifeCycleFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="lifeCycle.isActive = !lifeCycle.isActive">
                     <div class="letter-icon" *ngIf="lifeCycle.value === 'Annual'">A</div>
@@ -63,18 +63,13 @@
         </div>
     </mat-sidenav>
 
-
-
-
-
-
     <mat-sidenav-content>
         <div fxLayout="column" class="sidenav-contents">
             <div fxFlex="100" fxLayoutAlign="center">
                 <h2 class="page-header">Search</h2>
             </div>
 
-            <mat-chip-list>
+            <mat-chip-list fxLayoutAlign="center center">
                 <mat-chip *ngFor="let filter of activeFilters" color="accent" selected>
                     <mat-icon (click)="removeFilter(filter)">close</mat-icon>
                     {{filter.value}}

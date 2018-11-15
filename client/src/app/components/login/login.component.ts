@@ -114,7 +114,6 @@ export class LoginDialogComponent {
       url: 'http://api.farmsense.net/v1/frostdates/probabilities/?station=' + stationId + '&season=' + season
     }).subscribe( result => {
       result = JSON.parse(result);
-      // Convert to Date Object
       let dateString = (new Date()).getFullYear() + '-' + result[0].prob_90.toString().substr(0, 2) + '-' + result[0].prob_90.toString().substr(2, 2);
       if (season === 1) {
         this.registerCredentials.lastFrostDate = new Date(dateString);
