@@ -11,14 +11,13 @@ import { EventEmitter } from 'events';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileDialogComponent {
-  @Output() logoutEvent = new EventEmitter
+  @Output() logoutEvent = new EventEmitter();
   user: User;
+  isLogout: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<EditProfileDialogComponent>,
   public authService: AuthenticationService, public dataService: DataService) {
       this.user = data;
-      console.log(this.user);
-      console.log(data);
      }
 
   editUser() {
@@ -38,7 +37,7 @@ export class EditProfileDialogComponent {
     return new Date(this.user.lastFrostDate).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
   }
 
-  onLogout(){
-    this.logoutEvent.emit(null);
+  onLogout() {
+    this.dialogRef.close({isLogout: true});
   }
 }

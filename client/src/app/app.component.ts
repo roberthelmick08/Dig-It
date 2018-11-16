@@ -77,14 +77,17 @@ ngOnInit(): void {
 
   openEditProfileDialog() {
     const dialogRef = this.dialog.open(EditProfileDialogComponent, {
-      height: window.innerWidth <= 600 ? '100vh' : '450px',
+      height: '450px',
       width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: ['dialog-container', 'remove-bottom-padding'],
       data: this.user,
     });
 
-    // dialogRef.componentInstance.logoutEvent.subscribe( () => {
-    // });
+    dialogRef.afterClosed().subscribe(() => {
+      if (dialogRef.componentInstance.isLogout) {
+        this.onLogout();
+      }
+    });
   }
 
   onLogout() {

@@ -18,5 +18,9 @@ export class AddToGardenDialogComponent {
   }
 
   onSubmit() {
+    this.dialogRef.close({
+      isPotted: this.isPotted,
+      stage: this.stage
+    });
   }
 }

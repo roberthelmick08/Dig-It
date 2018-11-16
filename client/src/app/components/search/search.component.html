@@ -112,7 +112,7 @@
                         <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
                         <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
                     </div>
-                    <div fxLayout="column">
+                    <div fxFlex fxLayoutAlign="end center">
                         <button mat-flat-button color="accent" *ngIf="authService.isLoggedIn()" (click)="openAddToGardenDialog(plant)"><mat-icon>add</mat-icon></button>
                     </div>
                 </div>

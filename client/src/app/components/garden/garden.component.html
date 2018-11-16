@@ -2,7 +2,7 @@
     <div fxFlex="100" fxLayoutAlign="center">
         <h2 class="page-header">Garden</h2>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center" cdkDropList (cdkDropListDropped)="onDrop($event)">
+    <div fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center">
         <div *ngIf="user?.garden.length === 0">No plants in your Garden. To get started, add a plant to your Garden.</div>
         <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
             <div class="plant-icon" (click)="openPlantDetailsDialog(plant)">
@@ -24,15 +24,10 @@
                         </div>
                     </ng-container>
                 </div>
-                <div class="move-delete-icon-wrapper" fxLayout="row" fxLayoutAlign="space-between center" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
-                    <div class="drag-handle" cdkDrag>
-                        <mat-icon>open_with</mat-icon>
-                    </div>
-                    <div class="delete-icon-container" (click)="removePlantFromGarden(plant)">
-                        <div class="lid"></div>
-                        <div class="lidcap"></div>
-                        <div class="bin"></div>
-                    </div>
+                <div class="delete-icon-container" (click)="removePlantFromGarden(plant)">
+                    <div class="lid"></div>
+                    <div class="lidcap"></div>
+                    <div class="bin"></div>
                 </div>
             </div>
         </mat-card>

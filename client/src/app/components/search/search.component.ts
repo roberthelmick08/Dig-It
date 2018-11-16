@@ -135,7 +135,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.addToGarden(result);
+      console.log(result);
+      if (result.isSaveToGarden === true) {
+        this.addToGarden(result.plant);
+      } else {
+        this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
+      }
     });
   }
 
@@ -147,18 +152,20 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.openPlantDetailsDialogEvent.emit(data);
   }
 
-  openAddToGardenDialog(plant: Plant){
+  openAddToGardenDialog(plant: Plant) {
     const dialogRef = this.dialog.open(AddToGardenDialogComponent, {
       panelClass: ['dialog-container']
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       plant.isPotted = result.isPotted;
       plant.stage = result.stage;
     }, (err) => {
       this.dataService.openSnackBar('fail');
       console.log(err);
      }, () => {
+       console.log(plant.stage, plant.isPotted);
       this.addToGarden(plant);
     });
   }

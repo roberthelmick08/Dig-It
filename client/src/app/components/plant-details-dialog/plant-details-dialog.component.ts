@@ -52,9 +52,10 @@ export class PlantDetailsDialogComponent {
   }
 
   onPreviousStep() {
-    this.step--;
     if (this.step === 3 && !this.plant.reminders) {
       this.step = this.step - 2;
+    } else {
+    this.step--;
     }
   }
 
