@@ -37,8 +37,8 @@
                 <mat-icon class="info-icon harvest-info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
                 <span class="highlight">{{reminderService.getHarvestDateString(user, plant)}}</span>
             </div>
-            <div *ngIf="plant.zones">
-                <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div>
+            <!-- <div *ngIf="plant.zones">
+                <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div> -->
             <div *ngIf="plant.comment" fxLayout.lt-sm="column">
                 <div fxFlex="30" class="highlight">Comments: </div>
                 <div fxFlex>{{toSentenceCase(plant.comment)}}</div>

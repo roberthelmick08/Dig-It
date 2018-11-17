@@ -109,7 +109,7 @@
     overflow: hidden;
     .mat-chip-list {
         padding-bottom: 16px;
-        height: 40px;
+        min-height: 40px;
         .mat-chip {
             border-radius: 4px;
             opacity: 0.9;
@@ -136,6 +136,11 @@
             margin-top: 2px;
         }
     }
+    .main-search-wrapper{
+        /deep/ .mat-form-field-flex{
+            background-image: linear-gradient(to left, transparent, rgba(255,255,255,0.7));
+        }
+    }
     .plant-grid-item {
         border-left: 4px solid transparent;
         border-right: 4px solid transparent;
@@ -157,12 +162,18 @@
             color: $color-dark-gray;
             letter-spacing: 0.125rem; //2px
             text-align: right;
+            @media screen and (max-width: $break-sm){
+                text-align: left;
+            }
         }
         h5 {
             color: $color-blue;
             letter-spacing: 0.0625rem; //1px
             font-style: italic;
             text-align: right;
+            @media screen and (max-width: $break-sm){
+                text-align: left;
+            }
         }
         .plant-name-details {
             cursor: pointer;
@@ -187,6 +198,10 @@
         margin-top: -1rem;
         img {
             height: 100%;
+            @media screen and (max-width: $break-sm){
+                height: 50%;
+                margin-right: 16px;
+            }
         }
         .img-found {
             width: 180px;

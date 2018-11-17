@@ -48,22 +48,23 @@
         .highlight {
             color: $color-red;
         }
-        .slider-container {
-            height: 186px;
-            table {
-                border-collapse: collapse;
-                tr {
-                    margin-bottom: 1rem;
-                    td {
-                        border-left: 2px solid $color-light-gray;
-                        padding-left: 1rem;
-                    }
+        table {
+            border-collapse: collapse;
+            tr {
+                margin-bottom: 1rem;
+                td {
+                    border-left: 2px solid $color-light-gray;
+                    padding-left: 1rem;
                 }
             }
+        }
+        .slider-container {
+            height: 186px;
             h3 {
                 text-align: center;
                 opacity: 0.6;
                 letter-spacing: 4px;
+                font-variant: petite-caps;
             }
             div {
                 text-align: justify;
