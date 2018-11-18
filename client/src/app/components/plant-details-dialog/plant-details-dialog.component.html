@@ -80,15 +80,15 @@
         <div *ngIf="step === 3" fxLayout="column" class="slider-container">
             <h3>Sowing Instructions</h3>
             <div *ngIf="plant.comment">
-                <div *ngIf="plant.methodNum">
-                    <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
-                    {{dataService.getSowingMethodString(plant.methodNum)}}
-                </div>
                 <div *ngIf="plant.depth || plant.sowingSpace">
                     <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Seeds should be sown
                     <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
                     <span *ngIf="plant.depth && plant.sowingSpace">and </span>
                     <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
+                </div>
+                <div *ngIf="plant.methodNum">
+                    <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
+                    {{dataService.getSowingMethodString(plant.methodNum)}}
                 </div>
             </div>
         </div>

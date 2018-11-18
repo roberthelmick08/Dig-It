@@ -1,6 +1,7 @@
 @import "../../../styles.scss";
 .plant-details-dialog {
     .add-plant-header {
+        margin-top: -24px;
         @media screen and (max-width: $break-sm) {
             .close-dialog-icon {
                 position: relative;
@@ -9,7 +10,7 @@
         }
         img {
             max-height: 200px;
-            margin: -16px 24px 24px 0px;
+            margin: 6px 0 24px -24px;
             @media screen and (max-width: $break-sm) {
                 max-height: 250px;
             }
@@ -18,9 +19,9 @@
             border-bottom: 4px solid $color-light-green;
             border-left: 4px solid $color-light-green;
             border-right: 4px solid $color-light-green;
-            margin: -24px 24px 24px -24px;
+            margin: 0 24px 24px -24px;
             @media screen and (max-width: $break-sm) {
-                margin: -24px -48px 24px -24px;
+                margin: 0 -48px 24px -24px;
                 border-left: none;
                 border-right: none;
             }

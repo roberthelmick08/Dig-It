@@ -2,7 +2,7 @@ import { DataService } from './../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Component, Inject, Output } from '@angular/core';
 import { User } from 'src/models/user';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEmitter } from 'events';
 
 @Component({

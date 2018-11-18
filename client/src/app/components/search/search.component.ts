@@ -135,8 +135,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result.isSaveToGarden === true) {
+      if (result && result.isSaveToGarden === true) {
         this.addToGarden(result.plant);
       } else {
         this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
@@ -176,7 +175,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.lifeCycleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
     this.sunScheduleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
     this.sidenav.close();
-    if(this.activeFilters.length > 0){
+    if (this.activeFilters.length > 0) {
       this.visiblePlants = this.visiblePlants.filter(plant => {
         let retVal = false;
         for (let activeFilter of this.activeFilters) {
@@ -232,9 +231,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   onSearch() {
     this.visiblePlants = this.plantsList.filter(plant => {
-      if(this.searchTerm === ''){
+      if (this.searchTerm === '') {
         return true;
-      } else{
+      } else {
         if (plant.botanicalName && !plant.commonName) {
           return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
         } else if (plant.commonName && !plant.botanicalName) {
@@ -269,7 +268,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   // Reorder array based on closest match to search term
   levDist(s, t) {
-    const d = []; // 2d matrix
+    const d = [];
 
     const n = s.length;
     const m = t.length;
@@ -277,9 +276,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     if (n === 0) { return m; }
     if (m === 0) { return n; }
 
-    // Create an array of arrays in javascript (a descending loop is quicker)
     for (let i = n; i >= 0; i--) { d[i] = []; }
-
     for (let i = n; i >= 0; i--) { d[i][0] = i; }
     for (let j = m; j >= 0; j--) { d[0][j] = j; }
 
@@ -292,7 +289,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
             if (i === j && d[i][j] > 4) { return n; }
 
             const t_j = t.charAt(j - 1);
-            const cost = (s_i === t_j) ? 0 : 1; // Step 5
+            const cost = (s_i === t_j) ? 0 : 1;
 
             // Calculate the minimum
             let mi = d[i - 1][j] + 1;
@@ -302,7 +299,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
             if (b < mi) { mi = b; }
             if (c < mi) { mi = c; }
 
-            d[i][j] = mi; // Step 6
+            d[i][j] = mi;
 
             // Damerau transposition
             if (i > 1 && j > 1 && s_i === t.charAt(j - 2) && s.charAt(i - 2) === t_j) {
@@ -310,8 +307,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
             }
         }
     }
-
-    // Step 7
     return d[n][m];
-}
+  }
 }
