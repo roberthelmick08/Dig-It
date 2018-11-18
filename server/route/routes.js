@@ -3,8 +3,8 @@ var router = express.Router();
 var jwt = require('express-jwt');
 var passport = require('passport');
 var mongoose = require('mongoose');
-var privateKEY = 'MY_SECRET_KEY';
-// var privateKEY = fs.readFileSync('../../private.key', 'utf8');
+require('dotenv').config({ path: '../.env' })
+var privateKEY = process.env.MONGO_SECRET_KEY;
 
 const PlantSchema = require('../model/plants')
 const UserSchema = require('../model/user')
