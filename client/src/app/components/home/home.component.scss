@@ -25,7 +25,6 @@
 
 /deep/ .highlight {
     color: $color-light-green;
-    letter-spacing: 4px;
     font-weight: bold;
 }
 
@@ -58,7 +57,6 @@
     background-image: url("../../../assets/img/dirt.png");
     background-size: contain;
     color: white;
-    height: calc(100vh - 64px - 1rem);
     .quick-overview-header {
         margin-top: 2rem;
         img {
@@ -81,6 +79,7 @@
         overflow: hidden;
         width: 100%;
         margin-top: 1rem;
+        padding: 96px 0;
         .quick-overview-item {
             padding: 0rem 2rem 1rem 0;
             background: rgba(0, 0, 0, 0.4);
@@ -103,6 +102,7 @@
                 height: 265px;
                 text-align: center;
                 width: 100%;
+                padding-left: 2rem;
                 img {
                     width: 100px;
                     min-width: 100px;

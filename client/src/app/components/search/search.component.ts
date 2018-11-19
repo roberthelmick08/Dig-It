@@ -1,12 +1,14 @@
 import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
-import { Component, AfterViewInit, Output, EventEmitter, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, AfterViewInit, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSidenav } from '@angular/material';
 import { Plant } from './../../../models/plant';
 import { GardenPlant } from './../../../models/gardenPlant';
 import { User } from './../../../models/user';
 import { DataService } from '../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { ReminderService } from './../../services/reminder.service';
+import { SearchFilter } from 'src/models/searchFilter';
+import { AddToGardenDialogComponent } from './add-to-garden-dialog/add-to-garden-dialog.component';
 
 
 @Component({
@@ -20,31 +22,56 @@ export class SearchComponent implements AfterViewInit, OnInit {
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
+  @ViewChild('sidenav') sidenav: MatSidenav;
+
   user: User;
 
   // Variable to store ALL plants from database
   plantsList: Array<Plant> = [];
 
   // Variable to store VISIBLE plants after filter is applied
-  visiblePlants: Array<Plant>;
+  visiblePlants: Array<Plant> = [];
 
   searchTerm: string = '';
 
   searchBy: string = 'commonName';
 
-  isAddToGardenMenuVisible: boolean = false;
+  // To store all active filters
+  activeFilters: Array<SearchFilter> = [];
 
-  activeGardenMenuIndex: number;
+  plantTypeFilters: Array<SearchFilter> = [];
+
+  lifeCycleFilters: Array<SearchFilter> = [];
+
+  sunScheduleFilters: Array<SearchFilter> = [];
+
+  plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Vegetable', 'Vine'];
+
+  sunSchedules = ['Full Sun', 'Partial Sun', 'Partial Shade', 'Full Shade'];
+
+  lifeCycles = ['Annual', 'Biennial', 'Perennial'];
 
   constructor( private dataService: DataService, public authService: AuthenticationService,
     private reminderService: ReminderService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe(user => {
-      this.user = user;
-    }, (err) => {
-      console.error(err);
-    });
+    for (let plantType of this.plantTypes) {
+      this.plantTypeFilters.push({type: 'plantType', value: plantType});
+    }
+    for (let lifeCycle of this.lifeCycles) {
+      this.lifeCycleFilters.push({type: 'lifeCycle', value: lifeCycle});
+    }
+    for (let sunSchedule of this.sunSchedules) {
+      this.sunScheduleFilters.push({type: 'sunSchedule', value: sunSchedule});
+    }
+
+    if (this.authService.isLoggedIn() === true) {
+      this.authService.getUser().subscribe(user => {
+        this.user = user;
+      }, (err) => {
+        console.error(err);
+      });
+    }
   }
 
   ngAfterViewInit() {
@@ -59,10 +86,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.user.garden.push(gardenPlant);
 
     this.authService.updateUser(this.user).subscribe( result => { }, err => {
-      this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('fail');
     }, () => {
-      this.isAddToGardenMenuVisible = false;
       this.dataService.openSnackBar('success', plant.commonName + ' saved to your Garden!');
     });
   }
@@ -110,13 +135,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.addToGarden(result);
+      if (result && result.isSaveToGarden === true) {
+        this.addToGarden(result.plant);
+      } else {
+        this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
+      }
     });
-  }
-
-  toggleAddToGardenMenu(index: number) {
-    this.isAddToGardenMenuVisible = true;
-    this.activeGardenMenuIndex = index;
   }
 
   openPlantDetailsDialog(plant: Plant) {
@@ -127,15 +151,97 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.openPlantDetailsDialogEvent.emit(data);
   }
 
+  openAddToGardenDialog(plant: Plant) {
+    const dialogRef = this.dialog.open(AddToGardenDialogComponent, {
+      panelClass: ['dialog-container']
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      plant.isPotted = result.isPotted;
+      plant.stage = result.stage;
+    }, (err) => {
+      this.dataService.openSnackBar('fail');
+      console.log(err);
+     }, () => {
+       console.log(plant.stage, plant.isPotted);
+      this.addToGarden(plant);
+    });
+  }
+
+  applyFilters() {
+    this.activeFilters = [];
+    this.plantTypeFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
+    this.lifeCycleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
+    this.sunScheduleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
+    this.sidenav.close();
+    if (this.activeFilters.length > 0) {
+      this.visiblePlants = this.visiblePlants.filter(plant => {
+        let retVal = false;
+        for (let activeFilter of this.activeFilters) {
+          if (activeFilter.type === 'plantType' && plant.type === activeFilter.value) {
+            retVal = true;
+          } else if (activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value) {
+            retVal = true;
+          } else if (activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
+            retVal = true;
+          } else {
+            return false;
+          }
+        }
+        return retVal;
+      });
+    }
+  }
+
+  deselectAllFilters(filterType: 'plantType' | 'lifeCycle' | 'sunSchedule') {
+    if (filterType === 'plantType') {
+      this.plantTypeFilters.map(filter => { filter.isActive = false; });
+    } else if (filterType === 'lifeCycle') {
+      this.lifeCycleFilters.map(filter => { filter.isActive = false; });
+    } else if (filterType === 'sunSchedule') {
+      this.sunScheduleFilters.map(filter => { filter.isActive = false; });
+    }
+  }
+
+  removeFilter(filter: SearchFilter) {
+    this.activeFilters.splice(this.activeFilters.findIndex(f => filter === f), 1);
+    if (filter.type === 'plantType') {
+      this.plantTypeFilters.filter(f => filter === f).map(f => { f.isActive = false; });
+    } else if (filter.type === 'lifeCycle') {
+      this.lifeCycleFilters.filter(f => filter === f).map(f => { f.isActive = false; });
+    } else if (filter.type === 'sunSchedule') {
+      this.sunScheduleFilters.filter(f => filter === f).map(f => { f.isActive = false; });
+    }
+    this.onSearch();
+  }
+
+  onCancelFilters() {
+    this.plantTypeFilters.filter(filter => {
+      return this.activeFilters.findIndex(f => f === filter) === -1;
+    }).map(f => { f.isActive = false; });
+    this.lifeCycleFilters.filter(filter => {
+      return this.activeFilters.findIndex(f => f === filter) === -1;
+    }).map(f => { f.isActive = false; });
+    this.sunScheduleFilters.filter(filter => {
+      return this.activeFilters.findIndex(f => f === filter) === -1;
+    }).map(f => { f.isActive = false; });
+    this.sidenav.close();
+  }
+
   onSearch() {
     this.visiblePlants = this.plantsList.filter(plant => {
-      if (plant.botanicalName && !plant.commonName) {
-        return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-      } else if (plant.commonName && !plant.botanicalName) {
-        return plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      if (this.searchTerm === '') {
+        return true;
       } else {
-        return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
-            || plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        if (plant.botanicalName && !plant.commonName) {
+          return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        } else if (plant.commonName && !plant.botanicalName) {
+          return plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        } else {
+          return plant.botanicalName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1
+              || plant.commonName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        }
       }
     }).sort( plant => {
       if (this.searchBy === 'commonName') {
@@ -151,16 +257,18 @@ export class SearchComponent implements AfterViewInit, OnInit {
           return this.levDist(plant.botanicalName, this.searchTerm);
         }
       }
-    }).slice(0, 10);
+    }).slice(0, 100);
 
     for (let plant of this.visiblePlants) {
       this.dataService.imageSearchByName(plant);
     }
+
+    this.applyFilters();
   }
 
   // Reorder array based on closest match to search term
   levDist(s, t) {
-    const d = []; // 2d matrix
+    const d = [];
 
     const n = s.length;
     const m = t.length;
@@ -168,9 +276,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     if (n === 0) { return m; }
     if (m === 0) { return n; }
 
-    // Create an array of arrays in javascript (a descending loop is quicker)
     for (let i = n; i >= 0; i--) { d[i] = []; }
-
     for (let i = n; i >= 0; i--) { d[i][0] = i; }
     for (let j = m; j >= 0; j--) { d[0][j] = j; }
 
@@ -183,7 +289,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
             if (i === j && d[i][j] > 4) { return n; }
 
             const t_j = t.charAt(j - 1);
-            const cost = (s_i === t_j) ? 0 : 1; // Step 5
+            const cost = (s_i === t_j) ? 0 : 1;
 
             // Calculate the minimum
             let mi = d[i - 1][j] + 1;
@@ -193,7 +299,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
             if (b < mi) { mi = b; }
             if (c < mi) { mi = c; }
 
-            d[i][j] = mi; // Step 6
+            d[i][j] = mi;
 
             // Damerau transposition
             if (i > 1 && j > 1 && s_i === t.charAt(j - 2) && s.charAt(i - 2) === t_j) {
@@ -201,8 +307,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
             }
         }
     }
-
-    // Step 7
     return d[n][m];
-}
+  }
 }

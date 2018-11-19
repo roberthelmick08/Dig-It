@@ -9,7 +9,7 @@
             <img src="../../../../assets/icons/add-plant-img.svg" />
         </div>
         <form fxFlex>
-            <div *ngIf="step === 0" class="add-plant-scroll-contents" fxLayout="column">
+            <div *ngIf="step === 0" fxLayout="column">
                 <mat-form-field>
                     <input matInput placeholder="Common Name" name="commonName" maxlength="35" [(ngModel)]="newPlant.commonName" [required]="newPlant?.botanicalName?.length === 0">
                 </mat-form-field>
@@ -65,16 +65,16 @@
                         <mat-option value="Biennial">Biennial</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <div fxFlex="100" class="harvest-wrapper">
+                <div fxFlex="100" class="harvest-wrapper" fxLayout.lt-sm="column">
                     <mat-hint fxFlex="50">Does it produce something to harvest?</mat-hint>
-                    <mat-slide-toggle fxFlex="20" [(ngModel)]="newPlant.harvestable" name="harvestable" class="toggle" matRippleDisabled>{{ newPlant.harvestable ? 'Yes' : 'No' }}</mat-slide-toggle>
-                    <mat-form-field fxFlex="30" *ngIf="newPlant.harvestable === true">
+                    <mat-slide-toggle fxFlex="20" [(ngModel)]="newPlant.harvestable" name="harvestable" class="toggle" [class.toggle-margin-bottom]="newPlant.harvestable === false" matRippleDisabled>{{ newPlant.harvestable ? 'Yes' : 'No' }}</mat-slide-toggle>
+                    <mat-form-field fxFlex="30" *ngIf="newPlant.harvestable === true" class="harvest-weeks-input">
                         <input matInput type="number" placeholder="Weeks until harvest" name="weeksToHarvest" [(ngModel)]="newPlant.weeksToHarvest" required>
                     </mat-form-field>
                 </div>
             </div>
 
-            <div *ngIf="step === 1" class="add-plant-scroll-contents" fxLayout="column">
+            <div *ngIf="step === 1" fxLayout="column" [class.shift-is-save-to-garden]="isSaveToGarden">
                 <mat-form-field>
                     <mat-select required placeholder="Sun Schedule" name="sunSchedule" [(ngModel)]="newPlant.sunSchedule">
                         <mat-select-trigger>
@@ -113,6 +113,13 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+
+                <mat-form-field *ngIf="isSaveToGarden && newPlant.stage > 0">
+                    <mat-select placeholder="Potted / In Ground" name="isPotted" [(ngModel)]="newPlant.isPotted" required>
+                        <mat-option value="true">Potted</mat-option>
+                        <mat-option value="false">In Ground</mat-option>
+                    </mat-select>
+                </mat-form-field>
                 <mat-form-field>
                     <input matInput placeholder="Variety of {{newPlant.commonName ? (newPlant.commonName | titlecase) : (newPlant.botanicalName | titlecase) }}" name="variety" [(ngModel)]="newPlant.variety">
                 </mat-form-field>
@@ -123,9 +130,13 @@
                 <div fxFlex="100" fxLayoutAlign="end center">
                     <a (click)="onNextStep()">Advanced Settings ></a>
                 </div>
+                <div>
+
+
+                </div>
             </div>
 
-            <div *ngIf="step === 2" class="add-plant-scroll-contents" fxLayout="column">
+            <div *ngIf="step === 2" fxLayout="column">
                 <h3>Advanced Settings</h3>
                 <mat-form-field>
                     <input matInput type="number" placeholder="# of weeks before last frost date to sow the seeds" name="weeksToSowBeforeLastFrost" [(ngModel)]="newPlant.weeksToSowBeforeLastFrost">
@@ -143,6 +154,6 @@
         <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step === 0">Cancel</button>
         <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
         <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 1 && step !== 2" [disabled]="(!newPlant.commonName && !newPlant.botanicalName) || !newPlant.type || !newPlant.lifeType || (newPlant.harvestable === true && !newPlant.weeksToHarvest)">Next ></button>
-        <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 1 || step === 2" [disabled]="!newPlant.sunSchedule || !newPlant.stage">Submit</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 1 || step === 2" [disabled]="!newPlant.sunSchedule || (newPlant.stage > 0 && newPlant.isPotted === undefined)">Submit</button>
     </mat-dialog-actions>
 </div>

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatIconModule, MatDialog, MatDialogModule, MatButtonModule,
   MatInputModule, MatOptionModule, MatSelectModule, MatSlideToggleModule, MatToolbarModule,
-  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
+  MatSidenavModule, MatMenuModule, MatRadioModule, MatCardModule, MatCheckboxModule, MatSnackBarModule, MatTooltipModule, MatChipsModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
+import { AddToGardenDialogComponent } from './components/search/add-to-garden-dialog/add-to-garden-dialog.component';
 import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 import { GardenComponent } from './components/garden/garden.component';
 import { LoginDialogComponent } from './components/login/login.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
     AddPlantDialogComponent,
     EditProfileDialogComponent,
     GardenComponent,
+    AddToGardenDialogComponent,
     LoginDialogComponent,
     PlantDetailsDialogComponent,
     HomeComponent,
@@ -51,6 +53,7 @@ const routes: Routes = [
     MatRadioModule,
     MatOptionModule,
     MatSelectModule,
+    MatChipsModule,
     MatTooltipModule,
     MatMenuModule,
     OverlayModule,
@@ -69,6 +72,7 @@ const routes: Routes = [
     AddPlantDialogComponent,
     EditProfileDialogComponent,
     PlantDetailsDialogComponent,
+    AddToGardenDialogComponent,
     LoginDialogComponent,
   ],
   providers: [MatDialog, AuthenticationService, AuthGuardService, ReminderService],

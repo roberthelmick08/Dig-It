@@ -4,14 +4,14 @@
             <div class="toolbar-logo" (click)="setCurrentPage('home')" fxHide.lt-sm="true" *ngIf="currentPage !== 'home'">
                 <img src="../assets/logo/dig-it-text.svg" />
             </div>
-            <div class="navbar-items" (click)="setCurrentPage('search')"><img src="../assets/icons/search.png" matTooltip="Search Plants"/></div>
+            <div class="navbar-items" (click)="setCurrentPage('search')"><img src="../assets/icons/search.png" matTooltip="Search Plants" /></div>
             <div class="garden-icon-wrapper" [class.garden-icon-wrapper-hover]="authService.isLoggedIn()" (click)="authService.isLoggedIn() ? setCurrentPage('garden') : setCurrentPage('home')" matTooltip="{{authService.isLoggedIn() ? 'My Garden' : 'Please log in or register to dig your garden'}}"
                 matTooltipClass="dig-it-tooltip">
                 <img src="../assets/logo/dig-it-emblem-gray-no-border.svg" />
             </div>
 
             <div *ngIf="authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-stroked-button color="primary" (click)="onLogout()">Logout</button>
+                <button mat-stroked-button color="primary" (click)="onLogout()" fxHide.lt-sm>Logout</button>
                 <button mat-raised-button color="accent" class="accent-button" (click)="openEditProfileDialog()">Account</button>
             </div>
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">

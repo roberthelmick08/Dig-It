@@ -24,17 +24,27 @@ export class PlantDetailsDialogComponent {
     this.plant = data.plant;
     this.user = data.user;
     this.dataService.imageSearchByName(this.plant);
-    for(let reminder of this.plant.reminders){
-      reminder.date = new Date(reminder.date);
+    if (this.plant.reminders) {
+      for (let reminder of this.plant.reminders) {
+        reminder.date = new Date(reminder.date);
+      }
+      this.plant.reminders.sort( (a, b) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      });
     }
-    if(!this.plant.comment){
+
+
+    if (!this.plant.comment) {
+      this.maxSteps--;
+    }
+    if (!this.plant.reminders) {
       this.maxSteps--;
     }
   }
 
   onNextStep() {
     // Skip 2nd step if no reminders are present
-    if(this.step === 1 && !this.plant.reminders){
+    if (this.step === 1 && !this.plant.reminders) {
       this.step = this.step + 2;
     } else {
       this.step++;
@@ -42,9 +52,10 @@ export class PlantDetailsDialogComponent {
   }
 
   onPreviousStep() {
-    this.step--;
-    if(this.step === 1 && !this.plant.reminders){
+    if (this.step === 3 && !this.plant.reminders) {
       this.step = this.step - 2;
+    } else {
+    this.step--;
     }
   }
 
@@ -63,18 +74,18 @@ export class PlantDetailsDialogComponent {
     }
   }
 
-  getReminderDateElement(reminder: Reminder, element: string): string{
+  getReminderDateElement(reminder: Reminder, element: string): string {
     let payLoad;
 
-    switch(element){
-      case('day'): 
+    switch (element) {
+      case('day'):
         payLoad = { day: '2-digit'};
         break;
-      case('month'): 
+      case('month'):
         payLoad = { month: 'short'};
         break;
-      case('year'): 
-        payLoad = { day: 'numeric'};
+      case('year'):
+        payLoad = { year: 'numeric'};
         break;
     }
     let value = reminder.date.toLocaleDateString('en-US', payLoad );

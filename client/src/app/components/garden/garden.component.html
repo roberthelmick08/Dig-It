@@ -3,7 +3,7 @@
         <h2 class="page-header">Garden</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center">
-        <div *ngIf="user?.garden.length === 0">No plants in your Garden. To get started, add a plant to your Garden.</div>
+        <div class="no-plants-warning" *ngIf="user?.garden.length === 0">No plants in your Garden.</div>
         <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
             <div class="plant-icon" (click)="openPlantDetailsDialog(plant)">
                 <img src="{{plant.img}}" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
@@ -19,7 +19,7 @@
                 <div class="reminders-container" fxLayout="row wrap" fxFlex fxLayoutAlign="end center">
                     <p *ngIf="plant?.reminders.length === 0">No reminders</p>
                     <ng-container *ngFor="let reminder of plant?.reminders">
-                        <div *ngIf="isReminderVisible(reminder)" class="reminder-icon-wrapper" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
+                        <div *ngIf="isReminderVisible(reminder)" class="reminder-icon-wrapper" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
                             <img src="{{ '../../../assets/icons/reminders/' + reminder.name + '.svg' }}" class="reminders-icon" />
                         </div>
                     </ng-container>

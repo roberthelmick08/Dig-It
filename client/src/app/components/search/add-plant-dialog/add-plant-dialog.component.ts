@@ -51,17 +51,14 @@ export class AddPlantDialogComponent {
     if (this.newPlant.variety) this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
     if (this.newPlant.comment) this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
 
-    this.dataService.addPlant(this.newPlant)
-    .subscribe(result => { }, (err) => {
+    this.dataService.addPlant(this.newPlant).subscribe(result => { }, (err) => {
       this.dataService.openSnackBar('fail');
     }, () => {
       this.dataService.getAllPlants();
-      if (this.isSaveToGarden) {
-        this.dialogRef.close(this.newPlant);
-      } else {
+      if (!this.isSaveToGarden) {
         this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
-        this.dialogRef.close();
       }
+        this.dialogRef.close({plant: this.newPlant, isSaveToGarden: this.isSaveToGarden});
     });
   }
 

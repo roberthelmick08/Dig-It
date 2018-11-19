@@ -1,8 +1,9 @@
 import { DataService } from './../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Output } from '@angular/core';
 import { User } from 'src/models/user';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-edit-profile',
@@ -10,14 +11,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileDialogComponent {
-
+  @Output() logoutEvent = new EventEmitter();
   user: User;
+  isLogout: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<EditProfileDialogComponent>,
   public authService: AuthenticationService, public dataService: DataService) {
       this.user = data;
-      console.log(this.user);
-      console.log(data);
      }
 
   editUser() {
@@ -35,5 +35,9 @@ export class EditProfileDialogComponent {
 
   getLastFrostDateString(): string {
     return new Date(this.user.lastFrostDate).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
+  }
+
+  onLogout() {
+    this.dialogRef.close({isLogout: true});
   }
 }
