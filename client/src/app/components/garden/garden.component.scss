@@ -71,6 +71,15 @@
     }
 }
 
+.no-plants-warning {
+    font-size: 4rem;
+    color: $color-dark-gray;
+    opacity: 0.3;
+    margin: 3rem;
+    letter-spacing: 4px;
+    font-variant: petite-caps;
+}
+
 .delete-icon-container {
     cursor: pointer;
     transition: .1s ease-in;
