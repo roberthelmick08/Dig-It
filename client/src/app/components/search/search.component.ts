@@ -76,7 +76,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
-      this.dataService.openSnackBar('fail');
+      this.dataService.openSnackBar('fail', 'Unable to load plants. Please refresh and try again');
     });
   }
 

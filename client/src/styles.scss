@@ -192,7 +192,7 @@ h6 {
 /* Grid scroll bar overridden changes */
 
 ::-webkit-scrollbar {
-    width: 0.75rem; //12px;
+    width: 0.75rem;
     @media screen and (max-width: $break-md) {
         width: 0;
         height: 0;
@@ -209,6 +209,10 @@ h6 {
 
 ::-webkit-scrollbar-track {
     background: #fff;
+}
+
+.cdk-global-scrollblock {
+    overflow-y: hidden !important;
 }
 
 body {
