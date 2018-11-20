@@ -47,12 +47,11 @@ export class LoginDialogComponent {
     private dataService: DataService, private router: Router) {}
 
   login() {
-    this.auth.login(this.loginCredentials).subscribe(() => {
-      this.navigateToGardenEvent.emit(null);
-    }, (err) => {
+    this.auth.login(this.loginCredentials).subscribe(() => { }, (err) => {
       this.dataService.openSnackBar('fail', 'Unable to log in. Please try again.');
       console.error(err);
     }, () => {
+      this.navigateToGardenEvent.emit(null);
       this.dialogRef.close();
     });
 }
