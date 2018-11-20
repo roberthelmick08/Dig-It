@@ -1,7 +1,7 @@
 import { DataService } from './../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
-import { Component, Inject, Output } from '@angular/core';
 import { User } from 'src/models/user';
+import { Component, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEmitter } from 'events';
 
@@ -11,9 +11,9 @@ import { EventEmitter } from 'events';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileDialogComponent {
-  @Output() logoutEvent = new EventEmitter();
   user: User;
   isLogout: boolean = false;
+  @Output() logoutEvent = new EventEmitter();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<EditProfileDialogComponent>,
   public authService: AuthenticationService, public dataService: DataService) {

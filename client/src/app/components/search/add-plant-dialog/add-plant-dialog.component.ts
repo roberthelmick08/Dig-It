@@ -1,5 +1,5 @@
 import { DataService } from './../../../services/data.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Plant } from '../../../../models/plant';
 
