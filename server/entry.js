@@ -21,13 +21,32 @@ mongoose.connection.on('error', (err) => {
 const PORT = 3000;
 
 // Middleware
-app.use(bodyparser.urlencoded({
-    extended: true
-}));
-app.use(bodyparser.json());
-app.use(cors());
-app.use(passport.initialize());
-app.use(passport.session());
+
+function parallel(middlewares) {
+    return function(req, res, next) {
+        async.each(middlewares, function(mw, cb) {
+            mw(req, res, cb);
+        }, next);
+    };
+}
+
+app.use(parallel([
+    bodyparser.urlencoded({
+        extended: true
+    }),
+    bodyparser.json(),
+    cors(),
+    passport.initialize(),
+    passport.session()
+]), );
+
+// app.use(bodyparser.urlencoded({
+//     extended: true
+// }));
+// app.use(bodyparser.json());
+// app.use(cors());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // Routes
 app.use('/api', route);
