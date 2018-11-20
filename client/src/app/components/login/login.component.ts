@@ -1,9 +1,9 @@
-import { DataService } from './../../services/data.service';
 import { Component, Output } from '@angular/core';
-import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { DataService } from './../../services/data.service';
+import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +41,7 @@ export class LoginDialogComponent {
     garden: []
   };
 
-  activePageTab: 'login' | 'register' = 'login';
+  activePageTab = 'login';
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private auth: AuthenticationService,
     private dataService: DataService, private router: Router) {}

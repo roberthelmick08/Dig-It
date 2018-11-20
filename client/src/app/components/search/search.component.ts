@@ -1,14 +1,14 @@
-import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
 import { Component, AfterViewInit, Output, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSidenav } from '@angular/material';
-import { Plant } from './../../../models/plant';
-import { GardenPlant } from './../../../models/gardenPlant';
-import { User } from './../../../models/user';
 import { DataService } from '../../services/data.service';
 import { AuthenticationService } from './../../services/authentication.service';
 import { ReminderService } from './../../services/reminder.service';
-import { SearchFilter } from 'src/models/searchFilter';
+import { AddPlantDialogComponent } from './add-plant-dialog/add-plant-dialog.component';
 import { AddToGardenDialogComponent } from './add-to-garden-dialog/add-to-garden-dialog.component';
+import { SearchFilter } from 'src/models/searchFilter';
+import { Plant } from 'src/models/plant';
+import { GardenPlant } from 'src/models/gardenPlant';
+import { User } from 'src/models/user';
 
 
 @Component({
@@ -18,13 +18,12 @@ import { AddToGardenDialogComponent } from './add-to-garden-dialog/add-to-garden
   providers: [ DataService ]
 })
 export class SearchComponent implements AfterViewInit, OnInit {
+  user: User;
 
   @Output()
   openPlantDetailsDialogEvent = new EventEmitter();
 
   @ViewChild('sidenav') sidenav: MatSidenav;
-
-  user: User;
 
   // Variable to store ALL plants from database
   plantsList: Array<Plant> = [];

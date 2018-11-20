@@ -5,7 +5,6 @@ import { DataService } from './../../services/data.service';
 import { User } from 'src/models/user';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Reminder } from 'src/models/reminder';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-garden',
@@ -91,10 +90,6 @@ export class GardenComponent implements OnInit {
   setGridItemHover(isHover, index: number) {
     this.isGridItemOnHover = isHover;
     this.hoverIndex = index;
-  }
-
-  onDrop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.user.garden, event.previousIndex, event.currentIndex);
   }
 
   getReminderTooltipText(plant: GardenPlant, reminder: Reminder): string {
