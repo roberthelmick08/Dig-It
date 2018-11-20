@@ -2,10 +2,11 @@
 .sprout-stages-img-wrapper {
     width: 100%;
     height: calc(100vh - 4rem - 64px);
-    background-image: url('../../../assets/img/sproutStages.png');
+    background-image: url('../../../assets/img/sproutStages.webp'), url('../../../assets/img/sproutStages-min.png');
+    // background-image: url('../../../assets/img/sproutStages.webp');
     background-repeat: no-repeat;
     background-position-y: bottom;
-    background-size: contain;
+    background-size: 100%;
     @media screen and (min-width: $break-xl) {
         background-size: cover;
     }
@@ -15,7 +16,8 @@
         margin-bottom: -14%;
     }
     @media screen and (max-width: $break-sm) {
-        background-image: url('../../../assets/img/sproutStages-sm.png');
+        background-image: url('../../../assets/img/sproutStages-sm.webp'), url('../../../assets/img/sproutStages-sm-min.png');
+        // background-image: url('../../../assets/img/sproutStages-sm.webp');
         .home-page-header-logo {
             width: 100%;
             margin-top: 50%;
@@ -54,7 +56,8 @@
 
 .quick-overview-container {
     padding: 1rem;
-    background-image: url("../../../assets/img/dirt.png");
+    background-image: url("../../../assets/img/dirt.webp"), url("../../../assets/img/dirt-min.png");
+    // background-image: url("../../../assets/img/dirt.webp");
     background-size: contain;
     color: white;
     .quick-overview-header {
