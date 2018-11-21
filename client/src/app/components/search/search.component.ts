@@ -172,21 +172,32 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.lifeCycleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
     this.sunScheduleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
     this.sidenav.close();
+    // if (this.activeFilters.length > 0) {
+    //   this.visiblePlants = this.visiblePlants.filter(plant => {
+    //     let retVal = false;
+    //     for (let activeFilter of this.activeFilters) {
+    //       if (activeFilter.type === 'plantType' && plant.type === activeFilter.value) {
+    //         retVal = true;
+    //       } else if (activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value) {
+    //         retVal = true;
+    //       } else if (activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
+    //         retVal = true;
+    //       } else {
+    //         return false;
+    //       }
+    //     }
+    //     return retVal;
+    //   });
+    // }
     if (this.activeFilters.length > 0) {
       this.visiblePlants = this.visiblePlants.filter(plant => {
-        let retVal = false;
         for (let activeFilter of this.activeFilters) {
-          if (activeFilter.type === 'plantType' && plant.type === activeFilter.value) {
-            retVal = true;
-          } else if (activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value) {
-            retVal = true;
-          } else if (activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
-            retVal = true;
-          } else {
-            return false;
+          if (activeFilter.type === 'plantType' && plant.type === activeFilter.value || activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value
+          || activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
+            return true;
           }
         }
-        return retVal;
+        return false;
       });
     }
   }

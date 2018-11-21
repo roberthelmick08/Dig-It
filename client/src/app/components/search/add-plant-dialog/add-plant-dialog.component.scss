@@ -1,6 +1,7 @@
 @import "../../../../styles.scss";
 .add-plant-dialog {
     h2 {
+        margin-top: 0;
         font-size: 2rem;
     }
     h3 {
@@ -8,11 +9,11 @@
         margin-bottom: 32px;
     }
     .shift-is-save-to-garden {
-        margin-top: -32px;
+        margin-top: -12px;
     }
     .add-plant-scroll-container {
-        @media screen and (min-width: $break-sm){
-            height: 326px;
+        @media screen and (min-width: $break-sm) {
+            height: 352px;
         }
         mat-hint.mat-hint,
         .image-container {
@@ -30,11 +31,11 @@
             mat-hint.mat-hint {
                 margin-top: 18px;
             }
-            @media screen and (max-width: $break-sm){
-                .toggle-margin-bottom{
-                        margin-bottom: 77px;
+            @media screen and (max-width: $break-sm) {
+                .toggle-margin-bottom {
+                    margin-bottom: 77px;
                 }
-                .harvest-weeks-input{
+                .harvest-weeks-input {
                     margin-top: 12px;
                 }
             }
