@@ -55,6 +55,10 @@ $break-xl: 1920px;
     }
 }
 
+.highlight {
+    color: $color-red !important;
+}
+
 .dig-it-tooltip {
     border-top: 4px solid $color-light-green;
     margin-top: -24px;

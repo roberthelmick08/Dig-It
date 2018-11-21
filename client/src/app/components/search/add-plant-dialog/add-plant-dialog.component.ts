@@ -21,9 +21,6 @@ export class AddPlantDialogComponent {
 
     // Set default values
     this.newPlant.harvestable = false;
-    this.newPlant.weeksToSowBeforeLastFrost = 4;
-    this.newPlant.stage = 0;
-    this.newPlant.germEnd = 2;
   }
 
   onNextStep() {
@@ -38,8 +35,23 @@ export class AddPlantDialogComponent {
     // convert inputted values to negative numbers
     if (this.newPlant.weeksToSowBeforeLastFrost > 0) {
       this.newPlant.weeksToSowBeforeLastFrost = 0 - this.newPlant.weeksToSowBeforeLastFrost;
-    } else if (this.newPlant.germEnd > 0) {
+    }
+    if (this.newPlant.germEnd > 0) {
       this.newPlant.germEnd = 0 - this.newPlant.germEnd;
+    }
+
+    // Set Default Values
+    if (!this.newPlant.weeksToSowBeforeLastFrost) {
+      this.newPlant.weeksToSowBeforeLastFrost = 4;
+    }
+    if (!this.newPlant.germEnd) {
+      this.newPlant.germEnd = 2;
+    }
+    if (!this.newPlant.depth) {
+      this.newPlant.depth = 6;
+    }
+    if (!this.newPlant.sowingSpace) {
+      this.newPlant.sowingSpace = 9;
     }
 
     // Refresh Defaults

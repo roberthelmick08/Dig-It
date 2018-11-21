@@ -74,10 +74,35 @@
 .no-plants-warning {
     font-size: 4rem;
     color: $color-dark-gray;
-    opacity: 0.3;
     margin: 3rem;
     letter-spacing: 4px;
     font-variant: petite-caps;
+    .warning-opacity {
+        opacity: 0.3;
+    }
+}
+
+.no-plants-arrow,
+.no-plants-arrow-icon {
+    color: $color-red;
+    position: absolute;
+    top: 0px;
+    font-size: 32px;
+    left: calc(35% - 38px);
+    @media screen and (max-width: $break-md) {
+        left: calc(30% - 38px);
+    }
+    @media screen and (max-width: $break-sm) {
+        left: calc(20% - 38px);
+    }
+}
+
+.no-plants-arrow {
+    width: 2px;
+    bottom: 41%;
+    margin-left: 15px;
+    margin-top: 11px;
+    background-color: $color-red;
 }
 
 .delete-icon-container {

@@ -139,6 +139,12 @@
             <div *ngIf="step === 2" fxLayout="column">
                 <h3>Advanced Settings</h3>
                 <mat-form-field>
+                    <input matInput type="number" placeholder="Sowing Depth (in inches)" name="depth" [(ngModel)]="newPlant.depth">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput type="number" placeholder="Sowing Distance (in inches)" name="space" [(ngModel)]="newPlant.sowingSpace">
+                </mat-form-field>
+                <mat-form-field>
                     <input matInput type="number" placeholder="# of weeks before last frost date to sow the seeds" name="weeksToSowBeforeLastFrost" [(ngModel)]="newPlant.weeksToSowBeforeLastFrost">
                 </mat-form-field>
                 <mat-form-field>
@@ -154,6 +160,7 @@
         <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step === 0">Cancel</button>
         <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
         <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 1 && step !== 2" [disabled]="(!newPlant.commonName && !newPlant.botanicalName) || !newPlant.type || !newPlant.lifeType || (newPlant.harvestable === true && !newPlant.weeksToHarvest)">Next ></button>
-        <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 1 || step === 2" [disabled]="!newPlant.sunSchedule || (newPlant.stage > 0 && newPlant.isPotted === undefined)">Submit</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 1 || step === 2" [disabled]="!newPlant.sunSchedule || (this.isSaveToGarden && !this.newPlant.stage) ||
+        (this.isSaveToGarden && newPlant.stage > 0 && newPlant.isPotted === undefined)">Submit</button>
     </mat-dialog-actions>
 </div>
