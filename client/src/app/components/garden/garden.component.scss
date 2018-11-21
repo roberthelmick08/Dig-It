@@ -82,27 +82,30 @@
     }
 }
 
-.no-plants-arrow,
 .no-plants-arrow-icon {
     color: $color-red;
     position: absolute;
     top: 0px;
     font-size: 32px;
     left: calc(35% - 38px);
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    @keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+    @-webkit-keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
     @media screen and (max-width: $break-md) {
         left: calc(30% - 38px);
     }
     @media screen and (max-width: $break-sm) {
         left: calc(20% - 38px);
     }
-}
-
-.no-plants-arrow {
-    width: 2px;
-    bottom: 41%;
-    margin-left: 15px;
-    margin-top: 11px;
-    background-color: $color-red;
 }
 
 .delete-icon-container {
