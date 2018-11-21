@@ -156,14 +156,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       plant.isPotted = result.isPotted;
       plant.stage = result.stage;
     }, (err) => {
       this.dataService.openSnackBar('fail');
       console.log(err);
      }, () => {
-       console.log(plant.stage, plant.isPotted);
       this.addToGarden(plant);
     });
   }
