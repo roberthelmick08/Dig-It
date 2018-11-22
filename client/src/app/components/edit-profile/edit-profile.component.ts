@@ -38,6 +38,7 @@ export class EditProfileDialogComponent {
   }
 
   onLogout() {
-    this.dialogRef.close({isLogout: true});
+    this.isLogout = true;
+    this.dialogRef.close();
   }
 }
