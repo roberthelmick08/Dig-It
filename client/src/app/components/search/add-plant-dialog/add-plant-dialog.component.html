@@ -10,10 +10,10 @@
         </div>
         <form fxFlex>
             <div *ngIf="step === 0" fxLayout="column">
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput placeholder="Common Name" name="commonName" maxlength="35" [(ngModel)]="newPlant.commonName" [required]="newPlant?.botanicalName?.length === 0">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput placeholder="Botanical Name" name="botanicalName" maxlength="25" [(ngModel)]="newPlant.botanicalName">
                 </mat-form-field>
                 <mat-form-field>
@@ -68,7 +68,7 @@
                 <div fxFlex="100" class="harvest-wrapper" fxLayout.lt-sm="column">
                     <mat-hint fxFlex="50">Does it produce something to harvest?</mat-hint>
                     <mat-slide-toggle fxFlex="20" [(ngModel)]="newPlant.harvestable" name="harvestable" class="toggle" [class.toggle-margin-bottom]="newPlant.harvestable === false" matRippleDisabled>{{ newPlant.harvestable ? 'Yes' : 'No' }}</mat-slide-toggle>
-                    <mat-form-field fxFlex="30" *ngIf="newPlant.harvestable === true" class="harvest-weeks-input">
+                    <mat-form-field fxFlex="30" *ngIf="newPlant.harvestable === true" class="harvest-weeks-input" floatLabel="never">
                         <input matInput type="number" placeholder="Weeks until harvest" name="weeksToHarvest" [(ngModel)]="newPlant.weeksToHarvest" required>
                     </mat-form-field>
                 </div>
@@ -120,10 +120,10 @@
                         <mat-option value="false">In Ground</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput placeholder="Variety of {{newPlant.commonName ? (newPlant.commonName | titlecase) : (newPlant.botanicalName | titlecase) }}" name="variety" [(ngModel)]="newPlant.variety">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput placeholder="Comment" name="comment" [(ngModel)]="newPlant.comment">
                 </mat-form-field>
 
@@ -138,16 +138,16 @@
 
             <div *ngIf="step === 2" fxLayout="column">
                 <h3>Advanced Settings</h3>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="number" placeholder="Sowing Depth (in inches)" name="depth" [(ngModel)]="newPlant.depth">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="number" placeholder="Sowing Distance (in inches)" name="space" [(ngModel)]="newPlant.sowingSpace">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="number" placeholder="# of weeks before last frost date to sow the seeds" name="weeksToSowBeforeLastFrost" [(ngModel)]="newPlant.weeksToSowBeforeLastFrost">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="number" placeholder="Length of germination period (in weeks)" name="germEnd" [(ngModel)]="newPlant.germEnd">
                 </mat-form-field>
             </div>

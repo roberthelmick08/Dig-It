@@ -174,14 +174,49 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.sidenav.close();
 
     if (this.activeFilters.length > 0) {
+
+      let plantTypeFilters = this.activeFilters.filter(f => {
+        return f.type === 'plantType';
+      });
+      let lifeCycleFilters = this.activeFilters.filter(f => {
+        return f.type === 'lifeCycle';
+      });
+      let sunScheduleFilters = this.activeFilters.filter(f => {
+        return f.type === 'sunSchedule';
+      });
+
       this.visiblePlants = this.visiblePlants.filter(plant => {
-        for (let activeFilter of this.activeFilters) {
-          if (activeFilter.type === 'plantType' && plant.type === activeFilter.value || activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value
-          || activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
-            return true;
+        let retVal = false;
+        // for (let activeFilter of this.activeFilters) {
+          // if (activeFilter.type === 'plantType' && plant.type === activeFilter.value || activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value
+          // || activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
+          //   return true;
+          // }
+
+          for (let plantTypeFilter of plantTypeFilters) {
+            if (plantTypeFilter.value === plant.type) {
+              retVal = true;
+            } else {
+              retVal = false;
+            }
           }
+          for (let lifeCycleFilter of lifeCycleFilters) {
+            if (lifeCycleFilter.value === plant.lifeType) {
+              retVal = true;
+            } else {
+              retVal = false;
+            }
+          }
+          for (let sunScheduleFilter of sunScheduleFilters) {
+            if (sunScheduleFilter.value === plant.sunSchedule) {
+              retVal = true;
+            } else {
+              retVal = false;
+            }
+          // }
         }
-        return false;
+        return retVal;
+        // return false;
       });
     }
   }

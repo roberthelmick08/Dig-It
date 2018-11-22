@@ -13,23 +13,23 @@
             <h1 class="header">{{activePageTab === 'login' ? 'Login' : 'Register'}}</h1>
 
             <div *ngIf="activePageTab === 'login'" fxLayout="column">
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" (keyup.enter)="login()" required>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" (keyup.enter)="login()" required>
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="login()" [disabled]="!loginCredentials.email || !loginCredentials.password">Log In</button>
             </div>
 
             <div *ngIf="activePageTab === 'register'" fxLayout="column">
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" [(ngModel)]="registerCredentials.email" (keyup.enter)="setUserCredentials()" required>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="registerCredentials.password" (keyup.enter)="setUserCredentials()" required>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <input matInput type="text" pattern="\d*" name="zip" placeholder="ZIP code" [(ngModel)]="tempZip" maxLength="5" minLength="5" (keyup)="parseZipString()" (keyup.enter)="setUserCredentials()" required>
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="setUserCredentials()" *ngIf="!isLoading" [disabled]="!registerCredentials.email || !registerCredentials.password || tempZip?.length !== 5">Register</button>
