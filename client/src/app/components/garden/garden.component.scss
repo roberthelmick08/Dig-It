@@ -20,8 +20,11 @@
         overflow: hidden;
         cursor: pointer;
         transition: .1s ease-in;
-        img {
+        .img-found {
             width: 100%;
+            height: 100%;
+        }
+        .img-not-found {
             height: 100%;
         }
         @media screen and (min-width: $break-md) {
