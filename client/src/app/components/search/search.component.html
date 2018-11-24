@@ -5,11 +5,13 @@
             <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
                 <div class="filter-header">Plant Type</div>
             </div>
+            <div fxFlex fxLayoutAlign="end center">
+                <div class="clear-filters" (click)="deselectAllFilters('plantType')" *ngIf="isClearFiltersVisible('plantType')">
+                  <img src="../../assets/icons/remove.svg">
+                  Clear Filters
+                </div>
+            </div>
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
-                <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('plantType')">
-                    <img src="../../../assets/icons/remove.svg" class="remove-icon" />
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Clear Filters</div>
-                </li>
                 <li class="filter-item" [class.filter-item-selected]="plantType.isActive" *ngFor="let plantType of plantTypeFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="plantType.isActive = !plantType.isActive">
                     <img src="../../../assets/icons/{{plantType.value}}.svg" />
                     <div class="filter-text" fxFlex fxLayoutAlign="end center">{{plantType.value}}</div>
@@ -22,12 +24,14 @@
             <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
                 <div class="filter-header">Sun Schedule</div>
             </div>
+            <div fxFlex fxLayoutAlign="end center">
+                <div class="clear-filters" (click)="deselectAllFilters('sunSchedule')" *ngIf="isClearFiltersVisible('sunSchedule')">
+                  <img src="../../assets/icons/remove.svg">
+                  Clear Filters
+                </div>
+            </div>
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
-                <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('sunSchedule')">
-                    <img src="../../../assets/icons/remove.svg" class="remove-icon" />
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Clear Filters</div>
-                </li>
-                <li class="filter-item" [class.filter-item-selected]="sunSchedule.isActive" *ngFor="let sunSchedule of sunScheduleFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="sunSchedule.isActive = !sunSchedule.isActive">
+                <li class="filter-item" [class.filter-item-selected]="sunSchedule.isActive" *ngFor="let sunSchedule of sunScheduleFilters" fxFlex="48" (click)="sunSchedule.isActive = !sunSchedule.isActive">
                     <mat-icon *ngIf="sunSchedule.value === 'Full Sun'">brightness_high</mat-icon>
                     <mat-icon *ngIf="sunSchedule.value === 'Partial Sun'">brightness_low</mat-icon>
                     <mat-icon *ngIf="sunSchedule.value === 'Partial Shade'">brightness_medium</mat-icon>
@@ -42,11 +46,13 @@
             <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
                 <div class="filter-header">Life Cycle</div>
             </div>
+            <div fxFlex fxLayoutAlign="end center">
+                <div class="clear-filters" (click)="deselectAllFilters('lifeCycle')" *ngIf="isClearFiltersVisible('lifeCycle')">
+                  <img src="../../assets/icons/remove.svg">
+                  Clear Filters
+                </div>
+            </div>
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
-                <li class="filter-item" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="deselectAllFilters('lifeCycle')">
-                    <img src="../../../assets/icons/remove.svg" class="remove-icon" />
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">Clear Filters</div>
-                </li>
                 <li class="filter-item" [class.filter-item-selected]="lifeCycle.isActive" *ngFor="let lifeCycle of lifeCycleFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="lifeCycle.isActive = !lifeCycle.isActive">
                     <div class="letter-icon" *ngIf="lifeCycle.value === 'Annual'">A</div>
                     <div class="letter-icon" *ngIf="lifeCycle.value === 'Biennial'">B</div>

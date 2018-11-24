@@ -35,6 +35,20 @@
                 font-variant: petite-caps;
             }
         }
+        .clear-filters {
+            font-size: 0.75rem;
+            color: $color-light-gray;
+            cursor: pointer;
+            margin-top: -.625rem;
+            &:hover {
+                color: $color-red;
+            }
+            img{
+              height: 0.75rem;
+              margin-bottom: -1px;
+              margin-right: 4px;
+            }
+        }
         ul {
             list-style: none;
             color: $color-dark-gray;

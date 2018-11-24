@@ -44,7 +44,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   sunScheduleFilters: Array<SearchFilter> = [];
 
-  plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Vegetable', 'Vine'];
+  plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Tree', 'Vegetable', 'Vine'];
 
   sunSchedules = ['Full Sun', 'Partial Sun', 'Partial Shade', 'Full Shade'];
 
@@ -186,37 +186,37 @@ export class SearchComponent implements AfterViewInit, OnInit {
       });
 
       this.visiblePlants = this.visiblePlants.filter(plant => {
-        let retVal = false;
-        // for (let activeFilter of this.activeFilters) {
-          // if (activeFilter.type === 'plantType' && plant.type === activeFilter.value || activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value
-          // || activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
-          //   return true;
-          // }
+        // let retVal = false;
+        for (let activeFilter of this.activeFilters) {
+          if (activeFilter.type === 'plantType' && plant.type === activeFilter.value || activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value
+          || activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
+            return true;
+          }
 
-          for (let plantTypeFilter of plantTypeFilters) {
-            if (plantTypeFilter.value === plant.type) {
-              retVal = true;
-            } else {
-              retVal = false;
-            }
-          }
-          for (let lifeCycleFilter of lifeCycleFilters) {
-            if (lifeCycleFilter.value === plant.lifeType) {
-              retVal = true;
-            } else {
-              retVal = false;
-            }
-          }
-          for (let sunScheduleFilter of sunScheduleFilters) {
-            if (sunScheduleFilter.value === plant.sunSchedule) {
-              retVal = true;
-            } else {
-              retVal = false;
-            }
+          // for (let plantTypeFilter of plantTypeFilters) {
+          //   if (plantTypeFilter.value === plant.type) {
+          //     retVal = true;
+          //   } else {
+          //     retVal = false;
+          //   }
+          // }
+          // for (let lifeCycleFilter of lifeCycleFilters) {
+          //   if (lifeCycleFilter.value === plant.lifeType) {
+          //     retVal = true;
+          //   } else {
+          //     retVal = false;
+          //   }
+          // }
+          // for (let sunScheduleFilter of sunScheduleFilters) {
+          //   if (sunScheduleFilter.value === plant.sunSchedule) {
+          //     retVal = true;
+          //   } else {
+          //     retVal = false;
+          //   }
           // }
         }
-        return retVal;
-        // return false;
+        // return retVal;
+        return false;
       });
     }
   }
@@ -229,6 +229,17 @@ export class SearchComponent implements AfterViewInit, OnInit {
     } else if (filterType === 'sunSchedule') {
       this.sunScheduleFilters.map(filter => { filter.isActive = false; });
     }
+  }
+
+  isClearFiltersVisible(filterType: string): boolean {
+    if (filterType === 'plantType') {
+      return this.plantTypeFilters.filter(filter => filter.isActive === true ).length > 0;
+    } else if (filterType === 'lifeCycle') {
+      return this.lifeCycleFilters.filter(filter => filter.isActive === true ).length > 0;
+    } else if (filterType === 'sunSchedule') {
+      return this.sunScheduleFilters.filter(filter => filter.isActive === true).length > 0;
+    }
+
   }
 
   removeFilter(filter: SearchFilter) {
