@@ -174,49 +174,46 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.sidenav.close();
 
     if (this.activeFilters.length > 0) {
-
       let plantTypeFilters = this.activeFilters.filter(f => {
         return f.type === 'plantType';
-      });
-      let lifeCycleFilters = this.activeFilters.filter(f => {
-        return f.type === 'lifeCycle';
       });
       let sunScheduleFilters = this.activeFilters.filter(f => {
         return f.type === 'sunSchedule';
       });
+      let lifeCycleFilters = this.activeFilters.filter(f => {
+        return f.type === 'lifeCycle';
+      });
 
       this.visiblePlants = this.visiblePlants.filter(plant => {
-        // let retVal = false;
-        for (let activeFilter of this.activeFilters) {
-          if (activeFilter.type === 'plantType' && plant.type === activeFilter.value || activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value
-          || activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
-            return true;
+        let retVal = false;
+        let plantTypeRetVal = false;
+        let sunScheduleRetVal = false;
+          for (let plantTypeFilter of plantTypeFilters) {
+            if (plantTypeFilter.value === plant.type) {
+              plantTypeRetVal = true;
+              retVal = true;
+            }
           }
-
-          // for (let plantTypeFilter of plantTypeFilters) {
-          //   if (plantTypeFilter.value === plant.type) {
-          //     retVal = true;
-          //   } else {
-          //     retVal = false;
-          //   }
-          // }
-          // for (let lifeCycleFilter of lifeCycleFilters) {
-          //   if (lifeCycleFilter.value === plant.lifeType) {
-          //     retVal = true;
-          //   } else {
-          //     retVal = false;
-          //   }
-          // }
-          // for (let sunScheduleFilter of sunScheduleFilters) {
-          //   if (sunScheduleFilter.value === plant.sunSchedule) {
-          //     retVal = true;
-          //   } else {
-          //     retVal = false;
-          //   }
-          // }
-        }
-        // return retVal;
-        return false;
+          for (let sunScheduleFilter of sunScheduleFilters) {
+            if ((sunScheduleFilter.value === plant.sunSchedule && plantTypeRetVal === true && plantTypeFilters.length > 0)
+            || (sunScheduleFilter.value === plant.sunSchedule && plantTypeRetVal === false && plantTypeFilters.length === 0)) {
+              sunScheduleRetVal = true;
+              retVal = true;
+            } else {
+              retVal = false;
+            }
+          }
+          for (let lifeCycleFilter of lifeCycleFilters) {
+            if ((lifeCycleFilter.value === plant.lifeType && sunScheduleRetVal === true && plantTypeFilters.length > 0)
+            || (lifeCycleFilter.value === plant.lifeType && sunScheduleRetVal === false && plantTypeFilters.length === 0)
+            || (lifeCycleFilter.value === plant.lifeType && plantTypeRetVal === true && plantTypeFilters.length > 0)
+            || (lifeCycleFilter.value === plant.lifeType && plantTypeRetVal === false && plantTypeFilters.length === 0)) {
+              retVal = true;
+            } else {
+              retVal = false;
+            }
+          }
+        return retVal;
       });
     }
   }
@@ -239,7 +236,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
     } else if (filterType === 'sunSchedule') {
       return this.sunScheduleFilters.filter(filter => filter.isActive === true).length > 0;
     }
-
   }
 
   removeFilter(filter: SearchFilter) {
