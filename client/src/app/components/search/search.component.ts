@@ -44,7 +44,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   sunScheduleFilters: Array<SearchFilter> = [];
 
-  plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Vegetable', 'Vine'];
+  plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Tree', 'Vegetable', 'Vine'];
 
   sunSchedules = ['Full Sun', 'Partial Sun', 'Partial Shade', 'Full Shade'];
 
@@ -136,7 +136,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.isSaveToGarden === true) {
         this.addToGarden(result.plant);
-      } else {
+      } else if (result && result.isSaveToGarden === false) {
         this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
       }
     });
@@ -156,14 +156,12 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       plant.isPotted = result.isPotted;
       plant.stage = result.stage;
     }, (err) => {
       this.dataService.openSnackBar('fail');
       console.log(err);
      }, () => {
-       console.log(plant.stage, plant.isPotted);
       this.addToGarden(plant);
     });
   }
@@ -174,20 +172,47 @@ export class SearchComponent implements AfterViewInit, OnInit {
     this.lifeCycleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
     this.sunScheduleFilters.filter(filter => filter.isActive === true).map(filter => { this.activeFilters.push(filter); });
     this.sidenav.close();
+
     if (this.activeFilters.length > 0) {
+      let plantTypeFilters = this.activeFilters.filter(f => {
+        return f.type === 'plantType';
+      });
+      let sunScheduleFilters = this.activeFilters.filter(f => {
+        return f.type === 'sunSchedule';
+      });
+      let lifeCycleFilters = this.activeFilters.filter(f => {
+        return f.type === 'lifeCycle';
+      });
+
       this.visiblePlants = this.visiblePlants.filter(plant => {
         let retVal = false;
-        for (let activeFilter of this.activeFilters) {
-          if (activeFilter.type === 'plantType' && plant.type === activeFilter.value) {
-            retVal = true;
-          } else if (activeFilter.type === 'lifeCycle' && plant.lifeType === activeFilter.value) {
-            retVal = true;
-          } else if (activeFilter.type === 'sunSchedule' && plant.sunSchedule === activeFilter.value) {
-            retVal = true;
-          } else {
-            return false;
+        let plantTypeRetVal = false;
+        let sunScheduleRetVal = false;
+          for (let plantTypeFilter of plantTypeFilters) {
+            if (plantTypeFilter.value === plant.type) {
+              plantTypeRetVal = true;
+              retVal = true;
+            }
           }
-        }
+          for (let sunScheduleFilter of sunScheduleFilters) {
+            if ((sunScheduleFilter.value === plant.sunSchedule && plantTypeRetVal === true && plantTypeFilters.length > 0)
+            || (sunScheduleFilter.value === plant.sunSchedule && plantTypeRetVal === false && plantTypeFilters.length === 0)) {
+              sunScheduleRetVal = true;
+              retVal = true;
+            } else {
+              retVal = false;
+            }
+          }
+          for (let lifeCycleFilter of lifeCycleFilters) {
+            if ((lifeCycleFilter.value === plant.lifeType && sunScheduleRetVal === true && plantTypeFilters.length > 0)
+            || (lifeCycleFilter.value === plant.lifeType && sunScheduleRetVal === false && plantTypeFilters.length === 0)
+            || (lifeCycleFilter.value === plant.lifeType && plantTypeRetVal === true && plantTypeFilters.length > 0)
+            || (lifeCycleFilter.value === plant.lifeType && plantTypeRetVal === false && plantTypeFilters.length === 0)) {
+              retVal = true;
+            } else {
+              retVal = false;
+            }
+          }
         return retVal;
       });
     }
@@ -200,6 +225,16 @@ export class SearchComponent implements AfterViewInit, OnInit {
       this.lifeCycleFilters.map(filter => { filter.isActive = false; });
     } else if (filterType === 'sunSchedule') {
       this.sunScheduleFilters.map(filter => { filter.isActive = false; });
+    }
+  }
+
+  isClearFiltersVisible(filterType: string): boolean {
+    if (filterType === 'plantType') {
+      return this.plantTypeFilters.filter(filter => filter.isActive === true ).length > 0;
+    } else if (filterType === 'lifeCycle') {
+      return this.lifeCycleFilters.filter(filter => filter.isActive === true ).length > 0;
+    } else if (filterType === 'sunSchedule') {
+      return this.sunScheduleFilters.filter(filter => filter.isActive === true).length > 0;
     }
   }
 

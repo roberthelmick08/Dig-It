@@ -20,8 +20,11 @@
         overflow: hidden;
         cursor: pointer;
         transition: .1s ease-in;
-        img {
+        .img-found {
             width: 100%;
+            height: 100%;
+        }
+        .img-not-found {
             height: 100%;
         }
         @media screen and (min-width: $break-md) {
@@ -42,8 +45,9 @@
                 width: 36px;
                 height: 36px;
                 margin-left: 8px;
+                margin-top: 2px;
                 background-color: $color-red;
-                border: 1px solid $color-blue;
+                border: 2px solid $color-blue;
                 .reminders-icon {
                     height: 24px;
                     width: 24px;
@@ -74,10 +78,38 @@
 .no-plants-warning {
     font-size: 4rem;
     color: $color-dark-gray;
-    opacity: 0.3;
     margin: 3rem;
     letter-spacing: 4px;
     font-variant: petite-caps;
+    .warning-opacity {
+        opacity: 0.3;
+    }
+}
+
+.no-plants-arrow-icon {
+    color: $color-red;
+    position: absolute;
+    top: 0px;
+    font-size: 32px;
+    left: calc(35% - 38px);
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    @keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+    @-webkit-keyframes blink-animation {
+        to {
+            visibility: hidden;
+        }
+    }
+    @media screen and (max-width: $break-md) {
+        left: calc(30% - 38px);
+    }
+    @media screen and (max-width: $break-sm) {
+        left: calc(20% - 38px);
+    }
 }
 
 .delete-icon-container {

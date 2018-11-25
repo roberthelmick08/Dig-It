@@ -6,9 +6,6 @@
     background-repeat: no-repeat;
     background-position-y: bottom;
     background-size: 100%;
-    @media screen and (min-width: $break-xl) {
-        background-size: cover;
-    }
     .home-page-header-logo {
         z-index: 1;
         width: 50%;

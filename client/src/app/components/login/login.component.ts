@@ -129,7 +129,7 @@ export class LoginDialogComponent {
     });
   }
 
-  parseZipString(){
-    this.registerCredentials.zip = parseInt(this.tempZip);
+  parseZipString() {
+    this.registerCredentials.zip = parseInt(this.tempZip, 10);
   }
 }
