@@ -6,9 +6,12 @@ var cors = require('cors');
 var app = express();
 const route = require('./route/routes');
 require('./config/passport');
+require('dotenv').config({ path: './../.env' })
 
 // Mongoose 
-mongoose.connect('mongodb://localhost:27017/meanAuth');
+// mongoose.connect('mongodb://localhost:27017/meanAuth');
+console.log(process.env.MONGO_URL_PROD);
+mongoose.connect(process.env.MONGO_URL_PROD);
 
 mongoose.connection.on('connected', () => {
     console.log('MongoDB connected at port 27017');
