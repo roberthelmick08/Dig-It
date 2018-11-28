@@ -15,7 +15,7 @@
         background-image: url('../../../assets/img/sproutStages-sm.webp'), url('../../../assets/img/sproutStages-sm-min.png');
         .home-page-header-logo {
             width: 100%;
-            margin-top: 50%;
+            margin-top: 33%;
         }
     }
 }
@@ -54,6 +54,9 @@
     background-image: url("../../../assets/img/dirt.webp"), url("../../../assets/img/dirt-min.png");
     background-size: contain;
     color: white;
+    @media screen and (max-width: $break-sm) {
+        background-image: url("../../../assets/img/dirt-sm.webp"), url("../../../assets/img/dirt-sm-min.png");
+    }
     .quick-overview-header {
         margin-top: 2rem;
         img {
