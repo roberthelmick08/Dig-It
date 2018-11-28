@@ -21,7 +21,7 @@ Dig-It is a single-page web application that gives users custom gardening remind
 
 This project is licensed under the MIT License
 
-### Features in progress:
+## Features in progress:
 - Google OAuth2
 - Google & iCloud Calendar integration
 - Custom image upload
