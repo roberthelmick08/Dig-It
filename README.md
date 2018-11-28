@@ -12,6 +12,7 @@ Dig-It is a single-page web application that gives users custom gardening remind
 * SASS
 * Node.JS
 * MongoDB
+* [Tom Clothier](https://tomclothier.hort.net/) - Plant Database
 * [WikiMedia](https://www.mediawiki.org/) - Image lookup
 * [FrostLine by Waldo Jaquith](https://github.com/waldoj/frostline) - Calculate user's USDA Plant Hardiness Zone
 * [FarmSense](http://www.farmsense.net/api/frost-date-api/) - Calculate frost dates in user's location
