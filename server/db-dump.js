@@ -3,18 +3,6 @@ db = db.getSiblingDB("meanAuth");
 db.users.drop();
 db.createCollection("users");
 
-db.users.insert({
-    name: "Annual",
-    email: "Annual",
-    password: "Annual",
-    admin: true,
-    phone: "5555555555",
-    zone: 9,
-    zip: 75056,
-    garden: []
-});
-
-
 db.plants.drop();
 db.createCollection("plants");
 
