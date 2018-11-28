@@ -1,3 +1,5 @@
+![Dig-It logo](http://dig-it-web.s3-website-us-east-1.amazonaws.com/assets/logo/dig-it-logo-full.svg)
+
 # Dig-It
 
 Dig-It is a single-page web application that gives users custom gardening reminders. Dig-It's extensive crowdsourced database lets users, registered and unregistered, to view the details of any plant in the world. Dig-It takes out all of the guess-work by using the climate in the user's location, the type of plant, the plant's age, as well as many other factors, and calculates exactly when the plant should be watered, planted, repotted and more. 
