@@ -1,6 +1,8 @@
-# Dig-It
+## ![Dig-It logo](client/src/assets/logo/dig-it-logo-full.svg)
 
-Dig-It is a single-page web application that gives users custom gardening reminders. Based on the climate in the user's location, the type of plant, the plant's age, as well as many other factors, Dig-It calculates exactly when the plant should be watered, planted, repotted and more. Dig-It's extensive crowdsourced database lets users, registered and unregistered, to view the details of any plant in the world.
+Dig-It is a single-page web application that takes out all of the guess-work out of home gardening. By using the climate in the user's location, the type of plant, the plant's age, as well as many other factors, Dig-It gives the user custom reminders for when their plants should be watered, planted, repotted and more. 
+
+Dig-It's extensive crowdsourced database allows visitors and registered users to view the details of any plant in the world as well as optimal growing conditions in their area.
 
 ## Author
 
@@ -8,19 +10,25 @@ Dig-It is a single-page web application that gives users custom gardening remind
 
 ## Built With
 
-* Angular 6
-* SASS
-* NodeJS
-* MongoDB
-* [WikiMedia](https://www.mediawiki.org/) - Image lookup
-* [FrostLine by Waldo Jaquith](https://github.com/waldoj/frostline) - Calculate user's USDA Plant Hardiness Zone
-* [FarmSense](http://www.farmsense.net/api/frost-date-api/) - Calculate frost dates in user's location
-* [Hopscotch](http://linkedin.github.io/hopscotch) - Site Walkthrough
+- Angular 6
+- SASS
+- Node.JS
+- MongoDB
+- [Tom Clothier](https://tomclothier.hort.net/) - Plant Database
+- [WikiMedia](https://www.mediawiki.org/) - Image lookup
+- [FrostLine by Waldo Jaquith](https://github.com/waldoj/frostline) - Calculate user's USDA Plant Hardiness Zone
+- [FarmSense](http://www.farmsense.net/api/frost-date-api/) - Calculate frost dates in user's location
 
 ## License
 
 This project is licensed under the MIT License
 
-### TODO:
-- APIs
-    - [Hopscotch Walkthrough](http://linkedin.github.io/hopscotch)
+## Upcoming Features:
+- Google & iCloud Calendar integration
+- Custom image upload
+- Unit Testing
+- Administrator approval of new plants
+- Garden: Drag & Drop sorting
+- Dark Theme
+- Accessibility
+- Public API (on hold)

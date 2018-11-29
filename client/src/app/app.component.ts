@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 import { User } from 'src/models/user';
-import { AddPlantDialogComponent } from './components/search/add-plant-dialog/add-plant-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -96,10 +95,16 @@ ngOnInit(): void {
   }
 
   openLoginDialog() {
-    this.dialog.open(LoginDialogComponent, {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
       height: '400px',
       width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: ['dialog-container', 'remove-bottom-padding']
+    });
+
+    dialogRef.afterClosed().subscribe(() => { }, (err) => {}, () => {
+      if (this.authService.isLoggedIn() === true) {
+        this.currentPage = 'garden';
+      }
     });
   }
 }

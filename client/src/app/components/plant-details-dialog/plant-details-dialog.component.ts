@@ -1,8 +1,8 @@
-import { User } from './../../../models/user';
 import { ReminderService } from './../../services/reminder.service';
 import { DataService } from './../../services/data.service';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { User } from 'src/models/user';
 import { GardenPlant } from 'src/models/gardenPlant';
 import { Reminder } from 'src/models/reminder';
 

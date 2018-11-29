@@ -1,9 +1,9 @@
-import { DataService } from './../../services/data.service';
 import { Component, Output } from '@angular/core';
-import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { DataService } from './../../services/data.service';
+import { AuthenticationService, TokenPayload } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -41,18 +41,17 @@ export class LoginDialogComponent {
     garden: []
   };
 
-  activePageTab: 'login' | 'register' = 'login';
+  activePageTab = 'login';
 
   constructor(public dialogRef: MatDialogRef<LoginDialogComponent>, private auth: AuthenticationService,
     private dataService: DataService, private router: Router) {}
 
   login() {
-    this.auth.login(this.loginCredentials).subscribe(() => {
-      this.navigateToGardenEvent.emit(null);
-    }, (err) => {
+    this.auth.login(this.loginCredentials).subscribe(() => { }, (err) => {
       this.dataService.openSnackBar('fail', 'Unable to log in. Please try again.');
       console.error(err);
     }, () => {
+      this.navigateToGardenEvent.emit(null);
       this.dialogRef.close();
     });
 }
@@ -130,7 +129,7 @@ export class LoginDialogComponent {
     });
   }
 
-  parseZipString(){
-    this.registerCredentials.zip = parseInt(this.tempZip);
+  parseZipString() {
+    this.registerCredentials.zip = parseInt(this.tempZip, 10);
   }
 }

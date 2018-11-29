@@ -1,14 +1,15 @@
 <div fxLayout="column">
     <div fxFlex="100" fxLayoutAlign="center">
-        <h2 class="page-header">Garden</h2>
+        <h2 class="page-header"><span class="highlight">[</span>Garden<span class="highlight">]</span></h2>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center">
-        <div class="no-plants-warning" *ngIf="user?.garden.length === 0">No plants in your Garden.</div>
+        <div class="no-plants-warning" *ngIf="user?.garden.length === 0"><span class="warning-opacity">Add </span><span class="highlight">plants</span><span class="warning-opacity"> to your Garden.</span></div>
+        <mat-icon class="no-plants-arrow-icon" *ngIf="user?.garden.length === 0">keyboard_arrow_up</mat-icon>
         <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
-            <div class="plant-icon" (click)="openPlantDetailsDialog(plant)">
-                <img src="{{plant.img}}" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
-                <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" *ngIf="plant.stage > 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
-                <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" *ngIf="plant.stage <= 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+            <div class="plant-icon" (click)="openPlantDetailsDialog(plant)" fxLayoutAlign="center center">
+                <img src="{{plant.img}}" class="img-found" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
+                <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" class="img-not-found" *ngIf="plant.stage > 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+                <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" class="img-not-found" *ngIf="plant.stage <= 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
             </div>
 
             <div fxLayout="column" fxLayoutAlign="space-between center" class="plant-details-container">

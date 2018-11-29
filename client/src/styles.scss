@@ -35,12 +35,18 @@ $break-xl: 1920px;
 .page-header {
     letter-spacing: 0.75rem;
     font-size: 5rem;
+    font-weight: 400;
     margin-bottom: 1.5rem;
     margin-top: 1rem;
     color: $color-dark-gray;
     font-style: italic;
     opacity: 0.7;
     font-variant: petite-caps;
+    .highlight {
+        font-weight: lighter;
+        font-style: normal;
+        font-size: 6rem;
+    }
 }
 
 .dialog-container {
@@ -53,6 +59,10 @@ $break-xl: 1920px;
         padding-bottom: 0;
         overflow: hidden;
     }
+}
+
+.highlight {
+    color: $color-red !important;
 }
 
 .dig-it-tooltip {
@@ -192,7 +202,7 @@ h6 {
 /* Grid scroll bar overridden changes */
 
 ::-webkit-scrollbar {
-    width: 0.75rem; //12px;
+    width: 0.75rem;
     @media screen and (max-width: $break-md) {
         width: 0;
         height: 0;
@@ -209,6 +219,10 @@ h6 {
 
 ::-webkit-scrollbar-track {
     background: #fff;
+}
+
+.cdk-global-scrollblock {
+    overflow-y: hidden !important;
 }
 
 body {
