@@ -10,7 +10,7 @@
         }
         img {
             max-height: 200px;
-            margin: 6px 0 24px -24px;
+            margin: 6px 24px 24px 0px;
             @media screen and (max-width: $break-sm) {
                 max-height: 250px;
             }
