@@ -16,7 +16,7 @@
                 <mat-form-field floatLabel="never">
                     <input matInput placeholder="Botanical Name" name="botanicalName" maxlength="25" [(ngModel)]="newPlant.botanicalName">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <mat-select required placeholder="Plant Type" name="type" [(ngModel)]="newPlant.type">
                         <mat-option value="Houseplant"><img src="../../../../assets/icons/Houseplant.svg" />
                             <div class="option-text">Houseplant</div>
@@ -58,7 +58,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <mat-select required placeholder="Life Cycle" name="lifeType" [(ngModel)]="newPlant.lifeType">
                         <mat-option value="Annual">Annual</mat-option>
                         <mat-option value="Perennial">Perennial</mat-option>
@@ -75,7 +75,7 @@
             </div>
 
             <div *ngIf="step === 1" fxLayout="column" [class.shift-is-save-to-garden]="isSaveToGarden">
-                <mat-form-field>
+                <mat-form-field floatLabel="never">
                     <mat-select required placeholder="Sun Schedule" name="sunSchedule" [(ngModel)]="newPlant.sunSchedule">
                         <mat-select-trigger>
                             <span *ngIf="newPlant.sunSchedule === 'Full Sun'"><mat-icon>brightness_high</mat-icon> Full Sun</span>
@@ -97,7 +97,7 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field *ngIf="isSaveToGarden">
+                <mat-form-field *ngIf="isSaveToGarden" floatLabel="never">
                     <mat-select required placeholder="Plant Stage" name="stage" [(ngModel)]="newPlant.stage">
                         <mat-option value="0"><img src="../../../../assets/icons/plant-stage/stage0.svg" />
                             <div class="option-text">Seed</div>
@@ -114,7 +114,7 @@
                     </mat-select>
                 </mat-form-field>
 
-                <mat-form-field *ngIf="isSaveToGarden && newPlant.stage > 0">
+                <mat-form-field *ngIf="isSaveToGarden && newPlant.stage > 0" floatLabel="never">
                     <mat-select placeholder="Potted / In Ground" name="isPotted" [(ngModel)]="newPlant.isPotted" required>
                         <mat-option value="true">Potted</mat-option>
                         <mat-option value="false">In Ground</mat-option>

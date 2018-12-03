@@ -10,7 +10,6 @@ require('dotenv').config({ path: './../.env' })
 
 // Mongoose 
 // mongoose.connect('mongodb://localhost:27017/meanAuth');
-console.log(process.env.MONGO_URL_PROD);
 mongoose.connect(process.env.MONGO_URL_PROD);
 
 mongoose.connection.on('connected', () => {
