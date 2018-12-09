@@ -96,7 +96,7 @@
 
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="space-between center">
         <button mat-button color="primary" (click)="dialogRef.close()">Close</button>
-        <button mat-stroked-button color="primary" (click)="addToGarden()">Add to Garden</button>
+        <button mat-stroked-button color="primary" (click)="addToGarden()" *ngIf="!plant.reminders && !plant.stage">Add to Garden</button>
         <div>
             <button mat-raised-button color="accent" (click)="onPreviousStep()" *ngIf="step - 1 >= 1">< Back</button>
             <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps">Next ></button>

@@ -21,11 +21,9 @@ Dig-It's extensive crowdsourced database allows visitors and registered users to
 
 ## Public API:
 
-**Base URL:** 
+**Base URL:** ````http://dig-it.rh-codes.com/api```` 
 
-````http://dig-it.rh-codes.com/api```` 
-
-**Endpoints**
+**Endpoints:**
 
 GET all plants: 
 
