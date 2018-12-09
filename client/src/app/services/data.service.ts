@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class DataService {
 
-  apiPath: String = 'http://localhost:3000/api';
+  apiPath: String = 'http://dig-it.rh-codes.com/api';
 
   isImageLoaded: boolean = false;
 
@@ -61,7 +61,7 @@ export class DataService {
   openSnackBar(status: 'fail' | 'success', message?: string) {
     if (status === 'fail') {
       this.snackBar.open(message ? message : 'Something went wrong! Please try again.', null, {
-        duration: 3000,
+        duration: 1500,
         panelClass: 'snackbar-fail',
         verticalPosition: 'top'
       });

@@ -40,8 +40,8 @@
             <!-- <div *ngIf="plant.zones">
                 <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div> -->
             <div *ngIf="plant.comment" fxLayout.lt-sm="column">
-                <div fxFlex="30" class="highlight">Comments: </div>
-                <div fxFlex>{{toSentenceCase(plant.comment)}}</div>
+                <p fxFlex="30" class="highlight">Comments: </p>
+                <p fxFlex>{{toSentenceCase(plant.comment)}}</p>
             </div>
 
             <!-- Sowing Details -->
@@ -94,9 +94,12 @@
         </div>
     </div>
 
-    <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
-        <button mat-raised-button color="accent" (click)="onPreviousStep()" *ngIf="step - 1 >= 1">< Back</button>
-        <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps">Next ></button>
+    <mat-dialog-actions fxFlex="100" fxLayoutAlign="space-between center">
         <button mat-button color="primary" (click)="dialogRef.close()">Close</button>
+        <button mat-stroked-button color="primary" (click)="addToGarden()" *ngIf="!plant.reminders && !plant.stage">Add to Garden</button>
+        <div>
+            <button mat-raised-button color="accent" (click)="onPreviousStep()" *ngIf="step - 1 >= 1">< Back</button>
+            <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps">Next ></button>
+        </div>
     </mat-dialog-actions>
 </div>

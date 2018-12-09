@@ -35,6 +35,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
 
   searchBy: string = 'commonName';
 
+  // Variable to store state of search. Used to toggle search warnings
+  isOnSearch: boolean = false;
+
   // To store all active filters
   activeFilters: Array<SearchFilter> = [];
 
@@ -264,6 +267,7 @@ export class SearchComponent implements AfterViewInit, OnInit {
   }
 
   onSearch() {
+    this.isOnSearch = true;
     this.visiblePlants = this.plantsList.filter(plant => {
       if (this.searchTerm === '') {
         return true;

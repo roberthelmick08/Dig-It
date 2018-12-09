@@ -3,18 +3,17 @@
 
         <div class="filter-border" fxLayout="column">
             <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
-                <div class="filter-header">Plant Type</div>
+                <p class="filter-header">Plant Type</p>
             </div>
             <div fxFlex fxLayoutAlign="end center">
                 <div class="clear-filters" (click)="deselectAllFilters('plantType')" *ngIf="isClearFiltersVisible('plantType')">
-                  <img src="../../assets/icons/remove.svg">
-                  Clear Filters
+                    <img src="../../assets/icons/remove.svg"> Clear Filters
                 </div>
             </div>
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
                 <li class="filter-item" [class.filter-item-selected]="plantType.isActive" *ngFor="let plantType of plantTypeFilters" fxFlex.gt-sm="30" fxFlex.lt-md="48" (click)="plantType.isActive = !plantType.isActive">
                     <img src="../../../assets/icons/{{plantType.value}}.svg" />
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">{{plantType.value}}</div>
+                    <p class="filter-text" fxFlex fxLayoutAlign="end center">{{plantType.value}}</p>
                     <mat-icon class="checkmark-icon" *ngIf="plantType.isActive">check</mat-icon>
                 </li>
             </ul>
@@ -22,12 +21,11 @@
 
         <div class="filter-border" fxLayout="column">
             <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
-                <div class="filter-header">Sun Schedule</div>
+                <p class="filter-header">Sun Schedule</p>
             </div>
             <div fxFlex fxLayoutAlign="end center">
                 <div class="clear-filters" (click)="deselectAllFilters('sunSchedule')" *ngIf="isClearFiltersVisible('sunSchedule')">
-                  <img src="../../assets/icons/remove.svg">
-                  Clear Filters
+                    <img src="../../assets/icons/remove.svg"> Clear Filters
                 </div>
             </div>
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
@@ -36,7 +34,7 @@
                     <mat-icon *ngIf="sunSchedule.value === 'Partial Sun'">brightness_low</mat-icon>
                     <mat-icon *ngIf="sunSchedule.value === 'Partial Shade'">brightness_medium</mat-icon>
                     <mat-icon *ngIf="sunSchedule.value === 'Full Shade'">wb_cloudy</mat-icon>
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">{{sunSchedule.value}}</div>
+                    <p class="filter-text" fxFlex fxLayoutAlign="end center">{{sunSchedule.value}}</p>
                     <mat-icon class="checkmark-icon" *ngIf="sunSchedule.isActive">check</mat-icon>
                 </li>
             </ul>
@@ -44,12 +42,11 @@
 
         <div class="filter-border" fxLayout="column">
             <div class="filter-header-wrapper" fxFlex fxLayoutAlign="center">
-                <div class="filter-header">Life Cycle</div>
+                <p class="filter-header">Life Cycle</p>
             </div>
             <div fxFlex fxLayoutAlign="end center">
                 <div class="clear-filters" (click)="deselectAllFilters('lifeCycle')" *ngIf="isClearFiltersVisible('lifeCycle')">
-                  <img src="../../assets/icons/remove.svg">
-                  Clear Filters
+                    <img src="../../assets/icons/remove.svg"> Clear Filters
                 </div>
             </div>
             <ul fxLayout="row wrap" fxLayoutAlign="space-between start">
@@ -57,7 +54,7 @@
                     <div class="letter-icon" *ngIf="lifeCycle.value === 'Annual'">A</div>
                     <div class="letter-icon" *ngIf="lifeCycle.value === 'Biennial'">B</div>
                     <div class="letter-icon" *ngIf="lifeCycle.value === 'Perennial'">P</div>
-                    <div class="filter-text" fxFlex fxLayoutAlign="end center">{{lifeCycle.value}}</div>
+                    <p class="filter-text" fxFlex fxLayoutAlign="end center">{{lifeCycle.value}}</p>
                     <mat-icon class="checkmark-icon" *ngIf="lifeCycle.isActive">check</mat-icon>
                 </li>
             </ul>
@@ -116,9 +113,9 @@
                 Add plant to Dig-It
             </button>
 
-            <div *ngIf="visiblePlants?.length === 0 && searchTerm.length === 0" class="search-warning "><span class="highlight">Enter</span><span class="opacity"> a search term</span></div>
+            <div *ngIf="(visiblePlants?.length === 0 && searchTerm.length === 0) || isOnSearch === false" class="search-warning "><span class="highlight">Enter</span><span class="opacity"> a search term</span></div>
 
-            <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0">
+            <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0 && isOnSearch === true">
                 <h2 class="search-warning"><span class="highlight">No</span><span class="opacity"> Plants Found</span></h2>
             </div>
 

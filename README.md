@@ -10,7 +10,7 @@ Dig-It's extensive crowdsourced database allows visitors and registered users to
 
 ## Built With
 
-- Angular 6
+- Angular 5
 - SASS
 - Node.JS
 - MongoDB
@@ -18,6 +18,16 @@ Dig-It's extensive crowdsourced database allows visitors and registered users to
 - [WikiMedia](https://www.mediawiki.org/) - Image lookup
 - [FrostLine by Waldo Jaquith](https://github.com/waldoj/frostline) - Calculate user's USDA Plant Hardiness Zone
 - [FarmSense](http://www.farmsense.net/api/frost-date-api/) - Calculate frost dates in user's location
+
+## Public API:
+
+**Base URL:** ````http://dig-it.rh-codes.com/api```` 
+
+**Endpoints:**
+
+GET all plants: 
+
+````/search````
 
 ## License
 
@@ -31,4 +41,3 @@ This project is licensed under the MIT License
 - Garden: Drag & Drop sorting
 - Dark Theme
 - Accessibility
-- Public API (on hold)

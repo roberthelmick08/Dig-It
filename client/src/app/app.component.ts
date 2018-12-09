@@ -2,11 +2,12 @@ import { ReminderService } from './services/reminder.service';
 import { DataService } from './services/data.service';
 import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 import { User } from 'src/models/user';
+import { SearchComponent } from './components/search/search.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit {
   currentPage: string;
 
   user: User;
+
+  @ViewChild(SearchComponent) searchComponent;
 
   constructor( public dialog: MatDialog, public authService: AuthenticationService, public dataService: DataService, public reminderService: ReminderService) {
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
@@ -66,11 +69,17 @@ ngOnInit(): void {
   }
 
   openPlantDetailsDialog(data) {
-    this.dialog.open(PlantDetailsDialogComponent, {
+    const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
       height: window.innerWidth <= 600 ? '100vh' : '500px',
       width: window.innerWidth <= 600 ? '100vw' : '700px',
       panelClass: 'dialog-container',
       data: data
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data && data.plant) {
+        this.searchComponent.openAddToGardenDialog(data.plant);
+      }
     });
   }
 

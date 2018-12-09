@@ -67,7 +67,7 @@ $break-xl: 1920px;
 
 .dig-it-tooltip {
     border-top: 4px solid $color-light-green;
-    margin-top: -24px;
+    margin: 0 !important;
     text-align: justify;
     font-size: 0.75rem !important;
 }
@@ -120,6 +120,7 @@ h6 {
 .snackbar-success,
 .snackbar-fail {
     background: #423E37 !important;
+    margin: 0 !important;
     span {
         font-size: 1.25rem;
     }
