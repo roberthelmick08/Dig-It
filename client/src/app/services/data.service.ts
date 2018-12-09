@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class DataService {
 
-  apiPath: String = 'http://localhost:3000/api';
+  apiPath: String = 'http://dig-it.rh-codes.com/api';
 
   isImageLoaded: boolean = false;
 
