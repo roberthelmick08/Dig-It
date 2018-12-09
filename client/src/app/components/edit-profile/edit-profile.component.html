@@ -19,12 +19,10 @@
                 <input matInput type="number" name="zip" placeholder="ZIP code" [(ngModel)]="user.zip" required>
             </mat-form-field>
             <div fxLayout="row" fxLayoutAlign="center center">
-                <h3 fxFlex="75">Your USDA Hardiness Zone:</h3>
-                <div fxFlex fxLayoutAlign="center center">
-                    <h1>{{user.zone}}</h1>
-                    <mat-icon class="info-icon" matTooltip="A hardiness zone is a geographic area defined to encompass a certain range of climatic conditions relevant to plant growth and survival. It is used by Dig-It to calculate the optimal growing conditions for the climate in your location. The growing season in your area starts on {{getLastFrostDateString()}}, and ends on {{getFirstFrostDateString()}}."
-                        matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
-                </div>
+                <h3>Your USDA Hardiness Zone:</h3>
+                <h1>{{user.zone}}</h1>
+                <mat-icon class="info-icon" matTooltip="A hardiness zone is a geographic area defined to encompass a certain range of climatic conditions relevant to plant growth and survival. It is used by Dig-It to calculate the optimal growing conditions for the climate in your location. The growing season in your area starts on {{getLastFrostDateString()}}, and ends on {{getFirstFrostDateString()}}."
+                    matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
             </div>
 
             <button mat-raised-button color="primary" (click)="editUser()">Save Changes</button>

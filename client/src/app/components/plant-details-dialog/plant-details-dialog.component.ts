@@ -33,7 +33,6 @@ export class PlantDetailsDialogComponent {
       });
     }
 
-
     if (!this.plant.comment) {
       this.maxSteps--;
     }
@@ -72,6 +71,10 @@ export class PlantDetailsDialogComponent {
       });
       return sentenceArray.join(' ');
     }
+  }
+
+  addToGarden(){
+    this.dialogRef.close({plant: this.plant});
   }
 
   getReminderDateElement(reminder: Reminder, element: string): string {

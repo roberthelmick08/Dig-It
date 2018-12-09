@@ -10,7 +10,7 @@ Dig-It's extensive crowdsourced database allows visitors and registered users to
 
 ## Built With
 
-- Angular 6
+- Angular 5
 - SASS
 - Node.JS
 - MongoDB
@@ -22,10 +22,13 @@ Dig-It's extensive crowdsourced database allows visitors and registered users to
 ## Public API:
 
 **Base URL:** 
+
 ````http://dig-it.rh-codes.com/api```` 
 
 **Endpoints**
+
 GET all plants: 
+
 ````/search````
 
 ## License
