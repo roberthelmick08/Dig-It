@@ -50,7 +50,6 @@ export class LoginDialogComponent implements OnInit{
     private dataService: DataService, private router: Router) {}
 
   ngOnInit(){
-    localStorage.setItem("first_visit", "0");
     if(localStorage.getItem("first_visit") !== "1"){
       this.isLoginActive = false;
       localStorage.setItem("first_visit", "1");

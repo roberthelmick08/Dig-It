@@ -23,7 +23,7 @@
             </div>
 
             <div *ngIf="activePageTab === 'login' && !isLoginActive" fxLayout="column" fxLayoutAlign="center center" class="demo-login-button-wrapper">
-                <button mat-raised-button color="accent" (click)="loginDemoUser()">Log in with Demo user</button>
+                <button mat-raised-button color="accent" id="demo-user-button" (click)="loginDemoUser()">Log in with Demo user</button>
                 <button mat-stroked-button color="accent" (click)="isLoginActive = true">Continue to login</button>
             </div>
 
