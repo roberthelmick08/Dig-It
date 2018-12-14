@@ -12,7 +12,7 @@
         <div fxFlex class="form-wrapper">
             <h1 class="header">{{activePageTab === 'login' ? 'Login' : 'Register'}}</h1>
 
-            <div *ngIf="activePageTab === 'login'" fxLayout="column">
+            <div *ngIf="activePageTab === 'login' && isLoginActive" fxLayout="column">
                 <mat-form-field floatLabel="never">
                     <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" placeholder="Email" [(ngModel)]="loginCredentials.email" (keyup.enter)="login()" required>
                 </mat-form-field>
@@ -20,6 +20,11 @@
                     <input matInput type="password" name="password" placeholder="Password" [(ngModel)]="loginCredentials.password" (keyup.enter)="login()" required>
                 </mat-form-field>
                 <button mat-raised-button color="primary" (click)="login()" [disabled]="!loginCredentials.email || !loginCredentials.password">Log In</button>
+            </div>
+
+            <div *ngIf="activePageTab === 'login' && !isLoginActive" fxLayout="column" fxLayoutAlign="center center" class="demo-login-button-wrapper">
+                <button mat-raised-button color="accent" id="demo-user-button" (click)="loginDemoUser()">Log in with Demo user</button>
+                <button mat-stroked-button color="accent" (click)="isLoginActive = true">Continue to login</button>
             </div>
 
             <div *ngIf="activePageTab === 'register'" fxLayout="column">
