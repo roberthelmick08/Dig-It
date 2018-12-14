@@ -5,8 +5,15 @@
         <h2 class="page-header">{{newPlant.commonName ? newPlant.commonName : 'New Plant'}}</h2>
     </div>
     <div class="add-plant-scroll-container">
-        <div class="image-container" fxFlex="30">
+        <div class="image-container" fxFlex="30" fxLayout="column">
             <img src="../../../../assets/icons/add-plant-img.svg" />
+            <label class="image-upload-container btn btn-bwm">
+                <span>Select Image</span>
+                <input #imageInput
+                       type="file"
+                       accept="image/*"
+                       (change)="uploadImage(imageInput)">
+              </label>
         </div>
         <form fxFlex>
             <div *ngIf="step === 0" fxLayout="column">

@@ -3,22 +3,38 @@ var router = express.Router();
 var jwt = require('express-jwt');
 var passport = require('passport');
 var mongoose = require('mongoose');
-require('dotenv').config({ path: '../.env' })
-var privateKEY = process.env.MONGO_SECRET_KEY;
-
+var fs = require('fs');
 const PlantSchema = require('../model/plants')
 const UserSchema = require('../model/user')
-var User = mongoose.model('User');
+const User = mongoose.model('User');
+require('dotenv').config({ path: './.env' })
+const privateKEY = process.env.MONGO_SECRET_KEY;
 
 const auth = jwt({
     secret: privateKEY,
     userProperty: 'payload'
 });
 
-var sendJSONresponse = function(res, status, content) {
+var sendJSONresponse = (res, status, content) => {
     res.status(status);
     res.json(content);
 };
+
+/**************
+ * Image Upload to AWS S3 Bucket 
+ ***************/
+router.post('/image-upload', function(req, res) {
+
+    console.log("IN image-upload ENDPOINT")
+    singleUpload(req, res, function(err, some) {
+        if (err) {
+            return res.status(422).send({ errors: [{ title: 'Image Upload Error', detail: err.message }] });
+        }
+
+        console.log(req.file);
+        return res.json({ 'imageUrl': req.file.location });
+    });
+})
 
 /**************
  * AUTHENTICATION requests

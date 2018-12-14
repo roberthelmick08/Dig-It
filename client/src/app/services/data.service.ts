@@ -12,7 +12,8 @@ import { MatSnackBar } from '@angular/material';
 })
 export class DataService {
 
-  apiPath: String = 'http://dig-it.rh-codes.com/api';
+  // apiPath: String = 'http://dig-it.rh-codes.com/api';
+  apiPath: String = 'http://localhost:3000/api';
 
   isImageLoaded: boolean = false;
 
@@ -72,6 +73,14 @@ export class DataService {
         verticalPosition: 'top'
       });
     }
+  }
+
+  uploadImage(imageData: any){
+    console.log(imageData);
+
+    return this.http.post(this.apiPath + '/image-upload', imageData)
+      .pipe(map(res => res.json()));
+
   }
 
   getSowingMethodString(methodNum: number): string {

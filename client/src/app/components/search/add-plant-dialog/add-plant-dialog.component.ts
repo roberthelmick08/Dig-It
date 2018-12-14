@@ -8,6 +8,7 @@ import { Plant } from '../../../../models/plant';
   templateUrl: './add-plant-dialog.component.html',
   styleUrls: ['./add-plant-dialog.component.scss']
 })
+
 export class AddPlantDialogComponent {
   // Variable used to navigate Add Plant screens
   step: number = 0;
@@ -15,6 +16,8 @@ export class AddPlantDialogComponent {
   newPlant: Plant;
 
   isSaveToGarden: boolean = true;
+
+  plantImage: ImageSnippet;
 
   constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>, private dataService: DataService) {
     this.newPlant = new Plant();
@@ -63,6 +66,12 @@ export class AddPlantDialogComponent {
     if (this.newPlant.variety) this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
     if (this.newPlant.comment) this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
 
+    this.dataService.uploadImage(this.plantImage.file).subscribe(
+      (res) => { },
+      (err) => {
+        this.dataService.openSnackBar('fail', 'Image upload failed, please try again.');
+    })
+
     this.dataService.addPlant(this.newPlant).subscribe(result => { }, (err) => {
       this.dataService.openSnackBar('fail');
     }, () => {
@@ -72,6 +81,19 @@ export class AddPlantDialogComponent {
       }
         this.dialogRef.close({plant: this.newPlant, isSaveToGarden: this.isSaveToGarden});
     });
+  }
+
+  uploadImage(imageInput){
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener('load', (event: any) => {
+      this.plantImage = new ImageSnippet(event.target.result, file);
+    });
+
+    reader.readAsDataURL(file);
+
+    this.dataService.uploadImage(file);
   }
 
   toTitleCase(input: string) {
@@ -87,4 +109,8 @@ export class AddPlantDialogComponent {
       return input;
     }
   }
+}
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) {}
 }
