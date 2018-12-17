@@ -1,11 +1,10 @@
 <mat-icon class="close-dialog-icon" fxHide.lt-sm (click)="dialogRef.close()">close</mat-icon>
 <div class="plant-details-dialog" fxLayout="column">
     <div class="add-plant-header" fxLayout.lt-sm="column">
-        <img *ngIf="plant.img" src="{{plant.img}}" class="image-found" />
-        <img *ngIf="!plant.img" src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
         <mat-icon class="close-dialog-icon" (click)="dialogRef.close()" fxHide.gt-sm>close</mat-icon>
+        <app-image-upload [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageHeight]="100" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
 
-        <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
+        <div fxFlex="75" fxLayoutAlign="center" fxLayout="column">
             <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
             <h2>{{plant.commonName ? plant.botanicalName : '' }}</h2>
             <h4>{{toSentenceCase(plant.variety)}}</h4>

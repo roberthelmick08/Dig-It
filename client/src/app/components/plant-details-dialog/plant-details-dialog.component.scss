@@ -2,6 +2,7 @@
 .plant-details-dialog {
     .add-plant-header {
         margin-top: -24px;
+        height: 36vh;
         @media screen and (max-width: $break-sm) {
             .close-dialog-icon {
                 position: relative;
@@ -20,6 +21,8 @@
             border-left: 4px solid $color-light-green;
             border-right: 4px solid $color-light-green;
             margin: 0 24px 24px -24px;
+            width: 100%;
+            height: 75%;
             @media screen and (max-width: $break-sm) {
                 margin: 0 -48px 24px -24px;
                 border-left: none;

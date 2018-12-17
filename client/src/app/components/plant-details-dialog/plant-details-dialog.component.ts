@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { ReminderService } from './../../services/reminder.service';
 import { DataService } from './../../services/data.service';
 import { Component, Inject } from '@angular/core';
@@ -14,12 +15,12 @@ import { Reminder } from 'src/models/reminder';
 export class PlantDetailsDialogComponent {
   user: User;
   plant: GardenPlant;
+  today = new Date();
   // Variable used to navigate to next plant details page
   step: number = 1;
   maxSteps: number = 3;
-  today = new Date();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>, public authenticationService: AuthenticationService,
   public dataService: DataService, public reminderService: ReminderService) {
     this.plant = data.plant;
     this.user = data.user;
@@ -41,6 +42,11 @@ export class PlantDetailsDialogComponent {
     if (!this.plant.reminders) {
       this.maxSteps--;
     }
+  }
+
+  onImageUploadEvent(event){
+    this.plant.img = event;
+    this.authenticationService.setUser(this.user);
   }
 
   onNextStep() {

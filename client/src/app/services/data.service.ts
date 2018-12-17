@@ -1,11 +1,11 @@
 import { AuthenticationService } from './authentication.service';
-import { GardenPlant } from './../../models/gardenPlant';
-import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Plant } from '../../models/plant';
 import { MatSnackBar } from '@angular/material';
+import * as AWS from 'aws-sdk/global';
+import * as S3 from 'aws-sdk/clients/s3';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,33 @@ export class DataService {
   isImageLoaded: boolean = false;
 
   constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService) { }
+
+  uploadfile(file, key) {
+    const bucket = new S3(
+      {
+        accessKeyId: 'AKIAIIJYN6BZVGEFYVPA',
+        secretAccessKey: '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',
+        region: 'us-east-1'
+      }
+    );
+
+    const params = {
+      Bucket: 'dig-it-custom-images',
+      Key: key,
+      ContentType: 'image/jpeg',
+      Body: file
+    };
+
+    let upload = bucket.upload(params, (err, data) => {
+      if (err) {
+        console.log('There was an error uploading your file: ', err);
+        return false;
+      }
+
+      console.log('Successfully uploaded file.', data);
+      return true;
+    });
+  }
 
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
@@ -73,14 +100,6 @@ export class DataService {
         verticalPosition: 'top'
       });
     }
-  }
-
-  uploadImage(imageData: any){
-    console.log(imageData);
-
-    return this.http.post(this.apiPath + '/image-upload', imageData)
-      .pipe(map(res => res.json()));
-
   }
 
   getSowingMethodString(methodNum: number): string {
