@@ -1,0 +1,7 @@
+<div [style.background]="'url(' + plantImage + ')'" class="image-container" (mouseenter)="onMouseEnter()" fxLayoutAlign="center center">
+</div>
+
+<button mat-stroked-button color="accent" (click)="fileInput.click()">
+    <span>Upload Image</span>
+    <input #fileInput type="file" (change)="uploadImage($event)" style="display:none;" />
+  </button>

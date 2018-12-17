@@ -23,7 +23,9 @@ export class PlantDetailsDialogComponent {
   public dataService: DataService, public reminderService: ReminderService) {
     this.plant = data.plant;
     this.user = data.user;
-    this.dataService.imageSearchByName(this.plant);
+    if(!this.plant.img){
+      this.dataService.imageSearchByName(this.plant);
+    }
     if (this.plant.reminders) {
       for (let reminder of this.plant.reminders) {
         reminder.date = new Date(reminder.date);

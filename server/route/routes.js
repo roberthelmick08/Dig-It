@@ -21,22 +21,6 @@ var sendJSONresponse = (res, status, content) => {
 };
 
 /**************
- * Image Upload to AWS S3 Bucket 
- ***************/
-router.post('/image-upload', function(req, res) {
-
-    console.log("IN image-upload ENDPOINT")
-    singleUpload(req, res, function(err, some) {
-        if (err) {
-            return res.status(422).send({ errors: [{ title: 'Image Upload Error', detail: err.message }] });
-        }
-
-        console.log(req.file);
-        return res.json({ 'imageUrl': req.file.location });
-    });
-})
-
-/**************
  * AUTHENTICATION requests
  ***************/
 router.post('/register', (req, res, next) => {

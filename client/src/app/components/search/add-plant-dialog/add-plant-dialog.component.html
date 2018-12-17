@@ -5,20 +5,11 @@
         <h2 class="page-header">{{newPlant.commonName ? newPlant.commonName : 'New Plant'}}</h2>
     </div>
     <div class="add-plant-scroll-container">
-        <div class="image-container" fxFlex="30" fxLayout="column">
-            <img src="../../../../assets/icons/add-plant-img.svg" />
-            <label class="image-upload-container btn btn-bwm">
-                <span>Select Image</span>
-                <input #imageInput
-                       type="file"
-                       accept="image/*"
-                       (change)="uploadImage(imageInput)">
-              </label>
-        </div>
+        <app-image-upload (imageUploadEvent)="onImageUploadEvent($event)" [plantImage]="plantImage ? plantImage : '../../../../assets/icons/add-plant-img.svg'" class="image-container"></app-image-upload>
         <form fxFlex>
             <div *ngIf="step === 0" fxLayout="column">
                 <mat-form-field floatLabel="never">
-                    <input matInput placeholder="Common Name" name="commonName" maxlength="35" [(ngModel)]="newPlant.commonName" [required]="newPlant?.botanicalName?.length === 0">
+                    <input matInput placeholder="Common Name" name="commonName" maxlength="35" [(ngModel)]="newPlant.commonName" [required]="newPlant?.botanicalName?.length === 0" autofocus>
                 </mat-form-field>
                 <mat-form-field floatLabel="never">
                     <input matInput placeholder="Botanical Name" name="botanicalName" maxlength="25" [(ngModel)]="newPlant.botanicalName">
@@ -162,7 +153,7 @@
     </div>
 
     <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
-        <mat-checkbox [(ngModel)]="isSaveToGarden">Save to Garden</mat-checkbox>
+        <mat-checkbox [(ngModel)]="isSaveToGarden" (change)="isSaveToGarden === true && newPlant.stage = null">Save to Garden</mat-checkbox>
 
         <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step === 0">Cancel</button>
         <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>

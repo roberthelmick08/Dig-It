@@ -1,0 +1,20 @@
+@import "../../../styles.scss";
+img {
+    width: 100%;
+    &:hover {
+        opacity: 0.3;
+    }
+}
+
+.image-container {
+    width: calc(100% + 24px);
+    height: 50%;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+}
+
+button {
+    width: calc(100% - 24px);
+    margin-left: 12px;
+    margin-top: 12px;
+}

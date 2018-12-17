@@ -91,6 +91,10 @@ export class SearchComponent implements AfterViewInit, OnInit {
       this.dataService.openSnackBar('fail');
     }, () => {
       this.dataService.openSnackBar('success', plant.commonName + ' saved to your Garden!');
+      // Refresh visiblePlants
+      this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
+        this.dataService.openSnackBar('fail', 'Unable to load plants. Please refresh and try again');
+      });
     });
   }
 
@@ -298,7 +302,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
     }).slice(0, 100);
 
     for (let plant of this.visiblePlants) {
-      this.dataService.imageSearchByName(plant);
+      if(!plant.img){
+        this.dataService.imageSearchByName(plant);
+      }
     }
 
     this.applyFilters();
