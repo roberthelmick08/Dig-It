@@ -2,6 +2,6 @@
     <button mat-stroked-button color="accent" (click)="fileInput.click()" *ngIf="authService.isLoggedIn()">
     <mat-icon *ngIf="!isLoading">photo_camera</mat-icon>
     <div class="loading-icon" *ngIf="isLoading"></div>
-    <input #fileInput type="file" (change)="uploadImage($event)" style="display:none" />
+    <input #fileInput type="file" (change)="uploadImage($event)" hidden/>
   </button>
 </div>
