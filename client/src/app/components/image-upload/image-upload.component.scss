@@ -12,7 +12,21 @@ img {
 }
 
 button {
-    width: calc(100% - 24px);
-    margin-left: 12px;
-    margin-top: 12px;
+    margin-left: calc(100% - 38px);
+    color: white !important;
+    background: $color-dark-gray !important;
+    width: 38px !important;
+    min-width: 0;
+    padding: 0;
+    cursor: pointer;
+    &:hover {
+        color: $color-red !important;
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: all 0.3s ease;
+    }
+    .loading-icon {
+        margin-left: calc(50% - 20px);
+    }
 }

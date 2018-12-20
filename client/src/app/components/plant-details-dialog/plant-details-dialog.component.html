@@ -1,19 +1,17 @@
 <mat-icon class="close-dialog-icon" fxHide.lt-sm (click)="dialogRef.close()">close</mat-icon>
 <div class="plant-details-dialog" fxLayout="column">
-    <div class="add-plant-header" fxLayout.lt-sm="column">
-        <mat-icon class="close-dialog-icon" (click)="dialogRef.close()" fxHide.gt-sm>close</mat-icon>
-        <app-image-upload [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageHeight]="100" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
-
-        <div fxFlex="75" fxLayoutAlign="center" fxLayout="column">
-            <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
-            <h2>{{plant.commonName ? plant.botanicalName : '' }}</h2>
-            <h4>{{toSentenceCase(plant.variety)}}</h4>
+    <div class="add-plant-header" fxLayout="row">
+        <div class="header-image-wrapper">
+            <mat-icon class="close-dialog-icon" (click)="dialogRef.close()" fxHide.gt-sm>close</mat-icon>
+            <app-image-upload [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageHeight]="100" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
         </div>
-    </div>
 
-    <div class="plant-details-container" fxLayout="column">
-        <!-- General Details -->
-        <div *ngIf="step === 1" fxLayout="column">
+        <div fxLayout="column" class="header-plant-details" fxFlex fxLayoutAlign="center start">
+            <div fxLayout="column">
+                <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
+                <h4>{{plant.commonName ? plant.botanicalName : '' }}</h4>
+                <!-- <h4>{{toSentenceCase(plant.variety)}}</h4> -->
+            </div>
             <table *ngIf="plant.lifeType || plant.type || plant.sunSchedule">
                 <tr *ngIf="plant.lifeType || plant.type">
                     <td *ngIf="plant.type" fxLayout="row" fxFlex>
@@ -32,29 +30,33 @@
                     </td>
                 </tr>
             </table>
+        </div>
+    </div>
+
+    <div class="plant-details-container" fxLayout="column">
+        <!-- General Details -->
+        <div *ngIf="step === 1" fxLayout="column">
             <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date:
                 <mat-icon class="info-icon harvest-info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
                 <span class="highlight">{{reminderService.getHarvestDateString(user, plant)}}</span>
             </div>
-            <!-- <div *ngIf="plant.zones">
-                <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div> -->
             <div *ngIf="plant.comment" fxLayout.lt-sm="column">
                 <p fxFlex="30" class="highlight">Comments: </p>
                 <p fxFlex>{{toSentenceCase(plant.comment)}}</p>
             </div>
+        </div>
 
-            <!-- Sowing Details -->
-            <div *ngIf="!plant.comment">
-                <div *ngIf="plant.methodNum">
-                    <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
-                    {{dataService.getSowingMethodString(plant.methodNum)}}
-                </div>
-                <div *ngIf="plant.depth || plant.sowingSpace">
-                    <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Seeds should be sown
-                    <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
-                    <span *ngIf="plant.depth && plant.sowingSpace">and </span>
-                    <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
-                </div>
+        <!-- Sowing Details -->
+        <div *ngIf="!plant.comment">
+            <div *ngIf="plant.methodNum">
+                <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
+                {{dataService.getSowingMethodString(plant.methodNum)}}
+            </div>
+            <div *ngIf="plant.depth || plant.sowingSpace">
+                <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Seeds should be sown
+                <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
+                <span *ngIf="plant.depth && plant.sowingSpace">and </span>
+                <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
             </div>
         </div>
 

@@ -1,9 +1,7 @@
-<div [style.background]="'url(' + plantImage + ')'" [style.height.%]="imageHeight" class="image-container" (mouseenter)="onMouseEnter()" fxLayoutAlign="center center">
+<div [style.background]="'url(' + plantImage + ')'" [style.height.%]="imageHeight" class="image-container" (mouseenter)="onMouseEnter()" fxLayoutAlign="end end">
+    <button mat-stroked-button color="accent" (click)="fileInput.click()" *ngIf="authService.isLoggedIn()">
+    <mat-icon *ngIf="!isLoading">photo_camera</mat-icon>
+    <div class="loading-icon" *ngIf="isLoading"></div>
+    <input #fileInput type="file" (change)="uploadImage($event)" style="display:none" />
+  </button>
 </div>
-
-<button mat-stroked-button color="accent" (click)="fileInput.click()">
-  <span>Upload Image</span>
-  <input #fileInput type="file" (change)="uploadImage($event)" style="display:none;" />
-</button>
-
-<div class="loading-icon" *ngIf="isLoading"></div>

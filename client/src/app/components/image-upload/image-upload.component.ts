@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { DataService } from './../../services/data.service';
 import { Component, Output, Input, EventEmitter } from '@angular/core';
 
@@ -14,7 +15,7 @@ export class ImageUploadComponent {
   isLoading: boolean = false;
   isMouseOnHover: boolean = false;
 
-  constructor(public dataService: DataService) { }
+  constructor(public dataService: DataService, public authService: AuthenticationService) { }
 
   uploadImage(imageInput){
     const image = imageInput.target.files[0];
