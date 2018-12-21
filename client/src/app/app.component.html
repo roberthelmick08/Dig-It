@@ -1,23 +1,26 @@
 <div class="body-wrapper">
     <mat-toolbar class="navbar">
-        <div fxFlex="100" style="height: 100%;">
-            <div class="toolbar-logo" (click)="setCurrentPage('home')" fxHide.lt-sm="true" *ngIf="currentPage !== 'home'">
-                <img src="../assets/logo/dig-it-text.svg" />
-            </div>
-            <div class="navbar-items" (click)="setCurrentPage('search')"><img src="../assets/icons/search-min.png" matTooltip="Search Plants" matTooltipClass="dig-it-tooltip" /></div>
-            <div class="garden-icon-wrapper" [class.garden-icon-wrapper-hover]="authService.isLoggedIn()" (click)="authService.isLoggedIn() ? setCurrentPage('garden') : setCurrentPage('home')" matTooltip="{{authService.isLoggedIn() ? 'My Garden' : 'Please log in or register to dig your garden'}}"
-                matTooltipClass="dig-it-tooltip">
-                <img src="../assets/logo/dig-it-emblem-gray-no-border.svg" />
-            </div>
-
-            <div *ngIf="authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-stroked-button color="primary" (click)="onLogout()" fxHide.lt-sm>Logout</button>
-                <button mat-raised-button color="accent" class="accent-button" (click)="openEditProfileDialog()">Account</button>
-            </div>
-            <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-raised-button color="accent" class="accent-button" (click)="openLoginDialog()">Login / Register</button>
-            </div>
-        </div>
+        <ul fxLayoutAlign="space-between center" fxLayout="row">
+            <li class="navbar-items" (click)="setCurrentPage('home')">
+                <img src="../assets/logo/dig-it-text.svg" [hidden]="currentPage === 'home'" />
+            </li>
+            <li class="navbar-items navbar-center-item" (click)="setCurrentPage('search')">
+                <div *ngIf="authService.isLoggedIn()" fxLayout="row">
+                    <mat-icon>add</mat-icon>
+                    <p> Add Plant</p>
+                </div>
+                <div *ngIf="!authService.isLoggedIn()" fxLayout="row">
+                    <mat-icon>search</mat-icon>
+                    <p> Search Plants</p>
+                </div>
+            </li>
+            <li class="navbar-items">
+                <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
+                    <button mat-raised-button color="accent" (click)="openLoginDialog()">Login / Register</button>
+                </div>
+                <mat-icon *ngIf="authService.isLoggedIn()" class="settings-icon" (click)="openEditProfileDialog()">settings</mat-icon>
+            </li>
+        </ul>
     </mat-toolbar>
 
     <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">

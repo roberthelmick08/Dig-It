@@ -15,93 +15,55 @@
                 cursor: pointer;
             }
         }
-        .garden-icon-wrapper-hover {
-            cursor: pointer !important;
-            &:hover {
-                -webkit-box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
-                box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-                transition: all 0.3s ease;
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            .navbar-items {
+                cursor: pointer;
+                font-size: 1.25rem;
+                letter-spacing: 3px;
+                font-variant-caps: all-petite-caps;
+                p {
+                    margin: 0;
+                    padding-left: 4px;
+                }
+                img {
+                    height: 60px;
+                    margin-top: 1rem;
+                    opacity: 0.8;
+                    &:hover {
+                        opacity: 1;
+                        transition: all 0.3s ease;
+                    }
+                }
+                mat-icon.mat-icon.material-icons {
+                    font-variant-caps: normal;
+                }
+                .settings-icon {
+                    color: $color-light-gray;
+                    cursor: pointer;
+                    font-size: 1.3rem;
+                    height: 1.3rem;
+                    width: 1.3rem;
+                    &:hover {
+                        -webkit-transition: -webkit-transform .5s ease-in-out;
+                        transition: transform .5s ease-in-out;
+                        -webkit-transform: rotate(90deg);
+                        transform: rotate(90deg);
+                    }
+                }
             }
-        }
-        .garden-icon-wrapper {
-            background: $color-light-green;
-            height: 100px;
-            width: 100px;
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            z-index: 999;
-            position: absolute;
-            left: calc(50% - 50px);
-            cursor: default;
-            img {
-                height: 150px;
-                margin-left: -16px;
-                margin-top: -26px;
-            }
-        }
-        .navbar-items {
-            cursor: pointer;
-            font-size: 1.25rem;
-            letter-spacing: 3px;
-            font-variant-caps: all-petite-caps;
-            position: absolute;
-            left: calc(35% - 48px);
-            top: 3px;
-            z-index: 2;
-            &:hover {
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
-            @media screen and (max-width: $break-md) {
-                left: calc(30% - 48px);
-            }
-            @media screen and (max-width: $break-sm) {
-                left: calc(20% - 48px);
-            }
-            img {
-                height: 60px;
-                width: 60px;
-                opacity: 0.8;
+            .navbar-center-item {
+                position: absolute;
+                left: calc(50% - 106px);
+                top: 1rem;
                 &:hover {
-                    opacity: 1;
+                    -webkit-transform: scale(1.1);
+                    -ms-transform: scale(1.1);
+                    transform: scale(1.1);
                     transition: all 0.3s ease;
-                }
-            }
-        }
-        .user-button-wrapper {
-            position: absolute;
-            right: 0;
-            button {
-                margin-right: 1rem;
-                margin-top: 1rem;
-                letter-spacing: 2px;
-                line-height: 2rem;
-            }
-            .accent-button {
-                opacity: 0.8;
-                &:hover {
-                    opacity: 1;
-                }
-            }
-            .mat-stroked-button {
-                background-color: rgba(255, 255, 255, 0.5);
-            }
-            @media screen and (max-width: $break-sm) {
-                right: -8px;
-                top: -4px;
-                button {
-                    width: 100px;
-                    overflow: hidden;
-                    white-space: normal;
-                    height: 50px;
-                    line-height: 1rem;
-                    margin-top: 0;
-                    margin-right: 0;
                 }
             }
         }
@@ -113,7 +75,7 @@
             overflow-y: auto;
             max-height: calc(100% - 32px);
             box-shadow: none;
-            padding: 3rem 10% 1rem 10%;
+            padding: 3rem 15% 1rem 15%;
             @media screen and (max-width: $break-sm) {
                 padding: 3rem 0 0 0;
             }
