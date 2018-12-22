@@ -46,7 +46,7 @@
             </div>
 
             <!-- Sowing Details -->
-            <div *ngIf="!plant.comment">
+            <div *ngIf="!plant.comment && step !== 2">
                 <div *ngIf="plant.methodNum">
                     <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
                     {{dataService.getSowingMethodString(plant.methodNum)}}

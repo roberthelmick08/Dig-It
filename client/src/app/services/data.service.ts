@@ -17,7 +17,7 @@ export class DataService {
 
   isImageLoaded: boolean = false;
 
-  constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService) { }
+  constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService, ) { }
 
   uploadfile(file, key) {
     const bucket = new S3(
@@ -89,6 +89,11 @@ export class DataService {
     }, () => {
       if (!plant.img && !isRecurse) {
         this.imageSearchByName(plant, true);
+      }
+      if(plant.img){
+        this.updatePlant(plant).subscribe( result => { }, err => {
+          this.openSnackBar('fail');
+        });
       }
     });
   }
