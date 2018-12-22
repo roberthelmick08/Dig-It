@@ -79,6 +79,8 @@
             }
             &>div {
                 overflow: hidden;
+                margin-left: 114px;
+                transition: .3s ease-in;
             }
         }
         .bullet-icon {
@@ -92,8 +94,8 @@
         opacity: 0.4;
         min-width: 162px !important;
         &:hover {
-            opacity: 0.7;
-            transition: all 0.3s ease;
+            opacity: 0.8;
+            transition: 0.3s ease;
         }
     }
     .reminder-list-item {
