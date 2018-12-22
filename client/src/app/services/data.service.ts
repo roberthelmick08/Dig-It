@@ -4,8 +4,8 @@ import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Plant } from '../../models/plant';
 import { MatSnackBar } from '@angular/material';
-import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +20,11 @@ export class DataService {
   constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService) { }
 
   uploadfile(file, key) {
+    console.log(environment.AWS_ACCESS_ID);
     const bucket = new S3(
       {
-        accessKeyId: 'AKIAIIJYN6BZVGEFYVPA',
-        secretAccessKey: '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',
+        accessKeyId: environment.AWS_ACCESS_ID,
+        secretAccessKey: environment.AWS_SECRET_KEY,
         region: 'us-east-1'
       }
     );
