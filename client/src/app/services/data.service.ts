@@ -1,11 +1,11 @@
 import { AuthenticationService } from './authentication.service';
-import { GardenPlant } from './../../models/gardenPlant';
-import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Plant } from '../../models/plant';
 import { MatSnackBar } from '@angular/material';
+import * as AWS from 'aws-sdk/global';
+import * as S3 from 'aws-sdk/clients/s3';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,33 @@ export class DataService {
 
   constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService) { }
 
+  uploadfile(file, key) {
+    const bucket = new S3(
+      {
+        accessKeyId: 'AKIAIIJYN6BZVGEFYVPA',
+        secretAccessKey: '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',
+        region: 'us-east-1'
+      }
+    );
+
+    const params = {
+      Bucket: 'dig-it-custom-images',
+      Key: key,
+      ContentType: 'image/jpeg',
+      Body: file
+    };
+
+    let upload = bucket.upload(params, (err, data) => {
+      if (err) {
+        console.log('There was an error uploading your file: ', err);
+        return false;
+      }
+
+      console.log('Successfully uploaded file.', data);
+      return true;
+    });
+  }
+
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')
       .pipe(map(res => res.json()));
@@ -29,35 +56,42 @@ export class DataService {
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.apiPath + '/new_plant', newPlant, {headers: headers})
       .pipe(map(res => res.json()));
+  }
+
+  updatePlant(plant: Plant) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(this.apiPath + '/plant/' + plant._id, plant, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  imageSearchByName(plant: Plant, isRecurse?: boolean) {
+    let queryString;
+
+    if (!plant.botanicalName || isRecurse === true) {
+      queryString = plant.commonName.toLocaleLowerCase().split(' ').join('_');
+    } else {
+      queryString = plant.botanicalName.toLocaleLowerCase().split(' ').join('_');
     }
 
-    imageSearchByName(plant: Plant, isRecurse?: boolean) {
-      let queryString;
-
-      if (!plant.botanicalName || isRecurse === true) {
-        queryString = plant.commonName.toLocaleLowerCase().split(' ').join('_');
-      } else {
-        queryString = plant.botanicalName.toLocaleLowerCase().split(' ').join('_');
+    this.auth.doCORSRequest({
+      method: 'GET',
+      url: 'https://commons.wikimedia.org/w/api.php?action=query&generator=images&prop=imageinfo&gimlimit=1&redirects=1&titles=' + queryString + '&iiprop=url&format=json'
+    }).subscribe( result => {
+      result = JSON.parse(result);
+      if (result.query) {
+        plant.img = result.query.pages[Object.keys(result.query.pages)[0]].imageinfo[0].url;
+        this.isImageLoaded = true;
       }
-
-      this.auth.doCORSRequest({
-        method: 'GET',
-        url: 'https://commons.wikimedia.org/w/api.php?action=query&generator=images&prop=imageinfo&gimlimit=1&redirects=1&titles=' + queryString + '&iiprop=url&format=json'
-      }).subscribe( result => {
-        result = JSON.parse(result);
-        if (result.query) {
-          plant.img = result.query.pages[Object.keys(result.query.pages)[0]].imageinfo[0].url;
-          this.isImageLoaded = true;
-        }
-      }, (err) => {
-        this.openSnackBar('fail');
-        console.error(err);
-      }, () => {
-        if (!plant.img && !isRecurse) {
-          this.imageSearchByName(plant, true);
-        }
-      });
-    }
+    }, (err) => {
+      this.openSnackBar('fail');
+      console.error(err);
+    }, () => {
+      if (!plant.img && !isRecurse) {
+        this.imageSearchByName(plant, true);
+      }
+    });
+  }
 
   openSnackBar(status: 'fail' | 'success', message?: string) {
     if (status === 'fail') {
@@ -73,14 +107,6 @@ export class DataService {
         verticalPosition: 'top'
       });
     }
-  }
-
-  uploadImage(imageData: any){
-    console.log(imageData);
-
-    return this.http.post(this.apiPath + '/image-upload', imageData)
-      .pipe(map(res => res.json()));
-
   }
 
   getSowingMethodString(methodNum: number): string {

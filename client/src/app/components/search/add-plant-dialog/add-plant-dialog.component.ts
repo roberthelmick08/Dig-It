@@ -17,11 +17,10 @@ export class AddPlantDialogComponent {
 
   isSaveToGarden: boolean = true;
 
-  plantImage: ImageSnippet;
+  plantImage: string;
 
   constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>, private dataService: DataService) {
     this.newPlant = new Plant();
-
     // Set default values
     this.newPlant.harvestable = false;
   }
@@ -32,6 +31,10 @@ export class AddPlantDialogComponent {
 
   onPreviousStep() {
     this.step--;
+  }
+
+  onImageUploadEvent(event){
+    this.newPlant.img = event;
   }
 
   onSubmit() {
@@ -57,6 +60,10 @@ export class AddPlantDialogComponent {
       this.newPlant.sowingSpace = 9;
     }
 
+    if(this.plantImage){
+      this.newPlant.img = this.plantImage;
+    }
+
     // Refresh Defaults
     this.newPlant.germStart = this.newPlant.weeksToSowBeforeLastFrost;
 
@@ -65,12 +72,6 @@ export class AddPlantDialogComponent {
     if (this.newPlant.commonName) this.newPlant.commonName = this.toTitleCase(this.newPlant.commonName);
     if (this.newPlant.variety) this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
     if (this.newPlant.comment) this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
-
-    this.dataService.uploadImage(this.plantImage.file).subscribe(
-      (res) => { },
-      (err) => {
-        this.dataService.openSnackBar('fail', 'Image upload failed, please try again.');
-    })
 
     this.dataService.addPlant(this.newPlant).subscribe(result => { }, (err) => {
       this.dataService.openSnackBar('fail');
@@ -81,19 +82,6 @@ export class AddPlantDialogComponent {
       }
         this.dialogRef.close({plant: this.newPlant, isSaveToGarden: this.isSaveToGarden});
     });
-  }
-
-  uploadImage(imageInput){
-    const file: File = imageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener('load', (event: any) => {
-      this.plantImage = new ImageSnippet(event.target.result, file);
-    });
-
-    reader.readAsDataURL(file);
-
-    this.dataService.uploadImage(file);
   }
 
   toTitleCase(input: string) {
@@ -109,8 +97,4 @@ export class AddPlantDialogComponent {
       return input;
     }
   }
-}
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
 }
