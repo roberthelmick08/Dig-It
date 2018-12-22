@@ -28,6 +28,11 @@ export class ImageUploadComponent {
     this.cropperSettings.canvasHeight = 300;
     this.cropperSettings.canvasWidth = 400;
     this.cropperSettings.noFileInput = true;
+    this.cropperSettings.cropperDrawSettings.strokeColor = "#423E37";
+    this.cropperSettings.cropperDrawSettings.dragIconFillColor = "#D9D9D9";
+    this.cropperSettings.cropperDrawSettings.dragIconStrokeColor = "#423E37";
+    this.cropperSettings.cropperDrawSettings.strokeWidth = 1;
+    this.cropperSettings.cropperDrawSettings.dragIconStrokeWidth = 1;
 
     this.data = {};
    }
