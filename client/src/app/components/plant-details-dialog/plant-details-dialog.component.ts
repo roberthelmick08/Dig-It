@@ -50,7 +50,15 @@ export class PlantDetailsDialogComponent {
 
   onImageUploadEvent(event){
     this.plant.img = event;
-    this.authenticationService.setUser(this.user);
+    if(this.plant.reminders){
+      this.authenticationService.updateUser(this.user).subscribe( result => { }, err => {
+        this.dataService.openSnackBar('fail');
+      });
+    } else {
+        this.dataService.updatePlant(this.plant).subscribe( result => { }, err => {
+          this.dataService.openSnackBar('fail');
+        });
+    }
   }
 
   onNextStep() {
@@ -73,14 +81,15 @@ export class PlantDetailsDialogComponent {
   onRemindersScroll(index: number, scrollDir: string){
     if(scrollDir === 'left'){
       this.visibleReminderIndex = index;
-      console.log(this.remindersWrapperLeftMargin);
-      // Set left margin
       this.remindersWrapperLeftMargin = this.remindersWrapperLeftMargin === -1100 ? -304 : 114;
-      console.log(this.remindersWrapperLeftMargin);
     } else {
       this.visibleReminderIndex = index === this.plant.reminders.length ? index : index + 1;
       this.remindersWrapperLeftMargin = this.remindersWrapperLeftMargin === -304 ? -1100 : -304;
     }
+  }
+
+  addToGarden(){
+    this.dialogRef.close({plant: this.plant});
   }
 
   toSentenceCase(text: string) {
@@ -96,10 +105,6 @@ export class PlantDetailsDialogComponent {
       });
       return sentenceArray.join(' ');
     }
-  }
-
-  addToGarden(){
-    this.dialogRef.close({plant: this.plant});
   }
 
   getReminderDateElement(reminder: Reminder, element: string): string {
