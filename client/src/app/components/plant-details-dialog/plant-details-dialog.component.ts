@@ -19,6 +19,10 @@ export class PlantDetailsDialogComponent {
   // Variable used to navigate to next plant details page
   step: number = 1;
   maxSteps: number = 3;
+  // Index of 2nd reminder visible in Upcoming Reminders scroll area
+  visibleReminderIndex: number = 1;
+  // Left margin value for reminders wrapper
+  remindersWrapperLeftMargin: number = 114;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>, public authenticationService: AuthenticationService,
   public dataService: DataService, public reminderService: ReminderService) {
@@ -62,7 +66,20 @@ export class PlantDetailsDialogComponent {
     if (this.step === 3 && !this.plant.reminders) {
       this.step = this.step - 2;
     } else {
-    this.step--;
+      this.step--;
+    }
+  }
+
+  onRemindersScroll(index: number, scrollDir: string){
+    if(scrollDir === 'left'){
+      this.visibleReminderIndex = index;
+      console.log(this.remindersWrapperLeftMargin);
+      // Set left margin
+      this.remindersWrapperLeftMargin = this.remindersWrapperLeftMargin === -1100 ? -304 : 114;
+      console.log(this.remindersWrapperLeftMargin);
+    } else {
+      this.visibleReminderIndex = index === this.plant.reminders.length ? index : index + 1;
+      this.remindersWrapperLeftMargin = this.remindersWrapperLeftMargin === -304 ? -1100 : -304;
     }
   }
 

@@ -33,17 +33,15 @@ export class ImageUploadComponent {
    }
 
   uploadImage(){
-    console.log("&&&&UPLOAD&&&&", this.data);
-    const image = this.dataURLtoFile(this.data.image, 'h.jpeg');
-    console.log("&&&&UPLOAD&&&&", image);
-
-    const key = 'images/' + Date.now().toString() + "_" + image.name;
+    const image = this.dataURLtoFile(this.data.image, Date.now().toString() + '.jpeg');
+    const key = 'images/' + image.name;
     this.dataService.uploadfile(image, key);
     this.isLoading = true;
     setTimeout(() => {
       this.plantImage = 'https://s3.amazonaws.com/dig-it-custom-images/' + key;
       this.imageUploadEvent.emit(this.plantImage);
       this.isLoading = false;
+      this.onCancel();
     }, 5000);
   }
 
@@ -57,18 +55,20 @@ export class ImageUploadComponent {
 }
 
   onFileChange(event) {
-    console.log(event);
-
-    this.isCropperActive = true;
-    var image: any = new Image();
-    var file: File = event.target.files[0];
-    var myReader: FileReader = new FileReader();
-    var that = this;
-    myReader.onloadend = (loadEvent:any) => {
-        image.src = loadEvent.target.result;
-        that.cropper.setImage(image);
-    };
-    myReader.readAsDataURL(file);
+    if(event.target.files.length > 0){
+      this.isCropperActive = true;
+      var image: any = new Image();
+      var file: File = event.target.files[0];
+      var myReader: FileReader = new FileReader();
+      var that = this;
+      myReader.onloadend = (loadEvent:any) => {
+          image.src = loadEvent.target.result;
+          that.cropper.setImage(image);
+      };
+      myReader.readAsDataURL(file);
+    } else{
+      this.onCancel();
+    }
   }
 
   onCancel(){
