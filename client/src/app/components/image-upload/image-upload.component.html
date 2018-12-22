@@ -1,7 +1,18 @@
-<div [style.background]="'url(' + plantImage + ')'" [style.height.%]="imageHeight" class="image-container" (mouseenter)="onMouseEnter()" fxLayoutAlign="end end">
-    <button mat-stroked-button color="accent" (click)="fileInput.click()" *ngIf="authService.isLoggedIn()">
-    <mat-icon *ngIf="!isLoading">photo_camera</mat-icon>
-    <div class="loading-icon" *ngIf="isLoading"></div>
-    <input #fileInput type="file" (change)="uploadImage($event)" hidden/>
+<img [src]="plantImage" *ngIf="plantImage && !isCropperActive" />
+<img-cropper #cropper [image]="data" [settings]="cropperSettings" *ngIf="isCropperActive"></img-cropper>
+<input #fileInput id="custom-input" type="file" (change)="onFileChange($event)" hidden>
+
+<div class="button-wrapper" *ngIf="authService.isLoggedIn()" dir="rtl">
+    <button mat-stroked-button (click)="fileInput.click()" *ngIf="!data.image" title="Upload image">
+    <mat-icon>photo_camera</mat-icon>
+  </button>
+    <button mat-stroked-button (click)="uploadImage()" *ngIf="data.image && !isLoading" title="Save">
+    <mat-icon>check</mat-icon>
+  </button>
+    <button mat-stroked-button (click)="uploadImage()" *ngIf="data.image && isLoading" title="Loading">
+    <div class="loading-icon"></div>
+  </button>
+    <button mat-button (click)="onCancel()" *ngIf="data.image" title="Cancel">
+    <mat-icon>undo</mat-icon>
   </button>
 </div>

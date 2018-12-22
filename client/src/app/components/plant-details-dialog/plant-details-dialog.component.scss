@@ -2,7 +2,7 @@
 .plant-details-dialog {
     .add-plant-header {
         margin-top: -24px;
-        height: 40vh;
+        height: 300px;
         @media screen and (max-width: $break-sm) {
             .close-dialog-icon {
                 position: relative;
@@ -10,14 +10,14 @@
             }
         }
         .header-image-wrapper {
-            width: 40%;
+            width: 400px;
             margin-left: -24px;
             overflow: hidden;
             img {
-                max-height: 200px;
+                width: 400px;
                 margin: 6px 24px 24px 0px;
                 @media screen and (max-width: $break-sm) {
-                    max-height: 250px;
+                    width: 400px;
                 }
             }
         }

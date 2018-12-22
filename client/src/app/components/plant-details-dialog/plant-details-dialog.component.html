@@ -2,7 +2,6 @@
 <div class="plant-details-dialog" fxLayout="column">
     <div class="add-plant-header" fxLayout="row">
         <div class="header-image-wrapper">
-            <mat-icon class="close-dialog-icon" (click)="dialogRef.close()" fxHide.gt-sm>close</mat-icon>
             <app-image-upload [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageHeight]="100" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
         </div>
 
@@ -10,7 +9,6 @@
             <div fxLayout="column">
                 <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
                 <h4>{{plant.commonName ? plant.botanicalName : '' }}</h4>
-                <!-- <h4>{{toSentenceCase(plant.variety)}}</h4> -->
             </div>
             <table *ngIf="plant.lifeType || plant.type || plant.sunSchedule">
                 <tr *ngIf="plant.lifeType || plant.type">
