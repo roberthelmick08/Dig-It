@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../services/authentication.service';
 import { ReminderService } from './../../services/reminder.service';
 import { DataService } from './../../services/data.service';
 import { Component, Inject } from '@angular/core';
@@ -14,16 +15,22 @@ import { Reminder } from 'src/models/reminder';
 export class PlantDetailsDialogComponent {
   user: User;
   plant: GardenPlant;
+  today = new Date();
   // Variable used to navigate to next plant details page
   step: number = 1;
   maxSteps: number = 3;
-  today = new Date();
+  // Index of 2nd reminder visible in Upcoming Reminders scroll area
+  visibleReminderIndex: number = 1;
+  // Left margin value for reminders wrapper
+  remindersWrapperLeftMargin: number = 114;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>, public authenticationService: AuthenticationService,
   public dataService: DataService, public reminderService: ReminderService) {
     this.plant = data.plant;
     this.user = data.user;
-    this.dataService.imageSearchByName(this.plant);
+    if(!this.plant.img){
+      this.dataService.imageSearchByName(this.plant);
+    }
     if (this.plant.reminders) {
       for (let reminder of this.plant.reminders) {
         reminder.date = new Date(reminder.date);
@@ -41,6 +48,19 @@ export class PlantDetailsDialogComponent {
     }
   }
 
+  onImageUploadEvent(event){
+    this.plant.img = event;
+    if(this.plant.reminders){
+      this.authenticationService.updateUser(this.user).subscribe( result => { }, err => {
+        this.dataService.openSnackBar('fail');
+      });
+    } else {
+        this.dataService.updatePlant(this.plant).subscribe( result => { }, err => {
+          this.dataService.openSnackBar('fail');
+        });
+    }
+  }
+
   onNextStep() {
     // Skip 2nd step if no reminders are present
     if (this.step === 1 && !this.plant.reminders) {
@@ -54,8 +74,22 @@ export class PlantDetailsDialogComponent {
     if (this.step === 3 && !this.plant.reminders) {
       this.step = this.step - 2;
     } else {
-    this.step--;
+      this.step--;
     }
+  }
+
+  onRemindersScroll(index: number, scrollDir: string){
+    if(scrollDir === 'left'){
+      this.visibleReminderIndex = index;
+      this.remindersWrapperLeftMargin = this.remindersWrapperLeftMargin === -1100 ? -304 : 114;
+    } else {
+      this.visibleReminderIndex = index === this.plant.reminders.length ? index : index + 1;
+      this.remindersWrapperLeftMargin = this.remindersWrapperLeftMargin === -304 ? -1100 : -304;
+    }
+  }
+
+  addToGarden(){
+    this.dialogRef.close({plant: this.plant});
   }
 
   toSentenceCase(text: string) {
@@ -71,10 +105,6 @@ export class PlantDetailsDialogComponent {
       });
       return sentenceArray.join(' ');
     }
-  }
-
-  addToGarden(){
-    this.dialogRef.close({plant: this.plant});
   }
 
   getReminderDateElement(reminder: Reminder, element: string): string {

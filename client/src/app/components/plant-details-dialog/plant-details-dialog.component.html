@@ -1,51 +1,52 @@
 <mat-icon class="close-dialog-icon" fxHide.lt-sm (click)="dialogRef.close()">close</mat-icon>
-<div class="plant-details-dialog" fxLayout="column">
-    <div class="add-plant-header" fxLayout.lt-sm="column">
-        <img *ngIf="plant.img" src="{{plant.img}}" class="image-found" />
-        <img *ngIf="!plant.img" src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
-        <mat-icon class="close-dialog-icon" (click)="dialogRef.close()" fxHide.gt-sm>close</mat-icon>
-
-        <div fxFlex="100" fxLayoutAlign="center" fxLayout="column">
-            <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
-            <h2>{{plant.commonName ? plant.botanicalName : '' }}</h2>
-            <h4>{{toSentenceCase(plant.variety)}}</h4>
-        </div>
-    </div>
-
-    <div class="plant-details-container" fxLayout="column">
-        <!-- General Details -->
-        <div *ngIf="step === 1" fxLayout="column">
-            <table *ngIf="plant.lifeType || plant.type || plant.sunSchedule">
-                <tr *ngIf="plant.lifeType || plant.type">
-                    <td *ngIf="plant.type" fxLayout="row" fxFlex>
-                        <h3 class="highlight">{{plant.type}}</h3>
-                    </td>
-                    <td *ngIf="plant.lifeType" fxLayout="row" fxFlex>
-                        <h3 class="highlight">{{plant.lifeType}}</h3>
-                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('lifeType', plant.lifeType)" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
-                    </td>
-                </tr>
-
-                <tr *ngIf="plant.sunSchedule">
-                    <td fxLayout="row" fxFlex="100">
-                        <h3 class="highlight">{{plant.sunSchedule}}</h3>
-                        <mat-icon class="info-icon" [matTooltip]="getTooltipText('sunSchedule', plant.sunSchedule)" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
-                    </td>
-                </tr>
-            </table>
-            <div *ngIf="plant.harvestable && plant.weeksToHarvest">Approx. harvest date:
-                <mat-icon class="info-icon harvest-info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
-                <span class="highlight">{{reminderService.getHarvestDateString(user, plant)}}</span>
+<div fxLayout="column" class="plant-details-dialog-wrapper">
+    <div class="plant-details-dialog" fxLayout="column">
+        <div class="add-plant-header" fxLayout="row">
+            <div class="header-image-wrapper">
+                <app-image-upload [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageHeight]="100" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
             </div>
-            <!-- <div *ngIf="plant.zones">
-                <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Grows well in zones <span class="highlight">{{plant.zones}}</span></div> -->
-            <div *ngIf="plant.comment" fxLayout.lt-sm="column">
-                <p fxFlex="30" class="highlight">Comments: </p>
-                <p fxFlex>{{toSentenceCase(plant.comment)}}</p>
+
+            <div fxLayout="column" class="header-plant-details">
+                <div fxLayout="column" fxLayoutAlign="end start" fxFlex="60">
+                    <h1>{{ plant.commonName ? plant.commonName : plant.botanicalName }}</h1>
+                    <h4>{{plant.commonName ? plant.botanicalName : '' }}</h4>
+                </div>
+                <table *ngIf="plant.lifeType || plant.type || plant.sunSchedule" fxLayoutAlign="start end" fxFlex="40">
+                    <tr *ngIf="plant.type">
+                        <td fxLayout="row" fxFlex>
+                            <h4 class="highlight">{{plant.type}}</h4>
+                        </td>
+                    </tr>
+                    <tr *ngIf="plant.lifeType">
+                        <td fxLayout="row" fxFlex>
+                            <h4 class="highlight">{{plant.lifeType}}</h4>
+                            <mat-icon class="info-icon" [matTooltip]="getTooltipText('lifeType', plant.lifeType)" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
+                        </td>
+                    </tr>
+                    <tr *ngIf="plant.sunSchedule">
+                        <td fxLayout="row" fxFlex="100">
+                            <h4 class="highlight">{{plant.sunSchedule}}</h4>
+                            <mat-icon class="info-icon" [matTooltip]="getTooltipText('sunSchedule', plant.sunSchedule)" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="plant-details-container" fxFlex="100" fxLayout="column">
+            <!-- General Details -->
+            <div *ngIf="step === 1" fxLayout="column">
+                <div *ngIf="plant.harvestable && plant.weeksToHarvest"><span class="highlight">Approx. harvest date:</span>
+                    <mat-icon class="info-icon" [matTooltip]="getTooltipText('harvestDate')" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" (click)="tooltip.toggle()">help_outline</mat-icon>
+                    {{reminderService.getHarvestDateString(user, plant)}}
+                </div>
+                <div *ngIf="plant.comment" fxLayout.lt-sm="column">
+                    <p><span class="highlight">Comments:</span> {{toSentenceCase(plant.comment)}}</p>
+                </div>
             </div>
 
             <!-- Sowing Details -->
-            <div *ngIf="!plant.comment">
+            <div *ngIf="!plant.comment && step !== 2">
                 <div *ngIf="plant.methodNum">
                     <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
                     {{dataService.getSowingMethodString(plant.methodNum)}}
@@ -57,49 +58,56 @@
                     <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
                 </div>
             </div>
-        </div>
 
-        <div *ngIf="step === 2" fxLayout="column" class="slider-container">
-            <h3>Upcoming Reminders</h3>
-            <div fxLayout="{{plant.reminders.length < 3 ? 'column wrap' : 'row wrap'}}">
-                <ng-container *ngFor="let reminder of plant?.reminders">
-                    <div *ngIf="reminder.date >= today" class="reminder-list-item" fxLayout="row" fxFlex="50">
-                        <time class="calendar-icon">
-                            <em>{{getReminderDateElement(reminder, 'year')}}</em>
-                            <strong>{{getReminderDateElement(reminder, 'month')}}</strong>
-                            <span>{{getReminderDateElement(reminder, 'day')}}</span>
-                        </time>
-                        <div class="reminder-text" fxLayout="center center">
-                            {{reminder.name | titlecase}}
+            <div *ngIf="step === 2" fxLayout="column" class="slider-container">
+                <h3>Upcoming Reminders</h3>
+                <div [style.margin-left.px]="remindersWrapperLeftMargin">
+                    <ng-container *ngFor="let reminder of plant?.reminders; let index = index">
+                        <div class="reminder-list-item reminder-list-item-scroller" *ngIf="index === visibleReminderIndex - 2" (click)="onRemindersScroll(index, 'left')" fxLayout="row" fxFlex="50">
+                            <time class="calendar-icon">
+                              <em>{{getReminderDateElement(reminder, 'year')}}</em>
+                              <strong>{{getReminderDateElement(reminder, 'month')}}</strong>
+                              <span>{{getReminderDateElement(reminder, 'day')}}</span>
+                            </time>
                         </div>
+                        <div class="reminder-list-item" *ngIf="index !== visibleReminderIndex - 2" [class.reminder-list-item-scroller]="index === visibleReminderIndex + 1" (click)="index === visibleReminderIndex + 1 && onRemindersScroll(index, 'right')" fxLayout="row" fxFlex="50">
+                            <time class="calendar-icon">
+                              <em>{{getReminderDateElement(reminder, 'year')}}</em>
+                              <strong>{{getReminderDateElement(reminder, 'month')}}</strong>
+                              <span>{{getReminderDateElement(reminder, 'day')}}</span>
+                            </time>
+                            <div class="reminder-text" fxLayout="center center">
+                                {{reminder.name | titlecase}}
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div *ngIf="step === 3" fxLayout="column" class="slider-container">
+                <h3>Sowing Instructions</h3>
+                <div *ngIf="plant.comment">
+                    <div *ngIf="plant.depth || plant.sowingSpace">
+                        <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Seeds should be sown
+                        <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
+                        <span *ngIf="plant.depth && plant.sowingSpace">and </span>
+                        <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
                     </div>
-                </ng-container>
+                    <div *ngIf="plant.methodNum">
+                        <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
+                        {{dataService.getSowingMethodString(plant.methodNum)}}
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div *ngIf="step === 3" fxLayout="column" class="slider-container">
-            <h3>Sowing Instructions</h3>
-            <div *ngIf="plant.comment">
-                <div *ngIf="plant.depth || plant.sowingSpace">
-                    <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon> Seeds should be sown
-                    <span class="highlight" *ngIf="plant.depth">{{plant.depth}} inches deep </span>
-                    <span *ngIf="plant.depth && plant.sowingSpace">and </span>
-                    <span class="highlight" *ngIf="plant.sowingSpace">{{plant.sowingSpace}} inches apart</span>.
-                </div>
-                <div *ngIf="plant.methodNum">
-                    <mat-icon class="bullet-icon">keyboard_arrow_right</mat-icon>
-                    {{dataService.getSowingMethodString(plant.methodNum)}}
-                </div>
-            </div>
-        </div>
     </div>
-
-    <mat-dialog-actions fxFlex="100" fxLayoutAlign="space-between center">
-        <button mat-button color="primary" (click)="dialogRef.close()">Close</button>
+    <mat-dialog-actions fxLayoutAlign="space-between center">
+        <button mat-button color="primary" (click)="dialogRef.close()" tabindex="-1">Close</button>
         <button mat-stroked-button color="primary" (click)="addToGarden()" *ngIf="!plant.reminders && !plant.stage">Add to Garden</button>
         <div>
             <button mat-raised-button color="accent" (click)="onPreviousStep()" *ngIf="step - 1 >= 1">< Back</button>
-            <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps">Next ></button>
+            <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps" tabindex="1">Next ></button>
         </div>
     </mat-dialog-actions>
 </div>

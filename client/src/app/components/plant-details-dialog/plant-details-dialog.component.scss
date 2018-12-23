@@ -1,74 +1,86 @@
 @import "../../../styles.scss";
+.close-dialog-icon {
+    cursor: pointer;
+    width: 0;
+    position: relative;
+    right: 16px;
+    top: -12px;
+}
+
+.plant-details-dialog-wrapper {
+    height: 100%;
+}
+
 .plant-details-dialog {
+    .info-icon {
+        top: 0.25rem;
+    }
     .add-plant-header {
         margin-top: -24px;
-        @media screen and (max-width: $break-sm) {
-            .close-dialog-icon {
-                position: relative;
-                left: calc(100% - 24px);
-            }
-        }
-        img {
-            max-height: 200px;
-            margin: 6px 24px 24px 0px;
-            @media screen and (max-width: $break-sm) {
-                max-height: 250px;
-            }
-        }
-        .image-found {
-            border-bottom: 4px solid $color-light-green;
-            border-left: 4px solid $color-light-green;
-            border-right: 4px solid $color-light-green;
-            margin: 0 24px 24px -24px;
-            @media screen and (max-width: $break-sm) {
-                margin: 0 -48px 24px -24px;
-                border-left: none;
-                border-right: none;
-            }
-        }
-        h1 {
-            color: $color-dark-gray;
-            letter-spacing: 0.25rem;
-            font-variant: petite-caps;
-        }
-        h2 {
-            color: $color-dark-green;
-            font-style: italic;
-        }
-        h4 {
-            color: $color-blue;
-            opacity: 0.6;
-            margin-top: 0.5rem;
-        }
-    }
-    .plant-details-container {
-        height: 212px;
-        border-top: 1px solid $color-light-gray;
-        padding-top: 1rem;
-        font-size: 1.25rem;
-        .highlight {
-            color: $color-red;
-        }
-        table {
-            border-collapse: collapse;
-            tr {
-                margin-bottom: 1rem;
-                td {
-                    border-left: 2px solid $color-light-gray;
-                    padding-left: 1rem;
+        height: 300px;
+        .header-image-wrapper {
+            width: 400px;
+            margin-left: -24px;
+            overflow: hidden;
+            img {
+                width: 400px;
+                margin: 6px 24px 24px 0px;
+                @media screen and (max-width: $break-sm) {
+                    width: 400px;
                 }
             }
         }
+        .header-plant-details {
+            margin-left: 24px;
+            width: 252px;
+            border-bottom: 1px solid #dcdcdc;
+            h1 {
+                color: $color-dark-gray;
+                letter-spacing: 0.25rem;
+                font-variant: petite-caps;
+                font-size: 2.5rem;
+                font-weight: lighter;
+                max-height: 120px;
+                overflow: hidden;
+                line-height: 2.5rem;
+                text-overflow: ellipsis;
+                width: 258px;
+            }
+            h4 {
+                font-style: italic;
+                opacity: 0.6;
+            }
+            table {
+                border-collapse: collapse;
+                margin-top: 1rem;
+                tr {
+                    margin-bottom: 0.5rem;
+                    td {
+                        border-left: 1px solid $color-light-gray;
+                        padding-left: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    .plant-details-container {
+        padding-top: 1rem;
+        font-size: 1.25rem;
+        height: 144px;
+        .highlight {
+            color: $color-red;
+        }
         .slider-container {
-            height: 186px;
             h3 {
                 text-align: center;
                 opacity: 0.6;
                 letter-spacing: 4px;
                 font-variant: petite-caps;
             }
-            div {
-                text-align: justify;
+            &>div {
+                overflow: hidden;
+                margin-left: 114px;
+                transition: .3s ease-in;
             }
         }
         .bullet-icon {
@@ -76,25 +88,19 @@
             position: relative;
             top: 0.25rem;
         }
-        .info-icon {
-            font-size: 1rem;
-            color: $color-dark-gray;
-            cursor: pointer;
-            opacity: 0.4;
-            position: relative;
-            top: 0.75rem;
-            left: 0.5rem;
-            &:hover {
-                color: $color-red;
-                opacity: 1;
-            }
-        }
-        .harvest-info-icon {
-            top: .5rem;
-            left: -0.25rem;
+    }
+    .reminder-list-item-scroller {
+        cursor: pointer;
+        opacity: 0.4;
+        min-width: 162px !important;
+        &:hover {
+            opacity: 0.8;
+            transition: 0.3s ease;
         }
     }
     .reminder-list-item {
+        min-width: 256px;
+        height: 90px;
         .calendar-icon {
             font-size: .7em;
             margin-top: 16px;

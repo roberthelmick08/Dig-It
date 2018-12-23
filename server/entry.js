@@ -1,12 +1,15 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyparser = require('body-parser');
-var passport = require('passport');
-var cors = require('cors');
-var app = express();
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyparser = require('body-parser');
+const passport = require('passport');
+const cors = require('cors');
+const app = express();
 const route = require('./route/routes');
 require('./config/passport');
-require('dotenv').config({ path: './../.env' })
+require('dotenv').config({ path: './.env' });
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const aws = require('aws-sdk');
 
 // Mongoose 
 // mongoose.connect('mongodb://localhost:27017/meanAuth');

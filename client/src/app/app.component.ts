@@ -40,7 +40,9 @@ ngOnInit(): void {
     }, () => {
     // Reset annual reminders if older than 60 days
     for (let plant of this.user.garden) {
-      this.dataService.imageSearchByName(plant);
+      if(!plant.img){
+        this.dataService.imageSearchByName(plant);
+      }
       let tempPlant =  plant.reminders.filter(reminder => {
         return (reminder.name === 'move-inside' || reminder.name === 'move-outside' || reminder.name === 'repot') && new Date(reminder.date) < this.reminderService.addDays(today, -60);
       });
