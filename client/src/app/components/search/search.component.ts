@@ -101,9 +101,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
   setGardenPlant(plant): GardenPlant {
     const gardenPlant = new GardenPlant();
 
-    if (plant.stage) {
-      plant.stage = +plant.stage;
-    }
+    // if (plant.stage) {
+    //   plant.stage = +plant.stage;
+    // }
 
     gardenPlant.stage = plant.stage ? plant.stage : 0;
     gardenPlant.isPotted = Boolean(plant.isPotted);

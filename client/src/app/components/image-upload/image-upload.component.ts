@@ -1,6 +1,6 @@
 import { AuthenticationService } from './../../services/authentication.service';
 import { DataService } from './../../services/data.service';
-import { Component, Output, Input, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Output, Input, EventEmitter, ViewChild, OnInit } from '@angular/core';
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 
 @Component({
@@ -8,34 +8,40 @@ import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.scss']
 })
-export class ImageUploadComponent {
-  @Input() imageHeight: number;
+export class ImageUploadComponent implements OnInit {
+  @Input() imageWidth: number;
+  imageHeight: number;
   @Input() plantImage: string;
   @Output() imageUploadEvent = new EventEmitter();
   @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
   isLoading: boolean = false;
+
   isMouseOnHover: boolean = false;
   isCropperActive: boolean = false;
   cropperSettings: CropperSettings;
   data: any;
 
   constructor(public dataService: DataService, public authService: AuthenticationService) {
+    this.data = {};
+   }
+
+  ngOnInit(){
+    this.imageHeight = this.imageWidth * 0.75;
+
     this.cropperSettings = new CropperSettings();
-    this.cropperSettings.height = 300;
-    this.cropperSettings.width = 400;
-    this.cropperSettings.croppedHeight = 300;
-    this.cropperSettings.croppedWidth = 400;
-    this.cropperSettings.canvasHeight = 300;
-    this.cropperSettings.canvasWidth = 400;
+    this.cropperSettings.height = this.imageHeight;
+    this.cropperSettings.width = this.imageWidth;
+    this.cropperSettings.croppedHeight = this.imageHeight;
+    this.cropperSettings.croppedWidth = this.imageWidth;
+    this.cropperSettings.canvasHeight = this.imageHeight;
+    this.cropperSettings.canvasWidth = this.imageWidth;
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.cropperDrawSettings.strokeColor = "#423E37";
     this.cropperSettings.cropperDrawSettings.dragIconFillColor = "#D9D9D9";
     this.cropperSettings.cropperDrawSettings.dragIconStrokeColor = "#423E37";
     this.cropperSettings.cropperDrawSettings.strokeWidth = 1;
     this.cropperSettings.cropperDrawSettings.dragIconStrokeWidth = 1;
-
-    this.data = {};
-   }
+  }
 
   uploadImage(){
     const image = this.dataURLtoFile(this.data.image, Date.now().toString() + '.jpeg');
