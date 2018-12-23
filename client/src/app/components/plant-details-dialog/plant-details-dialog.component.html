@@ -3,7 +3,7 @@
     <div class="plant-details-dialog" fxLayout="column">
         <div class="add-plant-header" fxLayout="row">
             <div class="header-image-wrapper">
-                <app-image-upload [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageHeight]="100" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
+                <app-image-upload [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageWidth]="400" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
             </div>
 
             <div fxLayout="column" class="header-plant-details">
@@ -61,7 +61,7 @@
 
             <div *ngIf="step === 2" fxLayout="column" class="slider-container">
                 <h3>Upcoming Reminders</h3>
-                <div [style.margin-left.px]="remindersWrapperLeftMargin">
+                <div [style.margin-left.px]="remindersWrapperLeftMargin" class="reminder-carousel-wrapper">
                     <ng-container *ngFor="let reminder of plant?.reminders; let index = index">
                         <div class="reminder-list-item reminder-list-item-scroller" *ngIf="index === visibleReminderIndex - 2" (click)="onRemindersScroll(index, 'left')" fxLayout="row" fxFlex="50">
                             <time class="calendar-icon">

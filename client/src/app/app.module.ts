@@ -24,7 +24,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ReminderService } from './services/reminder.service';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
-import { ImageCropperComponent } from 'ng2-img-cropper';
+import { ImageCropperModule } from 'ng2-img-cropper';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
@@ -41,7 +41,6 @@ const routes: Routes = [
     LoginDialogComponent,
     PlantDetailsDialogComponent,
     HomeComponent,
-    ImageCropperComponent,
     ImageUploadComponent,
   ],
   imports: [
@@ -50,6 +49,7 @@ const routes: Routes = [
     HttpModule,
     RouterModule,
     FormsModule,
+    ImageCropperModule,
     MatIconModule,
     MatCheckboxModule,
     MatCardModule,
