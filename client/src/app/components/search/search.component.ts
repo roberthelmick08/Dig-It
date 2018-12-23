@@ -91,15 +91,19 @@ export class SearchComponent implements AfterViewInit, OnInit {
       this.dataService.openSnackBar('fail');
     }, () => {
       this.dataService.openSnackBar('success', plant.commonName + ' saved to your Garden!');
+      // Refresh visiblePlants
+      this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
+        this.dataService.openSnackBar('fail', 'Unable to load plants. Please refresh and try again');
+      });
     });
   }
 
   setGardenPlant(plant): GardenPlant {
     const gardenPlant = new GardenPlant();
 
-    if (plant.stage) {
-      plant.stage = +plant.stage;
-    }
+    // if (plant.stage) {
+    //   plant.stage = +plant.stage;
+    // }
 
     gardenPlant.stage = plant.stage ? plant.stage : 0;
     gardenPlant.isPotted = Boolean(plant.isPotted);
@@ -298,7 +302,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
     }).slice(0, 100);
 
     for (let plant of this.visiblePlants) {
-      this.dataService.imageSearchByName(plant);
+      if(!plant.img){
+        this.dataService.imageSearchByName(plant);
+      }
     }
 
     this.applyFilters();

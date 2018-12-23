@@ -1,0 +1,18 @@
+<img [src]="plantImage" *ngIf="plantImage && !isCropperActive" [style.height.px]="imageHeight" [style.width.px]="imageWidth" />
+<img-cropper #cropper [image]="data" [settings]="cropperSettings" *ngIf="isCropperActive"></img-cropper>
+<input #fileInput id="custom-input" type="file" (change)="onFileChange($event)" hidden>
+
+<div class="button-wrapper" *ngIf="authService.isLoggedIn()" dir="rtl">
+    <button mat-stroked-button (click)="fileInput.click()" *ngIf="!data.image" title="Upload image" tabindex="-1">
+    <mat-icon>photo_camera</mat-icon>
+  </button>
+    <button mat-stroked-button (click)="uploadImage()" *ngIf="data.image && !isLoading" title="Save">
+    <mat-icon>check</mat-icon>
+  </button>
+    <button mat-stroked-button class="loading-icon-button" *ngIf="data.image && isLoading" title="Loading">
+    <div class="loading-icon"></div>
+  </button>
+    <button mat-button (click)="onCancel()" *ngIf="data.image && !isLoading" title="Cancel">
+    <mat-icon>undo</mat-icon>
+  </button>
+</div>

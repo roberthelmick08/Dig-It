@@ -8,6 +8,7 @@ import { Plant } from '../../../../models/plant';
   templateUrl: './add-plant-dialog.component.html',
   styleUrls: ['./add-plant-dialog.component.scss']
 })
+
 export class AddPlantDialogComponent {
   // Variable used to navigate Add Plant screens
   step: number = 0;
@@ -16,9 +17,10 @@ export class AddPlantDialogComponent {
 
   isSaveToGarden: boolean = true;
 
+  plantImage: string;
+
   constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>, private dataService: DataService) {
     this.newPlant = new Plant();
-
     // Set default values
     this.newPlant.harvestable = false;
   }
@@ -29,6 +31,10 @@ export class AddPlantDialogComponent {
 
   onPreviousStep() {
     this.step--;
+  }
+
+  onImageUploadEvent(event){
+    this.newPlant.img = event;
   }
 
   onSubmit() {
@@ -52,6 +58,10 @@ export class AddPlantDialogComponent {
     }
     if (!this.newPlant.sowingSpace) {
       this.newPlant.sowingSpace = 9;
+    }
+
+    if(this.plantImage){
+      this.newPlant.img = this.plantImage;
     }
 
     // Refresh Defaults

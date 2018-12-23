@@ -1,0 +1,53 @@
+@import "../../../styles.scss";
+img {
+    width: 400px;
+    height: 300px;
+}
+
+.image-container {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+.button-wrapper {
+    margin-top: -40px;
+    .mat-button {
+        color: white !important;
+        background: $color-dark-gray !important;
+        width: 38px !important;
+        min-width: 0;
+        padding: 0;
+        margin-right: 4px;
+        border-radius: 4px 4px 0 0;
+        cursor: pointer;
+        &:hover {
+            color: $color-red !important;
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+    }
+    .mat-stroked-button {
+        width: 38px !important;
+        height: 36px;
+        min-width: 0;
+        padding: 0;
+        color: $color-dark-gray;
+        background: white;
+        border: white;
+        border-radius: 4px 0 0 0;
+        cursor: pointer;
+        &:hover {
+            color: $color-red !important;
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+        .loading-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
