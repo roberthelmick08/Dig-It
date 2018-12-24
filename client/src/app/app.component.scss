@@ -1,73 +1,78 @@
 @import "../styles.scss";
-.body-wrapper {
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.5);
-    .navbar {
-        background: transparent;
-        color: $color-dark-gray;
-        .toolbar-logo {
-            position: absolute;
-            margin-top: 1rem;
-            opacity: 0.8;
-            z-index: 2;
-            img {
-                height: 64px;
-                cursor: pointer;
-            }
+.navbar {
+    background: transparent;
+    color: $color-dark-gray;
+    .toolbar-logo {
+        position: absolute;
+        margin-top: 1rem;
+        opacity: 0.8;
+        z-index: 2;
+        img {
+            height: 64px;
+            cursor: pointer;
         }
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            .navbar-items {
-                cursor: pointer;
-                font-size: 1.25rem;
-                letter-spacing: 3px;
-                font-variant-caps: all-petite-caps;
-                p {
-                    margin: 0;
-                    padding-left: 4px;
-                }
-                img {
-                    height: 60px;
-                    margin-top: 1rem;
-                    opacity: 0.8;
-                    &:hover {
-                        opacity: 1;
-                        transition: all 0.3s ease;
-                    }
-                }
-                mat-icon.mat-icon.material-icons {
-                    font-variant-caps: normal;
-                }
-                .settings-icon {
-                    color: $color-light-gray;
-                    cursor: pointer;
-                    font-size: 1.3rem;
-                    height: 1.3rem;
-                    width: 1.3rem;
-                    &:hover {
-                        -webkit-transition: -webkit-transform .5s ease-in-out;
-                        transition: transform .5s ease-in-out;
-                        -webkit-transform: rotate(90deg);
-                        transform: rotate(90deg);
-                    }
-                }
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        .navbar-items {
+            cursor: pointer;
+            font-size: 1.25rem;
+            letter-spacing: 3px;
+            font-variant-caps: all-petite-caps;
+            p {
+                margin: 0;
+                padding-left: 4px;
+                line-height: 0.75rem;
             }
-            .navbar-center-item {
-                position: absolute;
-                left: calc(50% - 106px);
-                top: 1rem;
+            img {
+                height: 60px;
+                margin-top: 1rem;
+                opacity: 0.8;
                 &:hover {
-                    -webkit-transform: scale(1.1);
-                    -ms-transform: scale(1.1);
-                    transform: scale(1.1);
+                    opacity: 1;
                     transition: all 0.3s ease;
                 }
             }
+            mat-icon.mat-icon {
+                font-variant-caps: normal;
+            }
+            .settings-icon {
+                color: $color-light-gray;
+                cursor: pointer;
+                font-size: 1.3rem;
+                height: 1.3rem;
+                width: 1.3rem;
+                &:hover {
+                    -webkit-transition: -webkit-transform .5s ease-in-out;
+                    transition: transform .5s ease-in-out;
+                    -webkit-transform: rotate(90deg);
+                    transform: rotate(90deg);
+                }
+            }
+        }
+        .navbar-center-item {
+            position: absolute;
+            left: calc(50% - 106px);
+            top: 24px;
+            &:hover {
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+                transition: all 0.3s ease;
+            }
+            mat-icon.mat-icon {
+                font-size: 1rem;
+            }
         }
     }
+}
+
+.body-wrapper {
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.5);
     .page-content-wrapper {
         padding-bottom: 22px;
         .page-content {
