@@ -25,41 +25,73 @@ export class AppComponent implements OnInit {
 
   constructor( public dialog: MatDialog, public authService: AuthenticationService, public dataService: DataService, public reminderService: ReminderService) {
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
+
+    let today = new Date();
+
+    if (this.authService.isLoggedIn() === true) {
+      this.authService.getUser().subscribe(user => {
+        this.user = user;
+      }, (err) => {
+        console.error(err);
+        this.dataService.openSnackBar('fail');
+      }, () => {
+      // Reset annual reminders if older than 60 days
+      for (let plant of this.user.garden) {
+        if(!plant.img){
+          this.dataService.imageSearchByName(plant);
+        }
+        let tempPlant =  plant.reminders.filter(reminder => {
+          return (reminder.name === 'move-inside' || reminder.name === 'move-outside' || reminder.name === 'repot') && new Date(reminder.date) < this.reminderService.addDays(today, -60);
+        });
+        tempPlant.map(reminder => {
+          reminder.date = this.reminderService.addDays(reminder.date, 365);
+        });
+      }
+
+      // Refresh frost dates if passed
+      if (new Date(this.user.lastFrostDate) < this.reminderService.addDays(today, -30)) {
+        this.user.lastFrostDate = this.reminderService.addDays(this.user.lastFrostDate, 365);
+      } else if (new Date(this.user.firstFrostDate) < this.reminderService.addDays(today, -30)) {
+        this.user.firstFrostDate = this.reminderService.addDays(this.user.firstFrostDate, 365);
+      }
+      this.authService.updateUser(this.user).subscribe();
+      });
+    }
   }
 
 
 ngOnInit(): void {
-  let today = new Date();
+  // let today = new Date();
 
-  if (this.authService.isLoggedIn() === true) {
-    this.authService.getUser().subscribe(user => {
-      this.user = user;
-    }, (err) => {
-      console.error(err);
-      this.dataService.openSnackBar('fail');
-    }, () => {
-    // Reset annual reminders if older than 60 days
-    for (let plant of this.user.garden) {
-      if(!plant.img){
-        this.dataService.imageSearchByName(plant);
-      }
-      let tempPlant =  plant.reminders.filter(reminder => {
-        return (reminder.name === 'move-inside' || reminder.name === 'move-outside' || reminder.name === 'repot') && new Date(reminder.date) < this.reminderService.addDays(today, -60);
-      });
-      tempPlant.map(reminder => {
-        reminder.date = this.reminderService.addDays(reminder.date, 365);
-      });
-    }
+  // if (this.authService.isLoggedIn() === true) {
+  //   this.authService.getUser().subscribe(user => {
+  //     this.user = user;
+  //   }, (err) => {
+  //     console.error(err);
+  //     this.dataService.openSnackBar('fail');
+  //   }, () => {
+  //   // Reset annual reminders if older than 60 days
+  //   for (let plant of this.user.garden) {
+  //     if(!plant.img){
+  //       this.dataService.imageSearchByName(plant);
+  //     }
+  //     let tempPlant =  plant.reminders.filter(reminder => {
+  //       return (reminder.name === 'move-inside' || reminder.name === 'move-outside' || reminder.name === 'repot') && new Date(reminder.date) < this.reminderService.addDays(today, -60);
+  //     });
+  //     tempPlant.map(reminder => {
+  //       reminder.date = this.reminderService.addDays(reminder.date, 365);
+  //     });
+  //   }
 
-    // Refresh frost dates if passed
-    if (new Date(this.user.lastFrostDate) < this.reminderService.addDays(today, -30)) {
-      this.user.lastFrostDate = this.reminderService.addDays(this.user.lastFrostDate, 365);
-    } else if (new Date(this.user.firstFrostDate) < this.reminderService.addDays(today, -30)) {
-      this.user.firstFrostDate = this.reminderService.addDays(this.user.firstFrostDate, 365);
-    }
-    this.authService.updateUser(this.user).subscribe();
-    });
-  }
+  //   // Refresh frost dates if passed
+  //   if (new Date(this.user.lastFrostDate) < this.reminderService.addDays(today, -30)) {
+  //     this.user.lastFrostDate = this.reminderService.addDays(this.user.lastFrostDate, 365);
+  //   } else if (new Date(this.user.firstFrostDate) < this.reminderService.addDays(today, -30)) {
+  //     this.user.firstFrostDate = this.reminderService.addDays(this.user.firstFrostDate, 365);
+  //   }
+  //   this.authService.updateUser(this.user).subscribe();
+  //   });
+  // }
 }
 
   setCurrentPage(page: string) {

@@ -1,0 +1,7 @@
+<ul fxLayout="row">
+    <li *ngFor="let plant of plantsWithActiveReminders" [style.backgroundImage]="'url('+ plant.img +')'" fxLayoutAlign="end start" fxLayout="column">
+        <div class="name-label">
+            {{plant.commonName}}
+        </div>
+    </li>
+</ul>
