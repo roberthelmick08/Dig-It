@@ -17,14 +17,6 @@
                     <h4>{{plant.commonName ? (plant.commonName | titlecase): (plant.botanicalName | titlecase)}}</h4>
                     <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
                 </div>
-                <div class="reminders-container" fxLayout="row wrap" fxFlex fxLayoutAlign="end center">
-                    <p *ngIf="plant?.reminders.length === 0">No reminders</p>
-                    <ng-container *ngFor="let reminder of plant?.reminders">
-                        <div *ngIf="isReminderVisible(reminder)" class="reminder-icon-wrapper" matTooltip="{{getReminderTooltipText(plant, reminder)}}" matTooltipClass="dig-it-tooltip" #tooltip="matTooltip" matTooltipPosition="above" (click)="markReminderDone(plant, reminder)">
-                            <img src="{{ '../../../assets/icons/reminders/' + reminder.name + '.svg' }}" class="reminders-icon" />
-                        </div>
-                    </ng-container>
-                </div>
                 <div class="delete-icon-container" (click)="removePlantFromGarden(plant)" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
                     <div class="lid"></div>
                     <div class="lidcap"></div>

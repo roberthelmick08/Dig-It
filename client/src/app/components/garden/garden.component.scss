@@ -33,30 +33,6 @@
     }
     .plant-details-container {
         height: 33%;
-        .reminders-container {
-            height: 40px;
-            width: 100%;
-            margin-top: -163px;
-            position: absolute;
-            padding-right: 8px;
-            background: linear-gradient(white, rgba(255, 255, 255, 0.5), transparent);
-            .reminder-icon-wrapper {
-                border-radius: 50%;
-                width: 36px;
-                height: 36px;
-                margin-left: 8px;
-                margin-top: 2px;
-                background-color: $color-red;
-                border: 2px solid $color-blue;
-                .reminders-icon {
-                    height: 24px;
-                    width: 24px;
-                    cursor: pointer;
-                    margin-left: 6px;
-                    margin-top: 6px;
-                }
-            }
-        }
         .plant-name-details {
             cursor: pointer;
             h4 {
@@ -91,7 +67,7 @@
     position: absolute;
     top: 0px;
     font-size: 32px;
-    left: calc(35% - 38px);
+    left: calc(50% - 38px);
     animation: blink-animation 1s steps(5, start) infinite;
     -webkit-animation: blink-animation 1s steps(5, start) infinite;
     @keyframes blink-animation {
@@ -103,12 +79,6 @@
         to {
             visibility: hidden;
         }
-    }
-    @media screen and (max-width: $break-md) {
-        left: calc(30% - 38px);
-    }
-    @media screen and (max-width: $break-sm) {
-        left: calc(20% - 38px);
     }
 }
 

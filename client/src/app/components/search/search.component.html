@@ -113,7 +113,7 @@
                 Add plant to Dig-It
             </button>
 
-            <div *ngIf="(visiblePlants?.length === 0 && searchTerm.length === 0) || isOnSearch === false" class="search-warning "><span class="highlight">Enter</span><span class="opacity"> a search term</span></div>
+            <!-- <div *ngIf="(visiblePlants?.length === 0 && searchTerm.length === 0) || isOnSearch === false" class="search-warning "><span class="highlight">Enter</span><span class="opacity"> a search term</span></div> -->
 
             <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0 && isOnSearch === true">
                 <h2 class="search-warning"><span class="highlight">No</span><span class="opacity"> Plants Found</span></h2>
