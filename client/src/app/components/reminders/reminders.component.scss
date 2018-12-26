@@ -4,22 +4,25 @@ p {
     font-variant-caps: small-caps;
 }
 
-.reminders-tab {
-    height: 166px;
-    width: 110px;
-    border-radius: 6px 0 0 6px;
-    background: $color-dark-gray;
-    mat-icon.mat-icon {
-        color: $color-light-gray;
-        font-size: 100px;
-        height: 100px;
-        width: 100px;
+.reminders-wrapper {
+    margin-top: 1rem;
+    .reminders-tab {
+        height: 166px;
+        width: 110px;
+        border-radius: 6px 0 0 6px;
+        background: $color-dark-gray;
+        mat-icon.mat-icon {
+            color: $color-light-gray;
+            font-size: 100px;
+            height: 100px;
+            width: 100px;
+        }
     }
 }
 
 ul {
     list-style: none;
-    background: $color-light-gray;
+    background: white;
     overflow: hidden;
     padding: 0.5rem 1rem;
     margin: 0;

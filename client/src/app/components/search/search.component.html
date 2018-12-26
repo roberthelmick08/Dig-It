@@ -68,8 +68,13 @@
 
     <mat-sidenav-content>
         <div fxLayout="column" class="sidenav-contents">
-            <div fxFlex="100" fxLayoutAlign="center">
+
+            <div fxFlex="100" fxLayoutAlign="center center" fxLayout="column">
                 <h2 class="page-header"><span class="highlight">[</span>Search<span class="highlight">]</span></h2>
+                <h2 class="page-subheader" *ngIf="authService.isLoggedIn()">-OR-</h2>
+                <button mat-flat-button color="accent" (click)="openAddPlantDialog()" *ngIf="authService.isLoggedIn()" class="add-plant-button">
+                    Add plant to Dig-It
+                </button>
             </div>
 
             <mat-chip-list fxLayoutAlign="center center">
@@ -108,12 +113,6 @@
                     </mat-radio-group>
                 </div>
             </div>
-
-            <button mat-flat-button color="warn" (click)="openAddPlantDialog()" fxFlex="100" *ngIf="authService.isLoggedIn()" class="add-plant-button">
-                Add plant to Dig-It
-            </button>
-
-            <!-- <div *ngIf="(visiblePlants?.length === 0 && searchTerm.length === 0) || isOnSearch === false" class="search-warning "><span class="highlight">Enter</span><span class="opacity"> a search term</span></div> -->
 
             <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0 && isOnSearch === true">
                 <h2 class="search-warning"><span class="highlight">No</span><span class="opacity"> Plants Found</span></h2>
