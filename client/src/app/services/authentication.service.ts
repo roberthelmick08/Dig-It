@@ -32,8 +32,8 @@ export interface UserDetails {
 export class AuthenticationService {
   private token: string;
 
-  apiPath: String = 'http://dig-it.rh-codes.com/api';
-  // apiPath: String = 'http://localhost:3000/api';
+  // apiPath: String = 'http://dig-it.rh-codes.com/api';
+  apiPath: String = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient, private router: Router) {}
 

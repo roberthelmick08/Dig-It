@@ -49,6 +49,27 @@ $break-xl: 1920px;
     }
 }
 
+.plant-grid-item {
+    padding: 0;
+    margin: 16px 16px;
+    border-radius: 0.75rem;
+    border-bottom: 4px solid $color-dark-gray;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-size: 100%;
+    overflow: hidden;
+    transition: .1s ease-in;
+    &:hover {
+        background-color: rgba(255, 255, 255, 1);
+        border-bottom: 4px solid $color-light-green;
+        .plant-icon {
+            opacity: 1;
+        }
+    }
+    @media screen and (max-width: $break-sm) {
+        border-bottom: 4px solid $color-light-green;
+    }
+}
+
 .dialog-container {
     border-top: 4px solid $color-light-green;
     max-width: 100vw !important;

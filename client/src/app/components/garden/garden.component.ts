@@ -10,10 +10,10 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
   styleUrls: ['./garden.component.scss']
 })
 export class GardenComponent implements OnInit {
+  @Output() openPlantDetailsDialogEvent = new EventEmitter();
   user: User;
   isGridItemOnHover: boolean = false;
   hoverIndex: number;
-  @Output() openPlantDetailsDialogEvent = new EventEmitter();
 
   constructor(public dataService: DataService, public authService: AuthenticationService) { }
 
@@ -26,14 +26,6 @@ export class GardenComponent implements OnInit {
     });
   }
 
-  openPlantDetailsDialog(plant: GardenPlant) {
-    const data = {
-      plant: plant,
-      user: this.user
-    };
-    this.openPlantDetailsDialogEvent.emit(data);
-  }
-
   removePlantFromGarden(plant: GardenPlant) {
     this.user.garden.splice(this.user.garden.findIndex(p => plant === p), 1);
     this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
@@ -42,6 +34,10 @@ export class GardenComponent implements OnInit {
       let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
       this.dataService.openSnackBar('success', plantName + ' has been removed from your garden.');
     });
+  }
+
+  openPlantDetailsDialog(event) {
+    this.openPlantDetailsDialogEvent.emit(event);
   }
 
   setGridItemHover(isHover, index: number) {

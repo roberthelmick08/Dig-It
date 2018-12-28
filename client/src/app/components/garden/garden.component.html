@@ -6,22 +6,9 @@
     <div class="garden-wrapper" fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center">
         <div class="no-plants-warning" *ngIf="user?.garden.length === 0"><span class="warning-opacity">Add </span><span class="highlight">plants</span><span class="warning-opacity"> to your Garden.</span></div>
         <mat-icon class="no-plants-arrow-icon" *ngIf="user?.garden.length === 0">keyboard_arrow_up</mat-icon>
-        <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
-            <div class="plant-icon" (click)="openPlantDetailsDialog(plant)" fxLayoutAlign="center center">
-                <img src="{{this.dataService.getBackgroundImage(plant)}}" [class.img-found]="plant.img" [class.img-not-found]="plant.stage > 1 && !plant.img || plant.stage <= 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
-            </div>
 
-            <div fxLayout="column" fxLayoutAlign="space-between center" class="plant-details-container">
-                <div class="plant-name-details" fxLayout="column" (click)="openPlantDetailsDialog(plant)">
-                    <h4>{{plant.commonName ? (plant.commonName | titlecase): (plant.botanicalName | titlecase)}}</h4>
-                    <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
-                </div>
-                <div class="delete-icon-container" (click)="removePlantFromGarden(plant)" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
-                    <div class="lid"></div>
-                    <div class="lidcap"></div>
-                    <div class="bin"></div>
-                </div>
-            </div>
-        </mat-card>
+        <app-plant-grid-item class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)" [plant]="plant" [user]="user" [index]="index"
+            [hoverIndex]="hoverIndex" [isGridItemOnHover]="isGridItemOnHover" (removePlantFromGardenEvent)="removePlantFromGarden($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-plant-grid-item>
+
     </div>
 </div>

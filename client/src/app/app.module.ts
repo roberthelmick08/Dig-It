@@ -26,6 +26,7 @@ import { ReminderService } from './services/reminder.service';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { RemindersComponent } from './components/reminders/reminders.component';
+import { PlantGridItemComponent } from './components/plant-grid-item/plant-grid-item.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
     HomeComponent,
     ImageUploadComponent,
     RemindersComponent,
+    PlantGridItemComponent,
   ],
   imports: [
     BrowserModule,
