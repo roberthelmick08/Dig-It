@@ -2,18 +2,17 @@
     <div fxFlex="100" fxLayoutAlign="center">
         <h2 class="page-header"><span class="highlight">[</span>Garden<span class="highlight">]</span></h2>
     </div>
+
     <div class="garden-wrapper" fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center">
         <div class="no-plants-warning" *ngIf="user?.garden.length === 0"><span class="warning-opacity">Add </span><span class="highlight">plants</span><span class="warning-opacity"> to your Garden.</span></div>
         <mat-icon class="no-plants-arrow-icon" *ngIf="user?.garden.length === 0">keyboard_arrow_up</mat-icon>
         <mat-card class="plant-grid-item" *ngFor="let index = index; let plant of user?.garden" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)">
             <div class="plant-icon" (click)="openPlantDetailsDialog(plant)" fxLayoutAlign="center center">
-                <img src="{{plant.img}}" class="img-found" *ngIf="plant.img" [title]="dataService.getStageString(plant.stage)" />
-                <img src="{{ '../../../assets/icons/' + plant.type + '.svg' }}" class="img-not-found" *ngIf="plant.stage > 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
-                <img src="{{ '../../../assets/icons/plant-stage/stage' + plant.stage + '.svg' }}" class="img-not-found" *ngIf="plant.stage <= 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
+                <img src="{{this.dataService.getBackgroundImage(plant)}}" [class.img-found]="plant.img" [class.img-not-found]="plant.stage > 1 && !plant.img || plant.stage <= 1 && !plant.img" [title]="dataService.getStageString(plant.stage)" />
             </div>
 
             <div fxLayout="column" fxLayoutAlign="space-between center" class="plant-details-container">
-                <div class="plant-name-details" fxLayout="column" fxFlex="100" fxLayoutAlign="center center" (click)="openPlantDetailsDialog(plant)">
+                <div class="plant-name-details" fxLayout="column" (click)="openPlantDetailsDialog(plant)">
                     <h4>{{plant.commonName ? (plant.commonName | titlecase): (plant.botanicalName | titlecase)}}</h4>
                     <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
                 </div>

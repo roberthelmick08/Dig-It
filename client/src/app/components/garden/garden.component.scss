@@ -4,10 +4,9 @@
     .plant-grid-item {
         padding: 0;
         margin: 16px 16px;
-        border-bottom: 4px solid transparent;
+        border-bottom: 4px solid $color-dark-gray;
         background-color: rgba(255, 255, 255, 0.7);
-        height: 250px;
-        width: 200px;
+        background-size: 100%;
         overflow: hidden;
         transition: .1s ease-in;
         &:hover {
@@ -18,7 +17,8 @@
             }
         }
         .plant-icon {
-            height: 66%;
+            height: 150px;
+            width: 200px;
             overflow: hidden;
             cursor: pointer;
             transition: .1s ease-in;
@@ -27,27 +27,30 @@
                 height: 100%;
             }
             .img-not-found {
-                height: 100%;
+                height: calc(100% - 4px);
+                margin-bottom: 4px;
             }
             @media screen and (min-width: $break-md) {
                 opacity: 0.9;
             }
         }
         .plant-details-container {
-            height: 33%;
+            background: $color-dark-gray;
             .plant-name-details {
                 cursor: pointer;
+                width: 100%;
+                color: white;
+                padding: 0.25rem 1rem 0 1rem;
+                max-width: 200px;
                 h4 {
-                    letter-spacing: 4px;
-                    color: $color-dark-gray;
-                    text-align: center;
+                    letter-spacing: 3px;
+                    font-weight: 300;
                 }
                 h5 {
                     letter-spacing: 2px;
                     font-style: italic;
-                    opacity: 0.5;
-                    text-align: center;
-                    font-weight: 400;
+                    opacity: 0.6;
+                    font-weight: 300;
                 }
             }
         }
