@@ -46,6 +46,19 @@ export class RemindersComponent implements OnInit {
     this.plantIndex = null;
   }
 
+  getRemindersTabHeight(){
+    const gridItemWidth: number = 200;
+    const gridItemRightPadding: number = 16;
+    const remindersWidth = this.plantsWithActiveReminders.length * (gridItemWidth + gridItemRightPadding);
+    let elem =  document.getElementById("remindersList");
+
+    if(remindersWidth < elem.offsetWidth){
+      return 166;
+    } else{
+      return 182;
+    }
+  }
+
   markReminderDone(plant: GardenPlant, reminder: Reminder){
     this.plantsWithActiveReminders.splice(this.plantsWithActiveReminders.findIndex(tempPlant => {
       return tempPlant._id === plant._id;

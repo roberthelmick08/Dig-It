@@ -1,17 +1,17 @@
 <div fxLayout="row" *ngIf="plantsWithActiveReminders.length > 0" class="reminders-wrapper">
-    <div class="reminders-tab" fxLayoutAlign="center center">
+    <div id="reminders-tab" [style.height.px]="getRemindersTabHeight()" fxLayoutAlign="center center">
         <mat-icon>notifications_none</mat-icon>
     </div>
 
-    <ul fxLayout="row">
-        <li *ngFor="let plant of plantsWithActiveReminders; let plantIdx = index" [style.backgroundImage]="'url('+ plant.img +')'" fxLayoutAlign="space-between end" fxLayout="column">
+    <ul fxLayout="row" id="remindersList">
+        <li *ngFor="let plant of plantsWithActiveReminders; let plantIdx = index" (click)="openPlantDetailsDialog(plant)" [style.backgroundImage]="'url('+ plant.img +')'" fxLayoutAlign="space-between end" fxLayout="column">
             <ng-container *ngFor="let reminder of plant.reminders; let reminderIdx = index">
                 <div class="reminder-label" *ngIf="isReminderVisible(reminder)" (click)="markReminderDone(plant, reminder)" (mouseenter)="onMouseEnter(plantIdx, reminderIdx)" (mouseleave)="onMouseLeave()" [matTooltip]="getReminderTooltipText(plant, reminder)" matTooltipClass="dig-it-tooltip"
                     #tooltip="matTooltip" matTooltipPosition="above">
                     <p>{{isOnHover === true && reminderIndex === reminderIdx && plantIndex === plantIdx ? 'Click to mark done' : reminder.name | titlecase}}</p>
                 </div>
             </ng-container>
-            <div class="name-label" (click)="openPlantDetailsDialog(plant)">
+            <div class="name-label">
                 <p>{{plant.commonName ? plant.commonName : plant.botanicalName}}</p>
             </div>
         </li>

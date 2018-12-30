@@ -49,9 +49,11 @@ export class DataService {
     if(plant.img) {
       return plant.img;
     } else if(plant.stage > 1 && !plant.img) {
+      console.log("PLANT TYPE", '../../assets/icons/' + plant.type + '.svg');
       return '../../assets/icons/' + plant.type + '.svg';
     } else if(plant.stage <= 1 && !plant.img){
-     return '../../assets/icons/plant-stage/stage' + plant.stage + '.svg'
+      console.log("PLANT STAGE", '../../assets/icons/plant-stage/stage' + plant.stage + '.svg');
+     return '../../assets/icons/plant-stage/stage' + plant.stage + '.svg';
     }
   }
 
