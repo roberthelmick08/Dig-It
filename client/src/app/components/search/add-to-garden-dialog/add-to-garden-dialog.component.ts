@@ -12,8 +12,7 @@ export class AddToGardenDialogComponent {
 
   stage: number;
 
-  constructor( public dialogRef: MatDialogRef<AddToGardenDialogComponent>) {
-  }
+  constructor( public dialogRef: MatDialogRef<AddToGardenDialogComponent>) { }
 
   onSubmit() {
     this.dialogRef.close({
