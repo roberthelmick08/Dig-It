@@ -1,6 +1,5 @@
 <div class="plant-icon" (click)="openPlantDetailsDialog(plant)" fxLayoutAlign="center center">
-    <img src="{{this.dataService.getBackgroundImage(plant)}}" [class.img-found]="plant.img" [class.img-not-found]="plant.stage > 1 && !plant.img || plant.stage <= 1 && !plant.img" [title]="plant.stage ? dataService.getStageString(plant.stage) : plant.commonName"
-    />
+    <img src="{{this.dataService.getBackgroundImage(plant)}}" [class.img-found]="plant.img" [class.img-not-found]="!plant.stage && !plant.img" [title]="plant.stage ? dataService.getStageString(plant.stage) : plant.commonName" />
 </div>
 
 <div class="plant-details-container" fxLayout="row" fxLayoutAlign="space-between end">
@@ -8,10 +7,10 @@
         <h4>{{plant.commonName ? (plant.commonName | titlecase): (plant.botanicalName | titlecase)}}</h4>
         <h5>{{plant.botanicalName ? (plant.botanicalName | titlecase) : ''}}</h5>
     </div>
-    <!-- <div class="icon-container add-to-garden-icon-container" (click)="openAddToGardenDialog()" *ngIf="authService.isLoggedIn() && plant.reminders.length === 0" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
+    <div class="icon-container" (click)="openAddToGardenDialog()" *ngIf="authService.isLoggedIn() && !plant?.reminders?.length" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
         <mat-icon>add</mat-icon>
-    </div> -->
-    <div class="icon-container delete-icon-container" (click)="removePlantFromGarden(plant)" *ngIf="authService.isLoggedIn() && plant.reminders" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
+    </div>
+    <div class="icon-container" (click)="removePlantFromGarden(plant)" *ngIf="authService.isLoggedIn() && plant?.reminders" [fxHide.gt-sm]="!isGridItemOnHover || hoverIndex !== index">
         <div class="lid"></div>
         <div class="lidcap"></div>
         <div class="bin"></div>

@@ -21,6 +21,7 @@ export class PlantGridItemComponent {
   @Input() isGridItemOnHover: boolean;
 
   @Output() openPlantDetailsDialogEvent = new EventEmitter();
+  @Output() openAddToGardenDialogEvent = new EventEmitter();
   @Output() removePlantFromGardenEvent = new EventEmitter();
 
   constructor(public dataService: DataService, public authService: AuthenticationService) { }
@@ -33,8 +34,8 @@ export class PlantGridItemComponent {
     this.openPlantDetailsDialogEvent.emit(data);
   }
 
-  openAddToGardenDialog(plant){
-
+  openAddToGardenDialog(){
+    this.openAddToGardenDialogEvent.emit(this.plant);
   }
 
   removePlantFromGarden(plant) {

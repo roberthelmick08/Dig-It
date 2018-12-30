@@ -2,7 +2,7 @@
 .navbar {
     background: white;
     color: $color-dark-gray;
-    padding: 0 calc(15% + 12px) 0 15%;
+    padding-right: 15%;
     border-bottom: 1px solid $color-dark-gray;
     @media screen and (max-width: $break-sm) {
         padding: 0;
