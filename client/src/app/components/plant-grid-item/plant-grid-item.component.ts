@@ -11,7 +11,7 @@ import { User } from 'src/models/user';
   styleUrls: ['./plant-grid-item.component.scss']
 })
 export class PlantGridItemComponent {
-  @Input() plant: Plant | GardenPlant;
+  @Input() plant;
   @Input() user: User;
   // Index of grid item on hover
   @Input() index: number;
@@ -25,7 +25,7 @@ export class PlantGridItemComponent {
 
   constructor(public dataService: DataService, public authService: AuthenticationService) { }
 
-  openPlantDetailsDialog(plant: GardenPlant) {
+  openPlantDetailsDialog(plant) {
     const data = {
       plant: plant,
       user: this.user
@@ -33,7 +33,11 @@ export class PlantGridItemComponent {
     this.openPlantDetailsDialogEvent.emit(data);
   }
 
-  removePlantFromGarden(plant: GardenPlant) {
+  openAddToGardenDialog(plant){
+
+  }
+
+  removePlantFromGarden(plant) {
     this.removePlantFromGardenEvent.emit(plant);
   }
 }

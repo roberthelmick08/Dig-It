@@ -12,6 +12,7 @@
     .img-not-found {
         height: calc(100% - 4px);
         margin-bottom: 4px;
+        background: white;
     }
     @media screen and (min-width: $break-md) {
         opacity: 0.9;
@@ -39,12 +40,15 @@
     }
 }
 
-.delete-icon-container {
+.icon-container {
     cursor: pointer;
     transition: .1s ease-in;
     height: 1rem;
     position: relative;
     left: -1rem;
+}
+
+.delete-icon-container {
     &:hover {
         .lid,
         .lidcap {
