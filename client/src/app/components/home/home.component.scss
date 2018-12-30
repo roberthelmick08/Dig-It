@@ -53,11 +53,16 @@
     }
     .step-item {
         text-align: center;
+        transform: skew(-20deg);
         mat-icon.mat-icon {
             height: 4rem;
             width: 4rem;
             font-size: 4rem;
             opacity: 0.8;
+            transform: skew(20deg);
+        }
+        p {
+            transform: skew(20deg);
         }
     }
 }
@@ -91,7 +96,7 @@
         overflow: hidden;
         width: 100%;
         margin-top: 1rem;
-        padding: 96px 0;
+        padding: 54px 0;
         .quick-overview-item {
             padding: 0rem 2rem 1rem 0;
             background: rgba(0, 0, 0, 0.4);
@@ -192,7 +197,7 @@
     }
     p {
         margin: 0;
-        opacity: 0.8
+        opacity: 0.8;
     }
     a {
         text-decoration: none;
@@ -222,6 +227,7 @@
     }
     .footer-top {
         height: 150px;
+        background-image: linear-gradient(90deg, rgb(81, 126, 31), rgb(39, 56, 20));
         div {
             min-height: 150px;
         }

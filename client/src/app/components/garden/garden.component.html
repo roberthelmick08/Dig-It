@@ -3,7 +3,7 @@
         <h2 class="page-header"><span class="highlight">[</span>Garden<span class="highlight">]</span></h2>
     </div>
 
-    <div class="garden-wrapper" fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly center" fxLayoutAlign.xs="center center">
+    <div class="garden-wrapper" fxLayout="row wrap" fxLayoutAlign.gt-xs="space-evenly" fxLayoutAlign.xs="center">
         <div class="no-plants-warning" *ngIf="user?.garden.length === 0"><span class="warning-opacity">Add </span><span class="highlight">plants</span><span class="warning-opacity"> to your Garden.</span></div>
         <mat-icon class="no-plants-arrow-icon" *ngIf="user?.garden.length === 0">keyboard_arrow_up</mat-icon>
 
