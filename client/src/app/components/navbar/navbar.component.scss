@@ -1,0 +1,75 @@
+@import "../../../styles.scss";
+.navbar {
+    background: white;
+    color: $color-dark-gray;
+    padding-right: 15%;
+    border-bottom: 1px solid $color-dark-gray;
+    @media screen and (max-width: $break-sm) {
+        padding: 0;
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        .navbar-items {
+            cursor: pointer;
+            font-size: 1.25rem;
+            letter-spacing: 3px;
+            font-variant-caps: all-petite-caps;
+            p {
+                margin: 0;
+                line-height: 0.75rem;
+            }
+            img {
+                height: 60px;
+                margin-top: 0.5rem;
+                opacity: 0.8;
+                &:hover {
+                    opacity: 1;
+                    transition: all 0.3s ease;
+                }
+            }
+            mat-icon.mat-icon {
+                font-variant-caps: normal;
+            }
+            .settings-icon {
+                color: $color-light-gray;
+                cursor: pointer;
+                font-size: 1.3rem;
+                height: 1.3rem;
+                width: 1.3rem;
+                &:hover {
+                    -webkit-transition: -webkit-transform .5s ease-in-out;
+                    transition: transform .5s ease-in-out;
+                    -webkit-transform: rotate(90deg);
+                    transform: rotate(90deg);
+                }
+            }
+        }
+        .navbar-center-margin {
+            margin-left: -120px;
+        }
+        .navbar-center-item {
+            margin-top: 6px;
+            &:hover {
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+                transition: all 0.3s ease;
+                mat-icon.mat-icon {
+                    color: $color-light-green;
+                }
+            }
+            mat-icon.mat-icon {
+                font-size: 1rem;
+            }
+        }
+    }
+    .mat-menu-item {
+        span {
+            letter-spacing: 1px;
+            font-variant: petite-caps;
+        }
+    }
+}

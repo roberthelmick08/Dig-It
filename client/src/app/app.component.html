@@ -1,35 +1,5 @@
 <div class="body-wrapper" [class.home-body-wrapper]="currentPage === 'home'">
-    <mat-toolbar class="navbar">
-        <ul fxLayoutAlign="space-between center" fxLayout="row">
-            <li class="navbar-items" (click)="setCurrentPage('home')">
-                <img src="../assets/logo/dig-it-text.svg" [hidden]="currentPage === 'home'" />
-            </li>
-
-            <li class="navbar-items navbar-center-item" (click)="setCurrentPage('garden')">
-                <div *ngIf="authService.isLoggedIn()" fxLayout="row">
-                    <mat-icon>spa</mat-icon>
-                    <p> My Garden</p>
-                </div>
-            </li>
-
-            <li class="navbar-items navbar-center-item navbar-center-margin" (click)="setCurrentPage('search')">
-                <div *ngIf="authService.isLoggedIn()" fxLayout="row">
-                    <mat-icon><b>add</b></mat-icon>
-                    <p> Add Plant</p>
-                </div>
-                <div *ngIf="!authService.isLoggedIn()" fxLayout="row">
-                    <mat-icon>search</mat-icon>
-                    <p> Search Plants</p>
-                </div>
-            </li>
-            <li class="navbar-items">
-                <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                    <button mat-raised-button color="accent" (click)="openLoginDialog()">Login / Register</button>
-                </div>
-                <mat-icon *ngIf="authService.isLoggedIn()" class="settings-icon" (click)="openEditProfileDialog()">settings</mat-icon>
-            </li>
-        </ul>
-    </mat-toolbar>
+    <app-navbar [currentPage]="currentPage" [user]="user" (setCurrentPageEvent)="setCurrentPage($event)"></app-navbar>
 
     <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
         <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'">

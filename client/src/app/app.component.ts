@@ -1,11 +1,9 @@
 import { ReminderService } from './services/reminder.service';
 import { DataService } from './services/data.service';
-import { LoginDialogComponent } from './components/login/login.component';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
-import { EditProfileDialogComponent } from './components/edit-profile/edit-profile.component';
 import { User } from 'src/models/user';
 import { SearchComponent } from './components/search/search.component';
 
@@ -127,40 +125,6 @@ export class AppComponent {
     dialogRef.afterClosed().subscribe((data) => {
       if (data && data.plant) {
         this.searchComponent.openAddToGardenDialog(data.plant);
-      }
-    });
-  }
-
-  openEditProfileDialog() {
-    const dialogRef = this.dialog.open(EditProfileDialogComponent, {
-      height: '450px',
-      width: window.innerWidth <= 600 ? '100vw' : '700px',
-      panelClass: ['dialog-container', 'remove-bottom-padding'],
-      data: this.user,
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      if (dialogRef.componentInstance.isLogout) {
-        this.onLogout();
-      }
-    });
-  }
-
-  onLogout() {
-    this.authService.logout();
-    this.currentPage = 'home';
-  }
-
-  openLoginDialog() {
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
-      height: '400px',
-      width: window.innerWidth <= 600 ? '100vw' : '700px',
-      panelClass: ['dialog-container', 'remove-bottom-padding']
-    });
-
-    dialogRef.afterClosed().subscribe(() => { }, (err) => {}, () => {
-      if (this.authService.isLoggedIn() === true) {
-        this.currentPage = 'garden';
       }
     });
   }
