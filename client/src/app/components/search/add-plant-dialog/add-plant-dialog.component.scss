@@ -14,15 +14,21 @@
     .add-plant-scroll-container {
         @media screen and (min-width: $break-sm) {
             height: 352px;
+            .image-container {
+                margin: 54px 24px 0 -24px;
+                width: 30%;
+            }
         }
         mat-hint.mat-hint,
         .image-container {
-            margin: 54px 24px 0 -24px;
-            width: 30%;
             display: initial !important;
+            margin-bottom: 1rem;
+            width: 50%;
         }
         .harvest-wrapper {
-            margin-left: -33%;
+            @media screen and (min-width: $break-sm) {
+                margin-left: -33%;
+            }
             .toggle,
             mat-hint.mat-hint {
                 margin-top: 18px;

@@ -3,19 +3,26 @@
 </div>
 
 <div class="home-footer getting-started-container" fxLayout="column">
-    <div style="background-color: #87C145" fxFlex="100" class="getting-started-paragraph-wrapper">
-        <div fxFlex fxLayoutAlign="center center">
-            <h3>DIG YOUR GARDEN</h3>
+    <div fxLayout="row">
+        <div fxFlex="50" fxHide.lt-sm="true">
+            <img src="../../../assets/img/gardening-boy.png" class="gardening-boy-image" />
+        </div>
+        <div fxFlex.gt-sm="50" class="getting-started-paragraph-wrapper">
+            <div class="paragraph-wrapper-overlay">
+                <div fxFlex fxLayoutAlign="center center">
+                    <h3>DIG<br>your<br>garden</h3>
+                </div>
+            </div>
         </div>
     </div>
     <div fxLayout="row" fxFlex="100" class="footer-top">
         <div fxFlex="33" style="background-color: rgb(81, 126, 31)" fxLayoutAlign="center center" fxLayout="column" class="step-item">
             <mat-icon>person_add</mat-icon>
-            <p>Create an Account</p>
+            <p>Create an account</p>
         </div>
         <div fxFlex style="background-color:  #3E5820" fxLayoutAlign="center center" fxLayout="column" class="step-item">
             <mat-icon>local_florist</mat-icon>
-            <p>Add Plants to your Garden</p>
+            <p>Add plants to your garden</p>
         </div>
         <div fxFlex="33" style="background-color: rgb(39, 56, 20)" fxLayoutAlign="center center" fxLayout="column" class="step-item">
             <mat-icon>notifications_none</mat-icon>

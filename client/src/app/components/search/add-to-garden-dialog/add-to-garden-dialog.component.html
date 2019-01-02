@@ -21,6 +21,6 @@
 
     <div fxFlex fxLayoutAlign="end center" class="button-wrapper">
         <button mat-stroked-button color="accent" (click)="dialogRef.close();">Cancel</button>
-        <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="(stage > 0 && isPotted === undefined) || !stage">Submit</button>
+        <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="(stage > 0 && isPotted === undefined) || stage === undefined">Submit</button>
     </div>
 </div>

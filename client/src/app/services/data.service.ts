@@ -35,15 +35,24 @@ export class DataService {
       Body: file
     };
 
-    let upload = bucket.upload(params, (err, data) => {
+    bucket.upload(params, (err, data) => {
       if (err) {
         console.log('There was an error uploading your file: ', err);
         return false;
       }
-
       console.log('Successfully uploaded file.', data);
       return true;
     });
+  }
+
+  getBackgroundImage(plant): string{
+    if(plant.img) {
+      return plant.img;
+    } else if(plant.stage <= 1 && !plant.img){
+      return '../../assets/icons/plant-stage/stage' + plant.stage + '.svg';
+    } else {
+      return '../../assets/icons/' + plant.type + '.svg';
+    }
   }
 
   getAllPlants() {

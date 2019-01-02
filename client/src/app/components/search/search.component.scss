@@ -43,10 +43,10 @@
             &:hover {
                 color: $color-red;
             }
-            img{
-              height: 0.75rem;
-              margin-bottom: -1px;
-              margin-right: 4px;
+            img {
+                height: 0.75rem;
+                margin-bottom: -1px;
+                margin-right: 4px;
             }
         }
         ul {
@@ -122,6 +122,23 @@
 
 .sidenav-contents {
     overflow: hidden;
+    .page-subheader {
+        margin-top: -8px;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        font-size: 2rem;
+        font-weight: lighter;
+        letter-spacing: 6px;
+    }
+    .add-plant-button {
+        opacity: 0.8;
+        font-size: 1rem;
+        font-family: 'Courier New', Courier, monospace;
+        letter-spacing: 2px;
+        &:hover {
+            opacity: 1;
+        }
+    }
     .mat-chip-list {
         padding-bottom: 16px;
         min-height: 40px;
@@ -153,54 +170,12 @@
     }
     .main-search-wrapper {
         /deep/ .mat-form-field-flex {
-            background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.7));
+            background-image: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.7) 50%);
         }
     }
     .plant-grid-item {
-        border-left: 4px solid transparent;
-        border-right: 4px solid transparent;
-        padding: 1rem;
-        margin-top: 1rem;
-        background-color: rgba(255, 255, 255, 0.3);
-        overflow: hidden;
-        height: 83px;
-        &:hover {
-            border-left: 4px solid $color-light-green;
-            border-right: 4px solid $color-light-green;
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-        @media screen and (max-width: $break-md) {
-            border-left: 4px solid $color-light-green;
-            border-right: 4px solid $color-light-green;
-        }
-        h3,
-        h5 {
-            text-align: right;
-            @media screen and (min-width: $break-sm) and (max-width: $break-md) {
-                text-align: center;
-            }
-            @media screen and (max-width: $break-sm) {
-                text-align: left;
-            }
-        }
-        h3 {
-            color: $color-dark-gray;
-            letter-spacing: 0.125rem; //2px
-        }
-        h5 {
-            color: $color-blue;
-            letter-spacing: 0.0625rem; //1px
-            font-style: italic;
-        }
-        .plant-name-details {
-            cursor: pointer;
-        }
-    }
-    .add-plant-button {
-        opacity: 0.8;
-        &:hover {
-            opacity: 1;
-        }
+        width: 200px;
+        background: $color-dark-gray;
     }
     .search-warning {
         font-size: 6rem;
@@ -210,24 +185,6 @@
         font-variant: petite-caps;
         .opacity {
             opacity: 0.3;
-        }
-    }
-    .plant-icon {
-        height: 83px;
-        margin-top: -1rem;
-        img {
-            height: 100%;
-            @media screen and (max-width: $break-sm) {
-                height: 50%;
-                margin-right: 16px;
-            }
-        }
-        .img-found {
-            width: 180px;
-            margin-top: -1rem;
-            margin-left: -1rem;
-            height: 100%;
-            border-right: 4px solid $color-light-green;
         }
     }
 }

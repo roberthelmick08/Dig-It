@@ -4,8 +4,9 @@
     <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
         <h2 class="page-header">{{newPlant.commonName ? newPlant.commonName : 'New Plant'}}</h2>
     </div>
-    <div class="add-plant-scroll-container">
-        <app-image-upload (imageUploadEvent)="onImageUploadEvent($event)" [imageWidth]="200" [plantImage]="plantImage ? plantImage : '../../../../assets/icons/add-plant-img.svg'" class="image-container"></app-image-upload>
+    <div class="add-plant-scroll-container" fxLayout.lt-sm="column">
+        <app-image-upload (imageUploadEvent)="onImageUploadEvent($event)" [imageWidth]="cropCanvasWidth" [plantImage]="plantImage ? plantImage : '../../../../assets/icons/add-plant-img.svg'" class="image-container"></app-image-upload>
+
         <form fxFlex>
             <div *ngIf="step === 0" fxLayout="column">
                 <mat-form-field floatLabel="never">
@@ -127,10 +128,6 @@
 
                 <div fxFlex="100" fxLayoutAlign="end center">
                     <a (click)="onNextStep()">Advanced Settings ></a>
-                </div>
-                <div>
-
-
                 </div>
             </div>
 
