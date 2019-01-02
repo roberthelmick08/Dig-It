@@ -5,7 +5,7 @@ p {
 }
 
 .reminders-wrapper {
-    margin-top: 1rem;
+    // margin-top: 1rem;
     #reminders-tab {
         width: 110px;
         border-radius: 6px 0 0 6px;
@@ -29,7 +29,6 @@ ul {
     width: 100%;
     li {
         min-width: 200px;
-        height: 150px;
         margin-right: 1rem;
         background-size: 100%;
         border-radius: 1rem;
@@ -41,6 +40,13 @@ ul {
             -ms-transform: scale(1.1);
             transform: scale(1.1);
             transition: all 0.3s ease;
+        }
+        @media screen and (min-width: $break-sm) {
+            height: 150px;
+        }
+        @media screen and (max-width: $break-sm) {
+            min-width: 100px;
+            min-height: 75px;
         }
         .reminder-label {
             background: $color-red;
@@ -60,6 +66,24 @@ ul {
             p {
                 padding-left: 1.5rem;
             }
+        }
+    }
+}
+
+@media screen and (max-width: $break-sm) {
+    .reminders-wrapper {
+        height: 112px;
+        #reminders-tab {
+            width: inherit !important;
+            height: inherit !important;
+            mat-icon.mat-icon {
+                font-size: 50px !important;
+                height: 50px !important;
+                width: 50px !important;
+            }
+        }
+        .name-label {
+            height: inherit !important;
         }
     }
 }

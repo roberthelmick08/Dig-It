@@ -118,7 +118,7 @@
                 <h2 class="search-warning"><span class="highlight">No</span><span class="opacity"> Plants Found</span></h2>
             </div>
 
-            <div *ngIf="visiblePlants?.length > 0" fxLayout="row wrap" fxLayoutAlign="space-between">
+            <div *ngIf="visiblePlants?.length > 0" fxLayout="row wrap" fxLayoutAlign.gt-sm="space-between" fxLayoutAlign.lt-sm="center">
                 <app-plant-grid-item class="plant-grid-item" *ngFor="let index = index; let plant of visiblePlants" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)" [plant]="plant" [user]="user" [index]="index"
                     [hoverIndex]="hoverIndex" [isGridItemOnHover]="isGridItemOnHover" (openAddToGardenDialogEvent)="openAddToGardenDialog($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-plant-grid-item>
             </div>

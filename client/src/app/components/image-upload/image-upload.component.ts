@@ -1,7 +1,7 @@
 import { AuthenticationService } from './../../services/authentication.service';
 import { DataService } from './../../services/data.service';
 import { Component, Output, Input, EventEmitter, ViewChild, OnInit } from '@angular/core';
-import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
+import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 
 @Component({
   selector: 'app-image-upload',
@@ -37,7 +37,6 @@ export class ImageUploadComponent implements OnInit {
     this.cropperSettings.canvasWidth = this.imageWidth;
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.cropperDrawSettings.strokeColor = "#423E37";
-    this.cropperSettings.cropperDrawSettings.dragIconFillColor = "#D9D9D9";
     this.cropperSettings.cropperDrawSettings.dragIconStrokeColor = "#423E37";
     this.cropperSettings.cropperDrawSettings.strokeWidth = 1;
     this.cropperSettings.cropperDrawSettings.dragIconStrokeWidth = 1;

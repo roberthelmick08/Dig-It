@@ -5,18 +5,18 @@
         </li>
 
         <li class="navbar-items navbar-center-item" (click)="setCurrentPage('garden')">
-            <div *ngIf="authService.isLoggedIn()" fxLayout="row">
+            <div *ngIf="authService.isLoggedIn()" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
                 <mat-icon>spa</mat-icon>
                 <p> My Garden</p>
             </div>
         </li>
 
         <li class="navbar-items navbar-center-item navbar-center-margin" (click)="setCurrentPage('search')">
-            <div *ngIf="authService.isLoggedIn()" fxLayout="row">
+            <div *ngIf="authService.isLoggedIn()" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
                 <mat-icon><b>add</b></mat-icon>
                 <p> Add Plant</p>
             </div>
-            <div *ngIf="!authService.isLoggedIn()" fxLayout="row">
+            <div *ngIf="!authService.isLoggedIn()" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
                 <mat-icon>search</mat-icon>
                 <p> Search Plants</p>
             </div>
@@ -25,8 +25,6 @@
             <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
                 <button mat-raised-button color="accent" (click)="openLoginDialog()">Login / Register</button>
             </div>
-            <!-- <mat-icon *ngIf="authService.isLoggedIn()" class="settings-icon" (click)="openEditProfileDialog()">settings</mat-icon> -->
-
 
             <button mat-icon-button [matMenuTriggerFor]="settingsMenu" *ngIf="authService.isLoggedIn()">
               <mat-icon class="settings-icon">settings</mat-icon>

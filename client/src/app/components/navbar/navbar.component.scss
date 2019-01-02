@@ -17,6 +17,9 @@
             font-size: 1.25rem;
             letter-spacing: 3px;
             font-variant-caps: all-petite-caps;
+            @media screen and (max-width: $break-md) {
+                letter-spacing: 0;
+            }
             p {
                 margin: 0;
                 line-height: 0.75rem;
@@ -28,6 +31,9 @@
                 &:hover {
                     opacity: 1;
                     transition: all 0.3s ease;
+                }
+                @media screen and (max-width: $break-sm) {
+                    height: 24px;
                 }
             }
             mat-icon.mat-icon {
@@ -47,8 +53,10 @@
                 }
             }
         }
-        .navbar-center-margin {
-            margin-left: -120px;
+        @media screen and (min-width: $break-sm) {
+            .navbar-center-margin {
+                margin-left: -120px;
+            }
         }
         .navbar-center-item {
             margin-top: 6px;
@@ -61,15 +69,16 @@
                     color: $color-light-green;
                 }
             }
+            @media screen and (max-width: $break-sm) {
+                margin-top: 0;
+                mat-icon.mat-icon {
+                    height: 1rem;
+                    width: 1rem;
+                }
+            }
             mat-icon.mat-icon {
                 font-size: 1rem;
             }
-        }
-    }
-    .mat-menu-item {
-        span {
-            letter-spacing: 1px;
-            font-variant: petite-caps;
         }
     }
 }
