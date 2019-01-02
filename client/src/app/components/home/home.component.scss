@@ -14,7 +14,7 @@
     @media screen and (max-width: $break-sm) {
         background-image: url('../../../assets/img/sproutStages-sm.webp'), url('../../../assets/img/sproutStages-sm-min.png');
         .home-page-header-logo {
-            width: 100%;
+            width: 300px;
             margin-top: 33%;
         }
     }
@@ -27,24 +27,48 @@
 
 .getting-started-container {
     margin-top: -4px;
+    .gardening-boy-image {
+        width: 100%;
+        height: 100%;
+    }
     .getting-started-paragraph-wrapper {
         min-height: 150px;
         color: $color-dark-gray !important;
+        background-image: url('../../../assets/img/elevated-squares-bg.svg');
+        .paragraph-wrapper-overlay {
+            background-image: linear-gradient(270deg, transparent 30%, $color-light-green 100%);
+            height: 100%;
+            width: 100%;
+        }
         h3 {
             letter-spacing: 16px;
             text-align: right;
             font-size: 4rem;
             opacity: 0.8;
             text-align: center;
+            font-weight: 400;
+            color: rgba(0, 0, 0, .6);
+            text-shadow: 3px 2px 3px rgba(255, 255, 255, .2);
+            font-variant-caps: petite-caps;
         }
     }
     .step-item {
         text-align: center;
+        transform: skew(-20deg);
         mat-icon.mat-icon {
             height: 4rem;
             width: 4rem;
             font-size: 4rem;
             opacity: 0.8;
+            transform: skew(20deg);
+            @media screen and (max-width: $break-sm) {
+                margin-left: -2rem;
+            }
+        }
+        p {
+            transform: skew(20deg);
+            font-variant-caps: small-caps;
+            letter-spacing: 1px;
         }
     }
 }
@@ -78,7 +102,7 @@
         overflow: hidden;
         width: 100%;
         margin-top: 1rem;
-        padding: 96px 0;
+        padding: 54px 0;
         .quick-overview-item {
             padding: 0rem 2rem 1rem 0;
             background: rgba(0, 0, 0, 0.4);
@@ -179,7 +203,7 @@
     }
     p {
         margin: 0;
-        opacity: 0.8
+        opacity: 0.8;
     }
     a {
         text-decoration: none;
@@ -209,8 +233,17 @@
     }
     .footer-top {
         height: 150px;
+        background-image: linear-gradient(90deg, rgb(81, 126, 31), rgb(39, 56, 20));
         div {
             min-height: 150px;
         }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0.75rem;
+    @media screen and (max-width: $break-md) {
+        width: 0;
+        height: 0;
     }
 }

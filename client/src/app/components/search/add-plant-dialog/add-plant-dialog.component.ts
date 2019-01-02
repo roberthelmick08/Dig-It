@@ -19,8 +19,16 @@ export class AddPlantDialogComponent {
 
   plantImage: string;
 
+  // Screen width to calculate image upload canvas width
+  cropCanvasWidth: number;
+
   constructor( public dialogRef: MatDialogRef<AddPlantDialogComponent>, private dataService: DataService) {
     this.newPlant = new Plant();
+    if(window.innerWidth <= 600){
+      this.cropCanvasWidth = window.innerWidth - 48;
+    } else{
+      this.cropCanvasWidth = 400;
+    }
     // Set default values
     this.newPlant.harvestable = false;
   }

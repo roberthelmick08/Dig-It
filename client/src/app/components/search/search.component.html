@@ -68,8 +68,13 @@
 
     <mat-sidenav-content>
         <div fxLayout="column" class="sidenav-contents">
-            <div fxFlex="100" fxLayoutAlign="center">
+
+            <div fxFlex="100" fxLayoutAlign="center center" fxLayout="column">
                 <h2 class="page-header"><span class="highlight">[</span>Search<span class="highlight">]</span></h2>
+                <h2 class="page-subheader" *ngIf="authService.isLoggedIn()">-OR-</h2>
+                <button mat-flat-button color="accent" (click)="openAddPlantDialog()" *ngIf="authService.isLoggedIn()" class="add-plant-button">
+                    Add plant to Dig-It
+                </button>
             </div>
 
             <mat-chip-list fxLayoutAlign="center center">
@@ -109,32 +114,13 @@
                 </div>
             </div>
 
-            <button mat-flat-button color="warn" (click)="openAddPlantDialog()" fxFlex="100" *ngIf="authService.isLoggedIn()" class="add-plant-button">
-                Add plant to Dig-It
-            </button>
-
-            <div *ngIf="(visiblePlants?.length === 0 && searchTerm.length === 0) || isOnSearch === false" class="search-warning "><span class="highlight">Enter</span><span class="opacity"> a search term</span></div>
-
             <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0 && isOnSearch === true">
                 <h2 class="search-warning"><span class="highlight">No</span><span class="opacity"> Plants Found</span></h2>
             </div>
 
-            <div *ngIf="visiblePlants?.length > 0" fxLayout="column">
-
-                <div class="plant-grid-item" *ngFor="let index = index; let plant of visiblePlants">
-                    <div fxLayout="row" fxLayoutAlign="space-between start">
-                        <div class="plant-icon" fxLayoutAlign="center center">
-                            <img src="{{'../../../assets/icons/' + plant.type + '.svg'}}" />
-                        </div>
-                    </div>
-                    <div class="plant-name-details" fxLayout="column" fxFlex="50" fxFlex.lt-sm="70" fxLayoutAlign.gt-sm="center end" fxLayoutAlign.lt-sm="center start" (click)="openPlantDetailsDialog(plant)">
-                        <h3>{{plant.commonName ? plant.commonName : plant.botanicalName}}</h3>
-                        <h5>{{plant.botanicalName ? plant.botanicalName : ''}}</h5>
-                    </div>
-                    <div fxFlex fxLayoutAlign="end center">
-                        <button mat-flat-button color="accent" *ngIf="authService.isLoggedIn()" (click)="openAddToGardenDialog(plant)"><mat-icon>add</mat-icon></button>
-                    </div>
-                </div>
+            <div *ngIf="visiblePlants?.length > 0" fxLayout="row wrap" fxLayoutAlign.gt-sm="space-between" fxLayoutAlign.lt-sm="center">
+                <app-plant-grid-item class="plant-grid-item" *ngFor="let index = index; let plant of visiblePlants" fxLayout="column" (mouseenter)="setGridItemHover(true, index)" (mouseleave)="setGridItemHover(false, index)" [plant]="plant" [user]="user" [index]="index"
+                    [hoverIndex]="hoverIndex" [isGridItemOnHover]="isGridItemOnHover" (openAddToGardenDialogEvent)="openAddToGardenDialog($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-plant-grid-item>
             </div>
         </div>
     </mat-sidenav-content>

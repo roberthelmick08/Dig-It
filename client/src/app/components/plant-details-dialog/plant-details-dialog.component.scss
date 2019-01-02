@@ -17,22 +17,27 @@
     }
     .add-plant-header {
         margin-top: -24px;
-        height: 300px;
+        @media screen and (min-width: $break-sm) {
+            height: 300px;
+            .header-image-wrapper {
+                width: 400px !important;
+            }
+            .header-plant-details {
+                margin-left: 24px;
+                width: 252px;
+            }
+        }
         .header-image-wrapper {
-            width: 400px;
+            width: calc(100% + 48px);
             margin-left: -24px;
             overflow: hidden;
+            // min-height: 300px;
             img {
                 width: 400px;
                 margin: 6px 24px 24px 0px;
-                @media screen and (max-width: $break-sm) {
-                    width: 400px;
-                }
             }
         }
         .header-plant-details {
-            margin-left: 24px;
-            width: 252px;
             border-bottom: 1px solid #dcdcdc;
             h1 {
                 color: $color-dark-gray;
@@ -148,14 +153,15 @@
             letter-spacing: 2px;
         }
     }
-    @media screen and (max-width: $break-sm) {
-        h4 {
-            margin-bottom: 1rem;
-        }
-        .mat-dialog-actions {
-            position: absolute;
-            bottom: 2rem;
-            right: 1rem;
-        }
+}
+
+@media screen and (max-width: $break-sm) {
+    .header-image-wrapper img {
+        width: 400px;
+    }
+    .mat-dialog-actions {
+        position: absolute;
+        bottom: 2rem;
+        right: 1rem;
     }
 }

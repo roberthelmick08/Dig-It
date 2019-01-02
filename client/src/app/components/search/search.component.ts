@@ -19,38 +19,25 @@ import { User } from 'src/models/user';
 })
 export class SearchComponent implements AfterViewInit, OnInit {
   user: User;
-
-  @Output()
-  openPlantDetailsDialogEvent = new EventEmitter();
-
+  @Output() openPlantDetailsDialogEvent = new EventEmitter();
   @ViewChild('sidenav') sidenav: MatSidenav;
-
+  isGridItemOnHover: boolean = false;
+  hoverIndex: number;
   // Variable to store ALL plants from database
   plantsList: Array<Plant> = [];
-
   // Variable to store VISIBLE plants after filter is applied
   visiblePlants: Array<Plant> = [];
-
   searchTerm: string = '';
-
   searchBy: string = 'commonName';
-
   // Variable to store state of search. Used to toggle search warnings
   isOnSearch: boolean = false;
-
   // To store all active filters
   activeFilters: Array<SearchFilter> = [];
-
   plantTypeFilters: Array<SearchFilter> = [];
-
   lifeCycleFilters: Array<SearchFilter> = [];
-
   sunScheduleFilters: Array<SearchFilter> = [];
-
   plantTypes = ['Cactus', 'Flower', 'Fruit', 'Grain', 'Grass', 'Herb', 'Houseplant', 'Shrub', 'Succulent', 'Tree', 'Vegetable', 'Vine'];
-
   sunSchedules = ['Full Sun', 'Partial Sun', 'Partial Shade', 'Full Shade'];
-
   lifeCycles = ['Annual', 'Biennial', 'Perennial'];
 
   constructor( private dataService: DataService, public authService: AuthenticationService,
@@ -101,10 +88,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
   setGardenPlant(plant): GardenPlant {
     const gardenPlant = new GardenPlant();
 
-    // if (plant.stage) {
-    //   plant.stage = +plant.stage;
-    // }
-
     gardenPlant.stage = plant.stage ? plant.stage : 0;
     gardenPlant.isPotted = Boolean(plant.isPotted);
     gardenPlant._id = plant._id;
@@ -149,12 +132,8 @@ export class SearchComponent implements AfterViewInit, OnInit {
     });
   }
 
-  openPlantDetailsDialog(plant: Plant) {
-    const data = {
-      plant: plant,
-      user: this.user
-    };
-    this.openPlantDetailsDialogEvent.emit(data);
+  openPlantDetailsDialog(event) {
+    this.openPlantDetailsDialogEvent.emit(event);
   }
 
   openAddToGardenDialog(plant: Plant) {
@@ -171,6 +150,11 @@ export class SearchComponent implements AfterViewInit, OnInit {
      }, () => {
       this.addToGarden(plant);
     });
+  }
+
+  setGridItemHover(isHover, index: number) {
+    this.isGridItemOnHover = isHover;
+    this.hoverIndex = index;
   }
 
   applyFilters() {

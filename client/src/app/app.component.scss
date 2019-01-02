@@ -1,111 +1,12 @@
 @import "../styles.scss";
+.home-body-wrapper {
+    background-image: url('../assets/img/pixel-bg.svg') !important;
+    background-size: 100% !important;
+}
+
 .body-wrapper {
     height: 100vh;
-    background: rgba(255, 255, 255, 0.5);
-    .navbar {
-        background: transparent;
-        color: $color-dark-gray;
-        .toolbar-logo {
-            position: absolute;
-            margin-top: 1rem;
-            opacity: 0.8;
-            z-index: 2;
-            img {
-                height: 64px;
-                cursor: pointer;
-            }
-        }
-        .garden-icon-wrapper-hover {
-            cursor: pointer !important;
-            &:hover {
-                -webkit-box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
-                box-shadow: -5px 12px 30px 0px rgba(0, 0, 0, 0.6);
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
-        }
-        .garden-icon-wrapper {
-            background: $color-light-green;
-            height: 100px;
-            width: 100px;
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            z-index: 999;
-            position: absolute;
-            left: calc(50% - 50px);
-            cursor: default;
-            img {
-                height: 150px;
-                margin-left: -16px;
-                margin-top: -26px;
-            }
-        }
-        .navbar-items {
-            cursor: pointer;
-            font-size: 1.25rem;
-            letter-spacing: 3px;
-            font-variant-caps: all-petite-caps;
-            position: absolute;
-            left: calc(35% - 48px);
-            top: 3px;
-            z-index: 2;
-            &:hover {
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-                transition: all 0.3s ease;
-            }
-            @media screen and (max-width: $break-md) {
-                left: calc(30% - 48px);
-            }
-            @media screen and (max-width: $break-sm) {
-                left: calc(20% - 48px);
-            }
-            img {
-                height: 60px;
-                width: 60px;
-                opacity: 0.8;
-                &:hover {
-                    opacity: 1;
-                    transition: all 0.3s ease;
-                }
-            }
-        }
-        .user-button-wrapper {
-            position: absolute;
-            right: 0;
-            button {
-                margin-right: 1rem;
-                margin-top: 1rem;
-                letter-spacing: 2px;
-                line-height: 2rem;
-            }
-            .accent-button {
-                opacity: 0.8;
-                &:hover {
-                    opacity: 1;
-                }
-            }
-            .mat-stroked-button {
-                background-color: rgba(255, 255, 255, 0.5);
-            }
-            @media screen and (max-width: $break-sm) {
-                right: -8px;
-                top: -4px;
-                button {
-                    width: 100px;
-                    overflow: hidden;
-                    white-space: normal;
-                    height: 50px;
-                    line-height: 1rem;
-                    margin-top: 0;
-                    margin-right: 0;
-                }
-            }
-        }
-    }
+    background: linear-gradient(135deg, white 10%, $color-light-gray);
     .page-content-wrapper {
         padding-bottom: 22px;
         .page-content {
@@ -113,14 +14,14 @@
             overflow-y: auto;
             max-height: calc(100% - 32px);
             box-shadow: none;
-            padding: 3rem 10% 1rem 10%;
+            padding: 0 15% 1rem 15%;
             @media screen and (max-width: $break-sm) {
                 padding: 3rem 0 0 0;
             }
         }
         .page-content-home {
             padding: 4rem 0 0 0;
-            background: transparent;
+            background: linear-gradient(150deg, white, rgba(255, 255, 255, 0.1));
             box-shadow: none;
             overflow-x: hidden;
         }

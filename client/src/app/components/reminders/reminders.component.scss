@@ -1,0 +1,89 @@
+@import "../../../styles.scss";
+p {
+    margin: 0;
+    font-variant-caps: small-caps;
+}
+
+.reminders-wrapper {
+    // margin-top: 1rem;
+    #reminders-tab {
+        width: 110px;
+        border-radius: 6px 0 0 6px;
+        background: $color-dark-gray;
+        mat-icon.mat-icon {
+            color: $color-light-gray;
+            font-size: 100px;
+            height: 100px;
+            width: 100px;
+        }
+    }
+}
+
+ul {
+    list-style: none;
+    background: white;
+    overflow: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    border-radius: 0 6px 6px 0;
+    width: 100%;
+    li {
+        min-width: 200px;
+        margin-right: 1rem;
+        background-size: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        padding-top: 1rem;
+        cursor: pointer;
+        &:hover {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+        @media screen and (min-width: $break-sm) {
+            height: 150px;
+        }
+        @media screen and (max-width: $break-sm) {
+            min-width: 100px;
+            min-height: 75px;
+        }
+        .reminder-label {
+            background: $color-red;
+            color: white;
+            padding: 0.125rem 0.75rem;
+            border-radius: 12px 0 0 12px;
+            cursor: pointer;
+        }
+        .name-label {
+            width: 100%;
+            height: 1rem;
+            margin-top: -1rem;
+            background-color: $color-dark-gray;
+            color: white;
+            letter-spacing: 0.5px;
+            padding: 0.125rem 0.75rem;
+            p {
+                padding-left: 1.5rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $break-sm) {
+    .reminders-wrapper {
+        height: 112px;
+        #reminders-tab {
+            width: inherit !important;
+            height: inherit !important;
+            mat-icon.mat-icon {
+                font-size: 50px !important;
+                height: 50px !important;
+                width: 50px !important;
+            }
+        }
+        .name-label {
+            height: inherit !important;
+        }
+    }
+}

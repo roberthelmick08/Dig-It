@@ -23,6 +23,8 @@ export class PlantDetailsDialogComponent {
   visibleReminderIndex: number = 1;
   // Left margin value for reminders wrapper
   remindersWrapperLeftMargin: number = 114;
+  // Screen width to calculate image upload canvas width
+  screenWidth: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<PlantDetailsDialogComponent>, public authenticationService: AuthenticationService,
   public dataService: DataService, public reminderService: ReminderService) {
@@ -46,6 +48,8 @@ export class PlantDetailsDialogComponent {
     if (!this.plant.reminders) {
       this.maxSteps--;
     }
+
+    this.screenWidth = window.innerWidth;
   }
 
   onImageUploadEvent(event){
