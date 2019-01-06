@@ -1,5 +1,4 @@
-<img [src]="plantImage" *ngIf="plantImage && !isCropperActive" />
-<!-- <img [src]="plantImage" *ngIf="plantImage && !isCropperActive" [style.height.px]="imageHeight" [style.width.px]="imageWidth" /> -->
+<img [src]="plantImage" *ngIf="plantImage && !isCropperActive" [class.image-default-width]="isAddPlantDialog === false" />
 <img-cropper #cropper [image]="data" [settings]="cropperSettings" *ngIf="isCropperActive"></img-cropper>
 <input #fileInput id="custom-input" type="file" (change)="onFileChange($event)" hidden>
 

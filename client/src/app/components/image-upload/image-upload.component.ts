@@ -12,6 +12,7 @@ export class ImageUploadComponent implements OnInit {
   @Input() imageWidth: number;
   imageHeight: number;
   @Input() plantImage: string;
+  @Input() isAddPlantDialog: boolean = false;
   @Output() imageUploadEvent = new EventEmitter();
   @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
   isLoading: boolean = false;

@@ -6,18 +6,18 @@
 
         <li class="navbar-items navbar-center-item" (click)="setCurrentPage('garden')">
             <div *ngIf="authService.isLoggedIn()" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
-                <mat-icon>spa</mat-icon>
+                <mat-icon [class.active-page]="currentPage === 'garden'">spa</mat-icon>
                 <p> My Garden</p>
             </div>
         </li>
 
         <li class="navbar-items navbar-center-item navbar-center-margin" (click)="setCurrentPage('search')">
             <div *ngIf="authService.isLoggedIn()" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
-                <mat-icon><b>add</b></mat-icon>
+                <mat-icon [class.active-page]="currentPage === 'search'"><b>add</b></mat-icon>
                 <p> Add Plant</p>
             </div>
             <div *ngIf="!authService.isLoggedIn()" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="center center">
-                <mat-icon>search</mat-icon>
+                <mat-icon [class.active-page]="currentPage === 'search'">search</mat-icon>
                 <p> Search Plants</p>
             </div>
         </li>
