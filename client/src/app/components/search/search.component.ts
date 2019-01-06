@@ -126,8 +126,6 @@ export class SearchComponent implements AfterViewInit, OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.isSaveToGarden === true) {
         this.addToGarden(result.plant);
-      } else if (result && result.isSaveToGarden === false) {
-        this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
       }
     });
   }

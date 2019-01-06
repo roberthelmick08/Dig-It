@@ -149,13 +149,14 @@
         </form>
     </div>
 
-    <mat-dialog-actions fxFlex="100" fxLayoutAlign="end center">
-        <mat-checkbox [(ngModel)]="isSaveToGarden" (change)="isSaveToGarden === true && newPlant.stage = null">Save to Garden</mat-checkbox>
+    <mat-dialog-actions fxFlex="100" fxLayoutAlign="space-between center">
+        <mat-checkbox [(ngModel)]="isSaveToGarden" (change)="this.newPlant.stage = null">Save to Garden</mat-checkbox>
+        <mat-checkbox [(ngModel)]="isSaveToDatabase">Save to Dig-It database</mat-checkbox>
 
         <button mat-button color="primary" (click)="dialogRef.close()" *ngIf="step === 0">Cancel</button>
         <button mat-button color="primary" (click)="onPreviousStep()" *ngIf="step !== 0">< Back</button>
         <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step !== 1 && step !== 2" [disabled]="(!newPlant.commonName && !newPlant.botanicalName) || !newPlant.type || !newPlant.lifeType || (newPlant.harvestable === true && !newPlant.weeksToHarvest)">Next ></button>
-        <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 1 || step === 2" [disabled]="!newPlant.sunSchedule || (this.isSaveToGarden && !this.newPlant.stage) ||
-        (this.isSaveToGarden && newPlant.stage > 0 && newPlant.isPotted === undefined)">Submit</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()" *ngIf="step === 1 || step === 2" [disabled]="(!newPlant.sunSchedule || (this.isSaveToGarden && !this.newPlant.stage) ||
+        (this.isSaveToGarden && newPlant.stage > 0 && newPlant.isPotted === undefined)) || (isSaveToDatabase === false && isSaveToGarden === false)">Submit</button>
     </mat-dialog-actions>
 </div>
