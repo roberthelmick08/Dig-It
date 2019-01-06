@@ -99,9 +99,6 @@
             </div>
 
             <div fxLayout="column" fxFlex="100" fxHide.gt-xs="true">
-                <mat-form-field fxFlex class="main-search-wrapper" floatLabel="never">
-                    <input matInput type="search" placeholder="Search Plants" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" />
-                </mat-form-field>
                 <div fxLayoutAlign="space-around center">
                     <div class="filter-icon-wrapper" (click)="sidenav.open()">
                         <img src="../../../assets/icons/filter.svg">
@@ -112,6 +109,9 @@
                         </mat-radio-button>
                     </mat-radio-group>
                 </div>
+                <mat-form-field fxFlex class="main-search-wrapper" floatLabel="never">
+                    <input matInput type="search" placeholder="Search Plants" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" (keyup.tab)="onSearch()" />
+                </mat-form-field>
             </div>
 
             <div fxLayout="column " *ngIf="searchTerm.length > 0 && visiblePlants?.length === 0 && isOnSearch === true">
