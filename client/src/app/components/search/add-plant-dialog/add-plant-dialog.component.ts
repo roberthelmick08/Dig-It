@@ -17,6 +17,8 @@ export class AddPlantDialogComponent {
 
   isSaveToGarden: boolean = true;
 
+  isSaveToDatabase: boolean = false;
+
   plantImage: string;
 
   // Screen width to calculate image upload canvas width
@@ -81,15 +83,20 @@ export class AddPlantDialogComponent {
     if (this.newPlant.variety) this.newPlant.variety = this.toSentenceCase(this.newPlant.variety);
     if (this.newPlant.comment) this.newPlant.comment = this.toSentenceCase(this.newPlant.comment);
 
-    this.dataService.addPlant(this.newPlant).subscribe(result => { }, (err) => {
-      this.dataService.openSnackBar('fail');
-    }, () => {
-      this.dataService.getAllPlants();
-      if (!this.isSaveToGarden) {
+
+
+    if (this.isSaveToDatabase) {
+      this.dataService.addPlant(this.newPlant).subscribe(result => { }, (err) => {
+        this.dataService.openSnackBar('fail');
+      }, () => {
+        this.dataService.getAllPlants();
         this.dataService.openSnackBar('success', 'Plant saved to Dig-It database!');
-      }
         this.dialogRef.close({plant: this.newPlant, isSaveToGarden: this.isSaveToGarden});
-    });
+      });
+    } else{
+      this.dialogRef.close({plant: this.newPlant, isSaveToGarden: this.isSaveToGarden});
+    }
+    
   }
 
   toTitleCase(input: string) {
