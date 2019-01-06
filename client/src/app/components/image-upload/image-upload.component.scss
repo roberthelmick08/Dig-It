@@ -1,6 +1,6 @@
 @import "../../../styles.scss";
 @media screen and (min-width: $break-sm) {
-    img {
+    .image-default-width {
         width: 400px;
         height: 300px;
     }

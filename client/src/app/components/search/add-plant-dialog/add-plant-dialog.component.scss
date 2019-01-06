@@ -12,18 +12,18 @@
         margin-top: -12px;
     }
     .add-plant-scroll-container {
+        mat-hint.mat-hint,
+        .image-container {
+            display: initial !important;
+            margin-bottom: 1rem;
+            width: 50%;
+        }
         @media screen and (min-width: $break-sm) {
             height: 352px;
             .image-container {
                 margin: 54px 24px 0 -24px;
                 width: 30%;
             }
-        }
-        mat-hint.mat-hint,
-        .image-container {
-            display: initial !important;
-            margin-bottom: 1rem;
-            width: 50%;
         }
         .harvest-wrapper {
             @media screen and (min-width: $break-sm) {

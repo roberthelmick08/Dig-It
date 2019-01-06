@@ -79,6 +79,9 @@
             mat-icon.mat-icon {
                 font-size: 1rem;
             }
+            .active-page {
+                color: $color-light-green;
+            }
         }
     }
 }
