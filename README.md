@@ -35,9 +35,7 @@ This project is licensed under the MIT License
 
 ## Upcoming Features:
 - Google & iCloud Calendar integration
-- Custom image upload
 - Unit Testing
 - Administrator approval of new plants
-- Garden: Drag & Drop sorting
 - Dark Theme
-- Accessibility
+- Accessibility improvements
