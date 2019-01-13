@@ -46,7 +46,7 @@ export class ImageUploadComponent implements OnInit {
   uploadImage(){
     const image = this.dataURLtoFile(this.data.image, Date.now().toString() + '.jpeg');
     const key = 'images/' + image.name;
-    this.dataService.uploadfile(image, key);
+    this.dataService.uploadFile(image, key);
     this.isLoading = true;
     setTimeout(() => {
       this.plantImage = 'https://s3.amazonaws.com/dig-it-custom-images/' + key;

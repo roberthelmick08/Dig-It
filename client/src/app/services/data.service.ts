@@ -19,7 +19,7 @@ export class DataService {
 
   constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService, ) { }
 
-  uploadfile(file, key) {
+  uploadFile(file, key) {
     const bucket = new S3(
       {
         accessKeyId: environment.AWS_ACCESS_ID,

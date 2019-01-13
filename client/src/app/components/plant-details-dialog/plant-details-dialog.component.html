@@ -1,10 +1,10 @@
 <mat-icon class="close-dialog-icon" fxHide.lt-sm (click)="dialogRef.close()">close</mat-icon>
-<div fxLayout="column" class="plant-details-dialog-wrapper">
+<div fxLayout="column">
     <div class="plant-details-dialog" fxLayout="column">
         <div class="add-plant-header" fxLayout="row" fxLayout.lt-md="column">
-            <div class="header-image-wrapper" fxLayoutAlign="center start">
-                <app-image-upload fxHide.gt-sm="true" [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageWidth]="screenWidth" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
-                <app-image-upload fxHide.lt-sm="true" [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageWidth]="400" (imageUploadEvent)="onImageUploadEvent($event)" class="image-found"></app-image-upload>
+            <div class="header-image-wrapper" [class.header-image-wrapper-margin]="plant.img" fxLayoutAlign="center start">
+                <app-image-upload fxHide.gt-sm="true" [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageWidth]="screenWidth" (imageUploadEvent)="onImageUploadEvent($event)"></app-image-upload>
+                <app-image-upload fxHide.lt-sm="true" [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageWidth]="400" (imageUploadEvent)="onImageUploadEvent($event)"></app-image-upload>
             </div>
 
             <div fxLayout="column" class="header-plant-details">
@@ -108,7 +108,7 @@
         <button mat-stroked-button color="primary" (click)="addToGarden()" *ngIf="!plant.reminders && !plant.stage">Add to Garden</button>
         <div>
             <button mat-raised-button color="accent" (click)="onPreviousStep()" *ngIf="step - 1 >= 1">< Back</button>
-            <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps" tabindex="1">Next ></button>
+            <button mat-raised-button color="primary" (click)="onNextStep()" *ngIf="step + 1 <= maxSteps" tabindex="1" autofocus="false">Next ></button>
         </div>
     </mat-dialog-actions>
 </div>
