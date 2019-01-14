@@ -12,8 +12,8 @@ const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 
 // Mongoose 
-// mongoose.connect('mongodb://localhost:27017/meanAuth');
-mongoose.connect(process.env.MONGO_URL_PROD);
+mongoose.connect('mongodb://localhost:27017/meanAuth');
+// mongoose.connect(process.env.MONGO_URL_PROD);
 
 mongoose.connection.on('connected', () => {
     console.log('MongoDB connected at port 27017');

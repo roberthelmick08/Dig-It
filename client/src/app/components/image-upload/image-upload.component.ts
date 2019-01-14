@@ -16,7 +16,6 @@ export class ImageUploadComponent implements OnInit {
   @Output() imageUploadEvent = new EventEmitter();
   @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
   isLoading: boolean = false;
-
   isMouseOnHover: boolean = false;
   isCropperActive: boolean = false;
   cropperSettings: CropperSettings;
@@ -35,7 +34,11 @@ export class ImageUploadComponent implements OnInit {
     this.cropperSettings.croppedHeight = this.imageHeight;
     this.cropperSettings.croppedWidth = this.imageWidth;
     this.cropperSettings.canvasHeight = this.imageHeight;
-    this.cropperSettings.canvasWidth = this.imageWidth;
+    if(this.plantImage.startsWith('../../../assets/icons/')){
+      this.cropperSettings.canvasWidth = 200;
+    } else{
+      this.cropperSettings.canvasWidth = this.imageWidth;
+    }
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.cropperDrawSettings.strokeColor = "#423E37";
     this.cropperSettings.cropperDrawSettings.dragIconStrokeColor = "#423E37";

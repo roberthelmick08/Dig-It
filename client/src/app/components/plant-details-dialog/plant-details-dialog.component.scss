@@ -22,18 +22,18 @@
                 margin-left: 24px;
                 width: 252px;
             }
+            .header-image-wrapper-image-not-found {
+                width: 200px !important;
+            }
         }
-        .header-image-wrapper-margin {
+        .header-image-wrapper-image-found {
             width: calc(100% + 48px);
             margin-left: -24px;
             margin-top: 0;
         }
-        .header-image-wrapper {
-            margin-top: 24px;
-            img {
-                width: 400px;
-                margin: 6px 24px 24px 0px;
-            }
+        .header-image-wrapper img {
+            width: 400px;
+            margin: 6px 24px 24px 0px;
         }
         .header-plant-details {
             border-bottom: 1px solid #dcdcdc;

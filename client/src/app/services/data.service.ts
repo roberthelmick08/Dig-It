@@ -12,8 +12,8 @@ import { environment } from '../../environments/environment';
 })
 export class DataService {
 
-  apiPath: String = 'http://dig-it.rh-codes.com/api';
-  // apiPath: String = 'http://localhost:3000/api';
+  // apiPath: String = 'http://dig-it.rh-codes.com/api';
+  apiPath: String = 'http://localhost:3000/api';
 
   isImageLoaded: boolean = false;
 

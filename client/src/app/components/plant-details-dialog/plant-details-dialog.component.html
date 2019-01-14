@@ -2,7 +2,7 @@
 <div fxLayout="column">
     <div class="plant-details-dialog" fxLayout="column">
         <div class="add-plant-header" fxLayout="row" fxLayout.lt-md="column">
-            <div class="header-image-wrapper" [class.header-image-wrapper-margin]="plant.img" fxLayoutAlign="center start">
+            <div class="header-image-wrapper" [class.header-image-wrapper-image-found]="plant.img" [class.header-image-wrapper-image-not-found]="!plant.img" fxLayoutAlign="center start">
                 <app-image-upload fxHide.gt-sm="true" [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageWidth]="screenWidth" (imageUploadEvent)="onImageUploadEvent($event)"></app-image-upload>
                 <app-image-upload fxHide.lt-sm="true" [plantImage]="plant.img ? plant.img : '../../../assets/icons/' + plant.type + '.svg'" [imageWidth]="400" (imageUploadEvent)="onImageUploadEvent($event)"></app-image-upload>
             </div>
