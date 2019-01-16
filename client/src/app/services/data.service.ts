@@ -37,6 +37,7 @@ export class DataService {
 
     bucket.upload(params, (err, data) => {
       if (err) {
+        this.openSnackBar('fail', 'There was an error uploading your file. Please try again.')
         console.log('There was an error uploading your file: ', err);
         return false;
       }
@@ -104,6 +105,78 @@ export class DataService {
           this.openSnackBar('fail');
         });
       }
+    });
+  }
+
+  setUserCredentials(credentials) {
+    // Latitude and Longitude to use for Frostline API
+    let coordinates: {lat: number, lon: number};
+
+    this.auth.doCORSRequest({
+      method: 'GET',
+      url: 'https://phzmapi.org/' + credentials.zip + '.json',
+    }).subscribe( result => {
+      result = JSON.parse(result);
+      coordinates = result.coordinates;
+      credentials.zone = result.zone.substring(0, result.zone.length - 1);
+    }, (err) => {
+      this.openSnackBar('fail');
+      console.error(err);
+    }, () => {
+      this.getClosestWeatherStation(coordinates, credentials);
+    });
+  }
+
+  getClosestWeatherStation(coordinates, credentials) {
+    // ID of closest weather station used by FarmSense API to find frost dates
+    let stationId;
+
+    this.auth.doCORSRequest({
+      method: 'GET',
+      url: 'http://api.farmsense.net/v1/frostdates/stations/?lat=' + coordinates.lat + '&lon=' + coordinates.lon
+    }).subscribe( result => {
+      result = JSON.parse(result);
+      stationId = result[0].id;
+    }, (err) => {
+      this.openSnackBar('fail');
+      console.error(err);
+    }, () => {
+      this.getFrostDates(stationId, credentials, 1);
+      this.getFrostDates(stationId, credentials, 2);
+    });
+  }
+
+  getFrostDates(stationId: number, credentials: any, season: number) {
+    this.auth.doCORSRequest({
+      method: 'GET',
+      url: 'http://api.farmsense.net/v1/frostdates/probabilities/?station=' + stationId + '&season=' + season
+    }).subscribe( result => {
+      result = JSON.parse(result);
+      let dateString = (new Date()).getFullYear() + '-' + result[0].prob_90.toString().substr(0, 2) + '-' + result[0].prob_90.toString().substr(2, 2);
+      if (season === 1) {
+        credentials.lastFrostDate = new Date(dateString);
+      } else {
+        credentials.firstFrostDate = new Date(dateString);
+      }
+    }, (err) => {
+      this.openSnackBar('fail');
+      console.error(err);
+    }, () => {
+      if (season === 2 && credentials.password) {
+        this.register(credentials);
+      } else if (season === 2 && !credentials.password) {
+        credentials.zone = parseInt(credentials.zone);
+        this.auth.updateUser(credentials).subscribe( result => { }, err => {
+          this.openSnackBar('fail');
+        });
+      }
+    });
+  }
+
+  register(credentials: any) {
+    this.auth.setUser(credentials).subscribe((result) => { }, (err) => {
+      this.openSnackBar('fail', 'Unable to register. Please try again.');
+      console.error(err);
     });
   }
 
