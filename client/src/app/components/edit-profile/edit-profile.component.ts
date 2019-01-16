@@ -37,8 +37,4 @@ export class EditProfileDialogComponent {
     return new Date(this.user.lastFrostDate).toLocaleDateString('en-US', { month: 'long', day: '2-digit' });
   }
 
-  onLogout() {
-    this.isLogout = true;
-    this.dialogRef.close();
-  }
 }

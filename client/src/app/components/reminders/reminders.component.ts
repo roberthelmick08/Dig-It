@@ -81,32 +81,6 @@ export class RemindersComponent implements OnInit {
 
   isReminderVisible(reminder: Reminder): boolean {
     const reminderDate = new Date(reminder.date);
-    return reminderDate <= this.today && reminderDate > this.reminderService.addDays(this.today, -30);
-  }
-
-  getReminderTooltipText(plant: GardenPlant, reminder: Reminder): string {
-    let tempText = 'Something went wrong!';
-    let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
-
-    if (reminder.name === 'repot') {
-      if (plant.stage === 1) {
-        tempText = 'Repot your ' + plantName + '. It\'s strong enough to be put in a small-medium pot. You can start watering it like normal instead of using a spraybottle.';
-      } else {
-        tempText = 'Repot your ' + plantName + '. Put it in a medium or large pot. It\'s roots probably need more space to spread out.';
-      }
-    } else if (reminder.name === 'sow') {
-      tempText = 'Time to sow your ' + plantName + ' seeds. Keep the sproutling inside in the warmth until Dig-It instructs you to move it outside.' + this.dataService.getSowingMethodString(plant.methodNum) + ' Seeds should be sown ' + plant.depth + ' inches deep and ' + plant.sowingSpace + ' inches apart.';
-    } else if (reminder.name === 'water') {
-      tempText = 'Water your ' + plantName + '.';
-    } else if (reminder.name === 'spray') {
-      tempText = 'Gently spray your ' + plantName + ' with water.';
-    } else if (reminder.name === 'move-inside') {
-      tempText = 'It\'s about to start hitting freezing temps at night in your area. It\'s time to bring your ' + plantName + ' inside for the winter.';
-    } else if (reminder.name === 'move-outside') {
-      tempText = 'It\'s finally starting to get warm enough in your area to move your ' + plantName + ' outside.';
-    } else if (reminder.name === 'harvest') {
-      tempText = 'It\'s just about time to harvest your ' + plantName + '. Look up what signs to look for to ensure your ' + plantName + ' is ripe for harvesting.';
-    }
-    return tempText;
+    return this.today >= reminderDate && reminderDate > this.reminderService.addDays(this.today, -30);
   }
 }

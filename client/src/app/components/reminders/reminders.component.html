@@ -4,10 +4,9 @@
     </div>
 
     <ul fxLayout="row" id="remindersList">
-        <li *ngFor="let plant of plantsWithActiveReminders; let plantIdx = index" (click)="openPlantDetailsDialog(plant)" [style.backgroundImage]="'url('+ plant.img +')'" fxLayoutAlign="space-between end" fxLayout="column">
+        <li *ngFor="let plant of plantsWithActiveReminders; let plantIdx = index" (click)="openPlantDetailsDialog(plant)" [style.backgroundImage]="'url('+ dataService.getBackgroundImage(plant) +')'" [class.image-not-found-width]="!plant.img" fxLayoutAlign="space-between end" fxLayout="column">
             <ng-container *ngFor="let reminder of plant.reminders; let reminderIdx = index">
-                <div class="reminder-label" *ngIf="isReminderVisible(reminder)" (click)="markReminderDone(plant, reminder)" (mouseenter)="onMouseEnter(plantIdx, reminderIdx)" (mouseleave)="onMouseLeave()" [matTooltip]="getReminderTooltipText(plant, reminder)" matTooltipClass="dig-it-tooltip"
-                    #tooltip="matTooltip" matTooltipPosition="above">
+                <div class="reminder-label" *ngIf="isReminderVisible(reminder)" (click)="markReminderDone(plant, reminder)" (mouseenter)="onMouseEnter(plantIdx, reminderIdx)" (mouseleave)="onMouseLeave()">
                     <p>{{isOnHover === true && reminderIndex === reminderIdx && plantIndex === plantIdx ? 'Click to mark done' : reminder.name | titlecase}}</p>
                 </div>
             </ng-container>

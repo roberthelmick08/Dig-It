@@ -13,8 +13,6 @@ import { SearchComponent } from './components/search/search.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isUserMenuOpen: boolean = false;
-
   currentPage: string;
 
   user: User;
@@ -59,10 +57,6 @@ export class AppComponent {
 
   setCurrentPage(page: string) {
     this.currentPage = page;
-  }
-
-  toggleUserMenu() {
-    this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 
   onMarkReminderDoneEvent(event){
