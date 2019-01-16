@@ -21,7 +21,7 @@ export class RemindersComponent implements OnInit {
   plantIndex: number;
   reminderIndex: number;
 
-  constructor(private reminderService: ReminderService, private dataService: DataService) { }
+  constructor(private reminderService: ReminderService, public dataService: DataService) { }
 
   ngOnInit() {
     for(let plant of this.user.garden){
