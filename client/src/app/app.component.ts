@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { User } from 'src/models/user';
 import { SearchComponent } from './components/search/search.component';
+import { GardenPlant } from 'src/models/gardenPlant';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +18,14 @@ export class AppComponent {
 
   user: User;
 
+  plantsWithActiveReminders: Array<GardenPlant> = [];
+
   @ViewChild(SearchComponent) searchComponent;
 
   constructor( public dialog: MatDialog, public authService: AuthenticationService, public dataService: DataService, public reminderService: ReminderService) {
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
 
-    let today = new Date();
+    const today = new Date();
 
     if (this.authService.isLoggedIn() === true) {
       this.authService.getUser().subscribe(user => {
@@ -57,6 +60,19 @@ export class AppComponent {
 
   setCurrentPage(page: string) {
     this.currentPage = page;
+  }
+
+  setPlantsWithActiveReminders(){
+    for(let plant of this.user.garden){
+      let tempReminders = plant.reminders.filter(reminder => {
+        const today = new Date();
+        const reminderDate = new Date(reminder.date);
+        return today >= reminderDate && reminderDate > this.reminderService.addDays(today, -30);
+      });
+      if(tempReminders.length > 0){
+        this.plantsWithActiveReminders.push(plant);
+      }
+    }
   }
 
   onMarkReminderDoneEvent(event){

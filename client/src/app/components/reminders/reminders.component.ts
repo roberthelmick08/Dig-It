@@ -12,9 +12,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class RemindersComponent implements OnInit {
   @Input() user: User;
+  @Input() plantsWithActiveReminders: Array<GardenPlant> = [];
   @Output() markReminderDoneEvent = new EventEmitter();
   @Output() openPlantDetailsDialogEvent = new EventEmitter();
-  plantsWithActiveReminders: Array<GardenPlant> = [];
   today: Date = new Date();
   // Reminder hover state toggles
   isOnHover: boolean = false;
@@ -24,14 +24,6 @@ export class RemindersComponent implements OnInit {
   constructor(private reminderService: ReminderService, public dataService: DataService) { }
 
   ngOnInit() {
-    for(let plant of this.user.garden){
-      let tempReminders = plant.reminders.filter(reminder => {
-          return this.isReminderVisible(reminder);
-      });
-      if(tempReminders.length > 0){
-        this.plantsWithActiveReminders.push(plant);
-      }
-    }
   }
 
   onMouseEnter(plantIndex: number, reminderIndex: number){
