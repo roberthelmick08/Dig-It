@@ -56,23 +56,11 @@ export class AppComponent {
       this.authService.updateUser(this.user).subscribe();
       });
     }
+    this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(this.user.garden);
   }
 
   setCurrentPage(page: string) {
     this.currentPage = page;
-  }
-
-  setPlantsWithActiveReminders(){
-    for(let plant of this.user.garden){
-      let tempReminders = plant.reminders.filter(reminder => {
-        const today = new Date();
-        const reminderDate = new Date(reminder.date);
-        return today >= reminderDate && reminderDate > this.reminderService.addDays(today, -30);
-      });
-      if(tempReminders.length > 0){
-        this.plantsWithActiveReminders.push(plant);
-      }
-    }
   }
 
   onMarkReminderDoneEvent(event){
@@ -121,7 +109,12 @@ export class AppComponent {
       this.dataService.openSnackBar('fail');
     }, () => {
       this.dataService.openSnackBar('success', successMessage);
+      this.setPlantsWithActiveReminders();
     });
+  }
+  
+  setPlantsWithActiveReminders(){
+    this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(this.user.garden);
   }
 
   openPlantDetailsDialog(data) {

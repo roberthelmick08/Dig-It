@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/models/user';
 import { GardenPlant } from 'src/models/gardenPlant';
 import { ReminderService } from 'src/app/services/reminder.service';
@@ -10,7 +10,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './reminders.component.html',
   styleUrls: ['./reminders.component.scss']
 })
-export class RemindersComponent implements OnInit {
+export class RemindersComponent {
   @Input() user: User;
   @Input() plantsWithActiveReminders: Array<GardenPlant> = [];
   @Output() markReminderDoneEvent = new EventEmitter();
@@ -22,9 +22,6 @@ export class RemindersComponent implements OnInit {
   reminderIndex: number;
 
   constructor(private reminderService: ReminderService, public dataService: DataService) { }
-
-  ngOnInit() {
-  }
 
   onMouseEnter(plantIndex: number, reminderIndex: number){
     this.isOnHover = true;
