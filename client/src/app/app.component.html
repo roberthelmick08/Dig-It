@@ -3,11 +3,11 @@
 
     <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
         <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'">
-            <app-reminders *ngIf="authService.isLoggedIn() && user && currentPage !== 'home'" [user]="user" (markReminderDoneEvent)="onMarkReminderDoneEvent($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-reminders>
+            <app-reminders *ngIf="authService.isLoggedIn() && user && currentPage !== 'home'" [user]="user" [plantsWithActiveReminders]="plantsWithActiveReminders" (markReminderDoneEvent)="onMarkReminderDoneEvent($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-reminders>
 
             <app-home *ngIf="currentPage === 'home'"></app-home>
-            <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-search>
-            <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-garden>
+            <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)" (setActiveRemindersEvent)="setPlantsWithActiveReminders($event)"></app-search>
+            <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)" (setActiveRemindersEvent)="setPlantsWithActiveReminders($event)"></app-garden>
 
         </mat-card>
     </div>

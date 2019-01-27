@@ -11,6 +11,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 })
 export class GardenComponent implements OnInit {
   @Output() openPlantDetailsDialogEvent = new EventEmitter();
+  @Output() setActiveRemindersEvent = new EventEmitter();
   user: User;
   isGridItemOnHover: boolean = false;
   hoverIndex: number;
@@ -33,6 +34,7 @@ export class GardenComponent implements OnInit {
     }, () => {
       let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
       this.dataService.openSnackBar('success', plantName + ' has been removed from your garden.');
+      this.setActiveRemindersEvent.emit(this.user.garden);
     });
   }
 

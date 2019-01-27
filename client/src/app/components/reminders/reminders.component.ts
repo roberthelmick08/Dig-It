@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/models/user';
 import { GardenPlant } from 'src/models/gardenPlant';
 import { ReminderService } from 'src/app/services/reminder.service';
@@ -10,29 +10,17 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './reminders.component.html',
   styleUrls: ['./reminders.component.scss']
 })
-export class RemindersComponent implements OnInit {
+export class RemindersComponent {
   @Input() user: User;
+  @Input() plantsWithActiveReminders: Array<GardenPlant> = [];
   @Output() markReminderDoneEvent = new EventEmitter();
   @Output() openPlantDetailsDialogEvent = new EventEmitter();
-  plantsWithActiveReminders: Array<GardenPlant> = [];
-  today: Date = new Date();
   // Reminder hover state toggles
   isOnHover: boolean = false;
   plantIndex: number;
   reminderIndex: number;
 
   constructor(private reminderService: ReminderService, public dataService: DataService) { }
-
-  ngOnInit() {
-    for(let plant of this.user.garden){
-      let tempReminders = plant.reminders.filter(reminder => {
-          return this.isReminderVisible(reminder);
-      });
-      if(tempReminders.length > 0){
-        this.plantsWithActiveReminders.push(plant);
-      }
-    }
-  }
 
   onMouseEnter(plantIndex: number, reminderIndex: number){
     this.isOnHover = true;
@@ -81,6 +69,9 @@ export class RemindersComponent implements OnInit {
 
   isReminderVisible(reminder: Reminder): boolean {
     const reminderDate = new Date(reminder.date);
-    return this.today >= reminderDate && reminderDate > this.reminderService.addDays(this.today, -30);
+    reminderDate.setSeconds(reminderDate.getSeconds() - 5);
+    const today = new Date();
+
+    return today >= reminderDate && reminderDate > this.reminderService.addDays(today, -30);
   }
 }
