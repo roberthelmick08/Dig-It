@@ -1,10 +1,11 @@
-<div fxLayout="row" *ngIf="plantsWithActiveReminders.length > 0" class="reminders-wrapper">
+<div fxLayout="row" *ngIf="plantsWithActiveReminders?.length > 0" class="reminders-wrapper">
     <div id="reminders-tab" [style.height.px]="getRemindersTabHeight()" fxLayoutAlign="center center">
         <mat-icon>notifications_none</mat-icon>
     </div>
 
     <ul fxLayout="row" id="remindersList">
-        <li *ngFor="let plant of plantsWithActiveReminders; let plantIdx = index" (click)="openPlantDetailsDialog(plant)" [style.backgroundImage]="'url('+ dataService.getBackgroundImage(plant) +')'" [class.image-not-found-width]="!plant.img" fxLayoutAlign="space-between end" fxLayout="column">
+        <li *ngFor="let plant of plantsWithActiveReminders; let plantIdx = index" (click)="openPlantDetailsDialog(plant)" [style.backgroundImage]="'url('+ dataService.getBackgroundImage(plant) +')'" [class.image-not-found-width]="!plant.img" fxLayoutAlign="space-between end"
+            fxLayout="column">
             <ng-container *ngFor="let reminder of plant.reminders; let reminderIdx = index">
                 <div class="reminder-label" *ngIf="isReminderVisible(reminder)" (click)="markReminderDone(plant, reminder)" (mouseenter)="onMouseEnter(plantIdx, reminderIdx)" (mouseleave)="onMouseLeave()">
                     <p>{{isOnHover === true && reminderIndex === reminderIdx && plantIndex === plantIdx ? 'Click to mark done' : reminder.name | titlecase}}</p>

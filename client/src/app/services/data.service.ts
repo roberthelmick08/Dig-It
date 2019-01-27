@@ -1,4 +1,5 @@
 import { AuthenticationService } from './authentication.service';
+import { ReminderService } from './reminder.service';
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { Plant } from '../../models/plant';
 import { MatSnackBar } from '@angular/material';
 import * as S3 from 'aws-sdk/clients/s3';
 import { environment } from '../../environments/environment';
+import { GardenPlant } from 'src/models/gardenPlant';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class DataService {
 
   isImageLoaded: boolean = false;
 
-  constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService, ) { }
+  constructor( private http: Http, public snackBar: MatSnackBar, private auth: AuthenticationService, private reminderService: ReminderService) { }
 
   uploadFile(file, key) {
     const bucket = new S3(
@@ -55,6 +57,24 @@ export class DataService {
       return '../../assets/icons/' + plant.type + '.svg';
     }
   }
+
+  getPlantsWithActiveReminders(garden: GardenPlant[]){
+    let plantsWithActiveReminders = [];
+
+    for(let plant of garden){
+      let tempReminders = plant.reminders.filter(reminder => {
+        const today = new Date();
+        const reminderDate = new Date(reminder.date);
+        return today >= reminderDate && reminderDate > this.reminderService.addDays(today, -30);
+      });
+      if(tempReminders.length > 0){
+        plantsWithActiveReminders.push(plant);
+      }
+    }
+
+    return plantsWithActiveReminders.length > 0 ? plantsWithActiveReminders : null;
+  };
+
 
   getAllPlants() {
     return this.http.get(this.apiPath + '/search')

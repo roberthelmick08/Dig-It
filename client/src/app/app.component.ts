@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { User } from 'src/models/user';
 import { SearchComponent } from './components/search/search.component';
+import { GardenPlant } from 'src/models/gardenPlant';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +18,14 @@ export class AppComponent {
 
   user: User;
 
+  plantsWithActiveReminders: Array<GardenPlant> = [];
+
   @ViewChild(SearchComponent) searchComponent;
 
   constructor( public dialog: MatDialog, public authService: AuthenticationService, public dataService: DataService, public reminderService: ReminderService) {
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
 
-    let today = new Date();
+    const today = new Date();
 
     if (this.authService.isLoggedIn() === true) {
       this.authService.getUser().subscribe(user => {
@@ -51,6 +54,7 @@ export class AppComponent {
         this.user.firstFrostDate = this.reminderService.addDays(this.user.firstFrostDate, 365);
       }
       this.authService.updateUser(this.user).subscribe();
+      this.setPlantsWithActiveReminders();
       });
     }
   }
@@ -105,7 +109,13 @@ export class AppComponent {
       this.dataService.openSnackBar('fail');
     }, () => {
       this.dataService.openSnackBar('success', successMessage);
+      this.setPlantsWithActiveReminders();
     });
+  }
+
+  setPlantsWithActiveReminders(garden?: GardenPlant[]){
+    const gardenData = garden ? garden : this.user.garden;
+    this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(gardenData);
   }
 
   openPlantDetailsDialog(data) {
