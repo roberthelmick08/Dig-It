@@ -54,9 +54,9 @@ export class AppComponent {
         this.user.firstFrostDate = this.reminderService.addDays(this.user.firstFrostDate, 365);
       }
       this.authService.updateUser(this.user).subscribe();
+      this.setPlantsWithActiveReminders();
       });
     }
-    this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(this.user.garden);
   }
 
   setCurrentPage(page: string) {
@@ -112,9 +112,10 @@ export class AppComponent {
       this.setPlantsWithActiveReminders();
     });
   }
-  
-  setPlantsWithActiveReminders(){
-    this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(this.user.garden);
+
+  setPlantsWithActiveReminders(garden?: GardenPlant[]){
+    const gardenData = garden ? garden : this.user.garden;
+    this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(gardenData);
   }
 
   openPlantDetailsDialog(data) {

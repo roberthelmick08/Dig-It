@@ -15,7 +15,6 @@ export class RemindersComponent {
   @Input() plantsWithActiveReminders: Array<GardenPlant> = [];
   @Output() markReminderDoneEvent = new EventEmitter();
   @Output() openPlantDetailsDialogEvent = new EventEmitter();
-  today: Date = new Date();
   // Reminder hover state toggles
   isOnHover: boolean = false;
   plantIndex: number;
@@ -70,6 +69,9 @@ export class RemindersComponent {
 
   isReminderVisible(reminder: Reminder): boolean {
     const reminderDate = new Date(reminder.date);
-    return this.today >= reminderDate && reminderDate > this.reminderService.addDays(this.today, -30);
+    reminderDate.setSeconds(reminderDate.getSeconds() - 5);
+    const today = new Date();
+
+    return today >= reminderDate && reminderDate > this.reminderService.addDays(today, -30);
   }
 }

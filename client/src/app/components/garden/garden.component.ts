@@ -34,7 +34,7 @@ export class GardenComponent implements OnInit {
     }, () => {
       let plantName = plant.commonName ? plant.commonName : plant.botanicalName;
       this.dataService.openSnackBar('success', plantName + ' has been removed from your garden.');
-      this.setActiveRemindersEvent.emit(null);
+      this.setActiveRemindersEvent.emit(this.user.garden);
     });
   }
 

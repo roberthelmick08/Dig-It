@@ -73,6 +73,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
   addToGarden(plant: Plant) {
     const gardenPlant = this.setGardenPlant(plant);
 
+    if(!this.user.garden){
+      this.user.garden = [];
+    }
     this.user.garden.push(gardenPlant);
 
     this.authService.updateUser(this.user).subscribe( result => { }, err => {
@@ -82,8 +85,9 @@ export class SearchComponent implements AfterViewInit, OnInit {
       // Refresh visiblePlants
       this.dataService.getAllPlants().subscribe(plants => this.plantsList = plants, (err) => {
         this.dataService.openSnackBar('fail', 'Unable to load plants. Please refresh and try again');
+      }, () => {
+        this.setActiveRemindersEvent.emit(this.user.garden);
       });
-      this.setActiveRemindersEvent.emit(null);
     });
   }
 
