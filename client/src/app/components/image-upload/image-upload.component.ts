@@ -33,11 +33,12 @@ export class ImageUploadComponent implements OnInit {
     this.cropperSettings.width = this.imageWidth;
     this.cropperSettings.croppedHeight = this.imageHeight;
     this.cropperSettings.croppedWidth = this.imageWidth;
-    this.cropperSettings.canvasHeight = this.imageHeight;
-    if(this.plantImage.startsWith('../../../assets/icons/')){
+    if(this.plantImage.includes('add-plant-img.svg') && window.innerWidth >= 600){
       this.cropperSettings.canvasWidth = 200;
+      this.cropperSettings.canvasHeight = 150;
     } else{
       this.cropperSettings.canvasWidth = this.imageWidth;
+      this.cropperSettings.canvasHeight = this.imageHeight;
     }
     this.cropperSettings.noFileInput = true;
     this.cropperSettings.cropperDrawSettings.strokeColor = "#423E37";
