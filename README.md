@@ -33,9 +33,43 @@ GET all plants:
 
 This project is licensed under the MIT License
 
+## Versioning:
+
+**v2.2.1 *Current*:**
+
+- Google Analytics
+- Edit GardenPlant
+- Dark Theme
+- Bugfix: Display reminders on initial login
+
+**v2.2:**
+
+- Bugfix: Refresh Reminders on add/remove GardenPlant
+- Bugfix: Search grid alignment on mobile
+
+**v2.1:**
+
+- Add custom Plant to Garden without adding to database
+- Bugfix: Search algorithm
+- Bugfix: Image uploader
+
+**v2.0:**
+
+- UI refactor to minimalist theme
+- Image Uploader component
+
+**v1.1:**
+
+- Site responsiveness
+- Bugfix: Search grid item UI
+
+**v1.0:**
+
+- Dig-It MVP
+- UI layout v1
+
 ## Upcoming Features:
 - Google & iCloud Calendar integration
 - Unit Testing
 - Administrator approval of new plants
-- Dark Theme
 - Accessibility improvements
