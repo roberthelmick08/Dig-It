@@ -29,11 +29,7 @@ export class AppComponent {
     public dataService: DataService, public reminderService: ReminderService) {
 
     // Google Analytics
-    // this.router.events.subscribe(event => {
-      // if (event instanceof NavigationEnd) {
-        gtag('send', 'pageview');
-      // }
-    // });
+    gtag('send', 'pageview');
 
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
 
