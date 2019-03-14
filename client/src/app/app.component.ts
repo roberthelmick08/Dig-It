@@ -2,11 +2,14 @@ import { ReminderService } from './services/reminder.service';
 import { DataService } from './services/data.service';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { Component, ViewChild } from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { User } from 'src/models/user';
 import { SearchComponent } from './components/search/search.component';
 import { GardenPlant } from 'src/models/gardenPlant';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -22,7 +25,16 @@ export class AppComponent {
 
   @ViewChild(SearchComponent) searchComponent;
 
-  constructor( public dialog: MatDialog, public authService: AuthenticationService, public dataService: DataService, public reminderService: ReminderService) {
+  constructor( public dialog: MatDialog, public router: Router, public authService: AuthenticationService,
+    public dataService: DataService, public reminderService: ReminderService) {
+
+    // Google Analytics
+    // this.router.events.subscribe(event => {
+      // if (event instanceof NavigationEnd) {
+        gtag('send', 'pageview');
+      // }
+    // });
+
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
 
     const today = new Date();
