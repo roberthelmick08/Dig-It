@@ -26,50 +26,53 @@
 }
 
 .getting-started-container {
-    margin-top: -4px;
-    .gardening-boy-image {
-        width: 100%;
-        height: 100%;
+    font-family: Futura, Trebuchet MS, Arial, sans-serif;
+    font-variant-caps: petite-caps;
+    text-align: right;
+    height: calc(100vh - 64px);
+    overflow: hidden;
+    background-color: $color-blue;
+    .background-row {
+        background-image: url('../../../assets/img/house.jpg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin: 1rem 0 0 1rem;
     }
-    .getting-started-paragraph-wrapper {
-        min-height: 150px;
-        color: $color-dark-gray !important;
-        background-image: url('../../../assets/img/elevated-squares-bg.svg');
-        .paragraph-wrapper-overlay {
-            background-image: linear-gradient(270deg, transparent 30%, $color-light-green 100%);
-            height: 100%;
-            width: 100%;
+    .grid-item {
+        height: calc((100vh - 64px - 32px) / 3); // (100vh - navbar - vertical padding) / #Rows
+        padding: 1rem;
+        overflow: hidden;
+        h1 {
+            font-family: Futura, Trebuchet MS, Arial, sans-serif;
+            font-size: calc((100vh) / 2 - 1rem);
+            font-weight: 400;
+            opacity: 0.5;
+        }
+        h2 {
+            font-size: 5rem;
+            font-weight: 400;
         }
         h3 {
-            letter-spacing: 16px;
-            text-align: right;
-            font-size: 4rem;
-            opacity: 0.8;
-            text-align: center;
-            font-weight: 400;
-            color: rgba(0, 0, 0, .6);
-            text-shadow: 3px 2px 3px rgba(255, 255, 255, .2);
-            font-variant-caps: petite-caps;
+            z-index: 1;
+            letter-spacing: 4px;
         }
     }
-    .step-item {
-        text-align: center;
-        transform: skew(-20deg);
-        mat-icon.mat-icon {
-            height: 4rem;
-            width: 4rem;
-            font-size: 4rem;
-            opacity: 0.8;
-            transform: skew(20deg);
-            @media screen and (max-width: $break-sm) {
-                margin-left: -2rem;
-            }
-        }
-        p {
-            transform: skew(20deg);
-            font-variant-caps: small-caps;
-            letter-spacing: 1px;
-        }
+    .grid-item-number {
+        margin-top: 1rem;
+    }
+    .grid-item-number-1 {
+        max-width: inherit !important;
+        border-left: 1rem solid $color-blue;
+        border-top: 1rem solid $color-blue;
+        margin-left: -24px;
+        margin-bottom: -1rem;
+    }
+    .lily-img {
+        height: 150px;
+        margin-top: -120px;
+        margin-left: 30%;
+        -webkit-filter: drop-shadow(5px 5px 5px #222);
+        filter: drop-shadow(5px 5px 5px #222);
     }
 }
 
