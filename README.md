@@ -39,7 +39,6 @@ This project is licensed under the MIT License
 
 - Google Analytics
 - Edit GardenPlant
-- Dark Theme
 - Bugfix: Display reminders on initial login
 
 **v2.2:**
@@ -57,6 +56,7 @@ This project is licensed under the MIT License
 
 - UI refactor to minimalist theme
 - Image Uploader component
+- Performance enhancements
 
 **v1.1:**
 
