@@ -1,7 +1,7 @@
-<div class="body-wrapper" [class.home-body-wrapper]="currentPage === 'home'">
+<div id="body-wrapper" [class.home-body-wrapper]="currentPage === 'home'">
     <app-navbar [currentPage]="currentPage" [user]="user" (setCurrentPageEvent)="setCurrentPage($event)"></app-navbar>
 
-    <div fxFlexFill fxLayoutAlign="center" class="page-content-wrapper">
+    <div fxFlexFill fxLayoutAlign="center" id="page-content-wrapper">
         <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'">
             <app-reminders *ngIf="authService.isLoggedIn() && user && currentPage !== 'home'" [user]="user" [plantsWithActiveReminders]="plantsWithActiveReminders" (markReminderDoneEvent)="onMarkReminderDoneEvent($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-reminders>
 

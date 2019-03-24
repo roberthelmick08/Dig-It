@@ -4,10 +4,10 @@
     background-size: 100% !important;
 }
 
-.body-wrapper {
+#body-wrapper {
     height: 100vh;
     background: linear-gradient(135deg, white 10%, $color-light-gray);
-    .page-content-wrapper {
+    #page-content-wrapper {
         padding-bottom: 22px;
         .page-content {
             background: transparent;

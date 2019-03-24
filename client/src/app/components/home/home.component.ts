@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -6,56 +6,47 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @Output()
-  navigateToRegisterEvent = new EventEmitter();
-
-  @Output()
-  navigateToLoginEvent = new EventEmitter();
-
   iconPath: string = '../../../assets/icons/';
 
-  // Used to trigger slide-out animation
-  isSlideOut: boolean = false;
-  // Used to trigger slider animation
-  sliderStep: number = 0;
+  selectedSlideIndex: number = 0;
+
+  timer: any;
+
+  isLineVisible: boolean = false;
 
   // Array to store Slider Objects
   slides: Array<any> = [{
-    imgSrc: this.iconPath + 'gardening-tools.svg',
-    innerHTML: 'Dig-It was created for gardeners who struggle to keep their plants strong and healthy. <br><br><span class="highlight">Dig-It. Saves. Lives.</span>'
+    imgSrc: this.iconPath + 'farmer.svg',
+    innerHTML: 'Dig-It was created for gardeners who struggle to keep their plants strong and healthy. <br><br>Dig-It. Saves. Lives.'
   },
   {
-    imgSrc: this.iconPath + 'world.svg',
-    innerHTML: 'Plug in your ZIP code at registration, and Dig-It will give you growing tips <span class="highlight">specific to your location.</span>'
+    imgSrc: this.iconPath + 'position.svg',
+    innerHTML: 'Plug in your ZIP code at registration, and Dig-It will give you growing tips specific to your location.'
   },
   {
     imgSrc: this.iconPath + 'watering-can.svg',
-    innerHTML: 'Never forget to <span class="highlight">water, re-pot, or harvest</span> your plants again!'
+    innerHTML: 'Never forget to water, re-pot, or harvest your plants again!'
   },
   {
-    imgSrc: this.iconPath + 'ecology.svg',
-    innerHTML: 'Dig-It\'s extensive crowdsourced database gives details of <span class="highlight">any plant in the world!</span>'
+    imgSrc: this.iconPath + 'world.svg',
+    innerHTML: 'Dig-It\'s extensive crowdsourced database gives details of any plant in the world!'
   }
 ];
 
   constructor() { }
 
   ngOnInit() {
-    this.toggleSliderAnimation();
+    this.timer = setInterval( () => {
+        if(this.selectedSlideIndex === this.slides.length - 1){
+          this.selectedSlideIndex = 0;
+        } else{
+          this.selectedSlideIndex++;
+        }
+      }, 10000);
   }
 
-  toggleSliderAnimation() {
-    setTimeout( () => {
-      if (this.sliderStep === this.slides.length - 1) {
-        this.sliderStep = 0;
-      } else {
-        this.sliderStep++;
-      }
-      this.isSlideOut = true;
-          setTimeout( () => {
-            this.isSlideOut = false;
-            this.toggleSliderAnimation();
-          }, 500);
-    }, 7000);
+  selectOverviewItem(index: number){
+    this.selectedSlideIndex = index;
+    clearInterval(this.timer);
   }
 }

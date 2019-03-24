@@ -37,24 +37,39 @@
         background-repeat: no-repeat;
         background-size: contain;
         margin: 1rem 0 0 1rem;
+        width: 100%;
     }
     .grid-item {
         height: calc((100vh - 64px - 32px) / 3); // (100vh - navbar - vertical padding) / #Rows
         padding: 1rem;
         overflow: hidden;
+        &:hover {
+            h1 {
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+            h3 {
+                border-top: 1px solid white;
+            }
+        }
         h1 {
             font-family: Futura, Trebuchet MS, Arial, sans-serif;
             font-size: calc((100vh) / 2 - 1rem);
             font-weight: 400;
             opacity: 0.5;
+            width: 0;
+            transition: all 0.75s ease;
         }
         h2 {
             font-size: 5rem;
             font-weight: 400;
         }
         h3 {
+            border-top: 1px solid transparent;
             z-index: 1;
             letter-spacing: 4px;
+            transition: all 0.75s ease;
         }
     }
     .grid-item-number {
@@ -77,121 +92,62 @@
 }
 
 .quick-overview-container {
-    padding: 1rem;
-    background-image: url("../../../assets/img/dirt.webp"), url("../../../assets/img/dirt-min.png");
-    color: white;
-    @media screen and (max-width: $break-sm) {
-        background-image: url("../../../assets/img/dirt-sm.webp"), url("../../../assets/img/dirt-sm-min.png");
+    height: calc(100vh - 64px - 4rem);
+    padding: 4rem 4rem 0 4rem;
+    color: $color-dark-gray;
+    background-image: url('../../../assets/img/vine-bg.jpg');
+    background-position-x: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: white;
+    .overlay {
+        background-color: rgba(255, 255, 255, 0.55);
+        padding: 0 4rem 4rem 4rem;
     }
-    .quick-overview-header {
-        margin-top: 2rem;
-        img {
-            opacity: 0.8;
-            width: 50%;
-            @media screen and (max-width: $break-sm) {
-                width: 100%;
-            }
-        }
-        h2 {
-            color: $color-light-gray;
-            font-size: 5rem;
-            text-align: center;
-            letter-spacing: 1rem;
-            opacity: 0.7;
-        }
+    img {
+        height: 4rem;
+    }
+    h2 {
+        font-size: 4rem;
+        letter-spacing: 1rem;
+        font-weight: lighter;
+    }
+    .overview-text-container {
+        height: 120px;
+        width: 50vw;
+        border: 1px solid $color-dark-gray;
+        border-radius: 8px;
+        padding: 0 1rem;
+        text-align: center;
     }
     .quick-overview-contents {
-        transition: all 0.5s ease;
-        overflow: hidden;
         width: 100%;
-        margin-top: 1rem;
-        padding: 54px 0;
-        .quick-overview-item {
-            padding: 0rem 2rem 1rem 0;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 100px;
-            height: 150px;
-            width: 500px;
-            border-bottom: 2px solid $color-light-green;
-            img {
-                width: 150px;
-                min-width: 150px;
-                height: 150px;
-            }
-            p {
-                // text-align: left;
-                margin-left: 1rem;
-                font-size: 1.25rem;
-            }
-            @media screen and (max-width: $break-sm) {
-                border-radius: 50px;
-                height: 265px;
-                text-align: center;
-                width: 100%;
-                padding-left: 2rem;
-                img {
-                    width: 100px;
-                    min-width: 100px;
-                    height: 100px;
-                }
-            }
-        }
-        .slide-out-left {
+        .line {
             position: absolute;
-            -webkit-animation: slide-out-left 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: slide-out-left 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+            border-top: 1px solid $color-dark-gray;
+            width: 50%;
+            left: 25%;
+            transition: all 0.75s ease;
         }
-        @-webkit-keyframes slide-out-left {
-            0% {
-                -webkit-transform: translateX(0);
-                transform: translateX(0);
-                opacity: 1;
+        .overview-container {
+            width: 100px;
+            height: 100px;
+            z-index: 1;
+            img {
+                width: 64px;
+                margin: 1rem;
+                border: 1px solid $color-blue;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background: white;
             }
-            100% {
-                -webkit-transform: translateX(-1000px);
-                transform: translateX(-1000px);
-                opacity: 0;
-            }
-        }
-        @keyframes slide-out-left {
-            0% {
-                -webkit-transform: translateX(0);
-                transform: translateX(0);
-                opacity: 1;
-            }
-            100% {
-                -webkit-transform: translateX(-1000px);
-                transform: translateX(-1000px);
-                opacity: 0;
-                display: none;
-            }
-        }
-        .slide-in-right {
-            -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-        }
-        @-webkit-keyframes slide-in-right {
-            0% {
-                -webkit-transform: translateX(1000px);
-                transform: translateX(1000px);
-                opacity: 0;
-            }
-            100% {
-                -webkit-transform: translateX(0);
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        @keyframes slide-in-right {
-            0% {
-                -webkit-transform: translateX(1000px);
-                transform: translateX(1000px);
-                opacity: 0;
-            }
-            100% {
-                -webkit-transform: translateX(0);
-                transform: translateX(0);
-                opacity: 1;
+            .selected-overview,
+            img:hover {
+                border: 1px solid $color-light-green;
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
             }
         }
     }

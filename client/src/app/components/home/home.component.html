@@ -2,6 +2,7 @@
     <img src="../../../assets/logo/dig-it-logo-full.svg" class="home-page-header-logo" />
 </div>
 
+
 <div class="home-footer getting-started-container" fxLayout="row wrap">
     <div class="background-row" fxLayout="row wrap">
         <div class="grid-item" fxFlex="100" fxLayoutAlign="center center">
@@ -9,16 +10,17 @@
         </div>
         <div class="grid-item" fxFlex="50">
         </div>
-        <div class="grid-item grid-item-number grid-item-number-1" style="background-color: rgb(81, 126, 31)" fxFlex="50" fxLayoutAlign="space-between center">
+        <div class="grid-item grid-item-number grid-item-number-1" style="background-color: #01494e" fxFlex="50" fxLayoutAlign="space-between center">
             <h1>1</h1>
             <h3>Create an account</h3>
         </div>
     </div>
-    <div class="grid-item grid-item-number" style="background-color:  #3E5820" fxFlex="50" fxLayoutAlign="space-between center">
+
+    <div class="grid-item grid-item-number" style="background-color:  #006067" fxFlex="50" fxLayoutAlign="space-between center">
         <h1>2</h1>
         <h3>Add plants to your garden</h3>
     </div>
-    <div class="grid-item grid-item-number" style="background-color: rgb(39, 56, 20)" fxFlex="50" fxLayoutAlign="space-between center">
+    <div class="grid-item grid-item-number" style="background-color: #008F95" fxFlex="50" fxLayoutAlign="space-between center">
         <h1>3</h1>
         <h3>Get custom gardening notifications!</h3>
     </div>
@@ -26,22 +28,25 @@
 </div>
 
 <div class="quick-overview-container">
-    <div class="quick-overview-header" fxLayoutAlign="center center" fxLayout="column">
+    <div class="overlay" fxLayoutAlign="center center" fxLayout="column">
         <h2>CAN YOU</h2>
-        <img src="../../../assets/logo/dig-it-text-white.svg" />
-    </div>
-    <div class="quick-overview-contents" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
-        <ng-container *ngFor="let index = index; let slide of slides">
-            <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep"
-                fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center center">
-                <img [src]="slide.imgSrc" />
-                <div fxLayoutAlign="start center">
-                    <p [innerHTML]="slide.innerHTML"></p>
+        <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 0 4rem">
+            <h2>DIG IT?</h2>
+            <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 4rem; background-color: rgba(255, 255, 255, 0.8);">
+                <div class="overview-text-container" fxLayoutAlign="start center">
+                    <p [innerHTML]="slides[selectedSlideIndex].innerHTML"></p>
                 </div>
             </div>
-        </ng-container>
+            <div class="quick-overview-contents" fxLayoutAlign="space-between center">
+                <div class="overview-container" *ngFor="let i = index; let slide of slides" (click)="selectOverviewItem(i)">
+                    <img [src]="slide.imgSrc" [class.selected-overview]="i === selectedSlideIndex" />
+                </div>
+                <div class="line"></div>
+            </div>
+        </div>
     </div>
 </div>
+
 <div class="home-footer" fxLayout="column">
     <div fxLayout.lt-sm="column" fxFlex="100" class="footer-top">
         <div fxFlex="33" style="background-color: #008F95" fxLayoutAlign="center center">
