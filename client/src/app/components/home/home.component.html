@@ -2,6 +2,29 @@
     <img src="../../../assets/logo/dig-it-logo-full.svg" class="home-page-header-logo" />
 </div>
 
+<div class="learn-more-container" fxLayout="column" fxLayoutAlign="space-around center">
+    <button mat-raised-button color="warn">[ How Dig-It Works ]</button>
+</div>
+
+<div class="quick-overview-container">
+    <div class="overlay" fxLayoutAlign="center center" fxLayout="column">
+        <h2>CAN YOU</h2>
+        <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 0 4rem">
+            <h2>DIG-IT?</h2>
+            <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 4rem; background-color: rgba(255, 255, 255, 0.8);">
+                <div class="overview-text-container" fxLayoutAlign="start center">
+                    <p [innerHTML]="slides[selectedSlideIndex].innerHTML"></p>
+                </div>
+            </div>
+            <div class="quick-overview-contents" fxLayoutAlign="space-between center">
+                <div class="overview-container" *ngFor="let i = index; let slide of slides" (click)="selectOverviewItem(i)">
+                    <img [src]="slide.imgSrc" [class.selected-overview]="i === selectedSlideIndex" />
+                </div>
+                <div id="line"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="home-footer getting-started-container" fxLayout="row wrap">
     <div class="background-row" fxLayout="row wrap">
@@ -24,27 +47,7 @@
         <h1>3</h1>
         <h3>Get custom gardening notifications!</h3>
     </div>
-    <img src="../../../assets/img/lily.png" class="lily-img" />
-</div>
-
-<div class="quick-overview-container">
-    <div class="overlay" fxLayoutAlign="center center" fxLayout="column">
-        <h2>CAN YOU</h2>
-        <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 0 4rem">
-            <h2>DIG IT?</h2>
-            <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 4rem; background-color: rgba(255, 255, 255, 0.8);">
-                <div class="overview-text-container" fxLayoutAlign="start center">
-                    <p [innerHTML]="slides[selectedSlideIndex].innerHTML"></p>
-                </div>
-            </div>
-            <div class="quick-overview-contents" fxLayoutAlign="space-between center">
-                <div class="overview-container" *ngFor="let i = index; let slide of slides" (click)="selectOverviewItem(i)">
-                    <img [src]="slide.imgSrc" [class.selected-overview]="i === selectedSlideIndex" />
-                </div>
-                <div class="line"></div>
-            </div>
-        </div>
-    </div>
+    <img src="../../../assets/img/lily.png" id="lily-img" />
 </div>
 
 <div class="home-footer" fxLayout="column">

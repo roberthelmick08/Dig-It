@@ -2,7 +2,7 @@
     <app-navbar [currentPage]="currentPage" [user]="user" (setCurrentPageEvent)="setCurrentPage($event)"></app-navbar>
 
     <div fxFlexFill fxLayoutAlign="center" id="page-content-wrapper">
-        <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'">
+        <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'" (scroll)="scrollHandler()">
             <app-reminders *ngIf="authService.isLoggedIn() && user && currentPage !== 'home'" [user]="user" [plantsWithActiveReminders]="plantsWithActiveReminders" (markReminderDoneEvent)="onMarkReminderDoneEvent($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-reminders>
 
             <app-home *ngIf="currentPage === 'home'"></app-home>

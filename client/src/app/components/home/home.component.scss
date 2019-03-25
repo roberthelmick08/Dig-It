@@ -25,6 +25,79 @@
     font-weight: bold;
 }
 
+.learn-more-container {
+    background-color: $color-light-green;
+    height: 200px;
+    /deep/ .mat-button-wrapper {
+        line-height: 4rem;
+        font-size: 2rem;
+        font-weight: lighter;
+    }
+}
+
+.quick-overview-container {
+    height: calc(100vh - 64px - 4rem);
+    padding: 4rem 4rem 0 4rem;
+    color: $color-dark-gray;
+    background-image: url('../../../assets/img/vine-bg.jpg');
+    background-position-x: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: white;
+    .overlay {
+        background-color: rgba(255, 255, 255, 0.55);
+        padding: 0 4rem 4rem 4rem;
+    }
+    h2 {
+        font-size: 4rem;
+        letter-spacing: 1rem;
+        font-weight: lighter;
+    }
+    .overview-text-container {
+        height: 120px;
+        width: 50vw;
+        border: 1px solid $color-dark-gray;
+        border-radius: 8px;
+        padding: 0 1rem;
+        text-align: center;
+    }
+    .quick-overview-contents {
+        width: 100%;
+        #line {
+            position: absolute;
+            width: 0;
+            border-top: 1px solid $color-dark-gray;
+            left: 25%;
+            transition: all 0.75s ease;
+            transition-delay: 0.3s;
+        }
+        .active-animation {
+            width: 50% !important;
+        }
+        .overview-container {
+            width: 100px;
+            height: 100px;
+            z-index: 1;
+            img {
+                width: 64px;
+                margin: 1rem;
+                border: 1px solid $color-blue;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                background: white;
+            }
+            .selected-overview,
+            img:hover {
+                border: 1px solid $color-light-green;
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
 .getting-started-container {
     font-family: Futura, Trebuchet MS, Arial, sans-serif;
     font-variant-caps: petite-caps;
@@ -82,74 +155,15 @@
         margin-left: -24px;
         margin-bottom: -1rem;
     }
-    .lily-img {
+    #lily-img {
         height: 150px;
-        margin-top: -120px;
         margin-left: 30%;
         -webkit-filter: drop-shadow(5px 5px 5px #222);
         filter: drop-shadow(5px 5px 5px #222);
+        transition: all 2s ease;
     }
-}
-
-.quick-overview-container {
-    height: calc(100vh - 64px - 4rem);
-    padding: 4rem 4rem 0 4rem;
-    color: $color-dark-gray;
-    background-image: url('../../../assets/img/vine-bg.jpg');
-    background-position-x: right;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: white;
-    .overlay {
-        background-color: rgba(255, 255, 255, 0.55);
-        padding: 0 4rem 4rem 4rem;
-    }
-    img {
-        height: 4rem;
-    }
-    h2 {
-        font-size: 4rem;
-        letter-spacing: 1rem;
-        font-weight: lighter;
-    }
-    .overview-text-container {
-        height: 120px;
-        width: 50vw;
-        border: 1px solid $color-dark-gray;
-        border-radius: 8px;
-        padding: 0 1rem;
-        text-align: center;
-    }
-    .quick-overview-contents {
-        width: 100%;
-        .line {
-            position: absolute;
-            border-top: 1px solid $color-dark-gray;
-            width: 50%;
-            left: 25%;
-            transition: all 0.75s ease;
-        }
-        .overview-container {
-            width: 100px;
-            height: 100px;
-            z-index: 1;
-            img {
-                width: 64px;
-                margin: 1rem;
-                border: 1px solid $color-blue;
-                border-radius: 50%;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                background: white;
-            }
-            .selected-overview,
-            img:hover {
-                border: 1px solid $color-light-green;
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-            }
-        }
+    .active-animation {
+        margin-top: -120px;
     }
 }
 

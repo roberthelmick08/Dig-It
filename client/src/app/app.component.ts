@@ -1,8 +1,8 @@
 import { ReminderService } from './services/reminder.service';
 import { DataService } from './services/data.service';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
-import { Component, ViewChild } from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import {Router} from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { User } from 'src/models/user';
@@ -16,7 +16,7 @@ declare let gtag: Function;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   currentPage: string;
 
   user: User;
@@ -24,6 +24,13 @@ export class AppComponent {
   plantsWithActiveReminders: Array<GardenPlant> = [];
 
   @ViewChild(SearchComponent) searchComponent;
+
+  // HTML Elements for scroll animations
+  homeElems: Array<HTMLElement>;
+
+  // Boolean values for toggling scroll animations
+  isHomeLilyVisible: boolean = false;
+  isHomeLineVisible: boolean = false;
 
   constructor( public dialog: MatDialog, public router: Router, public authService: AuthenticationService,
     public dataService: DataService, public reminderService: ReminderService) {
@@ -67,6 +74,13 @@ export class AppComponent {
     }
   }
 
+  ngAfterViewInit(){
+    // Add HTMLElements to array for scroll animation
+    this.homeElems = [
+      document.getElementById('lily-img'),
+      document.getElementById('line'),
+    ]
+  }
   setCurrentPage(page: string) {
     this.currentPage = page;
   }
@@ -139,5 +153,31 @@ export class AppComponent {
         this.searchComponent.openAddToGardenDialog(data.plant);
       }
     });
+  }
+
+  // Assigns class 'active-animation' to elements in viewport on scroll
+  scrollHandler(){
+    let windowDimensions = {
+      width: window.innerWidth || document.documentElement.clientWidth,
+      height: window.innerHeight || document.documentElement.clientHeight
+    }
+    for(let elem of this.homeElems){
+      var bounding = elem.getBoundingClientRect();
+
+      if (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.right <= windowDimensions.width &&
+        bounding.top <= windowDimensions.height
+      ) {
+        if(!elem.classList.contains('active-animation')){
+          elem.classList.add('active-animation');
+        }
+      } else {
+        if(elem.classList.contains('active-animation')){
+          elem.classList.remove('active-animation');
+        }
+      }
+    }
   }
 }
