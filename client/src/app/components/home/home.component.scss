@@ -45,12 +45,12 @@
             left: 50%;
             top: 100px;
             z-index: 1;
-            border-top: 2px solid $color-red;
+            border-top: 2px solid $color-blue;
             box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
         #arrow-point {
-            color: #CD5360;
+            color: $color-blue;
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
             margin-top: -2px;
             margin-right: -12px;
@@ -100,6 +100,11 @@
     }
     button {
         z-index: 2;
+        background: $color-dark-gray;
+        color: $color-light-gray;
+        &:hover {
+            color: white;
+        }
     }
     /deep/ .mat-button-wrapper {
         line-height: 4rem;
