@@ -22,12 +22,12 @@
             </div>
         </li>
         <li class="navbar-items">
-            <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-raised-button color="accent" (click)="openLoginDialog()">Login / Register</button>
+            <div *ngIf="!authService.isLoggedIn()">
+                <button mat-raised-button color="accent" (click)="openLoginDialog()" class="login-button">Log in / Register</button>
             </div>
 
             <button mat-icon-button [matMenuTriggerFor]="settingsMenu" *ngIf="authService.isLoggedIn()">
-              <mat-icon class="settings-icon">settings</mat-icon>
+              <mat-icon class="menu-icon">menu</mat-icon>
             </button>
 
             <mat-menu #settingsMenu="matMenu">

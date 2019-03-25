@@ -39,18 +39,13 @@
             mat-icon.mat-icon {
                 font-variant-caps: normal;
             }
-            .settings-icon {
-                color: $color-light-gray;
+            .login-button {
+                font-weight: lighter;
+                letter-spacing: 1px;
+            }
+            .menu-icon {
+                color: $color-dark-gray;
                 cursor: pointer;
-                font-size: 1.3rem;
-                height: 1.3rem;
-                width: 1.3rem;
-                &:hover {
-                    -webkit-transition: -webkit-transform .5s ease-in-out;
-                    transition: transform .5s ease-in-out;
-                    -webkit-transform: rotate(90deg);
-                    transform: rotate(90deg);
-                }
             }
         }
         @media screen and (min-width: $break-sm) {

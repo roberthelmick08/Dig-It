@@ -4,7 +4,9 @@
 
 <div class="learn-more-container" fxLayout="column" fxLayoutAlign="space-around center">
     <div class="background-wrapper">
-        <div id="arrow" [class.active-arrow]="isButtonOnHover"></div>
+        <div id="arrow" [class.active-arrow]="isButtonOnHover" fxLayoutAlign="end center">
+            <mat-icon id="arrow-point">keyboard_arrow_right</mat-icon>
+        </div>
         <mat-icon id="gear1">settings</mat-icon>
         <mat-icon id="gear2">settings</mat-icon>
     </div>
@@ -16,8 +18,8 @@
         <h2>CAN YOU</h2>
         <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 0 4rem">
             <h2>DIG-IT?</h2>
-            <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 4rem; background-color: rgba(255, 255, 255, 0.8);">
-                <div class="overview-text-container" fxLayoutAlign="start center">
+            <div class="overlay" fxLayoutAlign="center center" fxLayout="column" style="padding: 4rem; background-color: rgba(255, 255, 255, 0.7);">
+                <div class="overview-text-container" fxLayoutAlign="center center">
                     <p [innerHTML]="slides[selectedSlideIndex].innerHTML"></p>
                 </div>
             </div>

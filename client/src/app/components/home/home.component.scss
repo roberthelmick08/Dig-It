@@ -49,10 +49,17 @@
             box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
+        #arrow-point {
+            color: #CD5360;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            margin-top: -2px;
+            margin-right: -12px;
+        }
         .active-arrow {
             width: 40% !important;
         }
-        mat-icon {
+        #gear1,
+        #gear2 {
             color: white;
             font-size: 500px;
             height: 500px;
