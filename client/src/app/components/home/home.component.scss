@@ -26,8 +26,74 @@
 }
 
 .learn-more-container {
+    background-image: url('../../../assets/icons/prism.svg');
     background-color: $color-light-green;
     height: 200px;
+    overflow: hidden;
+    border-bottom: 4px solid #008F95;
+    border-top: 4px solid #008F95;
+    .background-wrapper {
+        width: 100%;
+        height: 200px;
+        position: absolute;
+        overflow: hidden;
+        background-image: linear-gradient(to bottom left, transparent 40%, white 90%);
+        #arrow {
+            width: 0;
+            height: 0;
+            position: absolute;
+            left: 50%;
+            top: 100px;
+            z-index: 1;
+            border-top: 2px solid $color-red;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .active-arrow {
+            width: 40% !important;
+        }
+        mat-icon {
+            color: white;
+            font-size: 500px;
+            height: 500px;
+            width: 500px;
+            margin: 2rem;
+            animation: spin 45s linear infinite;
+        }
+        #gear2 {
+            animation: spin 30s linear infinite;
+            position: absolute;
+            right: -300px;
+            top: -65px;
+        }
+        @-moz-keyframes spin {
+            from {
+                -moz-transform: rotate(0deg);
+            }
+            to {
+                -moz-transform: rotate(360deg);
+            }
+        }
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    }
+    button {
+        z-index: 2;
+    }
     /deep/ .mat-button-wrapper {
         line-height: 4rem;
         font-size: 2rem;
@@ -36,12 +102,11 @@
 }
 
 .quick-overview-container {
-    height: calc(100vh - 64px - 4rem);
-    padding: 4rem 4rem 0 4rem;
+    padding: 4rem;
     color: $color-dark-gray;
     background-image: url('../../../assets/img/vine-bg.jpg');
     background-position-x: right;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-color: white;
     .overlay {

@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   timer: any;
 
-  isLineVisible: boolean = false;
+  isButtonOnHover: boolean = false;
 
   // Array to store Slider Objects
   slides: Array<any> = [{
@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
           this.selectedSlideIndex++;
         }
       }, 10000);
+  }
+
+  toggleButtonHover(isOnHover: boolean){
+    this.isButtonOnHover = isOnHover;
   }
 
   selectOverviewItem(index: number){

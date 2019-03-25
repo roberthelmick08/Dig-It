@@ -3,7 +3,12 @@
 </div>
 
 <div class="learn-more-container" fxLayout="column" fxLayoutAlign="space-around center">
-    <button mat-raised-button color="warn">[ How Dig-It Works ]</button>
+    <div class="background-wrapper">
+        <div id="arrow" [class.active-arrow]="isButtonOnHover"></div>
+        <mat-icon id="gear1">settings</mat-icon>
+        <mat-icon id="gear2">settings</mat-icon>
+    </div>
+    <button mat-raised-button color="warn" (mouseenter)="toggleButtonHover(true)" (mouseleave)="toggleButtonHover(false)">[ How Dig-It Works ]</button>
 </div>
 
 <div class="quick-overview-container">
