@@ -1,7 +1,7 @@
 import { ReminderService } from './services/reminder.service';
 import { DataService } from './services/data.service';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
@@ -16,7 +16,7 @@ declare let gtag: Function;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   currentPage: string;
 
   user: User;
@@ -74,14 +74,15 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit(){
-    // Add HTMLElements to array for scroll animation
-    this.homeElems = [
+  // Add HTMLElements to array for scroll animation
+  refreshHomeElemAnimations(){
+     this.homeElems = [
       document.getElementById('lily-img'),
       document.getElementById('line'),
     ]
   }
   setCurrentPage(page: string) {
+    if(page === 'home') this.refreshHomeElemAnimations();
     this.currentPage = page;
   }
 

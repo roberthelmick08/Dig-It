@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   timer: any;
 
   isButtonOnHover: boolean = false;
+
+  @Output() refreshAnimationsEvent = new EventEmitter();
 
   // Array to store Slider Objects
   slides: Array<any> = [{
@@ -43,6 +45,8 @@ export class HomeComponent implements OnInit {
           this.selectedSlideIndex++;
         }
       }, 10000);
+
+      this.refreshAnimationsEvent.emit();
   }
 
   toggleButtonHover(isOnHover: boolean){
