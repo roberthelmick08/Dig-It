@@ -114,7 +114,7 @@
 }
 
 .quick-overview-container {
-    padding: 4rem;
+    padding: 4rem 10%;
     color: $color-dark-gray;
     background-image: url('../../../assets/img/vine-bg.jpg');
     background-position-x: right;
@@ -122,8 +122,13 @@
     background-repeat: no-repeat;
     background-color: white;
     .overlay {
-        background-color: rgba(255, 255, 255, 0.55);
         padding: 0 4rem 4rem 4rem;
+    }
+    .overlay1 {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+    .overlay2 {
+        background-color: rgba(255, 255, 255, 0.90);
     }
     h2 {
         font-size: 4rem;
@@ -143,13 +148,13 @@
         #line {
             position: absolute;
             width: 0;
+            left: 30%;
             border-top: 1px solid $color-dark-gray;
-            left: 25%;
             transition: all 0.75s ease;
             transition-delay: 0.3s;
         }
         .active-animation {
-            width: 50% !important;
+            width: 40% !important;
         }
         .overview-container {
             width: 100px;
