@@ -10,7 +10,7 @@
         <mat-icon id="gear1">settings</mat-icon>
         <mat-icon id="gear2">settings</mat-icon>
     </div>
-    <button mat-raised-button (mouseenter)="toggleButtonHover(true)" (mouseleave)="toggleButtonHover(false)">[ How Dig-It Works ]</button>
+    <button mat-raised-button (click)="navigateToPage('about')" (mouseenter)="toggleButtonHover(true)" (mouseleave)="toggleButtonHover(false)">[ How Dig-It Works ]</button>
 </div>
 
 <div class="quick-overview-container">
@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<div class="home-footer getting-started-container" fxLayout="row wrap">
+<div class="getting-started-container" fxLayout="row wrap">
     <div class="background-row" fxLayout="row wrap">
         <div class="grid-item" fxFlex="100" fxLayoutAlign="center center">
             <h2>DIG YOUR GARDEN</h2>
@@ -53,22 +53,4 @@
         <h3>Get custom gardening notifications!</h3>
     </div>
     <img src="../../../assets/img/lily.png" id="lily-img" />
-</div>
-
-<div class="home-footer" fxLayout="column">
-    <div fxLayout.lt-sm="column" fxFlex="100" class="footer-top">
-        <div fxFlex="33" style="background-color: #008F95" fxLayoutAlign="center center">
-            <img src="../../../assets/logo/dig-it-emblem-green.svg" class="footer-logo" />
-        </div>
-        <div fxFlex style="background-color: #006067" fxLayoutAlign="center center" fxLayout="column">
-            <h2>Robert Helmick</h2>
-            <p>Denver, Colorado</p>
-            <a href="http://www.rh-codes.com" class="portfolio-site-link">www.rh-codes.com</a>
-        </div>
-        <div fxFlex="33" style="background-color: #01494e" fxLayoutAlign="space-around center" class="link-icon-container">
-            <a href="https://github.com/roberthelmick08"><img src="../../../assets/icons/github.svg" matTooltip="Github" matTooltipClass="dig-it-tooltip" /></a>
-            <a href="http://www.rh-codes.com"><img src="../../../assets/icons/website.svg" matTooltip="Portfolio Site" matTooltipClass="dig-it-tooltip" /></a>
-            <a href="mailto:robert.helmick.08@gmail.com"><img src="../../../assets/icons/email.svg" matTooltip="Email me" matTooltipClass="dig-it-tooltip" /></a>
-        </div>
-    </div>
 </div>

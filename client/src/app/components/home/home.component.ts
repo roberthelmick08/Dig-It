@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   isButtonOnHover: boolean = false;
 
   @Output() refreshAnimationsEvent = new EventEmitter();
+  @Output() setCurrentPageEvent = new EventEmitter;
 
   // Array to store Slider Objects
   slides: Array<any> = [{
@@ -45,12 +46,16 @@ export class HomeComponent implements OnInit {
           this.selectedSlideIndex++;
         }
       }, 10000);
-
+    // Initialize scroll animations
       this.refreshAnimationsEvent.emit();
   }
 
   toggleButtonHover(isOnHover: boolean){
     this.isButtonOnHover = isOnHover;
+  }
+
+  navigateToPage(page: string){
+    this.setCurrentPageEvent.emit(page);
   }
 
   selectOverviewItem(index: number){
