@@ -26,7 +26,7 @@ export class AppComponent {
   @ViewChild(SearchComponent) searchComponent;
 
   // HTML Elements for scroll animations
-  homeElems: Array<HTMLElement>;
+  elems: Array<HTMLElement>;
 
   // Boolean values for toggling scroll animations
   isHomeLilyVisible: boolean = false;
@@ -40,9 +40,13 @@ export class AppComponent {
 
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
 
-    const today = new Date();
+    this.refreshUser();
+  }
 
+  refreshUser(){
     if (this.authService.isLoggedIn() === true) {
+      const today = new Date();
+
       this.authService.getUser().subscribe(user => {
         this.user = user;
       }, (err) => {
@@ -71,19 +75,28 @@ export class AppComponent {
       this.authService.updateUser(this.user).subscribe();
       this.setPlantsWithActiveReminders();
       });
+    } else{
+      console.error('Unable to refresh user');
     }
   }
 
   // Add HTMLElements to array for scroll animation
-  refreshHomeElemAnimations(){
-     this.homeElems = [
-      document.getElementById('lily-img'),
-      document.getElementById('line'),
-    ]
+  refreshElemAnimations(){
+    if(this.currentPage === 'home'){
+      this.elems = [
+        document.getElementById('lily-img'),
+        document.getElementById('line'),
+      ]
+    } else if(this.currentPage === 'about'){
+      this.elems = [
+        // document.getElementById('lily-img'),
+        // document.getElementById('line'),
+      ]
+    }
   }
   setCurrentPage(page: string) {
-    if(page === 'home') this.refreshHomeElemAnimations();
     this.currentPage = page;
+    if(page === 'home' || page === 'about') this.refreshElemAnimations();
   }
 
   onMarkReminderDoneEvent(event){
@@ -141,6 +154,10 @@ export class AppComponent {
     this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(gardenData);
   }
 
+  isRemindersActive(){
+    return this.authService.isLoggedIn() && this.user && this.currentPage !== 'home' && this.currentPage !== 'about';
+  }
+
   openPlantDetailsDialog(data) {
     const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
       height: window.innerWidth <= 600 ? '100vh' : '500px',
@@ -162,7 +179,7 @@ export class AppComponent {
       width: window.innerWidth || document.documentElement.clientWidth,
       height: window.innerHeight || document.documentElement.clientHeight
     }
-    for(let elem of this.homeElems){
+    for(let elem of this.elems){
       var bounding = elem.getBoundingClientRect();
 
       if (

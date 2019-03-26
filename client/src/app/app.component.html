@@ -1,11 +1,13 @@
 <div id="body-wrapper" [class.home-body-wrapper]="currentPage === 'home'">
-    <app-navbar [currentPage]="currentPage" [user]="user" (setCurrentPageEvent)="setCurrentPage($event)"></app-navbar>
+    <app-navbar [currentPage]="currentPage" [user]="user" (setCurrentPageEvent)="setCurrentPage($event)" (refreshUserEvent)="refreshUser()"></app-navbar>
 
     <div fxFlexFill fxLayoutAlign="center" id="page-content-wrapper">
         <mat-card fxLayout="column" fxFlex="100" class="page-content" [class.page-content-home]="currentPage === 'home'" (scroll)="scrollHandler()">
-            <app-reminders *ngIf="authService.isLoggedIn() && user && currentPage !== 'home'" [user]="user" [plantsWithActiveReminders]="plantsWithActiveReminders" (markReminderDoneEvent)="onMarkReminderDoneEvent($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-reminders>
+            <app-reminders *ngIf="isRemindersActive()" [user]="user" [plantsWithActiveReminders]="plantsWithActiveReminders" (markReminderDoneEvent)="onMarkReminderDoneEvent($event)" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)"></app-reminders>
 
-            <app-home *ngIf="currentPage === 'home'" (refreshAnimationsEvent)="refreshHomeElemAnimations();"></app-home>
+            <app-home *ngIf="currentPage === 'home'" (refreshAnimationsEvent)="refreshElemAnimations()" (setCurrentPageEvent)="setCurrentPage($event)"></app-home>
+            <app-about *ngIf="currentPage === 'about'" (refreshAnimationsEvent)="refreshElemAnimations()"></app-about>
+
             <app-search *ngIf="currentPage === 'search'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)" (setActiveRemindersEvent)="setPlantsWithActiveReminders($event)"></app-search>
             <app-garden *ngIf="currentPage === 'garden'" (openPlantDetailsDialogEvent)="openPlantDetailsDialog($event)" (setActiveRemindersEvent)="setPlantsWithActiveReminders($event)"></app-garden>
 
