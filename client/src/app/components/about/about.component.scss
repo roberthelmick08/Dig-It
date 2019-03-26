@@ -1,1 +1,72 @@
+@import "../../../styles.scss";
 .about-header-container {}
+
+.about-reminders-container{
+    .reminders-wrapper {
+        margin-top: 1rem;
+        width: calc(100% + 20vw);
+        #reminders-tab {
+            width: 110px;
+            border-radius: 6px 0 0 6px;
+            background: $color-dark-gray;
+            mat-icon.mat-icon {
+                color: $color-light-gray;
+                font-size: 100px;
+                height: 100px;
+                width: 100px;
+                cursor: default;
+            }
+        }
+        ul {
+            list-style: none;
+            background: white;
+            overflow: auto;
+            padding: 0.5rem 1rem;
+            margin: 0;
+            border-radius: 0 6px 6px 0;
+            width: 100%;
+            li {
+                width: 150px;
+                height: 100px;
+                margin-right: 1rem;
+                background-size: 100%;
+                border-radius: 1rem;
+                overflow: hidden;
+                padding-top: 1rem;
+                cursor: pointer;
+                background-color: $color-light-gray;
+                transition: all 0.3s ease;
+                &:hover {
+                    -webkit-transform: scale(1.1);
+                    -ms-transform: scale(1.1);
+                    transform: scale(1.1);
+                }
+                .reminder-label {
+                    background: $color-red;
+                    color: white;
+                    padding: 0.125rem 0.75rem;
+                    border-radius: 12px 0 0 12px;
+                    cursor: pointer;
+                    p{
+                        margin: 0;
+                    }
+                }
+            }
+            .activeReminder{
+                border: 1px solid $color-blue;
+            }
+        }
+    }
+    ul#factors-list{
+        li{
+
+        }
+        .activeFactor{
+            color: $color-red;
+        }
+    }
+}
+
+.about-api-container{
+
+}

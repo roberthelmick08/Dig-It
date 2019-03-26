@@ -38,13 +38,14 @@ export class AppComponent {
     // Google Analytics
     gtag('send', 'pageview');
 
-    this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
+    this.currentPage = authService.isLoggedIn() ? 'garden' : 'about';
 
-    this.refreshUser();
+    if (this.authService.isLoggedIn() === true) {
+      this.refreshUser();
+    }
   }
 
   refreshUser(){
-    if (this.authService.isLoggedIn() === true) {
       const today = new Date();
 
       this.authService.getUser().subscribe(user => {
@@ -75,9 +76,6 @@ export class AppComponent {
       this.authService.updateUser(this.user).subscribe();
       this.setPlantsWithActiveReminders();
       });
-    } else{
-      console.error('Unable to refresh user');
-    }
   }
 
   // Add HTMLElements to array for scroll animation
@@ -89,8 +87,7 @@ export class AppComponent {
       ]
     } else if(this.currentPage === 'about'){
       this.elems = [
-        // document.getElementById('lily-img'),
-        // document.getElementById('line'),
+        // TODO: add about page elements for animation refresh
       ]
     }
   }

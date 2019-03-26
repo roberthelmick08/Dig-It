@@ -1,4 +1,51 @@
-<div class="about-header-container" fxLayout="column" fxLayoutAlign="center center">
-    <h2 class="page-header"><span class="highlight">[</span>About<span class="highlight">]</span></h2>
+<!-- <div class="about-header-container" fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="page-header"><span class="highlight">[</span>About Dig-It<span class="highlight">]</span></h2>
+
+    <h3>Dig-It takes all the guesswork out of gardening</h3>
+    <h4>Dig-It’s extensive crowdsourced database of plants contains detailed information for hundreds of common garden plants.</h4>
+    <h4>Click on the
+        <mat-icon class="info-icon">help_outline</mat-icon> icons for helpful tips and definitions.</h4>
+    <h4>Custom reminders are tailored to provide optimal growing conditions for your area.</h4>
+</div> -->
+
+<div class="about-reminders-container" fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="page-header"><span class="highlight">[</span>Custom Reminders<span class="highlight">]</span></h2>
+    <h4>Click an item below to highlight which factors are used to calculate Dig-It's reminders.</h4>
+
+    <!-- REMINDER TYPES -->
+    <div fxLayout="row" class="reminders-wrapper">
+        <div id="reminders-tab" fxLayoutAlign="center center">
+            <mat-icon>notifications_none</mat-icon>
+        </div>
+    
+        <ul fxLayout="row wrap" fxLayoutAlign="center center">
+            <li *ngFor="let reminder of reminders; let i = index" [class.activeReminder]="selectedReminderType === i" (click)="onSelectReminder(i)" fxLayoutAlign="space-between end" fxLayout="column">
+                <div class="reminder-label">
+                    <p>{{reminder}}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- TIMELINE -->
+
+    <ul fxLayout="column" id="factors-list">
+        <li *ngFor="let factor of reminderFactors; let i = index" [class.activeFactor]="selectedReminderType > -1 && isFactorActive(i)" (click)="toggleExpansion(i)" fxFlex="100" fxLayout="column">
+            <h3>{{factor.title}} <mat-icon>{{factor.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon></h3>
+            <ng-container *ngIf="factor.expanded">
+                <p *ngFor="let desc of factor.descriptions">- {{desc}}</p>
+            </ng-container>
+        </li>
+    </ul>
 
 </div>
+
+
+
+<!-- <div class="about-api-container" fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="page-header"><span class="highlight">[</span>API<span class="highlight">]</span></h2>
+    <h4>Dig-It’s Plants API is open, so it does not require an API key and it is not rate-limited. Subject to change.</h4>
+
+    <p>- Base URL: http://dig-it.rh-codes.com/api - Endpoints: - GET all plants: - /search
+    </p>
+</div> -->
