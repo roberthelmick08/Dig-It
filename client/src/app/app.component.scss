@@ -9,7 +9,12 @@
     background: linear-gradient(135deg, white 10%, $color-light-gray);
     #page-content-wrapper {
         padding-bottom: 22px;
-        .page-content {
+        .page-content-home {
+            padding: 4rem 0 0 0 !important;
+            background: linear-gradient(150deg, white, rgba(255, 255, 255, 0.1)) !important;
+            overflow-x: hidden;
+        }
+        #page-content {
             background: transparent;
             overflow-y: auto;
             max-height: calc(100% - 32px);
@@ -18,12 +23,6 @@
             @media screen and (max-width: $break-sm) {
                 padding: 3rem 0 0 0;
             }
-        }
-        .page-content-home {
-            padding: 4rem 0 0 0;
-            background: linear-gradient(150deg, white, rgba(255, 255, 255, 0.1));
-            box-shadow: none;
-            overflow-x: hidden;
         }
     }
 }

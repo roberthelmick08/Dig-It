@@ -1,36 +1,33 @@
-<div class="about-header-container" fxLayout="column" fxLayoutAlign="center center">
-    <h2 class="page-header"><span class="highlight">[</span>About Dig-It<span class="highlight">]</span></h2>
+<mat-icon id="scroll-icon" (click)="onPageDown()">keyboard_arrow_down</mat-icon>
 
-    <div fxLayoutAlign="space-around center" fxLayout="column" fxFlex="50">
-        <h1>Dig-It takes all the guesswork out of gardening.</h1>
-        <h3>Dig-It’s extensive crowdsourced database of plants contains detailed information for hundreds of common garden plants.</h3>
-        <h3>Click on the
-            <mat-icon>help_outline</mat-icon> icons for helpful tips and definitions.</h3>
-        <h3>Custom reminders are tailored to provide optimal growing conditions for your area.</h3>
+<div id="about-line-top" class="about-lines"></div>
+
+<div class="about-header-container" fxLayout="column" fxLayoutAlign="start center">
+    <div fxLayout="column" class="page-header-wrapper">
+        <h2 class="page-header"><span class="highlight">[</span>About Dig-It<span class="highlight">]</span></h2>
+        <h1 id="fade-in-1">Dig-It takes all the guesswork out of gardening.</h1>
+    </div>
+
+
+    <div fxLayout="column" fxFlex>
+        <div class="header-description-item" fxLayout="row" fxLayoutAlign="start center">
+            <div class="header-description-item-bullet"></div>
+            <h3 id="fade-in-2">Dig-It’s extensive <span class="highlight-blue">crowdsourced database of plants</span> contains detailed information for hundreds of common garden plants.</h3>
+        </div>
+        <div class="header-description-item" fxLayout="row" fxLayoutAlign="start center">
+            <div class="header-description-item-bullet"></div>
+            <h3 id="fade-in-3">Click on the
+                <mat-icon class="help-icon">help_outline</mat-icon> icons for helpful <span class="highlight-blue">tips</span> and <span class="highlight-blue">definitions.</span></h3>
+        </div>
+        <div class="header-description-item" fxLayout="row" fxLayoutAlign="start center">
+            <div class="header-description-item-bullet"></div>
+            <h3 id="fade-in-4"><span class="highlight-blue">Custom reminders</span> are tailored to provide optimal growing conditions for your area.</h3>
+        </div>
     </div>
 </div>
 
 <div class="about-reminders-container" fxLayout="column" fxLayoutAlign="center center">
     <h2 class="page-header"><span class="highlight">[</span>Reminders<span class="highlight">]</span></h2>
-    <h3 class="page-subheader">Click an item below to highlight which factors are used to calculate Dig-It's reminders.</h3>
-
-    <!-- REMINDER TYPES -->
-    <div fxLayout="row" class="reminders-wrapper">
-        <div id="reminders-tab" fxLayoutAlign="center center">
-            <mat-icon>notifications_none</mat-icon>
-        </div>
-
-        <ul fxLayout="row wrap" fxLayoutAlign="center center">
-            <li *ngFor="let reminder of reminders; let i = index" [class.activeReminder]="selectedReminderType === i" (click)="onSelectReminder(i)" fxLayoutAlign="space-between end" fxLayout="column">
-                <div class="reminder-label">
-                    <p>{{reminder}}</p>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <!-- TIMELINE -->
-
     <ul fxLayout="column" id="factors-list">
         <li *ngFor="let factor of reminderFactors; let i = index" [ngClass]="i % 2 === 0 ? 'even' : 'odd'" fxFlex="100" fxLayout="column">
             <div class="timeline-circle" (click)="toggleExpansion(i)" fxLayoutAlign="center center">
@@ -44,16 +41,19 @@
     </ul>
 </div>
 
+<div id="about-line-bottom" class="about-lines"></div>
+
 <div class="about-api-container" fxLayout="column" fxLayoutAlign="center center">
-    <h3 class="page-header"><span class="highlight">[</span>API<span class="highlight">]</span></h3>
-    <h1>Dig-It’s Plants API is open, so it does not require an API key and it is not rate-limited.</h1>
+    <h2 class="page-header"><span class="highlight">[</span>API<span class="highlight">]</span></h2>
+
+    <h1>Dig-It’s Plants API is open. No API key necessary.</h1>
 
     <h3><b>Base URL:</b>
         <br><a>http://dig-it.rh-codes.com/api</a>
 
         <br><br>
         <b>Endpoints:</b>
-        <br>GET all plants:
+        <br><span class="highlight-blue">GET</span> all plants:
         <br>/search
     </h3>
 </div>

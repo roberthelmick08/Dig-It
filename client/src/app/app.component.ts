@@ -87,13 +87,18 @@ export class AppComponent {
       ]
     } else if(this.currentPage === 'about'){
       this.elems = [
-        // TODO: add about page elements for animation refresh
+        document.getElementById('fade-in-1'),
+        document.getElementById('fade-in-2'),
+        document.getElementById('fade-in-3'),
+        document.getElementById('fade-in-4'),
+        document.getElementById('about-line-bottom'),
       ]
     }
   }
   setCurrentPage(page: string) {
     this.currentPage = page;
     if(page === 'home' || page === 'about') this.refreshElemAnimations();
+    document.getElementById('page-content').scrollTop = 0;
   }
 
   onMarkReminderDoneEvent(event){

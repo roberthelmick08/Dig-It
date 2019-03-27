@@ -19,8 +19,13 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // Initialize scroll animations
+    // Initialize animations
     this.refreshAnimationsEvent.emit();
+
+    setTimeout(() => {
+      document.getElementById("about-line-top").classList.add('active-animation');
+        document.getElementById("fade-in-1").classList.add('active-animation');
+    }, 500);
   }
 
   onSelectReminder(index: number){
@@ -33,8 +38,16 @@ export class AboutComponent implements OnInit {
       console.log(this.reminderFactors[factorIndex]);
       return this.selectedReminderType === idx;
     });
-    
+
     return activeIndex > -1;
+  }
+
+  onPageDown(){
+    document.getElementById('page-content').scrollBy({
+      top: window.innerHeight - 64,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   toggleExpansion(factorIndex: number){
