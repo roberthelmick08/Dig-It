@@ -26,7 +26,6 @@
 }
 
 .learn-more-container {
-    background-image: url('../../../assets/icons/prism.svg');
     background-color: $color-light-green;
     height: 200px;
     overflow: hidden;
@@ -116,20 +115,11 @@
 .quick-overview-container {
     padding: 4rem 10%;
     color: $color-dark-gray;
-    background-image: url('../../../assets/img/vine-bg.jpg');
-    background-position-x: right;
-    background-size: cover;
+    background-image: url('../../../assets/img/cactus.jpg');
+    background-position: bottom right;
+    background-size: 500px;
     background-repeat: no-repeat;
     background-color: white;
-    .overlay {
-        padding: 0 4rem 4rem 4rem;
-    }
-    .overlay1 {
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-    .overlay2 {
-        background-color: rgba(255, 255, 255, 0.90);
-    }
     h2 {
         font-size: 4rem;
         letter-spacing: 1rem;
@@ -139,22 +129,23 @@
         height: 120px;
         width: 50vw;
         border: 1px solid $color-dark-gray;
-        border-radius: 8px;
+        border-radius: 0.5rem;
         padding: 0 1rem;
+        margin: 4rem 0;
         text-align: center;
     }
     .quick-overview-contents {
-        width: 100%;
+        width: 45vw;
         #line {
             position: absolute;
             width: 0;
-            left: 30%;
+            left: 25%;
             border-top: 1px solid $color-dark-gray;
             transition: all 0.75s ease;
             transition-delay: 0.3s;
         }
         .active-animation {
-            width: 40% !important;
+            width: 50% !important;
         }
         .overview-container {
             width: 100px;
@@ -207,6 +198,7 @@
             }
             h3 {
                 border-top: 1px solid white;
+                font-weight: lighter;
             }
         }
         h1 {

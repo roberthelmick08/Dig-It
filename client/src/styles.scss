@@ -35,12 +35,11 @@ $break-xl: 1920px;
 .page-header {
     letter-spacing: 0.75rem;
     font-size: 5rem;
-    font-weight: 400;
+    font-weight: 100;
     margin-bottom: 1.5rem;
     margin-top: 1rem;
     color: $color-dark-gray;
     font-style: italic;
-    opacity: 0.7;
     font-variant: petite-caps;
     text-align: center;
     .highlight {
@@ -87,6 +86,10 @@ $break-xl: 1920px;
 
 .highlight {
     color: $color-red !important;
+}
+
+.highlight-blue {
+    color: $color-blue !important;
 }
 
 .dig-it-tooltip {

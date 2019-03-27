@@ -20,19 +20,19 @@ export class HomeComponent implements OnInit {
   // Array to store Slider Objects
   slides: Array<any> = [{
     imgSrc: this.iconPath + 'farmer.svg',
-    innerHTML: 'Dig-It was created for gardeners who struggle to keep their plants strong and healthy. <br><br>Dig-It. Saves. Lives.'
+    innerHTML: 'Dig-It was created for gardeners who struggle to keep their plants strong and healthy. <br><br><span class="highlight-blue">Dig-It.  Saves.  Lives.</span>'
   },
   {
     imgSrc: this.iconPath + 'position.svg',
-    innerHTML: 'Plug in your ZIP code at registration, and Dig-It will give you growing tips specific to your location.'
+    innerHTML: 'Plug in your ZIP code at registration, and Dig-It will give you <span class="highlight-blue">growing tips</span> specific to your location.'
   },
   {
     imgSrc: this.iconPath + 'watering-can.svg',
-    innerHTML: 'Never forget to water, re-pot, or harvest your plants again!'
+    innerHTML: '<span class="highlight-blue">Never forget</span> to water, re-pot, or harvest your plants again.'
   },
   {
     imgSrc: this.iconPath + 'world.svg',
-    innerHTML: 'Dig-It\'s extensive crowdsourced database gives details of any plant in the world!'
+    innerHTML: 'Dig-It\'s extensive crowdsourced database gives details of <span class="highlight-blue">any plant in the world.</span>'
   }
 ];
 

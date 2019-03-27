@@ -13,21 +13,17 @@
     <button mat-raised-button (click)="navigateToPage('about')" (mouseenter)="toggleButtonHover(true)" (mouseleave)="toggleButtonHover(false)">[ How Dig-It Works ]</button>
 </div>
 
-<div class="quick-overview-container">
-    <div class="overlay overlay1" fxLayoutAlign="center center" fxLayout="column">
-        <h2>CAN YOU</h2>
-        <div class="overlay overlay2" fxLayoutAlign="center center" fxLayout="column" style="padding: 0 4rem">
-            <h2>DIG-IT?</h2>
-            <div class="overview-text-container" fxLayoutAlign="center center">
-                <p [innerHTML]="slides[selectedSlideIndex].innerHTML"></p>
-            </div>
-            <div class="quick-overview-contents" fxLayoutAlign="space-between center">
-                <div class="overview-container" *ngFor="let i = index; let slide of slides" (click)="selectOverviewItem(i)">
-                    <img [src]="slide.imgSrc" [class.selected-overview]="i === selectedSlideIndex" />
-                </div>
-                <div id="line"></div>
-            </div>
+<div class="quick-overview-container" fxLayoutAlign="center center" fxLayout="column">
+    <h2>CAN YOU</h2>
+    <h2>DIG-IT?</h2>
+    <div class="overview-text-container" fxLayoutAlign="center center">
+        <p [innerHTML]="slides[selectedSlideIndex].innerHTML"></p>
+    </div>
+    <div class="quick-overview-contents" fxLayoutAlign="space-between center">
+        <div class="overview-container" *ngFor="let i = index; let slide of slides" (click)="selectOverviewItem(i)">
+            <img [src]="slide.imgSrc" [class.selected-overview]="i === selectedSlideIndex" />
         </div>
+        <div id="line"></div>
     </div>
 </div>
 
