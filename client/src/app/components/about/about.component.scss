@@ -1,7 +1,28 @@
 @import "../../../styles.scss";
-.about-header-container {}
+.about-header-container,
+.about-reminders-container,
+.about-api-container {
+    color: $color-dark-gray;
+    h1,
+    h3 {
+        font-weight: 200;
+    }
+}
 
-.about-reminders-container{
+.about-header-container,
+.about-api-container {
+    height: calc(100vh - 64px);
+    h1,
+    h3 {
+        text-align: center;
+    }
+}
+
+h1 {
+    padding: 2rem 0;
+}
+
+.about-reminders-container {
     .reminders-wrapper {
         margin-top: 1rem;
         width: calc(100% + 20vw);
@@ -47,26 +68,100 @@
                     padding: 0.125rem 0.75rem;
                     border-radius: 12px 0 0 12px;
                     cursor: pointer;
-                    p{
+                    p {
                         margin: 0;
                     }
                 }
             }
-            .activeReminder{
+            .activeReminder {
                 border: 1px solid $color-blue;
             }
         }
     }
-    ul#factors-list{
-        li{
-
+    ul#factors-list {
+        width: 100%;
+        li {
+            min-height: 100px;
+            border-bottom: 1px solid $color-red;
+            border-top: 1px solid $color-red;
+            margin-top: -1px;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            &:first-child {
+                border-top: none;
+                border-radius: 0 0 0 1rem !important;
+            }
+            &:last-child {
+                border-bottom: none;
+                border-radius: 0 1rem 0 0 !important;
+            }
+            &:hover {
+                .timeline-circle mat-icon.mat-icon {
+                    color: $color-dark-gray;
+                }
+            }
+            .timeline-circle {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: $color-red;
+                position: absolute;
+                mat-icon.mat-icon {
+                    transition: all 0.3s ease;
+                    height: 36px;
+                    width: 36px;
+                    font-size: 36px;
+                    color: white;
+                }
+                .expanded {
+                    -webkit-transform: rotateZ(180deg);
+                    -moz-transform: rotateZ(180deg);
+                    transform: rotateZ(180deg);
+                    transform-origin: center center;
+                }
+            }
+            h3 {
+                cursor: pointer;
+                font-weight: 200;
+                font-size: 36px;
+                line-height: 50px;
+                transition: all 0.3s ease;
+            }
+            .activeFactor {
+                color: $color-red;
+            }
+            p {
+                cursor: text;
+                text-align: justify;
+            }
         }
-        .activeFactor{
-            color: $color-red;
+        li.even {
+            border-left: 1px solid $color-red;
+            border-radius: 1rem 0 0 1rem;
+            margin-right: 1rem;
+            padding-right: -1rem;
+            .timeline-circle {
+                margin-left: calc(-2rem - 25px);
+            }
+            h3 {
+                padding-left: 15%;
+            }
+        }
+        li.odd {
+            border-right: 1px solid $color-red;
+            border-radius: 0 1rem 1rem 0;
+            margin-left: 1rem;
+            padding-left: -1rem;
+            .timeline-circle {
+                margin-right: calc(0rem - 22px);
+                right: 15%;
+            }
+            h3 {
+                text-align: right;
+                padding-right: 15%;
+            }
         }
     }
 }
 
-.about-api-container{
-
-}
+.about-api-container {}
