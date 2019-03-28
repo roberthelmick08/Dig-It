@@ -28,20 +28,6 @@ export class AboutComponent implements OnInit {
     }, 500);
   }
 
-  onSelectReminder(index: number){
-    this.selectedReminderType = index;
-    // TODO: set active reminderFactors
-  }
-
-  isFactorActive(factorIndex: number){
-    let activeIndex = this.reminderFactors[factorIndex].activeRemindersIndexes.findIndex( idx => {
-      console.log(this.reminderFactors[factorIndex]);
-      return this.selectedReminderType === idx;
-    });
-
-    return activeIndex > -1;
-  }
-
   onPageDown(){
     document.getElementById('page-content').scrollBy({
       top: window.innerHeight - 64,

@@ -37,7 +37,7 @@ h1 {
 }
 
 #about-line-top.active-animation {
-    height: calc((100vh - 64px) * 4);
+    height: calc(((100vh - 64px) * 4) + 4rem);
     width: 50vw;
 }
 
@@ -45,7 +45,7 @@ h1 {
     border-right: 1px solid $color-red;
     right: calc(15% + 2px);
     margin-top: -1rem;
-    transition: all 2s ease;
+    transition: all 6s ease;
     @media screen and (max-width: $break-sm) {
         right: 40px;
         margin-top: -2rem;
@@ -95,6 +95,16 @@ h1 {
 }
 
 .about-reminders-container {
+    h1 {
+        font-size: 1.25rem;
+        text-align: center;
+        padding-top: 0;
+        opacity: 0;
+        transition-delay: 500ms !important;
+    }
+    h1.active-animation {
+        opacity: 1;
+    }
     ul#factors-list {
         width: 100%;
         @media screen and (max-width: $break-sm) {

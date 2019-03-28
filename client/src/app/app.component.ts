@@ -38,7 +38,7 @@ export class AppComponent {
     // Google Analytics
     gtag('send', 'pageview');
 
-    this.currentPage = authService.isLoggedIn() ? 'garden' : 'about';
+    this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
 
     if (this.authService.isLoggedIn() === true) {
       this.refreshUser();
@@ -91,6 +91,7 @@ export class AppComponent {
         document.getElementById('fade-in-2'),
         document.getElementById('fade-in-3'),
         document.getElementById('fade-in-4'),
+        document.getElementById('fade-in-5'),
         document.getElementById('about-line-bottom'),
       ]
     }

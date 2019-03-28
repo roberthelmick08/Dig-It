@@ -199,7 +199,6 @@
             }
             h3 {
                 border-top: 1px solid white;
-                font-weight: lighter;
             }
         }
         h1 {
@@ -218,6 +217,7 @@
             border-top: 1px solid transparent;
             z-index: 1;
             letter-spacing: 4px;
+            font-weight: lighter;
             transition: all 0.75s ease;
         }
     }

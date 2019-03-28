@@ -28,6 +28,7 @@
 
 <div class="about-reminders-container" fxLayout="column" fxLayoutAlign="center center">
     <h2 class="page-header"><span class="highlight">[</span>Reminders<span class="highlight">]</span></h2>
+    <h1 id="fade-in-5">Lots of factors go into Dig-It's reminders algorithm.<br>Here are some of the ways Dig-It calculates your gardening schedule.</h1>
     <ul fxLayout="column" id="factors-list">
         <li *ngFor="let factor of reminderFactors; let i = index" [ngClass]="i % 2 === 0 ? 'even' : 'odd'" fxFlex="100" fxLayout="column">
             <div class="timeline-circle" (click)="toggleExpansion(i)" fxLayoutAlign="center center">
