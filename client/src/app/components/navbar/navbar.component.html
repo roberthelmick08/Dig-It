@@ -35,11 +35,11 @@
                 <mat-icon>person_outline</mat-icon>
                 <span>Account Settings</span>
               </button>
-                <button mat-menu-item disabled>
+                <!-- <button mat-menu-item>
                 <mat-icon>settings_input_component</mat-icon>
                 <span>Preferences</span>
-              </button>
-                <button mat-menu-item disabled>
+              </button> -->
+                <button mat-menu-item (click)="setCurrentPage('about')">
                 <mat-icon>help_outline</mat-icon>
                 <span>About / Help</span>
               </button>
