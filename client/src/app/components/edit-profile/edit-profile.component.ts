@@ -21,13 +21,9 @@ export class EditProfileDialogComponent {
      }
 
   editUser() {
-    // this.authService.updateUser(this.user).subscribe( data => { }, (err) => {
-    //   this.dataService.openSnackBar('fail');
-    // }, () => {
       this.dataService.setUserCredentials(this.user);
       this.dialogRef.close();
       this.dataService.openSnackBar('success', 'Account updated.');
-    // });
   }
 
   getFirstFrostDateString(): string {

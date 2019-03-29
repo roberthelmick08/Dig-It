@@ -1,0 +1,238 @@
+@import "../../../styles.scss";
+h1 {
+    padding: 2rem 0;
+}
+
+#scroll-icon {
+    position: fixed;
+    color: $color-red;
+    cursor: pointer;
+    bottom: 2rem;
+    left: calc(50% - 12px);
+    transition: all 0.3s ease;
+    z-index: 1;
+    &:hover {
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+}
+
+.about-lines {
+    position: absolute;
+    height: 0;
+}
+
+#about-line-top {
+    width: 0;
+    border-radius: 1rem 0;
+    border-top: 1px solid $color-red;
+    border-left: 1px solid $color-red;
+    top: 208px;
+    margin-left: 40px;
+    transition: all 0.75s ease;
+    @media screen and (max-width: $break-sm) {
+        top: 248px;
+    }
+}
+
+#about-line-top.active-animation {
+    height: calc(((100vh - 64px) * 4) + 4rem);
+    width: 50vw;
+    @media screen and (max-width: $break-sm) {
+        height: calc(((100vh - 64px) * 4) + 8rem);
+    }
+}
+
+#about-line-bottom {
+    border-right: 1px solid $color-red;
+    right: 40px;
+    margin-top: -2rem;
+    transition: all 6s ease;
+}
+
+#about-line-bottom.active-animation {
+    height: calc(100vh - 64px);
+}
+
+.about-header-container {
+    padding: 4rem;
+    height: calc((100vh - 64px) * 4);
+    h1,
+    h3 {
+        opacity: 0;
+        transition-delay: 500ms !important;
+        mat-icon.help-icon {
+            font-size: 1rem;
+            height: 1rem;
+            width: 1rem;
+            padding: 0 0.25rem;
+        }
+    }
+    h1.active-animation,
+    h3.active-animation {
+        opacity: 1;
+    }
+    h3 {
+        margin-left: 1rem;
+        height: 52px;
+        margin-top: 1.5rem;
+    }
+    .page-header-wrapper,
+    .header-description-item {
+        height: calc(100vh - 64px);
+        .header-description-item-bullet {
+            min-width: 50px;
+            max-width: 50px;
+            height: 50px;
+            margin-left: calc(-24px - 26px);
+            border: 1px solid $color-red;
+            border-radius: 50%;
+            float: left;
+        }
+    }
+}
+
+.about-reminders-container {
+    @media screen and (max-width: $break-sm) {
+        .page-header {
+            font-size: 3rem;
+        }
+        h1 {
+            padding-left: 40px;
+        }
+    }
+    h1 {
+        font-size: 1.25rem;
+        text-align: center;
+        padding-top: 0;
+        opacity: 0;
+        transition-delay: 500ms !important;
+    }
+    h1.active-animation {
+        opacity: 1;
+    }
+    ul#factors-list {
+        width: 100%;
+        margin: 0;
+        @media screen and (max-width: $break-sm) {
+            padding-right: 40px;
+            li.odd {
+                .timeline-circle {
+                    margin-right: -45px !important;
+                }
+            }
+        }
+        li {
+            min-height: 100px;
+            border-bottom: 1px solid $color-red;
+            border-top: 1px solid $color-red;
+            margin-top: -1px;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            &:first-child {
+                border-top: none;
+                border-radius: 0 0 0 1rem !important;
+            }
+            &:last-child {
+                border-bottom: none;
+                border-radius: 0 1rem 0 0 !important;
+            }
+            &:hover {
+                .timeline-circle mat-icon.mat-icon {
+                    color: $color-dark-gray;
+                }
+            }
+            .timeline-circle {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: $color-red;
+                position: absolute;
+                mat-icon.mat-icon {
+                    transition: all 0.3s ease;
+                    height: 36px;
+                    width: 36px;
+                    font-size: 36px;
+                    color: white;
+                }
+                .expanded {
+                    -webkit-transform: rotateZ(180deg);
+                    -moz-transform: rotateZ(180deg);
+                    transform: rotateZ(180deg);
+                    transform-origin: center center;
+                }
+            }
+            h3 {
+                cursor: pointer;
+                font-weight: 200;
+                font-size: 36px;
+                line-height: 50px;
+                transition: all 0.3s ease;
+            }
+            .activeFactor {
+                color: $color-red;
+            }
+            p {
+                cursor: text;
+                text-align: justify;
+                font-weight: 200;
+            }
+        }
+        li.even {
+            border-left: 1px solid $color-red;
+            border-radius: 1rem 0 0 1rem;
+            margin-right: 1rem;
+            padding-right: -1rem;
+            .timeline-circle {
+                margin-left: calc(-2rem - 25px);
+            }
+            h3 {
+                padding-left: 15%;
+            }
+        }
+        li.odd {
+            border-right: 1px solid $color-red;
+            border-radius: 0 1rem 1rem 0;
+            margin-left: 1rem;
+            padding-left: -1rem;
+            .timeline-circle {
+                margin-right: -22px;
+                right: 15%;
+            }
+            h3 {
+                text-align: right;
+                padding-right: 15%;
+            }
+        }
+    }
+}
+
+.about-api-container {
+    background-image: url('../../../assets/logo/dig-it-emblem-lt-green-no-border.svg');
+    background-repeat: no-repeat;
+    background-size: 600px;
+    background-position-x: 210%;
+    background-position-y: -28px;
+    height: calc(100vh - 64px);
+    padding: 4rem;
+    @media screen and (max-width: $break-sm) {
+        background-position-x: 130%;
+        background-position-y: -80px;
+    }
+    h1,
+    h3 {
+        text-align: center;
+    }
+}
+
+.about-header-container,
+.about-reminders-container,
+.about-api-container {
+    color: $color-dark-gray;
+    h1,
+    h3 {
+        font-weight: 200;
+        transition: all 0.75s ease;
+    }
+}

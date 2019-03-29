@@ -2,11 +2,14 @@ import { ReminderService } from './services/reminder.service';
 import { DataService } from './services/data.service';
 import { PlantDetailsDialogComponent } from './components/plant-details-dialog/plant-details-dialog.component';
 import { Component, ViewChild } from '@angular/core';
+import {Router} from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { AuthenticationService } from './services/authentication.service';
 import { User } from 'src/models/user';
 import { SearchComponent } from './components/search/search.component';
 import { GardenPlant } from 'src/models/gardenPlant';
+
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -22,12 +25,29 @@ export class AppComponent {
 
   @ViewChild(SearchComponent) searchComponent;
 
-  constructor( public dialog: MatDialog, public authService: AuthenticationService, public dataService: DataService, public reminderService: ReminderService) {
+  // HTML Elements for scroll animations
+  elems: Array<HTMLElement>;
+
+  // Boolean values for toggling scroll animations
+  isHomeLilyVisible: boolean = false;
+  isHomeLineVisible: boolean = false;
+
+  constructor( public dialog: MatDialog, public router: Router, public authService: AuthenticationService,
+    public dataService: DataService, public reminderService: ReminderService) {
+
+    // Google Analytics
+    gtag('send', 'pageview');
+
     this.currentPage = authService.isLoggedIn() ? 'garden' : 'home';
 
-    const today = new Date();
-
     if (this.authService.isLoggedIn() === true) {
+      this.refreshUser();
+    }
+  }
+
+  refreshUser(){
+      const today = new Date();
+
       this.authService.getUser().subscribe(user => {
         this.user = user;
       }, (err) => {
@@ -56,11 +76,30 @@ export class AppComponent {
       this.authService.updateUser(this.user).subscribe();
       this.setPlantsWithActiveReminders();
       });
-    }
   }
 
+  // Add HTMLElements to array for scroll animation
+  refreshElemAnimations(){
+    if(this.currentPage === 'home'){
+      this.elems = [
+        document.getElementById('lily-img'),
+        document.getElementById('line'),
+      ]
+    } else if(this.currentPage === 'about'){
+      this.elems = [
+        document.getElementById('fade-in-1'),
+        document.getElementById('fade-in-2'),
+        document.getElementById('fade-in-3'),
+        document.getElementById('fade-in-4'),
+        document.getElementById('fade-in-5'),
+        document.getElementById('about-line-bottom'),
+      ]
+    }
+  }
   setCurrentPage(page: string) {
     this.currentPage = page;
+    if(page === 'home' || page === 'about') this.refreshElemAnimations();
+    document.getElementById('page-content').scrollTop = 0;
   }
 
   onMarkReminderDoneEvent(event){
@@ -118,6 +157,10 @@ export class AppComponent {
     this.plantsWithActiveReminders = this.dataService.getPlantsWithActiveReminders(gardenData);
   }
 
+  isRemindersActive(){
+    return this.authService.isLoggedIn() && this.user && this.currentPage !== 'home' && this.currentPage !== 'about';
+  }
+
   openPlantDetailsDialog(data) {
     const dialogRef = this.dialog.open(PlantDetailsDialogComponent, {
       height: window.innerWidth <= 600 ? '100vh' : '500px',
@@ -131,5 +174,31 @@ export class AppComponent {
         this.searchComponent.openAddToGardenDialog(data.plant);
       }
     });
+  }
+
+  // Assigns class 'active-animation' to elements in viewport on scroll
+  scrollHandler(){
+    let windowDimensions = {
+      width: window.innerWidth || document.documentElement.clientWidth,
+      height: window.innerHeight || document.documentElement.clientHeight
+    }
+    for(let elem of this.elems){
+      var bounding = elem.getBoundingClientRect();
+
+      if (
+        bounding.top >= 0 &&
+        bounding.left >= 0 &&
+        bounding.right <= windowDimensions.width &&
+        bounding.top <= windowDimensions.height
+      ) {
+        if(!elem.classList.contains('active-animation')){
+          elem.classList.add('active-animation');
+        }
+      } else {
+        if(elem.classList.contains('active-animation')){
+          elem.classList.remove('active-animation');
+        }
+      }
+    }
   }
 }

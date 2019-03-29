@@ -65,7 +65,9 @@ export class DataService {
       let tempReminders = plant.reminders.filter(reminder => {
         const today = new Date();
         const reminderDate = new Date(reminder.date);
-        return today >= reminderDate && reminderDate > this.reminderService.addDays(today, -30);
+        return today >= reminderDate
+        && (reminderDate > this.reminderService.addDays(today, -30)
+        || reminder.name === 'water' || reminder.name === 'spray');
       });
       if(tempReminders.length > 0){
         plantsWithActiveReminders.push(plant);

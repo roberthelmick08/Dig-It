@@ -2,66 +2,48 @@
     <img src="../../../assets/logo/dig-it-logo-full.svg" class="home-page-header-logo" />
 </div>
 
-<div class="home-footer getting-started-container" fxLayout="column">
-    <div fxLayout="row">
-        <div fxFlex="50" fxHide.lt-sm="true">
-            <img src="../../../assets/img/gardening-boy-min.png" class="gardening-boy-image" />
-        </div>
-        <div fxFlex.gt-sm="50" class="getting-started-paragraph-wrapper">
-            <div class="paragraph-wrapper-overlay">
-                <div fxFlex fxLayoutAlign="center center">
-                    <h3>DIG<br>your<br>garden</h3>
-                </div>
-            </div>
-        </div>
+<div class="learn-more-container" fxLayout="column" fxLayoutAlign="space-around center">
+    <div class="background-wrapper">
+        <mat-icon id="gear1" fxHide.lt-sm>settings</mat-icon>
+        <mat-icon id="gear2">settings</mat-icon>
     </div>
-    <div fxLayout="row" fxFlex="100" class="footer-top">
-        <div fxFlex="33" style="background-color: rgb(81, 126, 31)" fxLayoutAlign="center center" fxLayout="column" class="step-item">
-            <mat-icon>person_add</mat-icon>
-            <p>Create an account</p>
+    <button mat-raised-button (click)="navigateToPage('about')">[ How Dig-It Works ]</button>
+</div>
+
+<div class="quick-overview-container" fxLayoutAlign="center center" fxLayout="column">
+    <h2>CAN YOU</h2>
+    <h2>DIG-IT?</h2>
+    <div class="overview-text-container" fxLayoutAlign="center center">
+        <p [innerHTML]="slides[selectedSlideIndex].innerHTML"></p>
+    </div>
+    <div class="quick-overview-contents" fxLayoutAlign="space-between center">
+        <div class="overview-container" *ngFor="let i = index; let slide of slides" (click)="selectOverviewItem(i)">
+            <img [src]="slide.imgSrc" [class.selected-overview]="i === selectedSlideIndex" />
         </div>
-        <div fxFlex style="background-color:  #3E5820" fxLayoutAlign="center center" fxLayout="column" class="step-item">
-            <mat-icon>local_florist</mat-icon>
-            <p>Add plants to your garden</p>
-        </div>
-        <div fxFlex="33" style="background-color: rgb(39, 56, 20)" fxLayoutAlign="center center" fxLayout="column" class="step-item">
-            <mat-icon>notifications_none</mat-icon>
-            <p>Get custom gardening notifications!</p>
-        </div>
+        <div id="line"></div>
     </div>
 </div>
 
-<div class="quick-overview-container">
-    <div class="quick-overview-header" fxLayoutAlign="center center" fxLayout="column">
-        <h2>CAN YOU</h2>
-        <img src="../../../assets/logo/dig-it-text-white.svg" />
-    </div>
-    <div class="quick-overview-contents" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
-        <ng-container *ngFor="let index = index; let slide of slides">
-            <div class="quick-overview-item" *ngIf="index === sliderStep || (index === sliderStep - 1 && isSlideOut) || (index === slides.length - 1 && sliderStep === 0 && isSlideOut)" [class.slide-out-left]="isSlideOut && index !== sliderStep" [class.slide-in-right]="index === sliderStep"
-                fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="center center">
-                <img [src]="slide.imgSrc" />
-                <div fxLayoutAlign="start center">
-                    <p [innerHTML]="slide.innerHTML"></p>
-                </div>
-            </div>
-        </ng-container>
-    </div>
-</div>
-<div class="home-footer" fxLayout="column">
-    <div fxLayout.lt-sm="column" fxFlex="100" class="footer-top">
-        <div fxFlex="33" style="background-color: #008F95" fxLayoutAlign="center center">
-            <img src="../../../assets/logo/dig-it-emblem-green.svg" class="footer-logo" />
+<div class="getting-started-container" fxLayout="row wrap" fxLayout.lt-sm="column">
+    <div class="background-row" fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div class="grid-item" fxFlex="100" fxLayoutAlign="center center">
+            <h2>DIG YOUR GARDEN</h2>
         </div>
-        <div fxFlex style="background-color: #006067" fxLayoutAlign="center center" fxLayout="column">
-            <h2>Robert Helmick</h2>
-            <p>Denver, Colorado</p>
-            <a href="http://www.rh-codes.com" class="portfolio-site-link">www.rh-codes.com</a>
+        <div class="grid-item" fxFlex="50" fxHide.lt-sm>
         </div>
-        <div fxFlex="33" style="background-color: #01494e" fxLayoutAlign="space-around center" class="link-icon-container">
-            <a href="https://github.com/roberthelmick08"><img src="../../../assets/icons/github.svg" matTooltip="Github" matTooltipClass="dig-it-tooltip" /></a>
-            <a href="http://www.rh-codes.com"><img src="../../../assets/icons/website.svg" matTooltip="Portfolio Site" matTooltipClass="dig-it-tooltip" /></a>
-            <a href="mailto:robert.helmick.08@gmail.com"><img src="../../../assets/icons/email.svg" matTooltip="Email me" matTooltipClass="dig-it-tooltip" /></a>
+        <div class="grid-item grid-item-number grid-item-number-1" style="background-color: #01494e" fxFlex="50" fxLayoutAlign="space-between center">
+            <h1>1</h1>
+            <h3>Create an account</h3>
         </div>
     </div>
+
+    <div class="grid-item grid-item-number" style="background-color:  #006067" fxFlex="50" fxLayoutAlign="space-between center">
+        <h1>2</h1>
+        <h3>Add plants to your garden</h3>
+    </div>
+    <div class="grid-item grid-item-number" style="background-color: #008F95" fxFlex="50" fxLayoutAlign="space-between center">
+        <h1>3</h1>
+        <h3>Get custom gardening notifications!</h3>
+    </div>
+    <img src="../../../assets/img/lily-min.png" id="lily-img" fxHide.lt-sm />
 </div>

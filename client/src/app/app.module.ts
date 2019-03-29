@@ -28,6 +28,7 @@ import { ImageCropperModule } from 'ng2-img-cropper';
 import { RemindersComponent } from './components/reminders/reminders.component';
 import { PlantGridItemComponent } from './components/plant-grid-item/plant-grid-item.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
     RemindersComponent,
     PlantGridItemComponent,
     NavbarComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

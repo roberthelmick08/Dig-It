@@ -98,6 +98,7 @@ export class ReminderService {
     }
 
     tempReminder.date = this.addDays(today, dayIncrementer);
+    tempReminder.date.setHours(0,0,0,0);
     return tempReminder;
   }
 
@@ -137,6 +138,7 @@ export class ReminderService {
       tempReminder.date = this.addDays(this.getSowDate(user, plant),  plant.type === 'Cactus' || plant.type === 'Succulent' ? 30 : 14);
     } else {
       tempReminder.date = this.addDays(new Date(), plant.type === 'Cactus' || plant.type === 'Succulent' ? 90 : 60);
+      tempReminder.date.setHours(0,0,0,0);
     }
     return tempReminder;
   }

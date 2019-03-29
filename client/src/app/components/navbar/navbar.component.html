@@ -1,7 +1,7 @@
 <mat-toolbar class="navbar">
     <ul fxLayoutAlign="space-between center" fxLayout="row">
         <li class="navbar-items" (click)="setCurrentPage('home')">
-            <img src="../../../assets/logo/dig-it-text.svg" [hidden]="currentPage === 'home'" />
+            <img src="../../../assets/logo/dig-it-text.svg" />
         </li>
 
         <li class="navbar-items navbar-center-item" (click)="setCurrentPage('garden')">
@@ -22,12 +22,12 @@
             </div>
         </li>
         <li class="navbar-items">
-            <div *ngIf="!authService.isLoggedIn()" class="user-button-wrapper">
-                <button mat-raised-button color="accent" (click)="openLoginDialog()">Login / Register</button>
+            <div *ngIf="!authService.isLoggedIn()">
+                <button mat-raised-button color="accent" (click)="openLoginDialog()" class="login-button">Log in / Register</button>
             </div>
 
             <button mat-icon-button [matMenuTriggerFor]="settingsMenu" *ngIf="authService.isLoggedIn()">
-              <mat-icon class="settings-icon">settings</mat-icon>
+              <mat-icon class="menu-icon">menu</mat-icon>
             </button>
 
             <mat-menu #settingsMenu="matMenu">
@@ -35,11 +35,11 @@
                 <mat-icon>person_outline</mat-icon>
                 <span>Account Settings</span>
               </button>
-                <button mat-menu-item disabled>
+                <!-- <button mat-menu-item>
                 <mat-icon>settings_input_component</mat-icon>
                 <span>Preferences</span>
-              </button>
-                <button mat-menu-item disabled>
+              </button> -->
+                <button mat-menu-item (click)="setCurrentPage('about')">
                 <mat-icon>help_outline</mat-icon>
                 <span>About / Help</span>
               </button>

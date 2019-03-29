@@ -13,6 +13,7 @@ import { User } from 'src/models/user';
 })
 export class NavbarComponent {
   @Output() setCurrentPageEvent = new EventEmitter;
+  @Output() refreshUserEvent = new EventEmitter;
   @Input() currentPage: string;
   @Input() user: User;
 
@@ -32,6 +33,7 @@ export class NavbarComponent {
     dialogRef.afterClosed().subscribe(() => { }, (err) => {}, () => {
       if (this.authService.isLoggedIn() === true) {
         this.setCurrentPageEvent.emit('garden');
+        this.refreshUserEvent.emit();
       }
     });
   }

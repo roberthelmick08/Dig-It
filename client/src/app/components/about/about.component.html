@@ -1,0 +1,62 @@
+<mat-icon id="scroll-icon" (click)="onPageDown()">keyboard_arrow_down</mat-icon>
+
+<div id="about-line-top" class="about-lines"></div>
+
+<div class="about-header-container" fxLayout="column" fxLayoutAlign="start center">
+    <div fxLayout="column" class="page-header-wrapper">
+        <h2 class="page-header"><span class="highlight">[</span>About Dig-It<span class="highlight">]</span></h2>
+        <h1 id="fade-in-1">Dig-It takes all the guesswork out of gardening.</h1>
+    </div>
+
+
+    <div fxLayout="column" fxFlex>
+        <div class="header-description-item" fxLayout="row" fxLayoutAlign="start center">
+            <div class="header-description-item-bullet"></div>
+            <h3 id="fade-in-2">Dig-It’s extensive <span class="highlight-blue">crowdsourced database of plants</span> contains detailed information for hundreds of common garden plants.</h3>
+        </div>
+        <div class="header-description-item" fxLayout="row" fxLayoutAlign="start center">
+            <div class="header-description-item-bullet"></div>
+            <h3 id="fade-in-3">Click on the
+                <mat-icon class="help-icon">help_outline</mat-icon> icons for helpful <span class="highlight-blue">tips</span> and <span class="highlight-blue">definitions.</span></h3>
+        </div>
+        <div class="header-description-item" fxLayout="row" fxLayoutAlign="start center">
+            <div class="header-description-item-bullet"></div>
+            <h3 id="fade-in-4"><span class="highlight-blue">Custom reminders</span> are tailored to provide optimal growing conditions for your area.</h3>
+        </div>
+    </div>
+</div>
+
+<div class="about-reminders-container" fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="page-header"><span class="highlight">[</span>Reminders<span class="highlight">]</span></h2>
+    <h1 id="fade-in-5">Lots of factors go into Dig-It's reminders algorithm.
+        <br>
+        <br>Here are some of the ways Dig-It calculates your gardening schedule.</h1>
+    <ul fxLayout="column" id="factors-list">
+        <li *ngFor="let factor of reminderFactors; let i = index" [ngClass]="i % 2 === 0 ? 'even' : 'odd'" fxFlex="100" fxLayout="column">
+            <div class="timeline-circle" (click)="toggleExpansion(i)" fxLayoutAlign="center center">
+                <mat-icon [class.expanded]="factor.expanded">keyboard_arrow_down</mat-icon>
+            </div>
+            <h3 (click)="toggleExpansion(i)">{{factor.title}}</h3>
+            <ng-container *ngIf="factor.expanded">
+                <p *ngFor="let desc of factor.descriptions">- {{desc}}</p>
+            </ng-container>
+        </li>
+    </ul>
+</div>
+
+<div id="about-line-bottom" class="about-lines"></div>
+
+<div class="about-api-container" fxLayout="column" fxLayoutAlign="center center">
+    <h2 class="page-header"><span class="highlight">[</span>API<span class="highlight">]</span></h2>
+
+    <h1>Dig-It’s Plants API is open. No API key necessary.</h1>
+
+    <h3><b>Base URL:</b>
+        <br><a>http://dig-it.rh-codes.com/api</a>
+
+        <br><br>
+        <b>Endpoints:</b>
+        <br><span class="highlight-blue">GET</span> all plants:
+        <br>/search
+    </h3>
+</div>

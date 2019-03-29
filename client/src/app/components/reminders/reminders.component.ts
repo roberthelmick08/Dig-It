@@ -69,9 +69,12 @@ export class RemindersComponent {
 
   isReminderVisible(reminder: Reminder): boolean {
     const reminderDate = new Date(reminder.date);
-    reminderDate.setSeconds(reminderDate.getSeconds() - 5);
     const today = new Date();
 
-    return today >= reminderDate && reminderDate > this.reminderService.addDays(today, -30);
+    reminderDate.setSeconds(reminderDate.getSeconds() - 5);
+
+    return today >= reminderDate
+    && (reminderDate > this.reminderService.addDays(today, -30)
+    || reminder.name === 'water' || reminder.name === 'spray');
   }
 }
