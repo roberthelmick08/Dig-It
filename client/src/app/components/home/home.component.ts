@@ -12,8 +12,6 @@ export class HomeComponent implements OnInit {
 
   timer: any;
 
-  isButtonOnHover: boolean = false;
-
   @Output() refreshAnimationsEvent = new EventEmitter();
   @Output() setCurrentPageEvent = new EventEmitter;
 
@@ -48,10 +46,6 @@ export class HomeComponent implements OnInit {
       }, 10000);
     // Initialize scroll animations
       this.refreshAnimationsEvent.emit();
-  }
-
-  toggleButtonHover(isOnHover: boolean){
-    this.isButtonOnHover = isOnHover;
   }
 
   navigateToPage(page: string){

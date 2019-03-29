@@ -4,13 +4,10 @@
 
 <div class="learn-more-container" fxLayout="column" fxLayoutAlign="space-around center">
     <div class="background-wrapper">
-        <div id="arrow" [class.active-arrow]="isButtonOnHover" fxLayoutAlign="end center">
-            <mat-icon id="arrow-point">keyboard_arrow_right</mat-icon>
-        </div>
         <mat-icon id="gear1" fxHide.lt-sm>settings</mat-icon>
         <mat-icon id="gear2">settings</mat-icon>
     </div>
-    <button mat-raised-button (click)="navigateToPage('about')" (mouseenter)="toggleButtonHover(true)" (mouseleave)="toggleButtonHover(false)">[ How Dig-It Works ]</button>
+    <button mat-raised-button (click)="navigateToPage('about')">[ How Dig-It Works ]</button>
 </div>
 
 <div class="quick-overview-container" fxLayoutAlign="center center" fxLayout="column">
@@ -48,5 +45,5 @@
         <h1>3</h1>
         <h3>Get custom gardening notifications!</h3>
     </div>
-    <img src="../../../assets/img/lily.png" id="lily-img" fxHide.lt-sm />
+    <img src="../../../assets/img/lily-min.png" id="lily-img" fxHide.lt-sm />
 </div>
