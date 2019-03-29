@@ -120,10 +120,23 @@
     background-size: 500px;
     background-repeat: no-repeat;
     background-color: white;
+    @media screen and (max-width: $break-sm) {
+        background-image: none;
+        .overview-text-container {
+            width: inherit !important;
+        }
+        .quick-overview-contents {
+            width: inherit !important;
+            .active-animation {
+                width: 100% !important;
+            }
+        }
+    }
     h2 {
         font-size: 4rem;
         letter-spacing: 1rem;
         font-weight: lighter;
+        text-align: center;
     }
     .overview-text-container {
         height: 120px;
@@ -139,14 +152,17 @@
         #line {
             position: absolute;
             width: 0;
-            left: 25%;
+            left: 0;
             margin-top: -1px;
             border-top: 1px solid $color-dark-gray;
             transition: all 0.75s ease;
             transition-delay: 0.3s;
         }
         .active-animation {
-            width: 50% !important;
+            @media screen and (min-width: $break-sm) {
+                width: 50% !important;
+                left: 25%;
+            }
         }
         .overview-container {
             width: 100px;
@@ -180,6 +196,19 @@
     overflow: hidden;
     background-color: $color-blue;
     color: white;
+    @media screen and (max-width: $break-sm) {
+        height: inherit !important;
+        .background-row {
+            background-size: 150% !important;
+        }
+        .grid-item {
+            height: inherit !important;
+        }
+        .grid-item-number-1 {
+            border-top: none !important;
+            border-left: none !important;
+        }
+    }
     .background-row {
         background-image: url('../../../assets/img/house.jpg');
         background-repeat: no-repeat;

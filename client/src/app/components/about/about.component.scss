@@ -39,17 +39,16 @@ h1 {
 #about-line-top.active-animation {
     height: calc(((100vh - 64px) * 4) + 4rem);
     width: 50vw;
+    @media screen and (max-width: $break-sm) {
+        height: calc(((100vh - 64px) * 4) + 8rem);
+    }
 }
 
 #about-line-bottom {
     border-right: 1px solid $color-red;
-    right: calc(15% + 2px);
-    margin-top: -1rem;
+    right: 40px;
+    margin-top: -2rem;
     transition: all 6s ease;
-    @media screen and (max-width: $break-sm) {
-        right: 40px;
-        margin-top: -2rem;
-    }
 }
 
 #about-line-bottom.active-animation {
@@ -95,6 +94,14 @@ h1 {
 }
 
 .about-reminders-container {
+    @media screen and (max-width: $break-sm) {
+        .page-header {
+            font-size: 3rem;
+        }
+        h1 {
+            padding-left: 40px;
+        }
+    }
     h1 {
         font-size: 1.25rem;
         text-align: center;
@@ -107,6 +114,7 @@ h1 {
     }
     ul#factors-list {
         width: 100%;
+        margin: 0;
         @media screen and (max-width: $break-sm) {
             padding-right: 40px;
             li.odd {

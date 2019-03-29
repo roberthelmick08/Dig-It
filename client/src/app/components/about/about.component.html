@@ -28,13 +28,15 @@
 
 <div class="about-reminders-container" fxLayout="column" fxLayoutAlign="center center">
     <h2 class="page-header"><span class="highlight">[</span>Reminders<span class="highlight">]</span></h2>
-    <h1 id="fade-in-5">Lots of factors go into Dig-It's reminders algorithm.<br>Here are some of the ways Dig-It calculates your gardening schedule.</h1>
+    <h1 id="fade-in-5">Lots of factors go into Dig-It's reminders algorithm.
+        <br>
+        <br>Here are some of the ways Dig-It calculates your gardening schedule.</h1>
     <ul fxLayout="column" id="factors-list">
         <li *ngFor="let factor of reminderFactors; let i = index" [ngClass]="i % 2 === 0 ? 'even' : 'odd'" fxFlex="100" fxLayout="column">
             <div class="timeline-circle" (click)="toggleExpansion(i)" fxLayoutAlign="center center">
                 <mat-icon [class.expanded]="factor.expanded">keyboard_arrow_down</mat-icon>
             </div>
-            <h3 (click)="toggleExpansion(i)" [class.activeFactor]="selectedReminderType > -1 && isFactorActive(i)">{{factor.title}}</h3>
+            <h3 (click)="toggleExpansion(i)">{{factor.title}}</h3>
             <ng-container *ngIf="factor.expanded">
                 <p *ngFor="let desc of factor.descriptions">- {{desc}}</p>
             </ng-container>

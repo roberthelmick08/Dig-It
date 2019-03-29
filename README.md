@@ -37,9 +37,11 @@ This project is licensed under the MIT License
 
 **v2.2.1 *Current*:**
 
+- Homepage redesign
+- Add 'About' page
 - Google Analytics
-- Edit GardenPlant
 - Bugfix: Display reminders on initial login
+- Bugfix: Set water reminder dates to midnight
 
 **v2.2:**
 

@@ -7,7 +7,7 @@
         <div id="arrow" [class.active-arrow]="isButtonOnHover" fxLayoutAlign="end center">
             <mat-icon id="arrow-point">keyboard_arrow_right</mat-icon>
         </div>
-        <mat-icon id="gear1">settings</mat-icon>
+        <mat-icon id="gear1" fxHide.lt-sm>settings</mat-icon>
         <mat-icon id="gear2">settings</mat-icon>
     </div>
     <button mat-raised-button (click)="navigateToPage('about')" (mouseenter)="toggleButtonHover(true)" (mouseleave)="toggleButtonHover(false)">[ How Dig-It Works ]</button>
@@ -27,12 +27,12 @@
     </div>
 </div>
 
-<div class="getting-started-container" fxLayout="row wrap">
-    <div class="background-row" fxLayout="row wrap">
+<div class="getting-started-container" fxLayout="row wrap" fxLayout.lt-sm="column">
+    <div class="background-row" fxLayout="row wrap" fxLayout.lt-sm="column">
         <div class="grid-item" fxFlex="100" fxLayoutAlign="center center">
             <h2>DIG YOUR GARDEN</h2>
         </div>
-        <div class="grid-item" fxFlex="50">
+        <div class="grid-item" fxFlex="50" fxHide.lt-sm>
         </div>
         <div class="grid-item grid-item-number grid-item-number-1" style="background-color: #01494e" fxFlex="50" fxLayoutAlign="space-between center">
             <h1>1</h1>
@@ -48,5 +48,5 @@
         <h1>3</h1>
         <h3>Get custom gardening notifications!</h3>
     </div>
-    <img src="../../../assets/img/lily.png" id="lily-img" />
+    <img src="../../../assets/img/lily.png" id="lily-img" fxHide.lt-sm />
 </div>
