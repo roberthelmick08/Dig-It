@@ -35,7 +35,14 @@ This project is licensed under the MIT License
 
 ## Versioning:
 
-**v2.2.1 *Current*:**
+**v2.2.2 *Current*:**
+
+- Enhancements to Google Analytics
+- Upcoming Reminders carousel redesign
+- Mobile scrolling fixes
+- Add new plant type: Bonsai
+
+**v2.2.1:**
 
 - Homepage redesign
 - Add 'About' page
@@ -43,35 +50,29 @@ This project is licensed under the MIT License
 - Bugfix: Display reminders on initial login
 - Bugfix: Set water reminder dates to midnight
 
-**v2.2:**
+**v2.2.0:**
 
 - Bugfix: Refresh Reminders on add/remove GardenPlant
 - Bugfix: Search grid alignment on mobile
 
-**v2.1:**
+**v2.1.0:**
 
 - Add custom Plant to Garden without adding to database
 - Bugfix: Search algorithm
 - Bugfix: Image uploader
 
-**v2.0:**
+**v2.0.0:**
 
-- UI refactor to minimalist theme
+- UI redesign to minimalist theme
 - Image Uploader component
 - Performance enhancements
 
-**v1.1:**
+**v1.1.0:**
 
 - Site responsiveness
 - Bugfix: Search grid item UI
 
-**v1.0:**
+**v1.0.0:**
 
 - Dig-It MVP
 - UI layout v1
-
-## Upcoming Features:
-- Google & iCloud Calendar integration
-- Unit Testing
-- Administrator approval of new plants
-- Accessibility improvements
