@@ -23,14 +23,10 @@ export class AppComponent {
 
   plantsWithActiveReminders: Array<GardenPlant> = [];
 
-  @ViewChild(SearchComponent) searchComponent;
-
   // HTML Elements for scroll animations
   elems: Array<HTMLElement>;
 
-  // Boolean values for toggling scroll animations
-  isHomeLilyVisible: boolean = false;
-  isHomeLineVisible: boolean = false;
+  @ViewChild(SearchComponent) searchComponent;
 
   constructor( public dialog: MatDialog, public router: Router, public authService: AuthenticationService,
     public dataService: DataService, public reminderService: ReminderService) {
@@ -82,7 +78,6 @@ export class AppComponent {
   refreshElemAnimations(){
     if(this.currentPage === 'home'){
       this.elems = [
-        document.getElementById('lily-img'),
         document.getElementById('line'),
       ]
     } else if(this.currentPage === 'about'){

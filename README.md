@@ -10,7 +10,7 @@ Dig-It's extensive crowdsourced database allows visitors and registered users to
 
 ## Built With
 
-- Angular 5
+- Angular 6
 - SASS
 - Node.JS
 - MongoDB
