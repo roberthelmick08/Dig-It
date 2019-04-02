@@ -19,9 +19,12 @@
     position: absolute;
     top: 0px;
     font-size: 32px;
-    left: calc(50% - 38px);
+    left: calc(75% - 38px);
     animation: blink-animation 1s steps(5, start) infinite;
     -webkit-animation: blink-animation 1s steps(5, start) infinite;
+    @media screen and (max-width: $break-sm) {
+        left: calc(60% - 38px);
+    }
     @keyframes blink-animation {
         to {
             visibility: hidden;
